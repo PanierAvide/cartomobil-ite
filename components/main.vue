@@ -206,12 +206,29 @@ export default {
 
   methods: {
     loadAndOverrideMapStyle() {
-      return fetch(`${config.mapStyle}${config.maptilerApiKey}`)
-        .then(res => res.json())
-        .then((data) => {
-          data.sprite = `${window.location.origin}/sprite/caresteouvert`;
-          this.mapStyle = data;
-        });
+      return new Promise(resolve => {
+        this.mapStyle = {
+            version: 8,
+            name: "ProjetDuMois.fr",
+            sprite: `${window.location.origin}/sprite/caresteouvert`,
+            sources: {
+                osm: {
+                    type: "raster",
+                    tiles: [ "https://tile.openstreetmap.org/{z}/{x}/{y}.png" ],
+                    maxzoom: 19,
+                    attribution: "&copy; OpenStreetMap"
+                }
+            },
+            layers: [
+                {
+                    id: "osm",
+                    source: "osm",
+                    type: "raster"
+                }
+            ]
+        };
+        resolve();
+      });
     },
 
     loadInitialLocation(location) {

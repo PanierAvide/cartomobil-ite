@@ -20,7 +20,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+//       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ]
   },
   /*
@@ -38,7 +38,6 @@ export default {
   */
   plugins: [
     { src: '~/plugins/map', mode: 'client' },
-    { src: '~/plugins/qa_map', mode: 'client' },
     { src: '~/plugins/matomo', mode: 'client' },
     { src: '~/plugins/linkified' },
     { src: '~/plugins/url' }

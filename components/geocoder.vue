@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { jawgApiKey } from '../config.json';
+import { nominatimUrl } from '../config.json';
 import { countries } from '../categories.json';
 import debounce from 'lodash.debounce';
 
@@ -66,18 +66,20 @@ export default {
       this.isLoading = true;
       this.controller = new AbortController();
       const signal = this.controller.signal;
-      const boundary = countries.join(',');
-      const url = `https://api.jawg.io/places/v1/search?boundary.country=${boundary}&lang=${this.$i18n.locale}&text=${encodeURIComponent(this.search)}&access-token=${jawgApiKey}`;
+      const boundary = countries.join(',').toLowerCase();
+      const url = `${nominatimUrl}/search?q=${encodeURIComponent(this.search)}&format=json&countrycodes=${boundary}&limit=5&accept-language=${this.$i18n.locale}`;
 
       fetch(url, { signal })
         .then(res => res.json())
-        .then(body => {
+        .then(results => {
           this.error = null;
-          this.items = body.features.map((feature) => {
+          this.items = results.map(r => {
+            const labels = r.display_name.split(', ');
+            const [ minlat, maxlat, minlon, maxlon ] = r.boundingbox.map(v => parseFloat(v));
             return {
-              text: feature.properties.label,
-              region: feature.properties.region,
-              value: feature.bbox ? feature.bbox : feature.geometry.coordinates.concat(feature.geometry.coordinates)
+              text: labels[0],
+              region: labels.splice(1).join(", "),
+              value: [minlon, minlat, maxlon, maxlat]
             };
           });
           if(directCoordinates) { this.items.unshift(directCoordinates); }
