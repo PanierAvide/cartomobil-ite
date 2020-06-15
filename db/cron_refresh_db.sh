@@ -9,7 +9,7 @@ cd ${WORKDIR}
 ./update_imposm_nodocker.sh ${CONNEXION}
 
 # MàJ des enseignes
-./import_brand_rules.sh ${CONNEXION}
+#./import_brand_rules.sh ${CONNEXION}
 
 # MàJ des POIs personnalisés
 ./import_custom_poi.sh ${CONNEXION}
