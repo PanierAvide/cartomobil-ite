@@ -315,17 +315,18 @@ export default {
 
     getCurrentCountry() {
       const { lat, lng } = this.mapCenter;
-      fetch(`${config.apiUrl}/country?lat=${lat}&lon=${lng}`)
-        .then(res => res.text())
-        .then(area => {
-          this.$store.commit('setArea', area);
+//      fetch(`${config.apiUrl}/country?lat=${lat}&lon=${lng}`)
+//        .then(res => res.text())
+//        .then(area => {
+//          this.$store.commit('setArea', area);
+          this.$store.commit('setArea', 'FR');
           const [category, subcategory] = this.filter.split('/');
           if (!this.categories.includes(category)) {
             this.filter = '';
           } else if (subcategory && !this.allCategories[category].subcategories[subcategory]) {
             this.filter = category;
           }
-        });
+//        });
     },
 
     getDistanceBetween2MapCenter(lat1, lon1, lat2, lon2) {
