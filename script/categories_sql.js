@@ -111,7 +111,7 @@ Object.entries(catg.categories).forEach(e => {
 	});
 });
 
-const catfct = `CREATE OR REPLACE FUNCTION get_category(tags HSTORE, area VARCHAR) RETURNS VARCHAR AS $$
+const catfct = `CREATE OR REPLACE FUNCTION get_category(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	${tagsPerCategoryToSql(tagsPerCategory)}
 	ELSIF tags->'opening_hours:covid19' != '' THEN
@@ -150,7 +150,7 @@ Object.values(catg.categories).forEach((cat, index) => {
 	});
 });
 
-const subcatfct = `CREATE OR REPLACE FUNCTION get_subcategory(tags HSTORE, area VARCHAR) RETURNS VARCHAR AS $$
+const subcatfct = `CREATE OR REPLACE FUNCTION get_subcategory(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	${tagsPerCategoryToSql(tagsPerSubcategory)}
 	ELSE
@@ -202,7 +202,7 @@ Object.values(catg.categories)
 	});
 });
 
-const sqlCond = `\n\tcountry_iso2 IN (${catg.countries.map(c => `'${c}'`).join(", ")}) AND ("opening_hours:covid19" != '' OR `+Object.entries(tagsForCondition).map(e => `"${e[0]}" IN (${[...e[1]].sort().map(v => `'${v}'`).join(', ')})`).join(" OR ")+`) --CATEGORIES\n`;
+const sqlCond = `\n\t(`+Object.entries(tagsForCondition).map(e => `"${e[0]}" IN (${[...e[1]].sort().map(v => `'${v}'`).join(', ')})`).join(" OR ")+`) --CATEGORIES\n`;
 
 fs.readFile(POI_SQL, 'utf8', (err, txt) => {
 	if(err) { throw new Error(err); }

@@ -2,9 +2,8 @@
   "countries": [ "FR" ],
   "sql_columns": [
     "aeroway", "amenity", "craft", "emergency", "healthcare", "highway", "historic",
-    "leisure", "office", "public_transport", "railway", "shop", "tobacco", "tourism",
-    "opening_hours", "opening_hours:covid19", "access:covid19", "delivery:covid19",
-    "description:covid19", "drive_through:covid19", "takeaway:covid19"
+    "leisure", "office", "public_transport", "railway", "shop", "tourism",
+    "opening_hours"
   ],
   "categories": {
     "amenity": {
