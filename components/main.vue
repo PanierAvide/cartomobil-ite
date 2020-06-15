@@ -209,8 +209,9 @@ export default {
       return new Promise(resolve => {
         this.mapStyle = {
             version: 8,
-            name: "ProjetDuMois.fr",
+            name: "Cartomobil'ité",
             sprite: `${window.location.origin}/sprite/caresteouvert`,
+            glyphs: `${config.fontsUrl}/{fontstack}/{range}.pbf`,
             sources: {
                 osm: {
                     type: "raster",

@@ -1,11 +1,12 @@
 {
   "maptilerApiKey": "",
   "mapZoom": 10,
-  "mapCenter": [-17.6937, -149.3845],
+  "mapCenter": [-149.3845, -17.6937],
   "tilesUrl": "https://tiles.cartomobilite.avoscartes.pf",
   "poiFeature": "https://features.cartomobilite.avoscartes.pf/collections/public.poi_osm/items",
   "apiUrl": "https://api.cartomobilite.avoscartes.pf",
   "geoIpUrl": "https://geo.cartomobilite.avoscartes.pf/me",
+  "fontsUrl": "https://fonts.cartomobilite.avoscartes.pf",
   "osmUrl": "https://www.openstreetmap.org",
   "nominatimUrl": "https://nominatim.openstreetmap.org",
   "minZoomPoi": 12,
