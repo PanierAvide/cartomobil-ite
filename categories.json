@@ -3,67 +3,57 @@
   "sql_columns": [
     "aeroway", "amenity", "craft", "emergency", "healthcare", "highway", "historic",
     "leisure", "office", "public_transport", "railway", "shop", "tourism",
-    "opening_hours"
+    "opening_hours", "operator", "natural", "school:FR", "name", "wheelchair"
   ],
   "categories": {
-    "amenity": {
-      "name": "Amenity",
+    "administration": {
+      "name": "Administration",
       "subcategories": {
+        "townhall": {
+          "name": "Townhall",
+          "osm_tags": [ { "amenity": "townhall" } ],
+          "areas": "all"
+        },
+        "government": {
+          "name": "Administration",
+          "osm_tags": [
+            { "office": "government|diplomatic" }
+          ],
+          "areas": "all"
+        },
         "police": {
           "name": "Police",
           "osm_tags": [
             { "amenity": "police" }
           ],
           "areas": "all",
-          "form_details": [ "access" ],
-          "show_qa": false
-        },
-        "townhall": {
-          "name": "Townhall",
-          "osm_tags": [ { "amenity": "townhall" } ],
-          "areas": "all",
-          "form_details": [ "access" ],
-          "show_qa": false
-        },
-        "post_office": {
-          "name": "Postal services",
-          "osm_tags": [
-            { "amenity": "post_office" },
-            { "amenity": "vending_machine", "vending": "stamps|parcel_mail_in|parcel_pickup|parcel_pickup;parcel_mail_in" }
-          ],
-          "areas": "all",
           "form_details": [ "access" ]
-        },
-        "childcare": {
-          "name": "Childcare",
-          "osm_tags": [ { "amenity": "childcare" }, { "amenity": "kindergarten", "kindergarten:FR": "*" } ],
-          "areas": [ "FR" ],
-          "show_qa": false
-        },
-        "employment_agency": {
-          "name": "Employment agency",
+        }
+      }
+    },
+    "financial": {
+      "name": "Banque / assurances",
+      "subcategories": {
+        "bank": {
+          "name": "Bank",
           "osm_tags": [
-            { "office": "employment_agency" }
-          ],
-          "areas": "all",
-          "form_details": [ "access" ],
-          "show_qa": false
-        },
-        "funeral_directors": {
-          "name": "Funeral directors",
-          "osm_tags": [
-            { "shop": "funeral_directors" }
+            { "amenity": "bank" }
           ],
           "areas": "all"
         },
-        "money": {
-          "name": "Money",
+        "atm": {
+          "name": "ATM",
           "osm_tags": [
-            { "amenity": "bank|atm|money_transfer|mobile_money_agent" },
-            { "shop": "money_lender" }
+            { "amenity": "atm" }
           ],
-          "-areas": [ "CD" ],
-          "form_details": [ "access" ]
+          "areas": "all"
+        },
+        "money_transfer": {
+          "name": "Money transfer",
+          "osm_tags": [
+            { "amenity": "money_transfer" }
+          ],
+          "areas": "all"
         },
         "insurance": {
           "name": "Insurance",
@@ -71,152 +61,127 @@
             { "office": "insurance" },
             { "shop": "insurance" }
           ],
-          "areas": "all",
-          "form_details": [ "access" ]
-        },
-        "tourism_info": {
-          "name": "Tourism information",
+          "areas": "all"
+        }
+      }
+    },
+    "post_service": {
+      "name": "Poste",
+      "subcategories": {
+        "post_office": {
+          "name": "Agence",
           "osm_tags": [
-            { "tourism": "information", "information": "office" }
+            { "amenity": "post_office" }
           ],
-          "osm_filter_tags": [
-            { "opening_hours:covid19": "*" }
+          "areas": "all"
+        },
+        "post_box": {
+          "name": "Boîte aux lettres",
+          "osm_tags": [
+            { "amenity": "post_box" }
           ],
-          "areas": "all",
-          "-mapfilter": "all",
-          "form_details": [ "access" ]
+          "areas": "all"
         },
-        "hotel": {
-          "name": "Hosting",
-          "osm_tags": [ { "tourism": "hotel|motel|hostel" } ],
-          "areas": [ "FR", "AT", "DE", "CH", "IT" ]
+        "stamps": {
+          "name": "Distributeur de timbres",
+          "osm_tags": [
+            { "amenity": "vending_machine", "vending": "stamps" }
+          ],
+          "areas": "all"
         },
-        "recycling_centre": {
-          "name": "Recycling centre",
-          "osm_tags": [ { "amenity": "recycling", "recycling_type": "centre" } ],
-          "areas": [ "AT", "CH", "DE", "FR", "IT" ],
-          "show_qa": false
-        },
-        "library": {
-          "name": "Library",
-          "osm_tags": [ { "amenity": "library" } ],
-          "areas": [ "AT", "CH", "DE", "FI", "IT", "FR" ],
-          "show_qa": false
+        "parcel": {
+          "name": "Colis",
+          "osm_tags": [
+            { "amenity": "vending_machine", "vending": "parcel_mail_in|parcel_pickup|parcel_pickup;parcel_mail_in" }
+          ],
+          "areas": "all"
         },
         "copyshop": {
           "name": "Copy shop",
           "osm_tags": [
             { "shop": "copyshop" }
           ],
-          "areas": [ "AT", "CH", "DE", "IT", "FR" ],
+          "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
+        }
+      }
+    },
+    "leisure": {
+      "name": "Loisirs / sorties",
+      "subcategories": {
+        "cinema": {
+          "name": "Cinéma",
+          "osm_tags": [
+            { "amenity": "cinema" }
+          ],
+          "areas": "all"
+        },
+        "theatre": {
+          "name": "Théâtre",
+          "osm_tags": [
+            { "amenity": "theatre" }
+          ],
+          "areas": "all"
+        },
+        "restaurant": {
+          "name": "Restaurant",
+          "osm_tags": [
+            { "amenity": "restaurant|fast_food" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "takeaway", "drive_through", "access" ]
+        },
+        "cafe": {
+          "name": "Coffee shop",
+          "osm_tags": [
+            { "amenity": "cafe|ice_cream" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "takeaway", "access" ]
+        },
+        "bar": {
+          "name": "Bar",
+          "osm_tags": [ { "amenity": "bar|pub" } ],
+          "areas": "all",
+          "form_details": [ "delivery", "takeaway", "access" ]
+        },
+        "nightclub": {
+          "name": "Discothèque",
+          "osm_tags": [ { "amenity": "nightclub" } ],
+          "areas": "all"
+        },
+        "swimming_pool": {
+          "name": "Piscine",
+          "osm_tags": [
+            { "leisure": "sports_centre", "sport": "swimming" },
+            { "leisure": "swimming_pool", "access": "yes|public" },
+            { "amenity": "swimming_pool" }
+          ],
+          "areas": "all"
         },
         "museum": {
           "name": "Museum",
           "osm_tags": [
-            { "tourism": "museum" },
-            { "historic": "archaeological_site" }
+            { "tourism": "museum" }
           ],
-          "areas": [ "IT", "FR" ]
+          "areas": "all"
         },
-        "place_of_worship": {
-          "name": "Place of worship",
+        "association": {
+          "name": "Association",
           "osm_tags": [
-            { "amenity": "place_of_worship" }
+            { "office": "association", "association:for": "disabled" }
           ],
-          "areas": [ "IT" ]
+          "areas": "all"
         },
-        "sports_centre": {
-          "name": "Sports centre",
-          "osm_tags": [
-            { "leisure": "sports_centre" }
-          ],
-          "areas": [ "IT" ]
-        },
-        "beach_resort": {
-          "name": "Beach resort",
-          "osm_tags": [
-            { "leisure": "beach_resort" }
-          ],
-          "areas": [ "IT" ]
+        "library": {
+          "name": "Library",
+          "osm_tags": [ { "amenity": "library" } ],
+          "areas": "all"
         }
       }
     },
-    "health": {
-      "name": "Health",
-      "subcategories": {
-        "pharmacy": {
-          "name": "Pharmacy",
-          "osm_tags": [
-            { "amenity": "pharmacy" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access", "hydroalcoholic_gel", "mask" ]
-        },
-        "covid19_centre": {
-          "name": "Covid-19 consultation centre",
-          "osm_tags": [ { "healthcare": "centre", "healthcare:speciality": "covid19" } ],
-          "areas": [ "FR" ],
-          "show_qa": false
-        },
-        "optician": {
-          "name": "Optician",
-          "osm_tags": [
-            { "shop": "optician" },
-            { "craft": "optician" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "hearing_aids": {
-          "name": "Hearing aids",
-          "osm_tags": [
-            { "shop": "hearing_aids" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "condoms": {
-          "name": "Condoms vending machine",
-          "osm_tags": [
-            { "amenity": "vending_machine", "vending": "condoms" }
-          ],
-          "areas": "all",
-          "show_qa": false
-        },
-        "medical_supply": {
-          "name": "Medical supplies",
-          "osm_tags": [
-            { "shop": "medical_supply" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access", "hydroalcoholic_gel", "mask" ]
-        },
-        "health_center": {
-          "name": "Health center",
-          "osm_tags": [
-            { "healthcare": "centre|clinic|doctor|hospital|rehabilitation|laboratory" },
-            { "amenity": "hospital|clinic|doctors" }
-          ],
-          "areas": "all",
-          "-mapfilter": "all",
-          "osm_filter_tags": [
-            { "opening_hours:covid19": "*" }
-          ],
-          "show_qa": false
-        },
-        "herbalist": {
-          "name": "Herbalist",
-          "osm_tags": [
-            { "shop": "herbalist" }
-          ],
-          "areas": [ "IT" ],
-          "form_details": [ "delivery", "access" ]
-        }
-      }
-    },
-    "food": {
-      "name": "Food",
+    "shop": {
+      "name": "Commerces",
       "subcategories": {
         "supermarket": {
           "name": "Supermarket",
@@ -224,7 +189,7 @@
             { "shop": "frozen_food|supermarket" }
           ],
           "areas": "all",
-          "form_details": [ "delivery", "access", "drive_through", "hydroalcoholic_gel", "mask" ]
+          "form_details": [ "delivery", "access", "drive_through" ]
         },
         "butcher": {
           "name": "Butcher",
@@ -248,7 +213,7 @@
             { "shop": "convenience|general" }
           ],
           "areas": "all",
-          "form_details": [ "delivery", "access", "hydroalcoholic_gel", "mask" ]
+          "form_details": [ "delivery", "access" ]
         },
         "seafood": {
           "name": "Seafood",
@@ -269,7 +234,7 @@
         "grocery": {
           "name": "Grocery",
           "osm_tags": [
-            { "shop": "deli|spices|honey|pasta|cannery" }
+            { "shop": "deli|spices|honey|pasta|cannery|tea|coffee" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
@@ -282,24 +247,6 @@
           "areas": "all",
           "form_details": [ "delivery", "access" ]
         },
-        "chocolate": {
-          "name": "Chocolate",
-          "osm_tags": [ { "shop": "chocolate" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "tea": {
-          "name": "Tea",
-          "osm_tags": [ { "shop": "tea" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "coffee": {
-          "name": "Coffee",
-          "osm_tags": [ { "shop": "coffee" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
         "dairy": {
           "name": "Dairy",
           "osm_tags": [
@@ -307,12 +254,11 @@
             { "amenity": "vending_machine", "vending": "milk" }
           ],
           "areas": "all",
-          "-mapfilter": [ "FR", "MC" ],
           "form_details": [ "delivery", "access" ]
         },
         "confectionery": {
           "name": "Confectionery",
-          "osm_tags": [ { "shop": "confectionery" } ],
+          "osm_tags": [ { "shop": "confectionery|chocolate" } ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
         },
@@ -327,8 +273,7 @@
           "osm_tags": [
             { "amenity": "marketplace" }
           ],
-          "areas": "all",
-          "show_qa": false
+          "areas": "all"
         },
         "bakery": {
           "name": "Bakery",
@@ -344,322 +289,19 @@
           "osm_tags": [
             { "shop": "alcohol|beverages|wine|winery" }
           ],
-          "areas": [ "CD" ],
+          "areas": "all",
           "form_details": [ "delivery", "access" ]
-        }
-      }
-    },
-    "eat": {
-      "name": "Restaurant & take-away",
-      "subcategories": {
-        "vending_machine": {
-          "name": "Vending machine",
-          "osm_tags": [
-            { "amenity": "vending_machine", "vending": "pizza|drinks|water|sweets" }
-          ],
-          "areas": "all",
-          "show_qa": false
         },
-        "restaurant": {
-          "name": "Restaurant",
-          "osm_tags": [
-            { "amenity": "restaurant" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "takeaway", "drive_through", "access" ]
-        },
-        "awarded_chef": {
-          "name": "Top chef",
-          "areas": [ "FR-admin8_Lyon" ]
-        },
-        "fast_food": {
-          "name": "Fast food",
-          "osm_tags": [
-            { "amenity": "fast_food" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "takeaway", "drive_through", "access" ]
-        },
-        "ice_cream": {
-          "name": "Ice cream",
-          "osm_tags": [
-            { "amenity": "ice_cream" },
-            { "amenity": "cafe", "cuisine": "ice_cream" },
-            { "shop": "ice_cream" }
-          ],
-          "areas": [ "DE", "AT", "CH", "IT" ],
-          "form_details": [ "delivery", "takeaway", "access" ]
-        },
-        "cafe": {
-          "name": "Coffee shop",
-          "osm_tags": [
-            { "amenity": "cafe" },
-            { "amenity": "vending_machine", "vending": "coffee" }
-          ],
-          "osm_filter_tags": [
-            { "opening_hours:covid19": "*" },
-            { "delivery": "yes|only" },
-            { "takeaway": "yes|only" },
-            { "delivery:covid19": "yes|only" },
-            { "takeaway:covid19": "yes|only" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "takeaway", "access" ]
-        },
-        "bar": {
-          "name": "Bar",
-          "osm_tags": [ { "amenity": "bar|pub" } ],
-          "osm_filter_tags": [
-            { "opening_hours:covid19": "*" },
-            { "delivery": "yes|only" },
-            { "takeaway": "yes|only" },
-            { "delivery:covid19": "yes|only" },
-            { "takeaway:covid19": "yes|only" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "takeaway", "access" ]
-        }
-      }
-    },
-    "drugs": {
-      "name": "Drugs",
-      "subcategories": {
         "tobacco": {
-          "name": "Tobacco",
+          "name": "Tabac / vapotage",
           "osm_tags": [
-            { "shop": "tobacco|newsagent;tobacco|tobacco;newsagent" },
+            { "shop": "tobacco|newsagent;tobacco|tobacco;newsagent|e-cigarette" },
             { "tobacco": "yes|only" },
-            { "amenity": "vending_machine", "vending": "cigarettes" }
+            { "amenity": "vending_machine", "vending": "cigarettes|e-cigarettes" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "access", "mask" ]
         },
-        "e_cigarette": {
-          "name": "E-cigarette",
-          "osm_tags": [
-            { "shop": "e-cigarette" },
-            { "amenity": "vending_machine", "vending": "e-cigarettes" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "alcohol": {
-          "name": "Alcohol store",
-          "osm_tags": [
-            { "shop": "alcohol|beverages|wine" }
-          ],
-          "-areas": [ "CD" ],
-          "form_details": [ "delivery", "access" ]
-        }
-      },
-      "-mapfilter": [ "CD" ]
-    },
-    "money": {
-      "name": "Money",
-      "subcategories": {
-        "bank": {
-          "name": "Bank",
-          "osm_tags": [
-            { "amenity": "bank" }
-          ],
-          "areas": [ "CD" ],
-          "form_details": [ "access" ]
-        },
-        "atm": {
-          "name": "ATM",
-          "osm_tags": [
-            { "amenity": "atm" }
-          ],
-          "areas": [ "CD" ],
-          "show_qa": false
-        },
-        "money_transfer": {
-          "name": "Money transfer",
-          "osm_tags": [
-            { "amenity": "money_transfer" }
-          ],
-          "areas": [ "CD" ]
-        },
-        "mobile_money_agent": {
-          "name": "Mobile money agent",
-          "osm_tags": [
-            { "amenity": "mobile_money_agent" }
-          ],
-          "areas": [ "CD" ]
-        }
-      },
-      "mapfilter": [ "CD" ]
-    },
-    "clothing_beauty": {
-      "name": "Clothing & Beauty",
-      "subcategories": {
-        "shoes": {
-          "name": "Shoes",
-          "osm_tags": [ { "shop": "shoes" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "bag": {
-          "name": "Bags",
-          "osm_tags": [
-            { "shop": "bag" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
-          "form_details": [ "delivery", "access" ]
-        },
-        "beauty": {
-          "name": "Beauty store",
-          "osm_tags": [
-            { "shop": "beauty" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
-          "form_details": [ "delivery", "access" ]
-        },
-        "clothes": {
-          "name": "Clothes",
-          "osm_tags": [
-            { "shop": "boutique|clothes|fashion" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access", "mask" ]
-        },
-        "cosmetics": {
-          "name": "Cosmetics",
-          "osm_tags": [
-            { "shop": "cosmetics" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "hairdresser": {
-          "name": "Hairdresser",
-          "osm_tags": [
-            { "shop": "hairdresser" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "jewelry": {
-          "name": "Jewelry",
-          "osm_tags": [
-            { "shop": "jewelry" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "massage": {
-          "name": "Massage",
-          "osm_tags": [
-            { "shop": "massage" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "tailor": {
-          "name": "Tailor",
-          "osm_tags": [
-            { "shop": "tailor" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "perfumery": {
-          "name": "Perfumery",
-          "osm_tags": [
-            { "shop": "perfumery" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
-          "form_details": [ "delivery", "access" ]
-        },
-        "chemist": {
-          "name": "Chemist",
-          "osm_tags": [
-            { "shop": "chemist" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access", "hydroalcoholic_gel", "mask" ]
-        }
-      }
-    },
-    "home_equipment": {
-      "name": "Home equipment",
-      "subcategories": {
-        "hardware": {
-          "name": "Hardware",
-          "osm_tags": [
-            { "shop": "doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "bed": {
-          "name": "Bed",
-          "osm_tags": [
-            { "shop": "bed" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "furniture": {
-          "name": "Furniture",
-          "osm_tags": [
-            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "houseware": {
-          "name": "Houseware",
-          "osm_tags": [
-            { "shop": "houseware" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "interior_decoration": {
-          "name": "Interior decoration",
-          "osm_tags": [
-            { "shop": "interior_decoration" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
-          "form_details": [ "delivery", "access" ]
-        },
-        "pottery": {
-          "name": "Pottery",
-          "osm_tags": [
-            { "shop": "pottery" }
-          ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
-        },
-        "watches": {
-          "name": "Watches",
-          "osm_tags": [
-            { "shop": "watches" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "lighting": {
-          "name": "Lighting",
-          "osm_tags": [
-            { "shop": "lighting" }
-          ],
-          "areas": [ "AT", "CH", "DE", "IT", "FR" ]
-        },
-        "hifi": {
-          "name": "Hifi",
-          "osm_tags": [
-            { "shop": "hifi" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "electronics": {
-          "name": "Electronics",
-          "osm_tags": [
-            { "shop": "electronics" },
-            { "craft": "electronics_repair" },
-            { "shop": "appliance"}
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        }
-      }
-    },
-    "shop": {
-      "name": "Shops",
-      "subcategories": {
         "mobile_phone": {
           "name": "Mobile phone",
           "osm_tags": [
@@ -674,32 +316,19 @@
           "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
         },
-        "printer_ink": {
-          "name": "Printer ink",
-          "osm_tags": [ { "shop": "printer_ink" } ],
-          "areas": [ "IT" ],
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "dry_cleaning": {
-          "name": "Dry cleaning",
-          "osm_tags": [
-            { "shop": "dry_cleaning" }
-          ],
-          "areas": "all"
-        },
         "laundry": {
           "name": "Laundry",
           "osm_tags": [
-            { "shop": "laundry" }
+            { "shop": "dry_cleaning|laundry" }
           ],
           "areas": "all"
         },
         "stationery": {
           "name": "Stationery",
           "osm_tags": [
-            { "shop": "stationery" }
+            { "shop": "stationery|printer_ink" }
           ],
-          "areas": [ "AT", "CH", "DE", "FR", "IT" ],
+          "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
         },
         "newsagent": {
@@ -718,14 +347,6 @@
           "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
         },
-        "agrarian": {
-          "name": "Agricultural products",
-          "osm_tags": [
-            { "shop": "agrarian" }
-          ],
-          "areas": [ "AT", "CH", "DE", "FR", "IT" ],
-          "form_details": [ "delivery", "drive", "access" ]
-        },
         "flower": {
           "name": "Garden / flower",
           "osm_tags": [
@@ -738,7 +359,7 @@
           "name": "Sewing",
           "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool" }, { "craft": "sewing" } ],
           "areas": "all",
-          "form_details": [ "delivery", "drive", "access", "mask" ]
+          "form_details": [ "delivery", "drive", "access" ]
         },
         "books": {
           "name": "Book store",
@@ -747,7 +368,7 @@
             { "amenity": "vending_machine", "vending": "books" },
             { "amenity": "public_bookcase" }
           ],
-          "areas": [ "DE", "AT", "CH", "IT", "FR" ],
+          "areas": "all",
           "form_details": [ "delivery", "access" ]
         },
         "art": {
@@ -755,14 +376,14 @@
           "osm_tags": [
             { "shop": "art" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
         "charity": {
           "name": "Charity shop",
           "osm_tags": [
             { "shop": "charity" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
+          "areas": "all",
           "form_details": [ "delivery", "access" ]
         },
         "department_store": {
@@ -770,131 +391,295 @@
           "osm_tags": [
             { "shop": "department_store" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "gift": {
-          "name": "Gift shop",
-          "osm_tags": [
-            { "shop": "gift" }
-          ],
-          "osm_filter_tags": [
-            { "opening_hours:covid19": "*" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ],
-          "-mapfilter": "all"
+          "areas": "all"
         },
         "music": {
-          "name": "Music",
+          "name": "Musique",
           "osm_tags": [
-            { "shop": "music" }
+            { "shop": "music|musical_instrument" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "musical_instrument": {
-          "name": "Musical instrument",
-          "osm_tags": [
-            { "shop": "musical_instrument" }
-          ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
         "photo": {
           "name": "Photo",
           "osm_tags": [
             { "shop": "photo" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
         "second_hand": {
           "name": "Second hand",
           "osm_tags": [
             { "shop": "second_hand" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
         "ticket": {
           "name": "Tickets",
           "osm_tags": [
             { "shop": "ticket" }
           ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
+          "areas": "all"
         },
         "toys": {
           "name": "Toy store",
           "osm_tags": [
             { "shop": "toys" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "trade": {
-          "name": "Trade",
-          "osm_tags": [
-            { "shop": "trade" }
-          ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
-        },
-        "travel_agency": {
-          "name": "Travel agency",
-          "osm_tags": [
-            { "shop": "travel_agency" }
-          ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
+          "areas": "all"
         },
         "variety_store": {
           "name": "Variety store",
           "osm_tags": [
             { "shop": "variety_store" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
         "video": {
           "name": "Videos",
           "osm_tags": [
             { "shop": "video" }
           ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
+          "areas": "all"
         },
         "video_games": {
           "name": "Video games",
           "osm_tags": [
             { "shop": "video_games" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
-        },
-        "weapons": {
-          "name": "Weapons",
-          "osm_tags": [
-            { "shop": "weapons" }
-          ],
-          "areas": [ "DE", "AT", "CH" ]
+          "areas": "all"
         },
         "wholesale": {
           "name": "Wholesale",
           "osm_tags": [
             { "shop": "wholesale" }
           ],
-          "areas": [ "DE", "AT", "CH", "IT" ]
+          "areas": "all"
         },
         "sports": {
           "name": "Sports",
           "osm_tags": [
             { "shop": "fishing|hunting|sports|outdoor" }
           ],
-          "areas": [ "DE", "AT", "CH", "FI", "FR", "IT" ],
-          "form_details": [ "mask", "hydroalcoholic_gel" ]
+          "areas": "all"
+        },
+        "hardware": {
+          "name": "Hardware",
+          "osm_tags": [
+            { "shop": "doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "drive", "access" ]
+        },
+        "furniture": {
+          "name": "Furniture",
+          "osm_tags": [
+            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed" }
+          ],
+          "areas": "all"
+        },
+        "hifi": {
+          "name": "Hifi",
+          "osm_tags": [
+            { "shop": "hifi" }
+          ],
+          "areas": "all"
+        },
+        "electronics": {
+          "name": "Electronics",
+          "osm_tags": [
+            { "shop": "electronics" },
+            { "craft": "electronics_repair" },
+            { "shop": "appliance"}
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "drive", "access" ]
+        },
+        "beauty": {
+          "name": "Beauté",
+          "osm_tags": [
+            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access" ]
+        },
+        "clothes": {
+          "name": "Clothes",
+          "osm_tags": [
+            { "shop": "boutique|clothes|fashion|shoes|bag|jewelry|tailor|watches" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access" ]
+        },
+        "chemist": {
+          "name": "Chemist",
+          "osm_tags": [
+            { "shop": "chemist" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "drive", "access" ]
+        },
+        "edt": {
+          "name": "Électricité de Tahiti",
+          "osm_tags": [
+            { "office": "company", "name": "Electricité de Tahiti|EDT|Électricité de Tahiti" },
+            { "office": "company", "short_name": "EDT" }
+          ],
+          "areas": "all"
+        }
+      }
+    },
+    "education": {
+      "name": "Éducation",
+      "subcategories": {
+        "elementary": {
+          "name": "École élémentaire",
+          "osm_tags": [
+            { "amenity": "school", "school:FR": "élémentaire" }
+          ],
+          "areas": "all"
+        },
+        "college": {
+          "name": "Collège",
+          "osm_tags": [
+            { "amenity": "school", "school:FR": "collège" }
+          ],
+          "areas": "all"
+        },
+        "lycee": {
+          "name": "Lycée",
+          "osm_tags": [
+            { "amenity": "school", "school:FR": "lycée" }
+          ],
+          "areas": "all"
+        },
+        "childcare": {
+          "name": "Childcare",
+          "osm_tags": [ { "amenity": "childcare" }, { "amenity": "kindergarten", "kindergarten:FR": "*" } ],
+          "areas": "all"
+        }
+      }
+    },
+    "health": {
+      "name": "Health",
+      "subcategories": {
+        "pharmacy": {
+          "name": "Pharmacy",
+          "osm_tags": [
+            { "amenity": "pharmacy" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access", "hydroalcoholic_gel", "mask" ]
+        },
+        "hospital": {
+          "name": "Hôpital",
+          "osm_tags": [
+            { "healthcare": "hospital" },
+            { "amenity": "hospital" }
+          ],
+          "areas": "all"
+        },
+        "clinic": {
+          "name": "Clinique",
+          "osm_tags": [
+            { "healthcare": "clinic" },
+            { "amenity": "clinic" }
+          ],
+          "areas": "all"
+        },
+        "centre": {
+          "name": "Cabinet",
+          "osm_tags": [
+            { "healthcare": "centre|doctor|rehabilitation|audiologist|dentist|midwife|nurse|podiatrist|psychotherapist|speech_therapist" },
+            { "amenity": "doctors" }
+          ],
+          "areas": "all"
+        },
+        "occupational_therapist": {
+          "name": "Ergothérapeute",
+          "osm_tags": [ { "healthcare": "occupational_therapist" } ],
+          "areas": "all"
+        },
+        "physiotherapist": {
+          "name": "Kiné",
+          "osm_tags": [ { "healthcare": "physiotherapist" } ],
+          "areas": "all"
+        },
+        "optician": {
+          "name": "Optician",
+          "osm_tags": [
+            { "shop": "optician" },
+            { "craft": "optician" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access" ]
+        },
+        "hearing_aids": {
+          "name": "Hearing aids",
+          "osm_tags": [
+            { "shop": "hearing_aids" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access" ]
+        },
+        "condoms": {
+          "name": "Condoms vending machine",
+          "osm_tags": [
+            { "amenity": "vending_machine", "vending": "condoms" }
+          ],
+          "areas": "all"
+        },
+        "medical_supply": {
+          "name": "Medical supplies",
+          "osm_tags": [
+            { "shop": "medical_supply" }
+          ],
+          "areas": "all",
+          "form_details": [ "delivery", "access" ]
         }
       }
     },
     "mobility": {
       "name": "Mobility",
       "subcategories": {
-        "fuel": {
-          "name": "Fuel station",
+        "bus_stop": {
+          "name": "Arrêt de bus",
           "osm_tags": [
-            { "amenity": "fuel" },
-            { "shop": "gas" }
+            { "highway": "bus_stop" },
+            { "amenity": "bus_station" },
+            { "public_transport": "stop_position|platform", "bus": "yes" }
           ],
-          "areas": "all",
-          "show_qa": false
+          "areas": "all"
+        },
+        "ferry": {
+          "name": "Ferry",
+          "osm_tags": [
+            { "amenity": "ferry_terminal" }
+          ],
+          "areas": "all"
+        },
+        "taxi": {
+          "name": "Taxi",
+          "osm_tags": [
+            { "amenity": "taxi" }
+          ],
+          "areas": "all"
+        },
+        "airport": {
+          "name": "Aéroport",
+          "osm_tags": [
+            { "aeroway": "aerodrome" }
+          ],
+          "areas": "all"
+        },
+        "parking_pmr": {
+          "name": "Parking PMR",
+          "osm_tags": [
+            { "amenity": "parking_space", "parking_space": "disabled" },
+            { "amenity": "parking_space", "wheelchair": "yes|designated" },
+            { "amenity": "parking|parking_space", "capacity:disabled": "*" }
+          ],
+          "areas": "all"
         },
         "car_rental": {
           "name": "Car rental",
@@ -902,62 +687,68 @@
             { "amenity": "car_rental" }
           ],
           "areas": "all"
-        },
-        "bicycle": {
-          "name": "Bicycle shop",
+        }
+      }
+    },
+    "tourism": {
+      "name": "Tourisme",
+      "subcategories": {
+        "beach_resort": {
+          "name": "Beach resort",
           "osm_tags": [
-            { "shop": "bicycle" }
+            { "leisure": "beach_resort" }, { "natural": "beach" }
           ],
           "areas": "all"
         },
-        "car": {
-          "name": "Garage",
+        "park": {
+          "name": "Parc",
           "osm_tags": [
-            { "shop": "car_parts|car_repair" }
+            { "leisure": "park" }
           ],
           "areas": "all"
         },
-        "car_dealer": {
-          "name": "Car dealer",
+        "drinking_water": {
+          "name": "Point d'eau potable",
           "osm_tags": [
-            { "shop": "car" }
+            { "amenity": "drinking_water" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
-        "car_wash": {
-          "name": "Car wash",
+        "toilets": {
+          "name": "Toilettes",
           "osm_tags": [
-            { "amenity": "car_wash" }
+            { "amenity": "toilets" }
           ],
-          "areas": [ "AT", "CH", "DE", "IT", "FR" ],
-          "show_qa": false
+          "areas": "all"
         },
-        "motorcycle": {
-          "name": "Motorcycles",
+        "viewpoint": {
+          "name": "Point de vue",
           "osm_tags": [
-            { "shop": "motorcycle" }
+            { "tourism": "viewpoint" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
         },
-        "bicycle_tube": {
-          "name": "Bicycle tube vending machine",
-          "osm_tags": [ { "amenity": "vending_machine", "vending": "bicycle_tube" } ],
-          "areas": "all",
-          "-mapfilter": [ "FR" ],
-          "show_qa": false
-        },
-        "public_transport_tickets": {
-          "name": "Public transport ticket machine",
-          "osm_tags": [ { "amenity": "vending_machine", "vending": "public_transport_tickets" } ],
-          "areas": "all",
-          "show_qa": false
-        },
-        "tyres": {
-          "name": "Tyres",
+        "artwork": {
+          "name": "Oeuvre d'art",
           "osm_tags": [
-            { "shop": "tyres" }
+            { "tourism": "artwork" }
           ],
-          "areas": [ "DE", "AT", "CH", "FR", "IT" ]
+          "areas": "all"
+        },
+        "guest_house": {
+          "name": "Maison d'hôte",
+          "osm_tags": [ { "tourism": "guest_house" } ],
+          "areas": "all"
+        },
+        "hotel": {
+          "name": "Hôtel",
+          "osm_tags": [ { "tourism": "hostel" } ],
+          "areas": "all"
+        },
+        "hostel": {
+          "name": "Auberge de jeunesse",
+          "osm_tags": [ { "tourism": "hostel" } ],
+          "areas": "all"
         }
       }
     }
