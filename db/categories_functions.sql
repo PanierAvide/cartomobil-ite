@@ -11,7 +11,7 @@ BEGIN
 		RETURN 'administration';
 	ELSIF (tags->'amenity' IN ('bank', 'atm', 'money_transfer')) OR (tags->'office' = 'insurance') OR (tags->'shop' = 'insurance') THEN
 		RETURN 'financial';
-	ELSIF (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'stamps') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' IN ('parcel_mail_in', 'parcel_pickup', 'parcel_pickup;parcel_mail_in')) OR (tags->'amenity' IN ('post_office', 'post_box')) OR (tags->'shop' = 'copyshop') THEN
+	ELSIF (tags->'amenity' = 'vending_machine' AND tags->'vending' IN ('parcel_mail_in', 'parcel_pickup', 'parcel_pickup;parcel_mail_in')) OR (tags->'amenity' IN ('post_office', 'post_box')) OR (tags->'shop' = 'copyshop') THEN
 		RETURN 'post_service';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'office' = 'association' AND tags->'association:for' = 'disabled') OR (tags->'amenity' IN ('cinema', 'theatre', 'restaurant', 'fast_food', 'cafe', 'ice_cream', 'bar', 'pub', 'nightclub', 'swimming_pool', 'library')) OR (tags->'tourism' = 'museum') THEN
 		RETURN 'leisure';
@@ -23,7 +23,7 @@ BEGIN
 		RETURN 'health';
 	ELSIF (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' IN ('parking', 'parking_space') AND tags->'capacity:disabled' != '') OR (tags->'highway' = 'bus_stop') OR (tags->'amenity' IN ('bus_station', 'ferry_terminal', 'taxi', 'car_rental')) OR (tags->'aeroway' = 'aerodrome') THEN
 		RETURN 'mobility';
-	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'amenity' IN ('drinking_water', 'toilets')) OR (tags->'tourism' IN ('viewpoint', 'artwork', 'guest_house', 'hostel', 'hostel')) THEN
+	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'amenity' IN ('drinking_water', 'toilets')) OR (tags->'tourism' IN ('viewpoint', 'artwork', 'guest_house', 'hotel', 'hostel')) THEN
 		RETURN 'tourism';
 	ELSIF tags->'opening_hours:covid19' != '' THEN
 		RETURN 'other';
@@ -55,8 +55,6 @@ BEGIN
 		RETURN 'post_office';
 	ELSIF tags->'amenity' = 'post_box' THEN
 		RETURN 'post_box';
-	ELSIF tags->'amenity' = 'vending_machine' AND tags->'vending' = 'stamps' THEN
-		RETURN 'stamps';
 	ELSIF tags->'amenity' = 'vending_machine' AND tags->'vending' IN ('parcel_mail_in', 'parcel_pickup', 'parcel_pickup;parcel_mail_in') THEN
 		RETURN 'parcel';
 	ELSIF tags->'shop' = 'copyshop' THEN
@@ -225,7 +223,7 @@ BEGIN
 		RETURN 'artwork';
 	ELSIF tags->'tourism' = 'guest_house' THEN
 		RETURN 'guest_house';
-	ELSIF tags->'tourism' = 'hostel' THEN
+	ELSIF tags->'tourism' = 'hotel' THEN
 		RETURN 'hotel';
 	ELSIF tags->'tourism' = 'hostel' THEN
 		RETURN 'hostel';

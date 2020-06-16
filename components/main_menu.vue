@@ -18,7 +18,7 @@
       </v-card-subtitle>
     </v-card>
 
-    <governement-alert />
+    <!--governement-alert /-->
 
     <v-divider v-if="showBrand"></v-divider>
 

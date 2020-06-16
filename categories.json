@@ -32,7 +32,7 @@
       }
     },
     "financial": {
-      "name": "Banque / assurances",
+      "name": "Bank / insurance",
       "subcategories": {
         "bank": {
           "name": "Bank",
@@ -66,31 +66,24 @@
       }
     },
     "post_service": {
-      "name": "Poste",
+      "name": "Post services",
       "subcategories": {
         "post_office": {
-          "name": "Agence",
+          "name": "Post office",
           "osm_tags": [
             { "amenity": "post_office" }
           ],
           "areas": "all"
         },
         "post_box": {
-          "name": "Boîte aux lettres",
+          "name": "Post box",
           "osm_tags": [
             { "amenity": "post_box" }
           ],
           "areas": "all"
         },
-        "stamps": {
-          "name": "Distributeur de timbres",
-          "osm_tags": [
-            { "amenity": "vending_machine", "vending": "stamps" }
-          ],
-          "areas": "all"
-        },
         "parcel": {
-          "name": "Colis",
+          "name": "Parcel drop/pickup",
           "osm_tags": [
             { "amenity": "vending_machine", "vending": "parcel_mail_in|parcel_pickup|parcel_pickup;parcel_mail_in" }
           ],
@@ -107,17 +100,17 @@
       }
     },
     "leisure": {
-      "name": "Loisirs / sorties",
+      "name": "Leisure",
       "subcategories": {
         "cinema": {
-          "name": "Cinéma",
+          "name": "Cinema",
           "osm_tags": [
             { "amenity": "cinema" }
           ],
           "areas": "all"
         },
         "theatre": {
-          "name": "Théâtre",
+          "name": "Theatre",
           "osm_tags": [
             { "amenity": "theatre" }
           ],
@@ -146,12 +139,12 @@
           "form_details": [ "delivery", "takeaway", "access" ]
         },
         "nightclub": {
-          "name": "Discothèque",
+          "name": "Nightclub",
           "osm_tags": [ { "amenity": "nightclub" } ],
           "areas": "all"
         },
         "swimming_pool": {
-          "name": "Piscine",
+          "name": "Swimming pool",
           "osm_tags": [
             { "leisure": "sports_centre", "sport": "swimming" },
             { "leisure": "swimming_pool", "access": "yes|public" },
@@ -181,7 +174,7 @@
       }
     },
     "shop": {
-      "name": "Commerces",
+      "name": "Shops",
       "subcategories": {
         "supermarket": {
           "name": "Supermarket",
@@ -293,7 +286,7 @@
           "form_details": [ "delivery", "access" ]
         },
         "tobacco": {
-          "name": "Tabac / vapotage",
+          "name": "Tobacco / e-cigarettes",
           "osm_tags": [
             { "shop": "tobacco|newsagent;tobacco|tobacco;newsagent|e-cigarette" },
             { "tobacco": "yes|only" },
@@ -394,7 +387,7 @@
           "areas": "all"
         },
         "music": {
-          "name": "Musique",
+          "name": "Music",
           "osm_tags": [
             { "shop": "music|musical_instrument" }
           ],
@@ -496,7 +489,7 @@
           "form_details": [ "delivery", "drive", "access" ]
         },
         "beauty": {
-          "name": "Beauté",
+          "name": "Beauty",
           "osm_tags": [
             { "shop": "beauty|cosmetics|hairdresser|massage|perfumery" }
           ],
@@ -520,7 +513,7 @@
           "form_details": [ "delivery", "drive", "access" ]
         },
         "edt": {
-          "name": "Électricité de Tahiti",
+          "name": "Tahiti Electricity",
           "osm_tags": [
             { "office": "company", "name": "Electricité de Tahiti|EDT|Électricité de Tahiti" },
             { "office": "company", "short_name": "EDT" }
@@ -530,24 +523,24 @@
       }
     },
     "education": {
-      "name": "Éducation",
+      "name": "Education",
       "subcategories": {
         "elementary": {
-          "name": "École élémentaire",
+          "name": "Elementary school",
           "osm_tags": [
             { "amenity": "school", "school:FR": "élémentaire" }
           ],
           "areas": "all"
         },
         "college": {
-          "name": "Collège",
+          "name": "College",
           "osm_tags": [
             { "amenity": "school", "school:FR": "collège" }
           ],
           "areas": "all"
         },
         "lycee": {
-          "name": "Lycée",
+          "name": "Lycee",
           "osm_tags": [
             { "amenity": "school", "school:FR": "lycée" }
           ],
@@ -572,7 +565,7 @@
           "form_details": [ "delivery", "access", "hydroalcoholic_gel", "mask" ]
         },
         "hospital": {
-          "name": "Hôpital",
+          "name": "Hospital",
           "osm_tags": [
             { "healthcare": "hospital" },
             { "amenity": "hospital" }
@@ -580,7 +573,7 @@
           "areas": "all"
         },
         "clinic": {
-          "name": "Clinique",
+          "name": "Clinic",
           "osm_tags": [
             { "healthcare": "clinic" },
             { "amenity": "clinic" }
@@ -588,7 +581,7 @@
           "areas": "all"
         },
         "centre": {
-          "name": "Cabinet",
+          "name": "Centre",
           "osm_tags": [
             { "healthcare": "centre|doctor|rehabilitation|audiologist|dentist|midwife|nurse|podiatrist|psychotherapist|speech_therapist" },
             { "amenity": "doctors" }
@@ -596,12 +589,12 @@
           "areas": "all"
         },
         "occupational_therapist": {
-          "name": "Ergothérapeute",
+          "name": "Occupational therapist",
           "osm_tags": [ { "healthcare": "occupational_therapist" } ],
           "areas": "all"
         },
         "physiotherapist": {
-          "name": "Kiné",
+          "name": "Physiotherapist",
           "osm_tags": [ { "healthcare": "physiotherapist" } ],
           "areas": "all"
         },
@@ -643,7 +636,7 @@
       "name": "Mobility",
       "subcategories": {
         "bus_stop": {
-          "name": "Arrêt de bus",
+          "name": "Bus stop",
           "osm_tags": [
             { "highway": "bus_stop" },
             { "amenity": "bus_station" },
@@ -666,14 +659,14 @@
           "areas": "all"
         },
         "airport": {
-          "name": "Aéroport",
+          "name": "Airport",
           "osm_tags": [
             { "aeroway": "aerodrome" }
           ],
           "areas": "all"
         },
         "parking_pmr": {
-          "name": "Parking PMR",
+          "name": "Adapted parking space",
           "osm_tags": [
             { "amenity": "parking_space", "parking_space": "disabled" },
             { "amenity": "parking_space", "wheelchair": "yes|designated" },
@@ -691,7 +684,7 @@
       }
     },
     "tourism": {
-      "name": "Tourisme",
+      "name": "Tourism",
       "subcategories": {
         "beach_resort": {
           "name": "Beach resort",
@@ -701,52 +694,52 @@
           "areas": "all"
         },
         "park": {
-          "name": "Parc",
+          "name": "Park",
           "osm_tags": [
             { "leisure": "park" }
           ],
           "areas": "all"
         },
         "drinking_water": {
-          "name": "Point d'eau potable",
+          "name": "Drinking water",
           "osm_tags": [
             { "amenity": "drinking_water" }
           ],
           "areas": "all"
         },
         "toilets": {
-          "name": "Toilettes",
+          "name": "Toilets",
           "osm_tags": [
             { "amenity": "toilets" }
           ],
           "areas": "all"
         },
         "viewpoint": {
-          "name": "Point de vue",
+          "name": "View point",
           "osm_tags": [
             { "tourism": "viewpoint" }
           ],
           "areas": "all"
         },
         "artwork": {
-          "name": "Oeuvre d'art",
+          "name": "Artwork",
           "osm_tags": [
             { "tourism": "artwork" }
           ],
           "areas": "all"
         },
         "guest_house": {
-          "name": "Maison d'hôte",
+          "name": "Guest house",
           "osm_tags": [ { "tourism": "guest_house" } ],
           "areas": "all"
         },
         "hotel": {
-          "name": "Hôtel",
-          "osm_tags": [ { "tourism": "hostel" } ],
+          "name": "Hotel",
+          "osm_tags": [ { "tourism": "hotel" } ],
           "areas": "all"
         },
         "hostel": {
-          "name": "Auberge de jeunesse",
+          "name": "Hostel",
           "osm_tags": [ { "tourism": "hostel" } ],
           "areas": "all"
         }

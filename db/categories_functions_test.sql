@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(392);
+SELECT plan(390);
 
 SELECT is(get_category('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category amenity=>townhall for FR should be administration');
 
@@ -49,10 +49,6 @@ SELECT is(get_subcategory('amenity=>post_office'::hstore, 'FR'), 'post_office', 
 SELECT is(get_category('amenity=>post_box'::hstore, 'FR'), 'post_service', 'get_category amenity=>post_box for FR should be post_service');
 
 SELECT is(get_subcategory('amenity=>post_box'::hstore, 'FR'), 'post_box', 'get_subcategory amenity=>post_box for FR should be post_box');
-
-SELECT is(get_category('amenity=>vending_machine, vending=>stamps'::hstore, 'FR'), 'post_service', 'get_category amenity=>vending_machine, vending=>stamps for FR should be post_service');
-
-SELECT is(get_subcategory('amenity=>vending_machine, vending=>stamps'::hstore, 'FR'), 'stamps', 'get_subcategory amenity=>vending_machine, vending=>stamps for FR should be stamps');
 
 SELECT is(get_category('amenity=>vending_machine, vending=>parcel_mail_in'::hstore, 'FR'), 'post_service', 'get_category amenity=>vending_machine, vending=>parcel_mail_in for FR should be post_service');
 
@@ -782,9 +778,9 @@ SELECT is(get_category('tourism=>guest_house'::hstore, 'FR'), 'tourism', 'get_ca
 
 SELECT is(get_subcategory('tourism=>guest_house'::hstore, 'FR'), 'guest_house', 'get_subcategory tourism=>guest_house for FR should be guest_house');
 
-SELECT is(get_category('tourism=>hostel'::hstore, 'FR'), 'tourism', 'get_category tourism=>hostel for FR should be tourism');
+SELECT is(get_category('tourism=>hotel'::hstore, 'FR'), 'tourism', 'get_category tourism=>hotel for FR should be tourism');
 
-SELECT is(get_subcategory('tourism=>hostel'::hstore, 'FR'), 'hotel', 'get_subcategory tourism=>hostel for FR should be hotel');
+SELECT is(get_subcategory('tourism=>hotel'::hstore, 'FR'), 'hotel', 'get_subcategory tourism=>hotel for FR should be hotel');
 
 SELECT is(get_category('tourism=>hostel'::hstore, 'FR'), 'tourism', 'get_category tourism=>hostel for FR should be tourism');
 

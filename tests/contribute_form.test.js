@@ -53,7 +53,7 @@ describe('ContributeForm', () => {
     });
 
     it('parse the delivery:covid19 tag if it exists', () => {
-      const form = createWrapper({ place: { properties: { cat: 'restaurant', normalized_cat: 'eat', tags: { 'delivery:covid19': 'yes' } } } });
+      const form = createWrapper({ place: { properties: { cat: 'restaurant', normalized_cat: 'leisure', tags: { 'delivery:covid19': 'yes' } } } });
       form.vm.clickOpen();
       expect(form.vm.fieldValues.delivery).toBe('yes');
       expect(form.vm.filteredFields.find(f => f.id === 'delivery') !== undefined).toBe(true);

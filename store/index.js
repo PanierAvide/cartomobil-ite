@@ -37,7 +37,7 @@ export const mutations = {
 
 export const getters = {
   categories(state) {
-    return Object.keys(categoriesForArea(categories, state.area)).concat(['other']);
+    return Object.keys(categoriesForArea(categories, state.area));
   },
 
   allCategories(state) {
