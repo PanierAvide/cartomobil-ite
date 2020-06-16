@@ -25,7 +25,6 @@ tables:
         highway: ['street_lamp', 'traffic_signals', 'stop', 'give_way', 'motorway_junction', 'milestone', 'mini_roundabout', 'speed_camera']
         historic: ['boundary_stone','ruins','wayside_cross','wayside_shrine']
         railway: ['level_crossing', 'switch','signal','buffer_stop','crossing']
-        tourism: ['artwork', 'viewpoint']
     columns:
       - {name: 'osm_id', type: id}
       - {name: 'way', type: geometry}
@@ -46,7 +45,7 @@ tables:
       - {key: 'shop', name: 'shop', type: string}
       - {key: 'tourism', name: 'tourism', type: string}
       - {key: 'natural', name: 'natural', type: string}
-      - {key: 'school:FR', name: 'school_fr', type: string}
+      - {key: 'school:FR', name: 'school:FR', type: string}
       - {key: 'opening_hours', name: 'opening_hours', type: string}
       - {key: 'wheelchair', name: 'wheelchair', type: string}
   imposm_osm_polygon:
@@ -75,7 +74,6 @@ tables:
         highway: ['street_lamp', 'traffic_signals', 'stop', 'give_way', 'motorway_junction', 'milestone', 'mini_roundabout', 'speed_camera']
         historic: ['boundary_stone','ruins','wayside_cross','wayside_shrine']
         railway: ['level_crossing', 'switch','signal','buffer_stop','crossing']
-        tourism: ['artwork', 'viewpoint']
     columns:
       - {name: 'osm_id', type: id}
       - {name: 'way', type: geometry}
@@ -96,7 +94,7 @@ tables:
       - {key: 'shop', name: 'shop', type: string}
       - {key: 'tourism', name: 'tourism', type: string}
       - {key: 'natural', name: 'natural', type: string}
-      - {key: 'school:FR', name: 'school_fr', type: string}
+      - {key: 'school:FR', name: 'school:FR', type: string}
       - {key: 'opening_hours', name: 'opening_hours', type: string}
       - {key: 'wheelchair', name: 'wheelchair', type: string}
 tags:
