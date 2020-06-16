@@ -105,7 +105,7 @@
     "facebook": "Page Facebook",
     "not_accessible": "Pas d'accueil physique sur place",
     "capacity": "Capacité maximale : 0 personnes | Capacité maximale : 1 personne | Capacité maximale : {count} personnes",
-    "services": "Services",
+    "services": "Informations",
     "contact": "Contact",
     "last_update": {
       "date": "Dernière modification : {date}",
@@ -130,6 +130,18 @@
       "limited": "Partiellement accessible en fauteuil",
       "no": "Pas d'accès en fauteuil roulant",
       "unknown": "Potentiellement accessible"
+    },
+    "details_tags": {
+      "handwashing": "Lavabo",
+      "handrail": "Barre de transfert",
+      "handwashing:length": "Profondeur du lavabo",
+      "toilets": "Toilettes",
+      "toilets:wheelchair": "Toilettes adaptées PMR",
+      "toilets:wheelchair:description": "Détails accès toilettes",
+      "toilets:access:wheelchair": "Toilettes signalées PMR",
+      "toilets:handwashing": "Toilettes avec lavabo",
+      "delivery": "Livraison",
+      "takeaway": "Vente à emporter"
     },
     "delivery": {
       "yes": "Service de livraison proposé",

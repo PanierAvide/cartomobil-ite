@@ -133,22 +133,7 @@ describe('Detail', () => {
 
   it('display services depending of the tags', async () => {
     const detail = createWrapper({ id: '' });
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: { takeaway: 'yes' } } };
-    expect(detail.vm.services).toEqual([{ service: 'takeaway', value: 'details.takeaway.yes' }]);
-
-    detail.vm.place = { properties: { status: 'no', cat: '', tags: { takeaway: 'yes' } } };
-    expect(detail.vm.services).toEqual([{ service: 'takeaway', value: 'details.takeaway.yes' }]);
-
-    detail.vm.place = { properties: { status: 'unknown', cat: '', tags: { takeaway: 'yes' } } };
-    expect(detail.vm.services).toEqual([{ service: 'takeaway', value: 'details.takeaway.yes' }]);
-
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: { 'tobacco': 'yes' } } };
-    expect(detail.vm.services).toEqual([{ service: 'tobacco', value: 'details.tobacco.yes' }]);
-
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: { 'newsagent': 'yes' } } };
-    expect(detail.vm.services).toEqual([{ service: 'newsagent', value: 'details.newsagent.yes' }]);
-
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: { 'tobacco': 'no' } } };
-    expect(detail.vm.services).toEqual([]);
+    detail.vm.place = { properties: { status: 'yes', normalized_cat: 'leisure', cat: 'bar', tags: { takeaway: 'yes' } } };
+    expect(detail.vm.services).toEqual([{ service: 'takeaway', label: 'details.details_tags.takeaway', value: 'check' }]);
   });
 });

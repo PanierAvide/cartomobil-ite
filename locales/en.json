@@ -105,7 +105,7 @@
     "facebook": "Facebook page",
     "not_accessible": "No physical reception on site",
     "capacity": "Maximal capacity : 0 persons | Maximal capacity : 1 person | Maximal capacity : {count} persons",
-    "services": "Services",
+    "services": "Details",
     "contact": "Contact",
     "last_update": {
       "date": "Last update: {date}",
@@ -130,6 +130,18 @@
       "limited": "Partial access in wheelchair",
       "no": "No access in wheelchair",
       "unknown": "Eventually accessible in wheelchair"
+    },
+    "details_tags": {
+      "handwashing": "Hand washing",
+      "handrail": "Hand rail",
+      "handwashing:length": "Hand washing length",
+      "toilets": "Toilets",
+      "toilets:wheelchair": "Wheelchair-adapted toilets",
+      "toilets:wheelchair:description": "Toilets access details",
+      "toilets:access:wheelchair": "Toilets marked as wheelchair-accessible",
+      "toilets:handwashing": "Toilets with handwashing",
+      "delivery": "Delivery",
+      "takeaway": "Take-away"
     },
     "delivery": {
       "yes": "Delivery service available",

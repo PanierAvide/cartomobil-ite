@@ -122,6 +122,7 @@
             { "amenity": "restaurant|fast_food" }
           ],
           "areas": "all",
+          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ],
           "form_details": [ "delivery", "takeaway", "drive_through", "access" ]
         },
         "cafe": {
@@ -136,6 +137,7 @@
           "name": "Bar",
           "osm_tags": [ { "amenity": "bar|pub" } ],
           "areas": "all",
+          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ],
           "form_details": [ "delivery", "takeaway", "access" ]
         },
         "nightclub": {
@@ -712,7 +714,8 @@
           "osm_tags": [
             { "amenity": "toilets" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "details_tags": [ "handrail", "handwashing", "handwashing:length" ]
         },
         "viewpoint": {
           "name": "View point",

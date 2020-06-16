@@ -79,11 +79,12 @@
         <template v-if="services.length > 0">
           <v-subheader>{{ $t('details.services') }}</v-subheader>
            <v-list class="py-0">
-             <detail-link
-               v-for="{ service, value } in services"
+             <detail-service
+               v-for="{ service, label, value } in services"
                :key="service"
-               :title="value"
+               :title="label"
                :icon="`osm-${service}`"
+               :icon2="value && `osm-${value}`"
              />
            </v-list-item>
          </v-list>
@@ -144,8 +145,10 @@ import DetailHygiene from './detail_hygiene';
 import DetailLink from './detail_link';
 import DetailOpeningHours from './detail_opening_hours';
 import DetailState from './detail_state';
+import DetailService from './detail_service';
 import OsmLink from '../osm_link';
 import UpdateDetailDialog from '../update_detail_dialog';
+import { categories } from '../../categories.json';
 
 const CONTACTS = {
   'phone:covid19': 'osm-phone_covid',
@@ -163,6 +166,7 @@ export default {
     DetailLink,
     DetailOpeningHours,
     DetailState,
+    DetailService,
     OsmLink,
     UpdateDetailDialog
   },
@@ -200,6 +204,7 @@ export default {
 
   mounted() {
     this.updateDefaultHeight();
+
     this.beforeUnloadListener = (event) => {
       if (this.$refs.state && this.$refs.state.contribute) {
         event.preventDefault();
@@ -255,22 +260,26 @@ export default {
     },
 
     services() {
-      const services = [];
+      if(
+        this.place
+        && categories[this.place.properties.normalized_cat]
+        && categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat]
+        && categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat].details_tags
+      ) {
+        const details_tags = categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat].details_tags;
+        const valuesAsIcons = { "yes": "check", "no": "close" };
 
-      const addInfosIfValueYes = (tagName) => {
-        const tag = this.place.properties.tags[tagName];
-        if (tag && tag === 'yes') {
-          services.push({ service: tagName, value: this.$t(`details.${tagName}.${tag}`) });
-        }
-      };
-
-      addInfosIfValueYes('tobacco');
-      addInfosIfValueYes('newsagent');
-      addInfosIfValueYes('takeaway');
-      addInfosIfValueYes('delivery');
-      addInfosIfValueYes('drive_through');
-
-      return services;
+        return details_tags
+          .filter(tagname => this.place.properties.tags[tagname])
+          .map(tagname => {
+            const osmVal = this.place.properties.tags[tagname];
+            const label = this.$t(`details.details_tags.${tagname}`) + (valuesAsIcons[osmVal] ? '' : ' : '+osmVal);
+            return { service: tagname, label: label, value: valuesAsIcons[osmVal] };
+          });
+      }
+      else {
+        return [];
+      }
     },
 
     infos() {
