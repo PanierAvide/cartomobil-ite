@@ -26,8 +26,8 @@
         v-text="(contact('phone') || contact('mobile'))[0].text"
       />
       <dense-opening-hours
-        v-if="place.properties.opening_hours && place.properties.opening_hours !== 'open'"
-        :value="place.properties.opening_hours"
+        v-if="place.properties.tags.opening_hours"
+        :value="place.properties.tags.opening_hours"
       />
       <v-list-item-subtitle v-else>{{ $t(`details.state_short.${place.properties.status}`) }}</v-list-item-subtitle>
     </v-list-item-content>

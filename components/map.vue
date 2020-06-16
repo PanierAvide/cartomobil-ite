@@ -58,10 +58,10 @@ const contribSource = "poi-contrib-src";
 function getColorStroke(theme, contribs = readContributionFromStorage()) {
   return [
     'case',
-    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1].startsWith("open")).map(c => c[0])]], rawColorForStatus('open', theme),
-    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] === "closed").map(c => c[0])]], rawColorForStatus('closed', theme),
-    ["in", ["get", "status"], ["literal", ["open", "open_adapted"]]], rawColorForStatus('open', theme),
-    ["in", ["get", "status"], ["literal", ["closed"]]], rawColorForStatus('closed', theme),
+    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1].startsWith("yes")).map(c => c[0])]], rawColorForStatus('yes', theme),
+    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] === "no").map(c => c[0])]], rawColorForStatus('no', theme),
+    ["in", ["get", "status"], ["literal", ["yes", "limited"]]], rawColorForStatus('yes', theme),
+    ["in", ["get", "status"], ["literal", ["no"]]], rawColorForStatus('no', theme),
     rawColorForStatus('unknown', theme)
   ];
 }
@@ -73,12 +73,12 @@ function getLayers(theme) {
     0, 0,
     12, [
       'case',
-      ["in", ["get", "status"], ["literal", ["unknown", "partial", "closed"]]], 0,
+      ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 0,
       1
     ],
     14, [
       'case',
-      ["in", ["get", "status"], ["literal", ["unknown", "partial", "closed"]]], 0,
+      ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 0,
       1
     ],
     15, 1
@@ -92,8 +92,8 @@ function getLayers(theme) {
       layout: {
         'circle-sort-key': [
           'case',
-          ["in", ["get", "status"], ["literal", ["open", "open_adapted"]]], 2,
-          ["in", ["get", "status"], ["literal", ["closed"]]], 1,
+          ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 2,
+          ["in", ["get", "status"], ["literal", ["no"]]], 1,
           0
         ]
       },
@@ -103,7 +103,7 @@ function getLayers(theme) {
         'circle-stroke-opacity': conditionalOpacity,
         'circle-stroke-width': [
           'case',
-          ["in", ["get", "status"], ["literal", ["open", "open_adapted"]]], 4,
+          ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 4,
           2.5
         ],
         'circle-stroke-color': getColorStroke(theme),
@@ -115,7 +115,7 @@ function getLayers(theme) {
           14, 2,
           15, [
             'case',
-            ["in", ["get", "status"], ["literal", ["unknown", "partial", "closed"]]], 4,
+            ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
             6
           ],
           19, 13
@@ -130,8 +130,8 @@ function getLayers(theme) {
       layout: {
         'symbol-sort-key': [
           'case',
-          ["in", ["get", "status"], ["literal", ["open", "open_adapted"]]], 0,
-          ["in", ["get", "status"], ["literal", ["closed"]]], 1,
+          ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 0,
+          ["in", ["get", "status"], ["literal", ["no"]]], 1,
           2
         ],
         "icon-image": [

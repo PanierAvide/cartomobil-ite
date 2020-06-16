@@ -47,10 +47,10 @@
           :last-update="lastUpdate"
         />
 
-        <detail-hygiene
+        <!--detail-hygiene
           v-if="status != 'closed'"
           :place="place"
-        />
+        /-->
 
         <v-list
           v-if="infos.length > 0 || hasVending"
@@ -89,40 +89,14 @@
          </v-list>
        </template>
 
-       <template v-if="hasOpeningInfos">
-         <v-subheader v-if="hasSpecificOpeningHours || place.properties.brand_hours">{{ $t('details.lockdown_opening_hours') }}</v-subheader>
-         <v-subheader v-else>{{ $t('details.normal_opening_hours') }}</v-subheader>
+       <template v-if="place.properties.tags.opening_hours">
+         <v-subheader>{{ $t('details.normal_opening_hours') }}</v-subheader>
          <v-list class="py-0">
            <detail-opening-hours
-             v-if="hasSpecificOpeningHours"
-             :value="place.properties.opening_hours"
+             :value="place.properties.tags.opening_hours"
              :country="place.properties.country"
              :coordinates="place.geometry.coordinates"
            />
-           <detail-link
-             v-else-if="place.properties.brand_hours"
-             :href="place.properties.brand_hours"
-             :title="$t('details.lockdown_brand_hours')"
-             external
-             icon="osm-chevron_right"
-           />
-           <template v-else-if="place.properties.tags.opening_hours">
-             <v-alert
-               dense
-               tile
-               :icon="false"
-               border="left"
-               colored-border
-               type="warning"
-               class="mb-0 pa-0"
-             >
-               <detail-opening-hours
-                 :value="place.properties.tags.opening_hours"
-                 :country="place.properties.country"
-                 :coordinates="place.geometry.coordinates"
-               />
-             </v-alert>
-           </template>
          </v-list>
        </template>
 
@@ -144,10 +118,10 @@
           </v-list>
         </template>
 
-        <update-detail-dialog
+        <!--update-detail-dialog
           v-if="country === 'FR' && place.properties.brand"
           :place="place"
-        />
+        /-->
       </div>
 
       <v-spacer></v-spacer>
@@ -281,19 +255,7 @@ export default {
     },
 
     services() {
-      const isOpen = ['open', 'open_adapted'].includes(this.place.properties.status);
-      const isOpenOrPartial = ['open', 'open_adapted', 'partial'].includes(this.place.properties.status);
-
       const services = [];
-      const addInfosDependingOfTagAndStatus = (tagName) => {
-        const tagCovid19 = this.place.properties.tags[`${tagName}:covid19`];
-        const tag = this.place.properties.tags[tagName];
-        if (isOpenOrPartial && tagCovid19 && this.$te(`details.${tagName}.${tagCovid19}`)) {
-          services.push({ service: tagName, value: this.$t(`details.${tagName}.${tagCovid19}`) });
-        } else if (isOpen && tag && this.$te(`details.${tagName}.${tag}`) && !tagCovid19) {
-          services.push({ service: tagName, value: this.$t(`details.${tagName}.${tag}`) });
-        }
-      };
 
       const addInfosIfValueYes = (tagName) => {
         const tag = this.place.properties.tags[tagName];
@@ -304,10 +266,9 @@ export default {
 
       addInfosIfValueYes('tobacco');
       addInfosIfValueYes('newsagent');
-      addInfosDependingOfTagAndStatus('takeaway');
-      addInfosDependingOfTagAndStatus('delivery');
-      addInfosDependingOfTagAndStatus('drive_through');
-      addInfosDependingOfTagAndStatus('wheelchair');
+      addInfosIfValueYes('takeaway');
+      addInfosIfValueYes('delivery');
+      addInfosIfValueYes('drive_through');
 
       return services;
     },

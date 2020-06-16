@@ -3,47 +3,13 @@
 --
 
 -- Read opening state according to tags
-CREATE OR REPLACE FUNCTION opening_state(tags HSTORE) RETURNS VARCHAR AS $$
-DECLARE
-	status VARCHAR := 'unknown';
-	oh_c19 VARCHAR;
-	oh VARCHAR;
+CREATE OR REPLACE FUNCTION get_state(tags HSTORE) RETURNS VARCHAR AS $$
 BEGIN
-	oh_c19 := tags->'opening_hours:covid19';
-	oh := tags->'opening_hours';
-
-	-- opening_hours:covid19 defined
-	IF oh_c19 != '' THEN
-		-- opening_hours:covid19 = open
-		IF oh_c19 IN ('open', 'same', 'yes') THEN
-			-- opening_hours closed + opening_hours:covid19 same
-			IF oh ILIKE 'off%' AND oh_c19 = 'same' THEN
-				status := 'closed';
-
-			-- opening_hours open
-			ELSE
-				status := 'open';
-			END IF;
-
-		-- opening_hours:covid19 = closed
-		ELSIF oh_c19 ILIKE 'off%' OR oh_c19 = 'closed' THEN
-			status := 'closed';
-
-		-- opening_hours:covid19 = opening_hours
-		ELSIF oh_c19 = oh THEN
-			status := 'open';
-
-		-- opening_hours:covid19 = opening_hours syntax
-		ELSE
-			status := 'open_adapted';
-		END IF;
-
-	-- Self-service / vending machines
-	ELSIF (tags->'amenity' = 'fuel' AND tags->'self_service' = 'yes') OR tags->'amenity' = 'vending_machine' THEN
-		status := 'open';
+	IF tags->'wheelchair' IN ('yes', 'no', 'limited') THEN
+		RETURN tags->'wheelchair';
+	ELSE
+		RETURN 'unknown';
 	END IF;
-
-	RETURN status;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -87,13 +53,10 @@ CREATE TABLE IF NOT EXISTS poi_osm_next(
 	brand_infos VARCHAR,
 	status VARCHAR DEFAULT 'unknown',
 	status_order INTEGER,
-	opening_hours VARCHAR,
-	delivery VARCHAR DEFAULT 'unknown',
-	takeaway VARCHAR DEFAULT 'unknown',
-	hydroalcoholic_gel VARCHAR DEFAULT NULL,
-	mask VARCHAR DEFAULT NULL,
-	has_contact BOOLEAN DEFAULT NULL,
 	source_status VARCHAR DEFAULT 'osm',
+	delivery VARCHAR,
+	takeaway VARCHAR,
+	drive_through VARCHAR,
 	tags JSONB
 );
 
@@ -113,24 +76,11 @@ AS
 	COALESCE(tags->'brand', tags->'operator'),
 	COALESCE(tags->'brand:wikidata', tags->'operator:wikidata', tags->'wikidata'),
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
-	opening_state(tags),
-	status_order_value(opening_state(tags)),
-	CASE
---		WHEN "opening_hours:covid19" NOT IN ('off', 'same', '') AND NOT "opening_hours:covid19" ILIKE 'off%' THEN "opening_hours:covid19"
-		WHEN amenity = 'vending_machine' AND tags->'opening_hours' IN ('', '24/7') THEN '24/7'
-		ELSE NULL
-	END,
-	CASE
-		WHEN tags->'delivery:covid19' IN ('yes', 'no', 'only') THEN tags->'delivery:covid19'
-		WHEN tags->'delivery' IN ('yes', 'no', 'only') AND opening_state(tags) = 'ouvert' THEN tags->'delivery'
-		ELSE 'unknown'
-	END,
-	CASE
-		WHEN tags->'takeaway:covid19' IN ('yes', 'no', 'only') THEN tags->'takeaway:covid19'
-		WHEN tags->'takeaway' IN ('yes', 'no', 'only') AND opening_state(tags) = 'ouvert' THEN tags->'takeaway'
-		ELSE 'unknown'
-	END,
-	has_contact_tag(tags),
+	get_state(tags),
+	status_order_value(get_state(tags)),
+	tags->'delivery',
+	tags->'takeaway',
+	tags->'drive_through',
 	hstore_to_jsonb(tags) AS tags
 FROM osm_imposm_osm_point
 WHERE
@@ -147,24 +97,11 @@ SELECT
 	COALESCE(tags->'brand', tags->'operator'),
 	COALESCE(tags->'brand:wikidata', tags->'operator:wikidata', tags->'wikidata'),
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
-	opening_state(tags),
-	status_order_value(opening_state(tags)),
-	CASE
---		WHEN "opening_hours:covid19" NOT IN ('off', 'same', '') AND NOT "opening_hours:covid19" ILIKE 'off%' THEN "opening_hours:covid19"
-		WHEN amenity = 'vending_machine' AND tags->'opening_hours' IN ('', '24/7') THEN '24/7'
-		ELSE NULL
-	END,
-	CASE
-		WHEN tags->'delivery:covid19' IN ('yes', 'no', 'only') THEN tags->'delivery:covid19'
-		WHEN tags->'delivery' IN ('yes', 'no', 'only') AND opening_state(tags) = 'ouvert' THEN tags->'delivery'
-		ELSE 'unknown'
-	END,
-	CASE
-		WHEN tags->'takeaway:covid19' IN ('yes', 'no', 'only') THEN tags->'takeaway:covid19'
-		WHEN tags->'takeaway' IN ('yes', 'no', 'only') AND opening_state(tags) = 'ouvert' THEN tags->'takeaway'
-		ELSE 'unknown'
-	END,
-	has_contact_tag(tags),
+	get_state(tags),
+	status_order_value(get_state(tags)),
+	tags->'delivery',
+	tags->'takeaway',
+	tags->'drive_through',
 	hstore_to_jsonb(tags)
 FROM osm_imposm_osm_polygon
 WHERE
@@ -172,27 +109,19 @@ WHERE
 	-- Do not edit directly, run "yarn run categories" instead
 	("amenity" IN ('atm', 'bank', 'bar', 'bus_station', 'cafe', 'car_rental', 'childcare', 'cinema', 'clinic', 'doctors', 'drinking_water', 'fast_food', 'ferry_terminal', 'hospital', 'ice_cream', 'kindergarten', 'library', 'marketplace', 'money_transfer', 'nightclub', 'parking', 'parking_space', 'pharmacy', 'police', 'post_box', 'post_office', 'pub', 'public_bookcase', 'restaurant', 'school', 'swimming_pool', 'taxi', 'theatre', 'toilets', 'townhall', 'vending_machine') OR "office" IN ('association', 'company', 'diplomatic', 'government', 'insurance') OR "shop" IN ('alcohol', 'appliance', 'art', 'bag', 'bakery', 'bathroom_furnishing', 'beauty', 'bed', 'beverages', 'books', 'boutique', 'butcher', 'cannery', 'carpet', 'charity', 'cheese', 'chemist', 'chocolate', 'clothes', 'coffee', 'computer', 'confectionery', 'convenience', 'copyshop', 'cosmetics', 'curtain', 'dairy', 'deli', 'department_store', 'doityourself', 'dry_cleaning', 'e-cigarette', 'electrical', 'electronics', 'fabric', 'farm', 'fashion', 'fireplace', 'fishing', 'florist', 'frozen_food', 'furniture', 'garden_centre', 'general', 'glaziery', 'greengrocer', 'haberdashery', 'hairdresser', 'hardware', 'health_food', 'hearing_aids', 'hifi', 'honey', 'houseware', 'hunting', 'insurance', 'interior_decoration', 'jewelry', 'kiosk', 'kitchen', 'laundry', 'lighting', 'massage', 'medical_supply', 'mobile_phone', 'music', 'musical_instrument', 'newsagent', 'newsagent;tobacco', 'optician', 'outdoor', 'paint', 'pasta', 'pastry', 'perfumery', 'pet', 'photo', 'pottery', 'printer_ink', 'seafood', 'second_hand', 'sewing', 'shoes', 'spices', 'sports', 'stationery', 'supermarket', 'tailor', 'tea', 'ticket', 'tiles', 'tobacco', 'tobacco;newsagent', 'toys', 'variety_store', 'video', 'video_games', 'watches', 'wholesale', 'wine', 'winery', 'wool') OR "leisure" IN ('beach_resort', 'park', 'sports_centre', 'swimming_pool') OR "tourism" IN ('artwork', 'guest_house', 'hostel', 'hotel', 'museum', 'viewpoint') OR "craft" IN ('electronics_repair', 'optician', 'sewing') OR "name" IN ('EDT', 'Electricité de Tahiti', 'Électricité de Tahiti') OR "school:FR" IN ('collège', 'lycée', 'élémentaire') OR "healthcare" IN ('audiologist', 'centre', 'clinic', 'dentist', 'doctor', 'hospital', 'midwife', 'nurse', 'occupational_therapist', 'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist') OR "highway" IN ('bus_stop') OR "public_transport" IN ('platform', 'stop_position') OR "aeroway" IN ('aerodrome') OR "wheelchair" IN ('designated', 'yes') OR "natural" IN ('beach')) --CATEGORIES
 )
-INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, brand, brand_wikidata, brand_infos, status, status_order, opening_hours, delivery, takeaway, has_contact, tags)
+INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, brand, brand_wikidata, brand_infos, status, status_order, delivery, takeaway, drive_through, tags)
 SELECT *
 FROM selection
 -- Remove edge cases needing advanced filtering like vending machines
 WHERE normalized_cat IS NOT NULL AND NOT (tags ? 'access' AND tags->>'access' NOT IN ('yes', 'public', 'permissive'));
 
-UPDATE poi_osm_next
-SET status = 'open', status_order = status_order_value('open'), opening_hours = '24/7'
-WHERE status IN ('unknown', 'open_adapted') AND cat = 'fuel' AND tags->>'opening_hours' = '24/7';
-
-UPDATE poi_osm_next
-SET opening_hours = tags->>'opening_hours'
-WHERE status = 'open' AND opening_hours IS NULL;
-
 
 -- Join custom tags from poi_cro
 UPDATE poi_osm_next
 SET
-	tags = poi_osm_next.tags || c.tags || CONCAT('{ "cro:date": "',EXTRACT(EPOCH FROM c.lastupdate)::int,'" }')::jsonb,
-	hydroalcoholic_gel = c.tags->>'vending:hydroalcoholic_gel',
-	mask = c.tags->>'vending:mask'
+	tags = poi_osm_next.tags || c.tags || CONCAT('{ "cro:date": "',EXTRACT(EPOCH FROM c.lastupdate)::int,'" }')::jsonb
+-- 	hydroalcoholic_gel = c.tags->>'vending:hydroalcoholic_gel',
+-- 	mask = c.tags->>'vending:mask'
 FROM poi_cro c
 WHERE poi_osm_next.fid = c.osmid;
 
@@ -209,7 +138,7 @@ WHERE
 	pc.osm_id IS NOT NULL
 	AND pc.osm_id = poi_osm_next.fid;
 
-INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, status, status_order, opening_hours, delivery, takeaway, source_status, tags)
+INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, status, status_order, source_status, tags)
 WITH pc AS (
 	SELECT *, ST_Transform(ST_SetSRID(ST_Point(lng, lat), 4326), 3857) AS geom
 	FROM poi_custom
@@ -221,11 +150,8 @@ SELECT
 	pc.name,
 	pc.category,
 	pc.subcategory,
-	'open',
-	status_order_value('open'),
-	pc.tags->>'opening_hours',
-	pc.tags->>'delivery',
-	pc.tags->>'takeaway',
+	'yes',
+	status_order_value('yes'),
 	'cro',
 	tags
 FROM pc
@@ -236,8 +162,6 @@ WHERE pc.osm_id IS NULL;
 REINDEX TABLE poi_osm_next;
 CREATE INDEX poi_osm_next_geom_idx ON poi_osm_next USING GIST(geom);
 CREATE INDEX poi_osm_next_status_idx ON poi_osm_next(status);
-CREATE INDEX poi_osm_next_opening_hours_idx ON poi_osm_next(opening_hours);
-CREATE INDEX poi_osm_next_has_contact_idx ON poi_osm_next(has_contact);
 
 CREATE SCHEMA IF NOT EXISTS previous;
 DROP TABLE IF EXISTS previous.poi_osm CASCADE;
@@ -248,17 +172,9 @@ ALTER TABLE poi_osm_next RENAME TO poi_osm;
 ALTER INDEX poi_osm_next_pkey RENAME TO poi_osm_pkey;
 ALTER INDEX poi_osm_next_geom_idx RENAME TO poi_osm_geom_idx;
 ALTER INDEX poi_osm_next_status_idx RENAME TO poi_osm_status_idx;
-ALTER INDEX poi_osm_next_opening_hours_idx RENAME TO poi_osm_opening_hours_idx;
-ALTER INDEX poi_osm_next_has_contact_idx RENAME TO poi_osm_has_contact_idx;
 
 CREATE OR REPLACE VIEW poi_osm_light AS
-SELECT fid, fid AS id, geom, name, cat, normalized_cat, status, delivery, takeaway, hydroalcoholic_gel, mask
-FROM poi_osm;
-
-
--- Quality insurance views
-CREATE OR REPLACE VIEW poi_osm_qa AS
-SELECT fid, geom, name, normalized_cat, cat, opening_hours, has_contact
+SELECT fid, fid AS id, geom, name, cat, normalized_cat, status, takeaway, delivery, drive_through
 FROM poi_osm;
 
 

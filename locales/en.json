@@ -25,9 +25,8 @@
   },
   "services": {
     "delivery": "Delivery",
-    "hydroalcoholic_gel": "Hydroalcoholic gel",
-    "mask": "Mask",
-    "takeaway": "Takeaway"
+    "takeaway": "Takeaway",
+    "drive_through": "Drive-through"
   },
   "learnmore": {
     "about": "About",
@@ -102,9 +101,7 @@
     "signal_warning": "You were writing a report. It'll not be saved. Do you want to continue?",
     "signal": "Report a change",
     "signal_done": "Your report has been registered, thank you! It'll appear in a while.",
-    "lockdown_opening_hours": "Opening hours",
-    "normal_opening_hours": "Opening hours outside the lockdown period",
-    "lockdown_brand_hours": "Look at the opening hours",
+    "normal_opening_hours": "Opening hours",
     "facebook": "Facebook page",
     "not_accessible": "No physical reception on site",
     "capacity": "Maximal capacity : 0 persons | Maximal capacity : 1 person | Maximal capacity : {count} persons",
@@ -123,18 +120,16 @@
       "tomorrow": "tomorrow"
     },
     "state": {
-      "open": "Place open during lockdown",
-      "open_adapted": "Place open during lockdown, with adapted hours",
-      "partial": "Place belongs to a brand whose places are partially open during lockdown. Is it open or closed? Let us know.",
-      "unknown": "Place may be allowed to open during lockdown. Is it open or closed? Let us know.",
-      "closed": "Place closed during lockdown"
+      "yes": "Place accessible in wheelchair",
+      "limited": "Place partially accessible in wheelchair",
+      "no": "Place not accessible in wheelchair",
+      "unknown": "Place eventually accessible in wheelchair. Is it accessible ? Let us know."
     },
     "state_short": {
-      "open": "Open during the lockdown",
-      "open_adapted": "Open during the lockdown",
-      "partial": "Potentially open",
-      "unknown": "Potentially open",
-      "closed": "Closed during lockdown"
+      "yes": "Accessible in wheelchair",
+      "limited": "Partial access in wheelchair",
+      "no": "No access in wheelchair",
+      "unknown": "Eventually accessible in wheelchair"
     },
     "delivery": {
       "yes": "Delivery service available",

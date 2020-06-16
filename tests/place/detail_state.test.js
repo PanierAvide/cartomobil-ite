@@ -20,19 +20,14 @@ describe('DetailState', () => {
     });
   }
 
-  it('returns the state when open', () => {
-    const detail = createWrapper({ status: 'open', place: {} });
+  it('returns the state when yes', () => {
+    const detail = createWrapper({ status: 'yes', place: {} });
     expect(detail.vm.type).toEqual('success');
   });
 
-  it('returns the state when open_adapted', () => {
-    const detail = createWrapper({ status: 'open_adapted', place: {} });
+  it('returns the state when limited', () => {
+    const detail = createWrapper({ status: 'limited', place: {} });
     expect(detail.vm.type).toEqual('success');
-  });
-
-  it('returns the state when partial', () => {
-    const detail = createWrapper({ status: 'partial', place: {} });
-    expect(detail.vm.type).toEqual('warning');
   });
 
   it('returns the state when unknown', () => {
@@ -40,8 +35,8 @@ describe('DetailState', () => {
     expect(detail.vm.type).toEqual('warning');
   });
 
-  it('returns the state when closed', () => {
-    const detail = createWrapper({ status: 'closed', place: {} });
+  it('returns the state when no', () => {
+    const detail = createWrapper({ status: 'no', place: {} });
     expect(detail.vm.type).toEqual('error');
   });
 

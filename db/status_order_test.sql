@@ -3,27 +3,27 @@ BEGIN;
 SELECT plan(5);
 
 SELECT is(
-    status_order_value('open'),
+    status_order_value('yes'),
     1
 );
 
 SELECT is(
-    status_order_value('open_adapted'),
+    status_order_value('limited'),
     2
 );
 
 SELECT is(
-    status_order_value('partial'),
+    status_order_value('unknown'),
     3
 );
 
 SELECT is(
-    status_order_value('unknown'),
+    status_order_value('no'),
     4
 );
 
 SELECT is(
-    status_order_value('closed'),
+    status_order_value(''),
     5
 );
 

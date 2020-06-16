@@ -25,9 +25,8 @@
   },
   "services": {
     "delivery": "Livraison",
-    "hydroalcoholic_gel": "Gel hydroalcoolique",
-    "mask": "Masques",
-    "takeaway": "Vente à emporter"
+    "takeaway": "Vente à emporter",
+    "drive_through": "Drive"
   },
   "learnmore": {
     "about": "À propos",
@@ -102,9 +101,7 @@
     "signal_warning": "Vous étiez en train de signaler un changement, si vous partez il ne sera pas sauvegardé. Voulez-vous vraiment quitter la page ?",
     "signal": "Signaler un changement",
     "signal_done": "Votre signalement a été enregistré, merci ! Il apparaitra dans un moment sur la carte.",
-    "lockdown_opening_hours": "Horaires d'ouverture",
-    "normal_opening_hours": "Horaires d'ouverture habituels",
-    "lockdown_brand_hours": "Consulter les horaires",
+    "normal_opening_hours": "Horaires d'ouverture",
     "facebook": "Page Facebook",
     "not_accessible": "Pas d'accueil physique sur place",
     "capacity": "Capacité maximale : 0 personnes | Capacité maximale : 1 personne | Capacité maximale : {count} personnes",
@@ -123,18 +120,16 @@
       "tomorrow": "demain"
     },
     "state": {
-      "open": "Lieu ouvert durant la crise sanitaire",
-      "open_adapted": "Lieu ouvert durant la crise sanitaire avec des horaires adaptés",
-      "partial": "Lieu appartenant à une enseigne dont les établissements sont partiellement ouverts. Ouvert ou fermé ? À vous de le dire.",
-      "unknown": "Lieu potentiellement ouvert durant la crise sanitaire pour proposer ses services habituels ou de nouveaux. Ouvert ou fermé ? À vous de le dire.",
-      "closed": "Lieu fermé durant la crise sanitaire"
+      "yes": "Lieu entièrement accessible en fauteuil roulant",
+      "limited": "Lieu partiellement accessible en fauteuil roulant",
+      "no": "Lieu pas encore aménagé pour l'accès en fauteuil roulant",
+      "unknown": "Lieu potentiellement accessible en fauteuil roulant. Accessible ou pas ? À vous de le dire."
     },
     "state_short": {
-      "open": "Ouvert durant la crise sanitaire",
-      "open_adapted": "Ouvert durant la crise sanitaire",
-      "partial": "Potentiellement ouvert",
-      "unknown": "Potentiellement ouvert",
-      "closed": "Fermé durant la crise sanitaire"
+      "yes": "Accessible en fauteuil roulant",
+      "limited": "Partiellement accessible en fauteuil",
+      "no": "Pas d'accès en fauteuil roulant",
+      "unknown": "Potentiellement accessible"
     },
     "delivery": {
       "yes": "Service de livraison proposé",
