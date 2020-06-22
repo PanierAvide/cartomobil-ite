@@ -178,276 +178,49 @@
     "shop": {
       "name": "Shops",
       "subcategories": {
-        "supermarket": {
-          "name": "Supermarket",
+        "food": {
+          "name": "Food",
           "osm_tags": [
-            { "shop": "frozen_food|supermarket" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access", "drive_through" ]
-        },
-        "butcher": {
-          "name": "Butcher",
-          "osm_tags": [
-            { "shop": "butcher" }
+            { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
         },
-        "cheese": {
-          "name": "Cheese",
+        "electronics": {
+          "name": "Electronics",
           "osm_tags": [
-            { "shop": "cheese" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "convenience": {
-          "name": "Convenience",
-          "osm_tags": [
-            { "shop": "convenience|general" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "seafood": {
-          "name": "Seafood",
-          "osm_tags": [
-            { "shop": "seafood" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "greengrocer": {
-          "name": "Greengrocer",
-          "osm_tags": [
-            { "shop": "greengrocer" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "grocery": {
-          "name": "Grocery",
-          "osm_tags": [
-            { "shop": "deli|spices|honey|pasta|cannery|tea|coffee" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "health_food": {
-          "name": "Health food",
-          "osm_tags": [
-            { "shop": "health_food" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "dairy": {
-          "name": "Dairy",
-          "osm_tags": [
-            { "shop": "dairy" },
-            { "amenity": "vending_machine", "vending": "milk" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "confectionery": {
-          "name": "Confectionery",
-          "osm_tags": [ { "shop": "confectionery|chocolate" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "farm": {
-          "name": "Farm shop",
-          "osm_tags": [ { "shop": "farm" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "marketplace": {
-          "name": "Marketplace",
-          "osm_tags": [
-            { "amenity": "marketplace" }
-          ],
-          "areas": "all"
-        },
-        "bakery": {
-          "name": "Bakery",
-          "osm_tags": [
-            { "shop": "bakery|pastry" },
-            { "amenity": "vending_machine", "vending": "bread" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "alcohol": {
-          "name": "Alcohol store",
-          "osm_tags": [
-            { "shop": "alcohol|beverages|wine|winery" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "tobacco": {
-          "name": "Tobacco / e-cigarettes",
-          "osm_tags": [
-            { "shop": "tobacco|newsagent;tobacco|tobacco;newsagent|e-cigarette" },
-            { "tobacco": "yes|only" },
-            { "amenity": "vending_machine", "vending": "cigarettes|e-cigarettes" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access", "mask" ]
-        },
-        "mobile_phone": {
-          "name": "Mobile phone",
-          "osm_tags": [
-            { "shop": "mobile_phone" }
+            { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
+            { "craft": "electronics_repair" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
-        },
-        "computer": {
-          "name": "Computer",
-          "osm_tags": [ { "shop": "computer" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "laundry": {
-          "name": "Laundry",
-          "osm_tags": [
-            { "shop": "dry_cleaning|laundry" }
-          ],
-          "areas": "all"
         },
         "stationery": {
-          "name": "Stationery",
+          "name": "Stationery / books",
           "osm_tags": [
-            { "shop": "stationery|printer_ink" }
+            { "shop": "stationery|printer_ink|books|kiosk|newsagent" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
-        },
-        "newsagent": {
-          "name": "Newsagent",
-          "osm_tags": [
-            { "shop": "kiosk|newsagent" },
-            { "newsagent": "yes" }
-          ],
-          "areas": "all"
         },
         "pet": {
-          "name": "Pet store",
+          "name": "Pets / garden",
           "osm_tags": [
-            { "shop": "pet" }
+            { "shop": "pet|garden_centre|florist" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "drive", "access" ]
-        },
-        "flower": {
-          "name": "Garden / flower",
-          "osm_tags": [
-            { "shop": "garden_centre|florist" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "sewing": {
-          "name": "Sewing",
-          "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool" }, { "craft": "sewing" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "books": {
-          "name": "Book store",
-          "osm_tags": [
-            { "shop": "books" },
-            { "amenity": "vending_machine", "vending": "books" },
-            { "amenity": "public_bookcase" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
         },
         "art": {
-          "name": "Art",
-          "osm_tags": [
-            { "shop": "art" }
-          ],
-          "areas": "all"
-        },
-        "charity": {
-          "name": "Charity shop",
-          "osm_tags": [
-            { "shop": "charity" }
-          ],
+          "name": "Art / creative leisure",
+          "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool|art|music|musical_instrument|photo|toys|video|video_games" }, { "craft": "sewing" } ],
           "areas": "all",
-          "form_details": [ "delivery", "access" ]
-        },
-        "department_store": {
-          "name": "Department store",
-          "osm_tags": [
-            { "shop": "department_store" }
-          ],
-          "areas": "all"
-        },
-        "music": {
-          "name": "Music",
-          "osm_tags": [
-            { "shop": "music|musical_instrument" }
-          ],
-          "areas": "all"
-        },
-        "photo": {
-          "name": "Photo",
-          "osm_tags": [
-            { "shop": "photo" }
-          ],
-          "areas": "all"
-        },
-        "second_hand": {
-          "name": "Second hand",
-          "osm_tags": [
-            { "shop": "second_hand" }
-          ],
-          "areas": "all"
-        },
-        "ticket": {
-          "name": "Tickets",
-          "osm_tags": [
-            { "shop": "ticket" }
-          ],
-          "areas": "all"
-        },
-        "toys": {
-          "name": "Toy store",
-          "osm_tags": [
-            { "shop": "toys" }
-          ],
-          "areas": "all"
+          "form_details": [ "delivery", "drive", "access" ]
         },
         "variety_store": {
           "name": "Variety store",
           "osm_tags": [
-            { "shop": "variety_store" }
-          ],
-          "areas": "all"
-        },
-        "video": {
-          "name": "Videos",
-          "osm_tags": [
-            { "shop": "video" }
-          ],
-          "areas": "all"
-        },
-        "video_games": {
-          "name": "Video games",
-          "osm_tags": [
-            { "shop": "video_games" }
-          ],
-          "areas": "all"
-        },
-        "wholesale": {
-          "name": "Wholesale",
-          "osm_tags": [
-            { "shop": "wholesale" }
+            { "shop": "variety_store|department_store|wholesale|second_hand|charity" }
           ],
           "areas": "all"
         },
@@ -458,42 +231,17 @@
           ],
           "areas": "all"
         },
-        "hardware": {
-          "name": "Hardware",
+        "home": {
+          "name": "Home equipement",
           "osm_tags": [
-            { "shop": "doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
-        },
-        "furniture": {
-          "name": "Furniture",
-          "osm_tags": [
-            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed" }
+            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
           ],
           "areas": "all"
-        },
-        "hifi": {
-          "name": "Hifi",
-          "osm_tags": [
-            { "shop": "hifi" }
-          ],
-          "areas": "all"
-        },
-        "electronics": {
-          "name": "Electronics",
-          "osm_tags": [
-            { "shop": "electronics" },
-            { "craft": "electronics_repair" },
-            { "shop": "appliance"}
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
         },
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
-            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery" }
+            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
@@ -505,14 +253,6 @@
           ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
-        },
-        "chemist": {
-          "name": "Chemist",
-          "osm_tags": [
-            { "shop": "chemist" }
-          ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
         },
         "edt": {
           "name": "Tahiti Electricity",
