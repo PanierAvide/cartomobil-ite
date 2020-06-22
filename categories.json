@@ -181,7 +181,8 @@
         "food": {
           "name": "Food",
           "osm_tags": [
-            { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" }
+            { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" },
+            { "amenity": "marketplace" }
           ],
           "areas": "all",
           "form_details": [ "delivery", "access" ]
