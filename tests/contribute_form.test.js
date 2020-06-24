@@ -52,13 +52,6 @@ describe('ContributeForm', () => {
       expect(form.vm.filteredFields.find(f => f.id === 'delivery')).toBe(undefined);
     });
 
-    it('parse the delivery:covid19 tag if it exists', () => {
-      const form = createWrapper({ place: { properties: { cat: 'restaurant', normalized_cat: 'leisure', tags: { 'delivery:covid19': 'yes' } } } });
-      form.vm.clickOpen();
-      expect(form.vm.fieldValues.delivery).toBe('yes');
-      expect(form.vm.filteredFields.find(f => f.id === 'delivery') !== undefined).toBe(true);
-    });
-
     it('if the delivery tag has an unknow value, hide the field', () => {
       const form = createWrapper({ place: { properties: { tags: { 'delivery:covid19': 'Mo-Fr 09:00-18:00' } } } });
       form.vm.clickOpen();
