@@ -39,6 +39,7 @@ export default {
   plugins: [
     { src: '~/plugins/map', mode: 'client' },
     { src: '~/plugins/matomo', mode: 'client' },
+    { src: '~/plugins/vjsf' },
     { src: '~/plugins/linkified' },
     { src: '~/plugins/url' }
   ],
@@ -92,7 +93,8 @@ export default {
           }
         }
       )
-    }
+    },
+    transpile: ['vuetify', /@koumoul/]
   },
   router: {
     extendRoutes(routes, resolve) {

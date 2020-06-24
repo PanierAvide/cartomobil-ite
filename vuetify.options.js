@@ -6,7 +6,11 @@ export default {
       expand: 'osm-arrow_down',
       checkboxOn: 'osm-check_box',
       checkboxOff: 'osm-check_box_outline_blank',
-      cancel: 'osm-close'
+      cancel: 'osm-close',
+      calendar: 'osm-blog',
+      clock: 'osm-time',
+      add: 'osm-plus',
+      delete: 'osm-close'
     }
   }
 };

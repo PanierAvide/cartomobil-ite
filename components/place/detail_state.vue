@@ -13,7 +13,7 @@
       >
         {{ lastUpdateText }}
       </p>
-      <template v-if="!success">
+      <template v-if="hasForm && !success">
         <br>
         <v-btn
           :disabled="contribute || lastUpdateTooRecent"
@@ -43,7 +43,7 @@
 
 <script>
 import ContributeForm from '../contribute_form';
-import { colorForStatus } from '../../lib/place';
+import { colorForStatus, getForm } from '../../lib/place';
 
 export default {
   components: { ContributeForm },
@@ -73,6 +73,10 @@ export default {
   },
 
   computed: {
+    hasForm() {
+      return getForm(this.place) !== null;
+    },
+
     type() {
       return colorForStatus(this.status);
     },

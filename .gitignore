@@ -4,3 +4,4 @@
 /static/sprite
 /.cache
 /dist
+/report*

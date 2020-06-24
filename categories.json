@@ -26,8 +26,7 @@
           "osm_tags": [
             { "amenity": "police" }
           ],
-          "areas": "all",
-          "form_details": [ "access" ]
+          "areas": "all"
         }
       }
     },
@@ -93,23 +92,20 @@
             { "amenity": "restaurant|fast_food" }
           ],
           "areas": "all",
-          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ],
-          "form_details": [ "delivery", "takeaway", "drive_through", "access" ]
+          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ]
         },
         "cafe": {
           "name": "Coffee shop",
           "osm_tags": [
             { "amenity": "cafe|ice_cream" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "takeaway", "access" ]
+          "areas": "all"
         },
         "bar": {
           "name": "Bar",
           "osm_tags": [ { "amenity": "bar|pub" } ],
           "areas": "all",
-          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ],
-          "form_details": [ "delivery", "takeaway", "access" ]
+          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ]
         },
         "nightclub": {
           "name": "Nightclub",
@@ -185,8 +181,7 @@
           "osm_tags": [
             { "shop": "boutique|clothes|fashion|shoes|bag|jewelry|tailor|watches" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "food": {
           "name": "Food",
@@ -194,38 +189,33 @@
             { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" },
             { "amenity": "marketplace" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
             { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "medical_supply": {
           "name": "Medical supplies",
           "osm_tags": [
             { "shop": "medical_supply" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "art": {
           "name": "Art / creative leisure",
           "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool|art|music|musical_instrument|photo|toys|video|video_games" }, { "craft": "sewing" } ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
+          "areas": "all"
         },
         "stationery": {
           "name": "Stationery / books",
           "osm_tags": [
             { "shop": "stationery|printer_ink|books|kiosk|newsagent" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
+          "areas": "all"
         },
         "variety_store": {
           "name": "Variety store",
@@ -254,8 +244,7 @@
             { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
             { "craft": "electronics_repair" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "drive", "access" ]
+          "areas": "all"
         },
         "edt": {
           "name": "Tahiti Electricity",
@@ -271,16 +260,14 @@
             { "shop": "optician" },
             { "craft": "optician" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "hearing_aids": {
           "name": "Hearing aids",
           "osm_tags": [
             { "shop": "hearing_aids" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "condoms": {
           "name": "Condoms vending machine",
@@ -335,8 +322,7 @@
           "osm_tags": [
             { "amenity": "pharmacy" }
           ],
-          "areas": "all",
-          "form_details": [ "delivery", "access" ]
+          "areas": "all"
         },
         "hospital": {
           "name": "Hospital",
@@ -391,7 +377,8 @@
             { "amenity": "bus_station" },
             { "public_transport": "stop_position|platform", "bus": "yes" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "bus_stop"
         },
         "ferry": {
           "name": "Ferry",
@@ -421,7 +408,8 @@
             { "amenity": "parking_space", "wheelchair": "yes|designated" },
             { "amenity": "parking|parking_space", "capacity:disabled": "*" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "parking_pmr"
         },
         "fuel": {
           "name": "Fuel station",
@@ -470,7 +458,8 @@
             { "amenity": "toilets" }
           ],
           "areas": "all",
-          "details_tags": [ "handrail", "handwashing", "handwashing:length" ]
+          "details_tags": [ "handrail", "handwashing", "handwashing:length" ],
+          "form": "toilets"
         },
         "viewpoint": {
           "name": "View point",
@@ -512,6 +501,339 @@
           "name": "Hostel",
           "osm_tags": [ { "tourism": "hostel" } ],
           "areas": "all"
+        }
+      }
+    }
+  },
+  "forms": {
+    "bus_stop": {
+      "type": "object",
+      "x-display": "tabs",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-map-tags": {
+        "wheelchair": "basics.wheelchair",
+        "height": "basics.height",
+        "sign:wheelchair": "basics.sign:wheelchair",
+        "name": "details.name",
+        "information": "details.information",
+        "passenger_information_display": "details.passenger_information_display",
+        "bench": "details.bench",
+        "width": "details.width",
+        "crossfall": "details.crossfall",
+        "incline": "details.incline",
+        "shelter": "details.shelter"
+      },
+      "properties": {
+        "basics": {
+          "title": "Général",
+          "type": "object",
+          "properties": {
+            "wheelchair": {
+              "type": "string",
+              "title": "Accessible en fauteuil roulant ?",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Difficilement, avec de l'aide", "const": "limited" },
+                { "title": "Non", "const": "no" }
+              ]
+            },
+            "height": {
+              "type": "number",
+              "title": "Hauteur de la plateforme (en mètres)",
+              "minimum": 0
+            },
+            "sign:wheelchair": {
+              "title": "Signalétique PMR",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "" }
+              ]
+            }
+          }
+        },
+        "details": {
+          "title": "Détails",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Nom de l'arrêt"
+            },
+            "information": {
+              "type": "string",
+              "title": "Tableau d'informations ?",
+              "oneOf": [
+                { "title": "Oui", "const": "board" },
+                { "title": "Non", "const": "" }
+              ]
+            },
+            "passenger_information_display": {
+              "title": "Panneau d'affichage électronique temps réel ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "" }
+              ]
+            },
+            "bench": {
+              "title": "Banc ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "" }
+              ]
+            },
+            "width": {
+              "type": "number",
+              "title": "Largeur de passage du quai (en mètres)",
+              "minimum": 0
+            },
+            "crossfall": {
+              "title": "Dévers (en %)",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "incline": {
+              "title": "Inclinaison (en %)",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "shelter": {
+              "title": "Abri ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "" }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "toilets": {
+      "type": "object",
+      "x-display": "tabs",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-map-tags": {
+        "wheelchair": "basics.whch.wheelchair",
+        "sign:wheelchair": "basics.whch.sign:wheelchair",
+        "handrail": "details.hdr.handrail",
+        "handrail:wheelchair": "details.hdr.handrail:wheelchair",
+        "handwashing:length": "details.handwashing:length"
+      },
+      "properties": {
+        "basics": {
+          "title": "Général",
+          "type": "object",
+          "properties": {
+            "whch": {
+              "type": "object",
+              "title": "Accessible en fauteuil roulant ?",
+              "oneOf": [
+                {
+                  "title": "Oui, complètement aménagé",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "yes"
+                    }
+                  }
+                },
+                {
+                  "title": "Oui, mais il manque certains équipements",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "limited"
+                    },
+                    "sign:wheelchair": {
+                      "title": "Signalétique PMR",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non, complètement inaccessible",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "details": {
+          "title": "Détails",
+          "type": "object",
+          "properties": {
+            "sit_height": {
+              "title": "Hauteur d'assise (en mètres)",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "handwashing:length": {
+              "title": "Profondeur du lavabo (en mètres)",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "hdr": {
+              "type": "object",
+              "title": "Barre de transfert ?",
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "handrail": {
+                      "type": "string",
+                      "const": "yes"
+                    },
+                    "handrail:wheelchair": {
+                      "title": "Barre de transfert adaptée PMR ?",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "handrail": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "handrail": {
+                      "type": "string",
+                      "const": ""
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "parking_pmr": {
+      "type": "object",
+      "x-display": "tabs",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-map-tags": {
+        "wheelchair": "basics.whch.wheelchair",
+        "sign:disabled": "basics.whch.sign:disabled",
+        "width": "more_details.width",
+        "wheelchair:description": "more_details.wheelchair:description",
+        "crossfall": "more_details.crossfall",
+        "incline": "more_details.incline"
+      },
+      "properties": {
+        "basics": {
+          "title": "Général",
+          "type": "object",
+          "properties": {
+            "whch": {
+              "type": "object",
+              "title": "Accessible en fauteuil roulant ?",
+              "oneOf": [
+                {
+                  "title": "Oui, la place est aux normes",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "yes"
+                    }
+                  }
+                },
+                {
+                  "title": "Limité, seulement avec de l'aide",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "limited"
+                    },
+                    "sign:disabled": {
+                      "title": "Signalétique PMR",
+                      "description": "Panneau ou peinture au sol",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non, place inaccessible même avec de l'aide",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "more_details": {
+          "title": "Détails",
+          "type": "object",
+          "properties": {
+            "width": {
+              "title": "Largeur de la place (en mètres)",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "wheelchair:description": {
+              "title": "Description",
+              "type": "string"
+            },
+            "crossfall": {
+              "title": "Dévers (en %)",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "incline": {
+              "title": "Inclinaison (en %)",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
         }
       }
     }
