@@ -218,6 +218,9 @@
     "view": "View",
     "edit": "Edit"
   },
+  "categories_notes": {
+    "fuel": "Fuel station in French Polynesia are accessible, as employees refuel your car directly, so you don't need to get out of your car."
+  },
   "categories": {
     "other": "Other places",
     "administration": "Administration",

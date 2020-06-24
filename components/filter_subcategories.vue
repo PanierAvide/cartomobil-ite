@@ -9,6 +9,7 @@
       :column="expand"
       :mobile-break-point="10000"
       @change="(v) => $emit('input', v || category)"
+      ref="chipsubcat"
     >
       <v-chip
         v-for="{ subcategory, text} in sortedSubCategories"
@@ -21,6 +22,7 @@
       </v-chip>
     </v-chip-group>
     <v-btn
+      v-if="!hideExpandButton"
       :elevation="2"
       :class="{ less: expand, more: !expand }"
       large
@@ -51,8 +53,15 @@ export default {
 
   data() {
     return {
-      expand: false
+      expand: false,
+      hideExpandButton: false
     };
+  },
+
+  mounted() {
+    if(this.$refs.chipsubcat.$refs.content.clientWidth <= this.$refs.chipsubcat.$refs.wrapper.clientWidth) {
+      this.hideExpandButton = true;
+    }
   },
 
   computed: {

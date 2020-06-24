@@ -154,7 +154,6 @@ const CONTACTS = {
   'phone:covid19': 'osm-phone_covid',
   phone: 'osm-phone',
   mobile: 'osm-mobile_phone',
-  fax: 'osm-fax',
   email: 'osm-mail',
   facebook: 'osm-fcbk',
   website: 'osm-link'
@@ -284,6 +283,14 @@ export default {
 
     infos() {
       let infos = [];
+
+      // Category note
+      if(!this.$t(`categories_notes.${this.place.properties.normalized_cat}`).startsWith('categories_notes.')) {
+        infos.push(this.$t(`categories_notes.${this.place.properties.normalized_cat}`));
+      }
+      if(!this.$t(`categories_notes.${this.place.properties.cat}`).startsWith('categories_notes.')) {
+        infos.push(this.$t(`categories_notes.${this.place.properties.cat}`));
+      }
 
       // Custom POI description
       if (this.place.properties.tags['description:cro']) {

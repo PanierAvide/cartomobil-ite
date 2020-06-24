@@ -70,7 +70,7 @@ AS
 (SELECT
 	concat('n', osm_id),
 	way,
-	name,
+	COALESCE(tags->'name:ty', tags->'name:fr', name),
 	get_subcategory(tags),
 	get_category(tags) AS normalized_cat,
 	COALESCE(tags->'brand', tags->'operator'),
@@ -91,7 +91,7 @@ UNION ALL
 SELECT
 	CASE WHEN osm_id < 0 THEN concat('r', -osm_id) ELSE concat('w', osm_id) END,
 	ST_Centroid(way),
-	name,
+	COALESCE(tags->'name:ty', tags->'name:fr', name),
 	get_subcategory(tags),
 	get_category(tags),
 	COALESCE(tags->'brand', tags->'operator'),
