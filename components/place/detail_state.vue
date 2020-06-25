@@ -43,7 +43,8 @@
 
 <script>
 import ContributeForm from '../contribute_form';
-import { colorForStatus, getForm } from '../../lib/place';
+import { colorForStatus } from '../../lib/place';
+import { getForm } from '../../lib/form';
 
 export default {
   components: { ContributeForm },

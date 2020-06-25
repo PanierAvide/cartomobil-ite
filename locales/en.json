@@ -98,9 +98,9 @@
     "cancel": "Cancel"
   },
   "details": {
-    "signal_warning": "You were writing a report. It'll not be saved. Do you want to continue?",
-    "signal": "Report a change",
-    "signal_done": "Your report has been registered, thank you! It'll appear in a while.",
+    "signal_warning": "You were editing this placce. It'll not be saved. Do you want to continue?",
+    "signal": "Edit this place",
+    "signal_done": "Your edit has been saved, thank you! It'll appear in a while.",
     "normal_opening_hours": "Opening hours",
     "facebook": "Facebook page",
     "not_accessible": "No physical reception on site",

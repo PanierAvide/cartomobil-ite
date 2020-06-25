@@ -8,6 +8,7 @@
   "categories": {
     "administration": {
       "name": "Administration",
+      "form": "erp",
       "subcategories": {
         "townhall": {
           "name": "Townhall",
@@ -38,7 +39,8 @@
           "osm_tags": [
             { "amenity": "bank" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "atm": {
           "name": "ATM",
@@ -53,7 +55,8 @@
             { "office": "insurance" },
             { "shop": "insurance" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         }
       }
     },
@@ -65,7 +68,8 @@
           "osm_tags": [
             { "amenity": "post_office" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "letter_box": {
           "name": "Letter box",
@@ -85,6 +89,7 @@
     },
     "outside": {
       "name": "Outside",
+      "form": "erp",
       "subcategories": {
         "restaurant": {
           "name": "Restaurant",
@@ -116,6 +121,7 @@
     },
     "leisure": {
       "name": "Leisure",
+      "form": "erp",
       "subcategories": {
         "cinema": {
           "name": "Cinema",
@@ -154,6 +160,7 @@
     },
     "sport": {
       "name": "Sports",
+      "form": "erp",
       "subcategories": {
         "swimming_pool": {
           "name": "Swimming pool",
@@ -181,7 +188,8 @@
           "osm_tags": [
             { "shop": "boutique|clothes|fashion|shoes|bag|jewelry|tailor|watches" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "forms": ["erp", "erp_clothes"]
         },
         "food": {
           "name": "Food",
@@ -189,54 +197,62 @@
             { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" },
             { "amenity": "marketplace" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
             { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "medical_supply": {
           "name": "Medical supplies",
           "osm_tags": [
             { "shop": "medical_supply" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "art": {
           "name": "Art / creative leisure",
           "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool|art|music|musical_instrument|photo|toys|video|video_games" }, { "craft": "sewing" } ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "stationery": {
           "name": "Stationery / books",
           "osm_tags": [
             { "shop": "stationery|printer_ink|books|kiosk|newsagent" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "variety_store": {
           "name": "Variety store",
           "osm_tags": [
             { "shop": "variety_store|department_store|wholesale|second_hand|charity" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "sports": {
           "name": "Sports",
           "osm_tags": [
             { "shop": "fishing|hunting|sports|outdoor" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "home": {
           "name": "Home equipement",
           "osm_tags": [
             { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "electronics": {
           "name": "Electronics",
@@ -244,7 +260,8 @@
             { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
             { "craft": "electronics_repair" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "edt": {
           "name": "Tahiti Electricity",
@@ -252,7 +269,8 @@
             { "office": "company", "name": "Electricité de Tahiti|EDT|Électricité de Tahiti" },
             { "office": "company", "short_name": "EDT" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "optician": {
           "name": "Optician",
@@ -260,14 +278,16 @@
             { "shop": "optician" },
             { "craft": "optician" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "hearing_aids": {
           "name": "Hearing aids",
           "osm_tags": [
             { "shop": "hearing_aids" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "condoms": {
           "name": "Condoms vending machine",
@@ -280,6 +300,7 @@
     },
     "education": {
       "name": "Education",
+      "form": "erp",
       "subcategories": {
         "childcare": {
           "name": "Childcare",
@@ -316,6 +337,7 @@
     },
     "health": {
       "name": "Health",
+      "form": "erp",
       "subcategories": {
         "pharmacy": {
           "name": "Pharmacy",
@@ -385,7 +407,8 @@
           "osm_tags": [
             { "amenity": "ferry_terminal" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         },
         "taxi": {
           "name": "Taxi",
@@ -424,7 +447,8 @@
           "osm_tags": [
             { "amenity": "car_rental" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
         }
       }
     },
@@ -486,6 +510,7 @@
     },
     "housing": {
       "name": "Housing",
+      "forms": [ "erp", "erp_housing" ],
       "subcategories": {
         "guest_house": {
           "name": "Guest house",
@@ -506,25 +531,382 @@
     }
   },
   "forms": {
-    "bus_stop": {
+    "erp": {
       "type": "object",
       "x-display": "tabs",
       "x-props": {
         "tile": true,
         "mandatory": true
       },
+      "properties": {
+        "basics": {
+          "title": "Général",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Nom du lieu",
+              "format": "text"
+            },
+            "whch": {
+              "type": "object",
+              "title": "Accessible en fauteuil roulant ?",
+              "oneOf": [
+                {
+                  "title": "Oui, complètement aménagé",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "yes"
+                    }
+                  }
+                },
+                {
+                  "title": "Oui, mais il manque certains équipements",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "limited"
+                    },
+                    "sign:wheelchair": {
+                      "title": "Signalétique PMR",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "null" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non, complètement inaccessible",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "equipments": {
+          "title": "Équipements",
+          "type": "object",
+          "properties": {
+            "sgnwch": {
+              "title": "Signalétique PMR",
+              "type": "object",
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "sign:wheelchair": {
+                      "type": "string",
+                      "const": "yes"
+                    },
+                    "custom:sign:wheelchair:quality": {
+                      "type": "string",
+                      "title": "Accessibilité des informations",
+                      "oneOf": [
+                        { "title": "Bonne", "const": "good" },
+                        { "title": "Mauvaise", "const": "limited" },
+                        { "title": "Ne sais pas", "const": "null" }
+                      ]
+                    },
+                    "custom:sign:wheelchair:description": {
+                      "type": "string",
+                      "title": "Précisions sur la signalétique",
+                      "format": "text"
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "sign:wheelchair": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "sign:wheelchair": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
+                }
+              ]
+            },
+            "btn": {
+              "type": "object",
+              "title": "Bouton d'appel à l'entrée ?",
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "button_operated": {
+                      "type": "string",
+                      "const": "yes"
+                    },
+                    "button_operated:wheelchair": {
+                      "title": "Bouton accessible PMR ?",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "null" }
+                      ]
+                    },
+                    "button_operated:height": {
+                      "title": "Hauteur du bouton (en mètres)",
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "button_operated": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "button_operated": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
+                }
+              ]
+            },
+            "tlts": {
+              "type": "object",
+              "title": "Toilettes ?",
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "toilets": { "type": "string", "const": "yes" },
+                    "whch": {
+                      "type": "object",
+                      "title": "Toilettes accessible en fauteuil roulant ?",
+                      "oneOf": [
+                        {
+                          "title": "Oui, complètement aménagé",
+                          "properties": {
+                            "toilets:wheelchair": {
+                              "type": "string",
+                              "const": "yes"
+                            }
+                          }
+                        },
+                        {
+                          "title": "Oui, mais il manque certains équipements",
+                          "properties": {
+                            "toilets:wheelchair": {
+                              "type": "string",
+                              "const": "limited"
+                            },
+                            "toilets:sign:wheelchair": {
+                              "title": "Signalétique PMR pour les toilettes ?",
+                              "type": "string",
+                              "oneOf": [
+                                { "title": "Oui", "const": "yes" },
+                                { "title": "Non", "const": "no" },
+                                { "title": "Ne sais pas", "const": "null" }
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "title": "Non, complètement inaccessible",
+                          "properties": {
+                            "toilets:wheelchair": {
+                              "type": "string",
+                              "const": "no"
+                            }
+                          }
+                        },
+                        {
+                          "title": "Ne sais pas",
+                          "properties": {
+                            "toilets:wheelchair": {
+                              "type": "string",
+                              "const": "null"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "hdwsh": {
+                      "type": "object",
+                      "title": "Lavabo ?",
+                      "oneOf": [
+                        {
+                          "title": "Oui",
+                          "properties": {
+                            "toilets:handwashing": {
+                              "type": "string",
+                              "const": "yes"
+                            },
+                            "toilets:handwashing:length": {
+                              "title": "Profondeur du lavabo (en mètres)",
+                              "type": "number",
+                              "minimum": 0
+                            }
+                          }
+                        },
+                        {
+                          "title": "Non",
+                          "properties": {
+                            "toilets:handwashing": {
+                              "type": "string",
+                              "const": "no"
+                            }
+                          }
+                        },
+                        {
+                          "title": "Ne sais pas",
+                          "properties": {
+                            "toilets:handwashing": {
+                              "type": "string",
+                              "const": "null"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": { "toilets": { "type": "string", "const": "no" } }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": { "toilets": { "type": "string", "const": "null" } }
+                }
+              ]
+            }
+          }
+        },
+        "details": {
+          "title": "Détails",
+          "type": "object",
+          "properties": {
+            "custom:reception:visibility": {
+              "title": "Accueil repérable ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "access:wheelchair": {
+              "title": "Personnel formé à l'accueil PMR ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "custom:wheelchair:priority_line": {
+              "title": "File prioritaire PMR ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "erp_housing": {
+      "x-type": "form-extension",
       "x-map-tags": {
-        "wheelchair": "basics.wheelchair",
-        "height": "basics.height",
-        "sign:wheelchair": "basics.sign:wheelchair",
-        "name": "details.name",
-        "information": "details.information",
-        "passenger_information_display": "details.passenger_information_display",
-        "bench": "details.bench",
-        "width": "details.width",
-        "crossfall": "details.crossfall",
-        "incline": "details.incline",
-        "shelter": "details.shelter"
+        "rooms": "details.rooms",
+        "rooms:disabled": "details.rooms:disabled"
+      },
+      "properties": {
+        "details": {
+          "properties": {
+            "rooms": {
+              "type": "integer",
+              "title": "Nombre de chambres",
+              "minimum": 0
+            },
+            "rooms:disabled": {
+              "type": "integer",
+              "title": "Nombre de chambres adaptées PMR",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "erp_clothes": {
+      "x-type": "form-extension",
+      "properties": {
+        "basics": {
+          "properties": {
+            "custom:nb_cabines_pmr": {
+              "type": "integer",
+              "title": "Nombre de cabines accessibles",
+              "minimum": 0
+            },
+            "custom:nb_cabines_signale_pmr": {
+              "type": "integer",
+              "title": "Nombre de cabines avec signalétique PMR",
+              "minimum": 0
+            }
+          }
+        },
+        "details": {
+          "properties": {
+            "custom:cabine_width": {
+              "type": "number",
+              "title": "Largeur de la cabine",
+              "minimum": 0
+            },
+            "custom:cabine_length": {
+              "type": "number",
+              "title": "Longueur de la cabine",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "bus_stop": {
+      "type": "object",
+      "x-display": "tabs",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
       },
       "properties": {
         "basics": {
@@ -537,7 +919,8 @@
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Difficilement, avec de l'aide", "const": "limited" },
-                { "title": "Non", "const": "no" }
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
               ]
             },
             "height": {
@@ -551,7 +934,7 @@
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "" }
+                { "title": "Ne sais pas", "const": "null" }
               ]
             }
           }
@@ -562,14 +945,15 @@
           "properties": {
             "name": {
               "type": "string",
-              "title": "Nom de l'arrêt"
+              "title": "Nom de l'arrêt",
+              "format": "text"
             },
             "information": {
               "type": "string",
               "title": "Tableau d'informations ?",
               "oneOf": [
                 { "title": "Oui", "const": "board" },
-                { "title": "Non", "const": "" }
+                { "title": "Ne sais pas", "const": "null" }
               ]
             },
             "passenger_information_display": {
@@ -578,7 +962,7 @@
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "" }
+                { "title": "Ne sais pas", "const": "null" }
               ]
             },
             "bench": {
@@ -587,7 +971,7 @@
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "" }
+                { "title": "Ne sais pas", "const": "null" }
               ]
             },
             "width": {
@@ -613,7 +997,7 @@
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "" }
+                { "title": "Ne sais pas", "const": "null" }
               ]
             }
           }
@@ -626,13 +1010,6 @@
       "x-props": {
         "tile": true,
         "mandatory": true
-      },
-      "x-map-tags": {
-        "wheelchair": "basics.whch.wheelchair",
-        "sign:wheelchair": "basics.whch.sign:wheelchair",
-        "handrail": "details.hdr.handrail",
-        "handrail:wheelchair": "details.hdr.handrail:wheelchair",
-        "handwashing:length": "details.handwashing:length"
       },
       "properties": {
         "basics": {
@@ -665,7 +1042,7 @@
                       "oneOf": [
                         { "title": "Oui", "const": "yes" },
                         { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "" }
+                        { "title": "Ne sais pas", "const": "null" }
                       ]
                     }
                   }
@@ -676,6 +1053,15 @@
                     "wheelchair": {
                       "type": "string",
                       "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "null"
                     }
                   }
                 }
@@ -690,12 +1076,7 @@
             "sit_height": {
               "title": "Hauteur d'assise (en mètres)",
               "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "handwashing:length": {
-              "title": "Profondeur du lavabo (en mètres)",
-              "type": "number",
-              "exclusiveMinimum": 0
+              "minimum": 0
             },
             "hdr": {
               "type": "object",
@@ -714,7 +1095,7 @@
                       "oneOf": [
                         { "title": "Oui", "const": "yes" },
                         { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "" }
+                        { "title": "Ne sais pas", "const": "null" }
                       ]
                     }
                   }
@@ -733,7 +1114,45 @@
                   "properties": {
                     "handrail": {
                       "type": "string",
-                      "const": ""
+                      "const": "null"
+                    }
+                  }
+                }
+              ]
+            },
+            "hdwsh": {
+              "type": "object",
+              "title": "Lavabo ?",
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "handwashing": {
+                      "type": "string",
+                      "const": "yes"
+                    },
+                    "handwashing:length": {
+                      "title": "Profondeur du lavabo (en mètres)",
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "handwashing": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "handwashing": {
+                      "type": "string",
+                      "const": "null"
                     }
                   }
                 }
@@ -749,14 +1168,6 @@
       "x-props": {
         "tile": true,
         "mandatory": true
-      },
-      "x-map-tags": {
-        "wheelchair": "basics.whch.wheelchair",
-        "sign:disabled": "basics.whch.sign:disabled",
-        "width": "more_details.width",
-        "wheelchair:description": "more_details.wheelchair:description",
-        "crossfall": "more_details.crossfall",
-        "incline": "more_details.incline"
       },
       "properties": {
         "basics": {
@@ -790,7 +1201,7 @@
                       "oneOf": [
                         { "title": "Oui", "const": "yes" },
                         { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "" }
+                        { "title": "Ne sais pas", "const": "null" }
                       ]
                     }
                   }
@@ -803,23 +1214,33 @@
                       "const": "no"
                     }
                   }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
                 }
               ]
             }
           }
         },
-        "more_details": {
+        "details": {
           "title": "Détails",
           "type": "object",
           "properties": {
             "width": {
               "title": "Largeur de la place (en mètres)",
               "type": "number",
-              "exclusiveMinimum": 0
+              "minimum": 0
             },
             "wheelchair:description": {
               "title": "Description",
-              "type": "string"
+              "type": "string",
+              "format": "text"
             },
             "crossfall": {
               "title": "Dévers (en %)",
