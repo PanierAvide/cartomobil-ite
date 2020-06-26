@@ -72,7 +72,8 @@ export default {
           "add": "osm-plus",
           "edit": "",
           "delete": "osm-close"
-        }
+        },
+        childrenClass: "pl-2"
       }
     };
   },
@@ -143,3 +144,23 @@ export default {
   }
 };
 </script>
+
+<style>
+  .form-hide-desc p {
+    display: none;
+  }
+
+  .vjsf-tooltip {
+    max-width: 300px;
+    background: rgb(55, 52, 52);
+  }
+
+  .vjsf-property-equipments.pl-2,
+  .vjsf-property-basics.pl-2,
+  .vjsf-property-details.pl-2,
+  .vjsf-property-equipments.pl-2 > div > .vjsf-property.pl-2,
+  .vjsf-property-basics.pl-2 > div > .vjsf-property.pl-2,
+  .vjsf-property-details.pl-2 > div > .vjsf-property.pl-2 {
+    padding: 0 !important;
+  }
+</style>
