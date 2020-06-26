@@ -640,6 +640,26 @@
                   }
                 }
               ]
+            },
+            "email": {
+              "type": "string",
+              "title": "Courriel",
+              "format": "text",
+              "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+            },
+            "phone": {
+              "type": "string",
+              "title": "Téléphone",
+              "format": "text",
+              "description": "N° au format international, par exemple __+68912345678__",
+              "pattern": "\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)\\d{1,14}$"
+            },
+            "website": {
+              "type": "string",
+              "title": "Site web",
+              "format": "text",
+              "description": "Adresse complète, exemple __https://monsite.web/__",
+              "pattern": "^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\/[\\+~%\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\/\\\\w]*))?)$"
             }
           }
         },
