@@ -32,6 +32,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Merge localized names
+CREATE OR REPLACE FUNCTION merge_names(VARIADIC names VARCHAR[]) RETURNS VARCHAR AS $$
+BEGIN
+	RETURN array_to_string(array_remove(names, NULL), ' - ');
+END;
+$$ LANGUAGE plpgsql;
+
 -- Deprecated function to get normalized category label
 DROP INDEX IF EXISTS idx_imposm_osm_point_search;
 DROP INDEX IF EXISTS idx_imposm_osm_polygon_search;
@@ -70,7 +77,7 @@ AS
 (SELECT
 	concat('n', osm_id),
 	way,
-	COALESCE(tags->'name:ty', tags->'name:fr', name),
+	merge_names(COALESCE(tags->'name:fr', name), tags->'name:ty'),
 	get_subcategory(tags),
 	get_category(tags) AS normalized_cat,
 	COALESCE(tags->'brand', tags->'operator'),
@@ -91,7 +98,7 @@ UNION ALL
 SELECT
 	CASE WHEN osm_id < 0 THEN concat('r', -osm_id) ELSE concat('w', osm_id) END,
 	ST_Centroid(way),
-	COALESCE(tags->'name:ty', tags->'name:fr', name),
+	merge_names(COALESCE(tags->'name:fr', name), tags->'name:ty'),
 	get_subcategory(tags),
 	get_category(tags),
 	COALESCE(tags->'brand', tags->'operator'),

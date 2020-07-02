@@ -17,7 +17,7 @@
         <br>
         <v-btn
           :disabled="contribute || lastUpdateTooRecent"
-          @click="contribute = true">{{ $t('details.signal') }}</v-btn>
+          @click="$emit('contribute')">{{ $t('details.signal') }}</v-btn>
       </template>
     </v-alert>
     <v-alert
@@ -29,25 +29,15 @@
     >
       <span class="text-pre">{{ $t('details.signal_done') }}</span>
     </v-alert>
-    <div v-if="contribute">
-      <contribute-form
-        :place="place"
-        class="pa-2"
-        @success="success = true; contribute = false"
-        @close="contribute = false"
-      />
-      <v-divider />
-    </div>
+
   </div>
 </template>
 
 <script>
-import ContributeForm from '../contribute_form';
 import { colorForStatus } from '../../lib/place';
 import { getForm } from '../../lib/form';
 
 export default {
-  components: { ContributeForm },
 
   props: {
     status: {
@@ -63,14 +53,17 @@ export default {
     lastUpdate: {
       type: Date,
       required: false
-    }
-  },
+    },
 
-  data() {
-    return {
-      contribute: false,
-      success: false
-    };
+    success: {
+      type: Boolean,
+      required: false
+    },
+
+    contribute: {
+      type: Boolean,
+      required: false
+    }
   },
 
   computed: {

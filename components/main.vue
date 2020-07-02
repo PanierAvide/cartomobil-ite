@@ -11,7 +11,7 @@
       <v-navigation-drawer
         v-if="!isMobile"
         v-model="sidebar"
-        :width="hasFilter ? 400 : 300"
+        :width="hasFilter ? 400 : 350"
         temporary
         stateless
         hide-overlay
@@ -26,7 +26,7 @@
         />
         <main-menu
           v-else
-          :style="{ width: '300px' }"
+          :style="{ width: '350px' }"
         >
           <filter-list v-model="filter" />
         </main-menu>
@@ -372,7 +372,7 @@ export default {
   bottom: 20px;
 }
 .sidebar-opened .search {
-  transform: translateX(300px);
+  transform: translateX(350px);
 }
 .sidebar-big-opened .search, .place-opened .search {
   transform: translateX(400px);

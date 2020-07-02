@@ -1,25 +1,22 @@
 <template>
-  <v-list class="pt-1">
-    <v-list-item-group
-      :value="value"
-      @change="updateValue"
-    >
-      <v-list-item
+  <v-container>
+    <v-row dense>
+      <v-col
         v-for="category in categories"
         :key="category"
         :value="category"
-        active-class="primary--text text--accent-4"
+        cols="3"
+        md="4"
+        class="text-center category-col"
+        @click="updateValue(category)"
       >
-        <v-list-item-icon class="mr-0 my-3">
-          <v-icon small>{{ `osm-${category}` }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content class="ml-2 py-1">
-          <v-list-item-title>{{ $t(`categories.${category}`) }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list-item-group>
-  </v-list>
+        <v-avatar color="grey darken-2">
+          <v-icon color="white">{{ `osm-${category}` }}</v-icon>
+        </v-avatar>
+        <p class="text-subtitle2 mb-1">{{ $t(`categories.${category}`) }}</p>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -42,3 +39,29 @@ export default {
   }
 }
 </script>
+
+<style>
+.category-col {
+  cursor: pointer;
+}
+
+.category-col .v-avatar {
+  margin: 2px;
+  transition: transform .1s ease-in;
+}
+
+.category-col .v-avatar .v-icon {
+  transition: transform .1s ease-in;
+}
+
+.category-col:hover .v-avatar {
+  margin: 0px;
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+}
+
+.category-col:hover .v-avatar .v-icon {
+  font-size: 26px;
+}
+</style>
