@@ -11,6 +11,7 @@
   "nominatimUrl": "https://nominatim.openstreetmap.org",
   "minZoomPoi": 12,
   "maxZoomPoi": 13,
+  "mapillaryClientId": "eDhQTTdnRmZJNXdYZWUwRDQxc1Nwdzo5ZDhkMDM5NzU5NDVjODBm",
   "brands": {
     "DEFAULT": {
       "brand_text": "Cartomobil' ite",

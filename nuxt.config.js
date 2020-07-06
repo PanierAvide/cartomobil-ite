@@ -39,6 +39,7 @@ export default {
   plugins: [
     { src: '~/plugins/map', mode: 'client' },
     { src: '~/plugins/matomo', mode: 'client' },
+	{ src: '~/plugins/mapillary', mode: 'client' },
     { src: '~/plugins/vjsf' },
     { src: '~/plugins/linkified' },
     { src: '~/plugins/url' }

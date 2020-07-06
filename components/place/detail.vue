@@ -99,25 +99,24 @@
                 :icon="`osm-${service}`"
                 :icon2="value && `osm-${value}`"
               />
-            </v-list-item>
-          </v-list>
-        </template>
+            </v-list>
+          </template>
 
-        <template v-if="place.properties.tags.opening_hours">
-          <v-subheader>{{ $t('details.normal_opening_hours') }}</v-subheader>
-          <v-list class="py-0">
-            <detail-opening-hours
-              :value="place.properties.tags.opening_hours"
-              :country="place.properties.country"
-              :coordinates="place.geometry.coordinates"
-            />
-          </v-list>
-        </template>
+          <template v-if="place.properties.tags.opening_hours">
+            <v-subheader>{{ $t('details.normal_opening_hours') }}</v-subheader>
+            <v-list class="py-0">
+              <detail-opening-hours
+                :value="place.properties.tags.opening_hours"
+                :country="place.properties.country"
+                :coordinates="place.geometry.coordinates"
+              />
+            </v-list>
+          </template>
 
-        <template v-if="hasContactInfos">
-          <v-subheader>{{ $t('details.contact') }}</v-subheader>
-          <v-list class="py-0">
-            <template v-for="c in contactsDisplayed">
+          <template v-if="hasContactInfos">
+            <v-subheader>{{ $t('details.contact') }}</v-subheader>
+            <v-list class="py-0">
+              <template v-for="c in contactsDisplayed">
                 <template v-if="contact(c)">
                   <detail-link
                     v-for="value in contact(c)"
@@ -136,6 +135,14 @@
             v-if="country === 'FR' && place.properties.brand"
             :place="place"
           /-->
+
+          <mapillary-viewer
+            v-if="mapillaryImage"
+            :m-key="mapillaryImage"
+            :cover="true"
+            :marker="place.geometry"
+            class="card-mapillary"
+          />
         </template>
       </div>
 
@@ -151,7 +158,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { poiFeature, osmUrl } from '../../config.json';
+import { poiFeature, osmUrl, mapillaryClientId } from '../../config.json';
 import { encodePosition } from '../../lib/url';
 import parseId from '../../lib/parse_id';
 import { getRecentContribution } from '../../lib/recent_contributions';
@@ -166,6 +173,7 @@ import OsmLink from '../osm_link';
 import UpdateDetailDialog from '../update_detail_dialog';
 import { categories } from '../../categories.json';
 import ContributeForm from '../contribute_form';
+import { findImage } from '../mapillary/mapillary';
 
 const CONTACTS = {
   'phone:covid19': 'osm-phone_covid',
@@ -245,7 +253,8 @@ export default {
       place: null,
       lastUpdate: null,
       success: false,
-      contribute: false
+      contribute: false,
+      mapillaryImage: null
     };
   },
 
@@ -376,6 +385,11 @@ export default {
           }
           this.place = place;
           this.$store.commit('setPlace', place);
+
+          this.mapillaryImage = this.place.properties.tags.mapillary;
+          if(!this.mapillaryImage) {
+            this.fetchMapillaryImage();
+          }
         })
         .catch(() => {
           this.$nuxt.context.redirect(`/${this.$route.params.featuresAndLocation || ''}`);
@@ -400,6 +414,17 @@ export default {
       }
 
       return Promise.all(promises);
+    },
+
+    fetchMapillaryImage() {
+      const coordinates = {
+        lng: this.place.geometry.coordinates[0],
+        lat: this.place.geometry.coordinates[1]
+      };
+      findImage(coordinates, false, null, mapillaryClientId)
+      .then((mKey) => {
+        this.mapillaryImage = mKey;
+      });
     },
 
     close() {
@@ -465,5 +490,8 @@ export default {
 }
 .overflowwrap-anywhere {
   overflow-wrap: anywhere;
+}
+.card-mapillary {
+  height: 300px;
 }
 </style>
