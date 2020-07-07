@@ -3,6 +3,7 @@
     :center="mapCenter"
     :zoom="mapZoom"
     :map-style="mapStyle"
+    :max-bounds="mapBounds"
     @load="load"
     @rotateend="maprotated"
     @update:center="updateMapCenter"
@@ -58,7 +59,7 @@ const contribSource = "poi-contrib-src";
 function getColorStroke(theme, contribs = readContributionFromStorage()) {
   return [
     'case',
-    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1].startsWith("yes")).map(c => c[0])]], rawColorForStatus('yes', theme),
+    ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] && c[1].startsWith("yes")).map(c => c[0])]], rawColorForStatus('yes', theme),
     ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] === "no").map(c => c[0])]], rawColorForStatus('no', theme),
     ["in", ["get", "status"], ["literal", ["yes", "limited"]]], rawColorForStatus('yes', theme),
     ["in", ["get", "status"], ["literal", ["no"]]], rawColorForStatus('no', theme),
@@ -212,6 +213,11 @@ export default {
     mapZoom: {
       type: Number,
       required: true
+    },
+
+    mapBounds: {
+      type: Array,
+      required: false
     },
 
     filter: {

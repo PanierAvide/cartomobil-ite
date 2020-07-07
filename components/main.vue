@@ -45,7 +45,7 @@
             :map-style="mapStyle"
             :map-center.sync="mapCenter"
             :map-zoom.sync="mapZoom"
-            :map-bounds.sync="mapBounds"
+            :map-bounds="mapBounds"
             :filter="filter"
             :filter-services="filterServices"
             :featuresAndLocation="featuresAndLocation"
@@ -147,7 +147,7 @@ export default {
       filter: '',
       filterServices: [],
       loadMap: false,
-      mapBounds: [],
+      mapBounds: config.mapBounds || undefined,
       mapCenter: { lat: 0, lng: 0 },
       mapLoaded: false,
       mapStyle: null,

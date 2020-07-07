@@ -1,53 +1,49 @@
 <template>
   <div>
     <h1 class="title">{{ $t('contribute_form.title') }}</h1>
-    <v-form
-      ref="form"
-      v-model="valid"
-      @submit="submit"
-    >
-      <v-jsf
-        v-model="model"
-        :schema="schema"
-        :options="formOptions"
-        class="pb-0"
-      />
-      <v-container class="pt-0">
-        <v-row>
-          <v-col cols="6">
-            <v-btn
-              :loading="loading"
-              color="success"
-              @click="submit"
-              block
-            >
-              {{ $t('contribute_form.submit') }}
-            </v-btn>
-          </v-col>
-          <v-col cols="6">
-            <v-btn
-              :loading="loading"
-              color="secondary"
-              @click="close"
-              block
-            >
-              {{ $t('contribute_form.cancel') }}
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-form>
+    <detail-schema
+      :place="place"
+      @modelChanged="editedTags = $event"
+      @invalidModel="editedTags = null"
+    />
+    <v-container class="pt-0">
+      <v-row>
+        <v-col cols="6">
+          <v-btn
+            :loading="loading"
+            color="success"
+            @click="submit"
+            :disabled="!canSubmit"
+            block
+          >
+            {{ $t('contribute_form.submit') }}
+          </v-btn>
+        </v-col>
+        <v-col cols="6">
+          <v-btn
+            :loading="loading"
+            color="secondary"
+            @click="close"
+            block
+          >
+            {{ $t('contribute_form.cancel') }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
 import { apiUrl } from '../config.json';
 import parseId from '../lib/parse_id';
-import { getForm, getModelForForm, getTagsFromModel } from '../lib/form';
-import { categories, forms } from '../categories.json';
+import DetailSchema from './place/detail_schema';
+import equals from 'fast-deep-equal';
 
 export default {
-  components: {},
+  components: {
+    DetailSchema
+  },
 
   props: {
     place: {
@@ -61,30 +57,8 @@ export default {
       details: '',
       loading: false,
       valid: null,
-      model: {},
-      schema: {},
-      formOptions: {
-        locale: this.$i18n.locale,
-        icons: {
-          "calendar": "osm-blog",
-          "clock": "osm-time",
-          "info": "osm-info",
-          "add": "osm-plus",
-          "edit": "",
-          "delete": "osm-close"
-        },
-        childrenClass: "pl-2"
-      }
+      editedTags: null
     };
-  },
-
-  mounted() {
-    if(this.place) {
-      this.schema = getForm(this.place) || {};
-      if(Object.keys(this.schema).length > 0) {
-        this.model = getModelForForm(this.schema, this.place);
-      }
-    }
   },
 
   computed: {
@@ -97,16 +71,19 @@ export default {
       return `${type}/${id}`;
     },
 
+    canSubmit() {
+      return this.editedTags !== null;
+    },
+
     payload() {
       const [ lon, lat ] = this.place.geometry.coordinates;
-      const tags = getTagsFromModel(this.model);
 
       return {
         name: this.properties.name,
         lat,
         lon,
         lang: this.$i18n.locale,
-        tags: tags
+        tags: this.editedTags
       };
     }
   },
@@ -139,28 +116,9 @@ export default {
     },
 
     close() {
+      this.editedTags = null;
       this.$emit('close');
     }
   }
 };
 </script>
-
-<style>
-  .form-hide-desc p {
-    display: none;
-  }
-
-  .vjsf-tooltip {
-    max-width: 300px;
-    background: rgb(55, 52, 52);
-  }
-
-  .vjsf-property-equipments.pl-2,
-  .vjsf-property-basics.pl-2,
-  .vjsf-property-details.pl-2,
-  .vjsf-property-equipments.pl-2 > div > .vjsf-property.pl-2,
-  .vjsf-property-basics.pl-2 > div > .vjsf-property.pl-2,
-  .vjsf-property-details.pl-2 > div > .vjsf-property.pl-2 {
-    padding: 0 !important;
-  }
-</style>

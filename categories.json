@@ -97,7 +97,7 @@
             { "amenity": "restaurant|fast_food" }
           ],
           "areas": "all",
-          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ]
+          "details_tags": [ "delivery", "takeaway" ]
         },
         "cafe": {
           "name": "Coffee shop",
@@ -110,7 +110,7 @@
           "name": "Bar",
           "osm_tags": [ { "amenity": "bar|pub" } ],
           "areas": "all",
-          "details_tags": [ "delivery", "takeaway", "toilets", "toilets:wheelchair", "toilets:wheelchair:description", "toilets:access:wheelchair", "toilets:handwashing" ]
+          "details_tags": [ "delivery", "takeaway" ]
         },
         "nightclub": {
           "name": "Nightclub",
@@ -151,9 +151,21 @@
           ],
           "areas": "all"
         },
+        "leisure_club": {
+          "name": "Club",
+          "osm_tags": [
+            { "club": "scout|social|freemasonry|music|automobile|culture|veterans|sailing|youth|shooting|charity|fishing|motorcycle|game|ethnic|history|tourism|computer|board_games|dog|religion|linux|student|art|nature" }
+          ],
+          "areas": "all"
+        },
         "library": {
           "name": "Library",
           "osm_tags": [ { "amenity": "library" } ],
+          "areas": "all"
+        },
+        "theme_park": {
+          "name": "Theme park",
+          "osm_tags": [ { "tourism": "theme_park" } ],
           "areas": "all"
         }
       }
@@ -194,7 +206,14 @@
         "food": {
           "name": "Food",
           "osm_tags": [
-            { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" },
+            { "shop": "frozen_food|supermarket|butcher|cheese|convenience|general|seafood|greengrocer|deli|spices|honey|pasta|cannery|tea|coffee|health_food|dairy|confectionery|chocolate|farm|bakery|pastry|alcohol|beverages|wine|winery" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "marketplace": {
+          "name": "Marketplace",
+          "osm_tags": [
             { "amenity": "marketplace" }
           ],
           "areas": "all",
@@ -203,7 +222,7 @@
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
-            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist" }
+            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist|tatoo" }
           ],
           "areas": "all",
           "form": "erp"
@@ -217,8 +236,8 @@
           "form": "erp"
         },
         "art": {
-          "name": "Art / creative leisure",
-          "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool|art|music|musical_instrument|photo|toys|video|video_games" }, { "craft": "sewing" } ],
+          "name": "Hobbies",
+          "osm_tags": [ { "shop": "fabric|sewing|haberdashery|wool|art|music|musical_instrument|photo|craft|camera|video|video_games" }, { "craft": "sewing" } ],
           "areas": "all",
           "form": "erp"
         },
@@ -330,6 +349,20 @@
           "name": "Lycee",
           "osm_tags": [
             { "amenity": "school", "school:FR": "lycée" }
+          ],
+          "areas": "all"
+        },
+        "university": {
+          "name": "University",
+          "osm_tags": [
+            { "amenity": "university" }
+          ],
+          "areas": "all"
+        },
+        "college_sup": {
+          "name": "College",
+          "osm_tags": [
+            { "amenity": "college" }
           ],
           "areas": "all"
         }
@@ -449,6 +482,19 @@
           ],
           "areas": "all",
           "form": "erp"
+        },
+        "elevator": {
+          "name": "Elevator",
+          "osm_tags": [
+            { "highway": "elevator" },
+            { "room": "elevator" },
+            { "building:part": "elevator" },
+            { "buildingpart:verticalpassage": "elevator" },
+            { "building": "elevator" },
+            { "indoor": "elevator" }
+          ],
+          "areas": "all",
+          "form": "elevator"
         }
       }
     },
@@ -482,7 +528,6 @@
             { "amenity": "toilets" }
           ],
           "areas": "all",
-          "details_tags": [ "handrail", "handwashing", "handwashing:length" ],
           "form": "toilets"
         },
         "viewpoint": {
@@ -546,12 +591,16 @@
             "name": {
               "type": "string",
               "title": "Nom du lieu",
-              "format": "text"
+              "format": "text",
+              "x-hide-readOnly": true
             },
             "whch": {
               "type": "object",
               "title": "Accessible en fauteuil roulant ?",
               "x-class": "form-hide-desc",
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              },
               "description": "__Oui__ : aucune difficulté d'accès, pas de marches, caisse adaptée (cordon CB extensible, hauteur de caisse 70 cm au-dessus des genoux, tablette à moins de 80 cm, vide de 30 cm), commandes accessibles (pavé < 1.3 m).\n\n__Limitée__ : accessible avec de l'aide, marche inférieure à 7 cm, certaines zones accessibles sans marches, d'autres accessibles avec de l'aide. Les espaces principaux sont accessibles.\n\n__Non__ : inaccessible.",
               "oneOf": [
                 {
@@ -561,7 +610,8 @@
                       "type": "string",
                       "const": "yes"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Oui, mais il manque certains équipements",
@@ -628,7 +678,8 @@
                       "type": "string",
                       "const": "no"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Ne sais pas",
@@ -645,21 +696,33 @@
               "type": "string",
               "title": "Courriel",
               "format": "text",
-              "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+              "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+              "x-props": {
+                "prependIcon": "osm-mail"
+              },
+              "x-hide-readOnly": true
             },
             "phone": {
               "type": "string",
               "title": "Téléphone",
               "format": "text",
-              "description": "N° au format international, par exemple __+689 xx xxxxxx__ ou __+689 xx xx xx xx__",
-              "pattern": "\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)[0-9 ]+$"
+              "description": "N° au format international, par exemple __+689 xx xx xx xx__",
+              "pattern": "\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|4[987654310]|3[9643210]|2[70]|7|1)[0-9 ]+$",
+              "x-props": {
+                "prependIcon": "osm-phone"
+              },
+              "x-hide-readOnly": true
             },
             "website": {
               "type": "string",
               "title": "Site web",
               "format": "text",
               "description": "Adresse complète, exemple __https://monsite.web/__",
-              "pattern": "^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\/[\\+~%\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\/\\\\w]*))?)$"
+              "pattern": "^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\/[\\+~%\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\/\\\\w]*))?)$",
+              "x-props": {
+                "prependIcon": "osm-link"
+              },
+              "x-hide-readOnly": true
             }
           }
         },
@@ -717,6 +780,9 @@
             "tlts": {
               "type": "object",
               "title": "Toilettes ?",
+              "x-props": {
+                "prependIcon": "osm-toilets"
+              },
               "oneOf": [
                 {
                   "title": "Oui",
@@ -726,6 +792,9 @@
                       "type": "object",
                       "title": "Toilettes accessible en fauteuil roulant ?",
                       "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
+                      "x-props": {
+                        "prependIcon": "osm-wheelchair"
+                      },
                       "x-class": "form-hide-desc",
                       "oneOf": [
                         {
@@ -822,6 +891,9 @@
                     "hdwsh": {
                       "type": "object",
                       "title": "Lavabo ?",
+                      "x-props": {
+                        "prependIcon": "osm-hydroalcoholic_gel"
+                      },
                       "oneOf": [
                         {
                           "title": "Oui",
@@ -876,6 +948,9 @@
                 {
                   "title": "Oui",
                   "type": "object",
+                  "x-props": {
+                    "prependIcon": "osm-elevator"
+                  },
                   "properties": {
                     "elevator": {
                       "type": "string",
@@ -886,6 +961,9 @@
                       "title": "Ascenseur accessible en fauteuil roulant ?",
                       "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
                       "x-class": "form-hide-desc",
+                      "x-props": {
+                        "prependIcon": "osm-wheelchair"
+                      },
                       "oneOf": [
                         {
                           "title": "Oui",
@@ -1050,13 +1128,19 @@
             "rooms": {
               "type": "integer",
               "title": "Nombre de chambres",
-              "minimum": 0
+              "minimum": 0,
+              "x-props": {
+                "prependIcon": "osm-hotel"
+              }
             },
             "rooms:disabled": {
               "type": "integer",
               "title": "Nombre de chambres adaptées PMR",
               "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre)\n* Portes facilement ouvrables et suffisamment larges (> 80cm)\n* Pas de marches\n* Espace de retournement (170*170cm)\n* Hauteur du siège de toilette adapté (entre 45 et 55 cm)\n* Main courante à bonne hauteur (entre 70 et 80 cm du sol)\n* Lavabo accessible (à moins de 80cm du sol)\n* L’espace de transfert est adapté (80 x 130 cm)",
-              "minimum": 0
+              "minimum": 0,
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              }
             }
           }
         }
@@ -1117,7 +1201,11 @@
                 { "title": "Difficilement, avec de l'aide", "const": "limited" },
                 { "title": "Non", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
-              ]
+              ],
+              "x-hide-readOnly": true,
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              }
             },
             "height": {
               "type": "number",
@@ -1142,7 +1230,8 @@
             "name": {
               "type": "string",
               "title": "Nom de l'arrêt",
-              "format": "text"
+              "format": "text",
+              "x-hide-readOnly": true
             },
             "information": {
               "type": "string",
@@ -1217,6 +1306,9 @@
               "title": "Accessible en fauteuil roulant ?",
               "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
               "x-class": "form-hide-desc",
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              },
               "oneOf": [
                 {
                   "title": "Oui, complètement aménagé",
@@ -1225,7 +1317,8 @@
                       "type": "string",
                       "const": "yes"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Oui, mais il manque certains équipements",
@@ -1252,7 +1345,8 @@
                       "type": "string",
                       "const": "no"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Ne sais pas",
@@ -1323,6 +1417,9 @@
             "hdwsh": {
               "type": "object",
               "title": "Lavabo ?",
+              "x-props": {
+                "prependIcon": "osm-hydroalcoholic_gel"
+              },
               "oneOf": [
                 {
                   "title": "Oui",
@@ -1362,6 +1459,115 @@
         }
       }
     },
+    "elevator": {
+      "type": "object",
+      "x-display": "tabs",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "properties": {
+        "whch": {
+          "type": "object",
+          "title": "Accessible en fauteuil roulant ?",
+          "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
+          "x-class": "form-hide-desc",
+          "x-props": {
+            "prependIcon": "osm-wheelchair"
+          },
+          "oneOf": [
+            {
+              "title": "Oui",
+              "properties": {
+                "wheelchair": {
+                  "type": "string",
+                  "const": "yes"
+                }
+              }
+            },
+            {
+              "title": "Limitée",
+              "properties": {
+                "wheelchair": {
+                  "type": "string",
+                  "const": "limited"
+                },
+                "sign:wheelchair": {
+                  "title": "Signalétique PMR sur l'ascenseur",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Oui", "const": "yes" },
+                    { "title": "Non", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
+            },
+            {
+              "title": "Non",
+              "properties": {
+                "wheelchair": {
+                  "type": "string",
+                  "const": "no"
+                }
+              }
+            },
+            {
+              "title": "Ne sais pas",
+              "properties": {
+                "wheelchair": {
+                  "type": "string",
+                  "const": "null"
+                }
+              }
+            }
+          ]
+        },
+        "width": {
+          "type": "number",
+          "title": "Largeur cabine d'ascenseur (en mètres)",
+          "minimum": 0
+        },
+        "length": {
+          "type": "number",
+          "title": "Longueur cabine d'ascenseur (en mètres)",
+          "minimum": 0
+        },
+        "handrail": {
+          "title": "Main courante dans ascenseur ?",
+          "type": "string",
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        },
+        "mirror": {
+          "title": "Mirroir face à l'entrée dans ascenseur ?",
+          "type": "string",
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        },
+        "custom:buttons:height": {
+          "type": "number",
+          "title": "Hauteur du pavé numérique (en mètres)",
+          "minimum": 0
+        },
+        "button_operated:wheelchair": {
+          "title": "Bouton d'appel accessible ?",
+          "type": "string",
+          "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        }
+      }
+    },
     "parking_pmr": {
       "type": "object",
       "x-display": "tabs",
@@ -1379,6 +1585,9 @@
               "title": "Accessible en fauteuil roulant ?",
               "description": "__Oui__ : place aux normes (largeur > 3.30 m, pente < 2%) + cheminement vers trottoir (largeur > 80 cm).\n\n__Non__ : place pas aux normes et inaccessible même avec de l'aide.\n\n__Limité__ : place difficile d'accès (dimensions pas aux normes) ou revêtement inadapté. Accès possible avec de l'aide.",
               "x-class": "form-hide-desc",
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              },
               "oneOf": [
                 {
                   "title": "Oui, la place est aux normes",
@@ -1387,7 +1596,8 @@
                       "type": "string",
                       "const": "yes"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Limité, seulement avec de l'aide",
@@ -1415,7 +1625,8 @@
                       "type": "string",
                       "const": "no"
                     }
-                  }
+                  },
+                  "x-hide-readOnly": true
                 },
                 {
                   "title": "Ne sais pas",

@@ -15,17 +15,17 @@ BEGIN
 		RETURN 'post_service';
 	ELSIF tags->'amenity' IN ('restaurant', 'fast_food', 'cafe', 'ice_cream', 'bar', 'pub', 'nightclub') THEN
 		RETURN 'outside';
-	ELSIF (tags->'office' = 'association' AND tags->'association:for' = 'disabled') OR (tags->'amenity' IN ('cinema', 'theatre', 'library')) OR (tags->'tourism' = 'museum') THEN
+	ELSIF (tags->'office' = 'association' AND tags->'association:for' = 'disabled') OR (tags->'amenity' IN ('cinema', 'theatre', 'library')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'club' IN ('scout', 'social', 'freemasonry', 'music', 'automobile', 'culture', 'veterans', 'sailing', 'youth', 'shooting', 'charity', 'fishing', 'motorcycle', 'game', 'ethnic', 'history', 'tourism', 'computer', 'board_games', 'dog', 'religion', 'linux', 'student', 'art', 'nature')) THEN
 		RETURN 'leisure';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') THEN
 		RETURN 'sport';
-	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'medical_supply', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'toys', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'fishing', 'hunting', 'sports', 'outdoor', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'mobile_phone', 'computer', 'electronics', 'appliance', 'hifi', 'optician', 'hearing_aids')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' IN ('sewing', 'electronics_repair', 'optician')) THEN
+	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tatoo', 'medical_supply', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'fishing', 'hunting', 'sports', 'outdoor', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'mobile_phone', 'computer', 'electronics', 'appliance', 'hifi', 'optician', 'hearing_aids')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' IN ('sewing', 'electronics_repair', 'optician')) THEN
 		RETURN 'shop';
-	ELSIF (tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire')) OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'collège') OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée') OR (tags->'amenity' IN ('childcare', 'kindergarten')) THEN
+	ELSIF (tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire')) OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'collège') OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée') OR (tags->'amenity' IN ('childcare', 'kindergarten', 'university', 'college')) THEN
 		RETURN 'education';
 	ELSIF (tags->'amenity' IN ('pharmacy', 'hospital', 'clinic', 'doctors')) OR (tags->'healthcare' IN ('hospital', 'clinic', 'centre', 'rehabilitation', 'audiologist', 'dentist', 'midwife', 'nurse', 'podiatrist', 'psychotherapist', 'speech_therapist', 'occupational_therapist', 'doctor', 'physiotherapist')) THEN
 		RETURN 'health';
-	ELSIF (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' IN ('parking', 'parking_space') AND tags->'capacity:disabled' != '') OR (tags->'highway' = 'bus_stop') OR (tags->'amenity' IN ('bus_station', 'ferry_terminal', 'taxi', 'fuel', 'car_rental')) OR (tags->'aeroway' = 'aerodrome') OR (tags->'shop' = 'gas') THEN
+	ELSIF (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' IN ('parking', 'parking_space') AND tags->'capacity:disabled' != '') OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'amenity' IN ('bus_station', 'ferry_terminal', 'taxi', 'fuel', 'car_rental')) OR (tags->'aeroway' = 'aerodrome') OR (tags->'shop' = 'gas') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
 		RETURN 'mobility';
 	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'amenity' IN ('drinking_water', 'toilets')) OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') THEN
 		RETURN 'tourism';
@@ -77,21 +77,27 @@ BEGIN
 		RETURN 'museum';
 	ELSIF tags->'office' = 'association' AND tags->'association:for' = 'disabled' THEN
 		RETURN 'association';
+	ELSIF tags->'club' IN ('scout', 'social', 'freemasonry', 'music', 'automobile', 'culture', 'veterans', 'sailing', 'youth', 'shooting', 'charity', 'fishing', 'motorcycle', 'game', 'ethnic', 'history', 'tourism', 'computer', 'board_games', 'dog', 'religion', 'linux', 'student', 'art', 'nature') THEN
+		RETURN 'leisure_club';
 	ELSIF tags->'amenity' = 'library' THEN
 		RETURN 'library';
+	ELSIF tags->'tourism' = 'theme_park' THEN
+		RETURN 'theme_park';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'amenity' = 'swimming_pool') THEN
 		RETURN 'swimming_pool';
 	ELSIF tags->'club' = 'sport' AND tags->'sport:for' = 'disabled' THEN
 		RETURN 'club';
 	ELSIF tags->'shop' IN ('boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches') THEN
 		RETURN 'clothes';
-	ELSIF (tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery')) OR (tags->'amenity' = 'marketplace') THEN
+	ELSIF tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery') THEN
 		RETURN 'food';
-	ELSIF tags->'shop' IN ('beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist') THEN
+	ELSIF tags->'amenity' = 'marketplace' THEN
+		RETURN 'marketplace';
+	ELSIF tags->'shop' IN ('beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tatoo') THEN
 		RETURN 'beauty';
 	ELSIF tags->'shop' = 'medical_supply' THEN
 		RETURN 'medical_supply';
-	ELSIF (tags->'shop' IN ('fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'toys', 'video', 'video_games')) OR (tags->'craft' = 'sewing') THEN
+	ELSIF (tags->'shop' IN ('fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games')) OR (tags->'craft' = 'sewing') THEN
 		RETURN 'art';
 	ELSIF tags->'shop' IN ('stationery', 'printer_ink', 'books', 'kiosk', 'newsagent') THEN
 		RETURN 'stationery';
@@ -121,6 +127,10 @@ BEGIN
 		RETURN 'college';
 	ELSIF tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée' THEN
 		RETURN 'lycee';
+	ELSIF tags->'amenity' = 'university' THEN
+		RETURN 'university';
+	ELSIF tags->'amenity' = 'college' THEN
+		RETURN 'college_sup';
 	ELSIF tags->'amenity' = 'pharmacy' THEN
 		RETURN 'pharmacy';
 	ELSIF (tags->'healthcare' = 'hospital') OR (tags->'amenity' = 'hospital') THEN
@@ -149,6 +159,8 @@ BEGIN
 		RETURN 'fuel';
 	ELSIF tags->'amenity' = 'car_rental' THEN
 		RETURN 'car_rental';
+	ELSIF (tags->'highway' = 'elevator') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
+		RETURN 'elevator';
 	ELSIF (tags->'leisure' = 'beach_resort') OR (tags->'natural' = 'beach') THEN
 		RETURN 'beach_resort';
 	ELSIF tags->'leisure' = 'park' THEN

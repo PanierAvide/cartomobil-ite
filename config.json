@@ -2,6 +2,7 @@
   "maptilerApiKey": "",
   "mapZoom": 10,
   "mapCenter": [-149.3845, -17.6937],
+  "mapBounds": [[-150.3918, -18.0989], [-148.8922, -17.2562]],
   "tilesUrl": "https://tiles.cartomobilite.avoscartes.pf",
   "poiFeature": "https://features.cartomobilite.avoscartes.pf/collections/public.poi_osm/items",
   "apiUrl": "https://api.cartomobilite.avoscartes.pf",
@@ -14,7 +15,7 @@
   "mapillaryClientId": "eDhQTTdnRmZJNXdYZWUwRDQxc1Nwdzo5ZDhkMDM5NzU5NDVjODBm",
   "brands": {
     "DEFAULT": {
-      "brand_text": "Cartomobil' ite",
+      "brand_text": "Cartomobil 'ite",
       "domain": "carto.mobilite.xyz",
       "defaultLocale": "fr"
     }

@@ -1,5 +1,6 @@
 import { mapState } from 'vuex';
 import config from '../../config.json';
+import logo from '../../assets/logo.png';
 import brand from '../../assets/logo-FR-laptop.svg';
 import brandMobile from '../../assets/logo-FR-mobile.svg';
 import brandOg from '../../assets/logo-og.jpg';
@@ -33,11 +34,13 @@ export default {
     },
 
     logo() {
-      return {}[this.brandId] || brand;
+      return logo;
+//       return {}[this.brandId] || brand;
     },
 
     logoMobile() {
-      return {}[this.brandId] || brandMobile;
+      return logo;
+//       return {}[this.brandId] || brandMobile;
     },
 
     logoOg() {

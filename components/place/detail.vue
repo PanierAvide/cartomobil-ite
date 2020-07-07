@@ -89,6 +89,11 @@
             />
           </v-list>
 
+          <detail-schema
+            :place="place"
+            readOnly
+          />
+
           <template v-if="services.length > 0">
             <v-subheader>{{ $t('details.services') }}</v-subheader>
             <v-list class="py-0">
@@ -169,6 +174,7 @@ import DetailLink from './detail_link';
 import DetailOpeningHours from './detail_opening_hours';
 import DetailState from './detail_state';
 import DetailService from './detail_service';
+import DetailSchema from './detail_schema';
 import OsmLink from '../osm_link';
 import UpdateDetailDialog from '../update_detail_dialog';
 import { categories } from '../../categories.json';
@@ -191,6 +197,7 @@ export default {
     DetailOpeningHours,
     DetailState,
     DetailService,
+    DetailSchema,
     OsmLink,
     UpdateDetailDialog,
     ContributeForm

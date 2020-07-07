@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(354);
+SELECT plan(426);
 
 SELECT is(get_category('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category amenity=>townhall for FR should be administration');
 
@@ -90,9 +90,113 @@ SELECT is(get_category('office=>association, association:for=>disabled'::hstore,
 
 SELECT is(get_subcategory('office=>association, association:for=>disabled'::hstore, 'FR'), 'association', 'get_subcategory office=>association, association:for=>disabled for FR should be association');
 
+SELECT is(get_category('club=>scout'::hstore, 'FR'), 'leisure', 'get_category club=>scout for FR should be leisure');
+
+SELECT is(get_subcategory('club=>scout'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>scout for FR should be leisure_club');
+
+SELECT is(get_category('club=>social'::hstore, 'FR'), 'leisure', 'get_category club=>social for FR should be leisure');
+
+SELECT is(get_subcategory('club=>social'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>social for FR should be leisure_club');
+
+SELECT is(get_category('club=>freemasonry'::hstore, 'FR'), 'leisure', 'get_category club=>freemasonry for FR should be leisure');
+
+SELECT is(get_subcategory('club=>freemasonry'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>freemasonry for FR should be leisure_club');
+
+SELECT is(get_category('club=>music'::hstore, 'FR'), 'leisure', 'get_category club=>music for FR should be leisure');
+
+SELECT is(get_subcategory('club=>music'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>music for FR should be leisure_club');
+
+SELECT is(get_category('club=>automobile'::hstore, 'FR'), 'leisure', 'get_category club=>automobile for FR should be leisure');
+
+SELECT is(get_subcategory('club=>automobile'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>automobile for FR should be leisure_club');
+
+SELECT is(get_category('club=>culture'::hstore, 'FR'), 'leisure', 'get_category club=>culture for FR should be leisure');
+
+SELECT is(get_subcategory('club=>culture'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>culture for FR should be leisure_club');
+
+SELECT is(get_category('club=>veterans'::hstore, 'FR'), 'leisure', 'get_category club=>veterans for FR should be leisure');
+
+SELECT is(get_subcategory('club=>veterans'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>veterans for FR should be leisure_club');
+
+SELECT is(get_category('club=>sailing'::hstore, 'FR'), 'leisure', 'get_category club=>sailing for FR should be leisure');
+
+SELECT is(get_subcategory('club=>sailing'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>sailing for FR should be leisure_club');
+
+SELECT is(get_category('club=>youth'::hstore, 'FR'), 'leisure', 'get_category club=>youth for FR should be leisure');
+
+SELECT is(get_subcategory('club=>youth'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>youth for FR should be leisure_club');
+
+SELECT is(get_category('club=>shooting'::hstore, 'FR'), 'leisure', 'get_category club=>shooting for FR should be leisure');
+
+SELECT is(get_subcategory('club=>shooting'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>shooting for FR should be leisure_club');
+
+SELECT is(get_category('club=>charity'::hstore, 'FR'), 'leisure', 'get_category club=>charity for FR should be leisure');
+
+SELECT is(get_subcategory('club=>charity'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>charity for FR should be leisure_club');
+
+SELECT is(get_category('club=>fishing'::hstore, 'FR'), 'leisure', 'get_category club=>fishing for FR should be leisure');
+
+SELECT is(get_subcategory('club=>fishing'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>fishing for FR should be leisure_club');
+
+SELECT is(get_category('club=>motorcycle'::hstore, 'FR'), 'leisure', 'get_category club=>motorcycle for FR should be leisure');
+
+SELECT is(get_subcategory('club=>motorcycle'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>motorcycle for FR should be leisure_club');
+
+SELECT is(get_category('club=>game'::hstore, 'FR'), 'leisure', 'get_category club=>game for FR should be leisure');
+
+SELECT is(get_subcategory('club=>game'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>game for FR should be leisure_club');
+
+SELECT is(get_category('club=>ethnic'::hstore, 'FR'), 'leisure', 'get_category club=>ethnic for FR should be leisure');
+
+SELECT is(get_subcategory('club=>ethnic'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>ethnic for FR should be leisure_club');
+
+SELECT is(get_category('club=>history'::hstore, 'FR'), 'leisure', 'get_category club=>history for FR should be leisure');
+
+SELECT is(get_subcategory('club=>history'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>history for FR should be leisure_club');
+
+SELECT is(get_category('club=>tourism'::hstore, 'FR'), 'leisure', 'get_category club=>tourism for FR should be leisure');
+
+SELECT is(get_subcategory('club=>tourism'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>tourism for FR should be leisure_club');
+
+SELECT is(get_category('club=>computer'::hstore, 'FR'), 'leisure', 'get_category club=>computer for FR should be leisure');
+
+SELECT is(get_subcategory('club=>computer'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>computer for FR should be leisure_club');
+
+SELECT is(get_category('club=>board_games'::hstore, 'FR'), 'leisure', 'get_category club=>board_games for FR should be leisure');
+
+SELECT is(get_subcategory('club=>board_games'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>board_games for FR should be leisure_club');
+
+SELECT is(get_category('club=>dog'::hstore, 'FR'), 'leisure', 'get_category club=>dog for FR should be leisure');
+
+SELECT is(get_subcategory('club=>dog'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>dog for FR should be leisure_club');
+
+SELECT is(get_category('club=>religion'::hstore, 'FR'), 'leisure', 'get_category club=>religion for FR should be leisure');
+
+SELECT is(get_subcategory('club=>religion'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>religion for FR should be leisure_club');
+
+SELECT is(get_category('club=>linux'::hstore, 'FR'), 'leisure', 'get_category club=>linux for FR should be leisure');
+
+SELECT is(get_subcategory('club=>linux'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>linux for FR should be leisure_club');
+
+SELECT is(get_category('club=>student'::hstore, 'FR'), 'leisure', 'get_category club=>student for FR should be leisure');
+
+SELECT is(get_subcategory('club=>student'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>student for FR should be leisure_club');
+
+SELECT is(get_category('club=>art'::hstore, 'FR'), 'leisure', 'get_category club=>art for FR should be leisure');
+
+SELECT is(get_subcategory('club=>art'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>art for FR should be leisure_club');
+
+SELECT is(get_category('club=>nature'::hstore, 'FR'), 'leisure', 'get_category club=>nature for FR should be leisure');
+
+SELECT is(get_subcategory('club=>nature'::hstore, 'FR'), 'leisure_club', 'get_subcategory club=>nature for FR should be leisure_club');
+
 SELECT is(get_category('amenity=>library'::hstore, 'FR'), 'leisure', 'get_category amenity=>library for FR should be leisure');
 
 SELECT is(get_subcategory('amenity=>library'::hstore, 'FR'), 'library', 'get_subcategory amenity=>library for FR should be library');
+
+SELECT is(get_category('tourism=>theme_park'::hstore, 'FR'), 'leisure', 'get_category tourism=>theme_park for FR should be leisure');
+
+SELECT is(get_subcategory('tourism=>theme_park'::hstore, 'FR'), 'theme_park', 'get_subcategory tourism=>theme_park for FR should be theme_park');
 
 SELECT is(get_category('leisure=>sports_centre, sport=>swimming'::hstore, 'FR'), 'sport', 'get_category leisure=>sports_centre, sport=>swimming for FR should be sport');
 
@@ -252,7 +356,7 @@ SELECT is(get_subcategory('shop=>winery'::hstore, 'FR'), 'food', 'get_subcategor
 
 SELECT is(get_category('amenity=>marketplace'::hstore, 'FR'), 'shop', 'get_category amenity=>marketplace for FR should be shop');
 
-SELECT is(get_subcategory('amenity=>marketplace'::hstore, 'FR'), 'food', 'get_subcategory amenity=>marketplace for FR should be food');
+SELECT is(get_subcategory('amenity=>marketplace'::hstore, 'FR'), 'marketplace', 'get_subcategory amenity=>marketplace for FR should be marketplace');
 
 SELECT is(get_category('shop=>beauty'::hstore, 'FR'), 'shop', 'get_category shop=>beauty for FR should be shop');
 
@@ -277,6 +381,10 @@ SELECT is(get_subcategory('shop=>perfumery'::hstore, 'FR'), 'beauty', 'get_subca
 SELECT is(get_category('shop=>chemist'::hstore, 'FR'), 'shop', 'get_category shop=>chemist for FR should be shop');
 
 SELECT is(get_subcategory('shop=>chemist'::hstore, 'FR'), 'beauty', 'get_subcategory shop=>chemist for FR should be beauty');
+
+SELECT is(get_category('shop=>tatoo'::hstore, 'FR'), 'shop', 'get_category shop=>tatoo for FR should be shop');
+
+SELECT is(get_subcategory('shop=>tatoo'::hstore, 'FR'), 'beauty', 'get_subcategory shop=>tatoo for FR should be beauty');
 
 SELECT is(get_category('shop=>medical_supply'::hstore, 'FR'), 'shop', 'get_category shop=>medical_supply for FR should be shop');
 
@@ -314,9 +422,13 @@ SELECT is(get_category('shop=>photo'::hstore, 'FR'), 'shop', 'get_category shop=
 
 SELECT is(get_subcategory('shop=>photo'::hstore, 'FR'), 'art', 'get_subcategory shop=>photo for FR should be art');
 
-SELECT is(get_category('shop=>toys'::hstore, 'FR'), 'shop', 'get_category shop=>toys for FR should be shop');
+SELECT is(get_category('shop=>craft'::hstore, 'FR'), 'shop', 'get_category shop=>craft for FR should be shop');
 
-SELECT is(get_subcategory('shop=>toys'::hstore, 'FR'), 'art', 'get_subcategory shop=>toys for FR should be art');
+SELECT is(get_subcategory('shop=>craft'::hstore, 'FR'), 'art', 'get_subcategory shop=>craft for FR should be art');
+
+SELECT is(get_category('shop=>camera'::hstore, 'FR'), 'shop', 'get_category shop=>camera for FR should be shop');
+
+SELECT is(get_subcategory('shop=>camera'::hstore, 'FR'), 'art', 'get_subcategory shop=>camera for FR should be art');
 
 SELECT is(get_category('shop=>video'::hstore, 'FR'), 'shop', 'get_category shop=>video for FR should be shop');
 
@@ -538,6 +650,14 @@ SELECT is(get_category('amenity=>school, school:FR=>lycée'::hstore, 'FR'), 'edu
 
 SELECT is(get_subcategory('amenity=>school, school:FR=>lycée'::hstore, 'FR'), 'lycee', 'get_subcategory amenity=>school, school:FR=>lycée for FR should be lycee');
 
+SELECT is(get_category('amenity=>university'::hstore, 'FR'), 'education', 'get_category amenity=>university for FR should be education');
+
+SELECT is(get_subcategory('amenity=>university'::hstore, 'FR'), 'university', 'get_subcategory amenity=>university for FR should be university');
+
+SELECT is(get_category('amenity=>college'::hstore, 'FR'), 'education', 'get_category amenity=>college for FR should be education');
+
+SELECT is(get_subcategory('amenity=>college'::hstore, 'FR'), 'college_sup', 'get_subcategory amenity=>college for FR should be college_sup');
+
 SELECT is(get_category('amenity=>pharmacy'::hstore, 'FR'), 'health', 'get_category amenity=>pharmacy for FR should be health');
 
 SELECT is(get_subcategory('amenity=>pharmacy'::hstore, 'FR'), 'pharmacy', 'get_subcategory amenity=>pharmacy for FR should be pharmacy');
@@ -669,6 +789,30 @@ SELECT is(get_subcategory('shop=>gas'::hstore, 'FR'), 'fuel', 'get_subcategory s
 SELECT is(get_category('amenity=>car_rental'::hstore, 'FR'), 'mobility', 'get_category amenity=>car_rental for FR should be mobility');
 
 SELECT is(get_subcategory('amenity=>car_rental'::hstore, 'FR'), 'car_rental', 'get_subcategory amenity=>car_rental for FR should be car_rental');
+
+SELECT is(get_category('highway=>elevator'::hstore, 'FR'), 'mobility', 'get_category highway=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('highway=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory highway=>elevator for FR should be elevator');
+
+SELECT is(get_category('room=>elevator'::hstore, 'FR'), 'mobility', 'get_category room=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('room=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory room=>elevator for FR should be elevator');
+
+SELECT is(get_category('building:part=>elevator'::hstore, 'FR'), 'mobility', 'get_category building:part=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('building:part=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory building:part=>elevator for FR should be elevator');
+
+SELECT is(get_category('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'mobility', 'get_category buildingpart:verticalpassage=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory buildingpart:verticalpassage=>elevator for FR should be elevator');
+
+SELECT is(get_category('building=>elevator'::hstore, 'FR'), 'mobility', 'get_category building=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('building=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory building=>elevator for FR should be elevator');
+
+SELECT is(get_category('indoor=>elevator'::hstore, 'FR'), 'mobility', 'get_category indoor=>elevator for FR should be mobility');
+
+SELECT is(get_subcategory('indoor=>elevator'::hstore, 'FR'), 'elevator', 'get_subcategory indoor=>elevator for FR should be elevator');
 
 SELECT is(get_category('leisure=>beach_resort'::hstore, 'FR'), 'tourism', 'get_category leisure=>beach_resort for FR should be tourism');
 
