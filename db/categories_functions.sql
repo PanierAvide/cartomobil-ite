@@ -4,8 +4,8 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 --
 
--- Function for getting normalized category from OSM tags
-CREATE OR REPLACE FUNCTION get_category(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+-- Function for getting normalized category (cat1) from OSM tags
+CREATE OR REPLACE FUNCTION get_category1(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	IF (tags->'amenity' IN ('townhall', 'police')) OR (tags->'office' = 'government') THEN
 		RETURN 'administration';
@@ -40,8 +40,8 @@ END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 
 
--- Function for getting normalized subcategory from OSM tags
-CREATE OR REPLACE FUNCTION get_subcategory(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+-- Function for getting normalized subcategory (cat2) from OSM tags
+CREATE OR REPLACE FUNCTION get_category2(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	IF tags->'amenity' = 'townhall' THEN
 		RETURN 'townhall';
@@ -181,6 +181,25 @@ BEGIN
 		RETURN 'hotel';
 	ELSIF tags->'tourism' = 'hostel' THEN
 		RETURN 'hostel';
+	ELSE
+		RETURN 'other';
+	END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+
+-- Function for getting normalized subfilter (cat3) from OSM tags
+CREATE OR REPLACE FUNCTION get_category3(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+BEGIN
+	tags := tags::hstore || CONCAT('cat2=>', get_category2(tags, area))::hstore;
+	IF (tags->'name' = 'Caisse de Prévoyance Sociale' AND tags->'cat2' = 'government') OR (tags->'name' = 'CPS' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'CPS' AND tags->'cat2' = 'government') THEN
+		RETURN 'cps';
+	ELSIF (tags->'name' = 'Service des Affaires Sociales' AND tags->'cat2' = 'government') OR (tags->'name' = 'Direction des Solidarités, de la Famille et de l''Egalité' AND tags->'cat2' = 'government') OR (tags->'name' = 'DFSE' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'DFSE' AND tags->'cat2' = 'government') THEN
+		RETURN 'dsfe';
+	ELSIF (tags->'name' = 'Commission Technique d''Orientation et de Reclassement Professionnel' AND tags->'cat2' = 'government') OR (tags->'name' = 'COTOREP' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'COTOREP' AND tags->'cat2' = 'government') THEN
+		RETURN 'cotorep';
+	ELSIF (tags->'name' = 'Service de l''emploi, de la formation et de l''insertion professionnelles' AND tags->'cat2' = 'government') OR (tags->'name' = 'SEFI' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'SEFI' AND tags->'cat2' = 'government') THEN
+		RETURN 'sefi';
 	ELSE
 		RETURN 'other';
 	END IF;

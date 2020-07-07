@@ -75,8 +75,8 @@ function createTest(fn, test, result) {
 
 const categoriesTestsString = categoriesTests.flatMap((test) => {
   return [
-    createTest('get_category', test, test.catId),
-    createTest('get_subcategory', test, test.subCatId)
+    createTest('get_category1', test, test.catId),
+    createTest('get_category2', test, test.subCatId)
   ];
 }).join("\n\n");
 

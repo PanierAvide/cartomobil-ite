@@ -52,8 +52,9 @@ CREATE TABLE IF NOT EXISTS poi_osm_next(
 	fid VARCHAR PRIMARY KEY,
 	geom GEOMETRY(Point, 3857),
 	name VARCHAR,
-	cat VARCHAR,
-	normalized_cat VARCHAR DEFAULT 'other',
+	cat1 VARCHAR DEFAULT 'other',
+	cat2 VARCHAR,
+	cat3 VARCHAR,
 	brand VARCHAR,
 	brand_wikidata VARCHAR,
 	brand_hours VARCHAR,
@@ -78,8 +79,9 @@ AS
 	concat('n', osm_id),
 	way,
 	merge_names(COALESCE(tags->'name:fr', name), tags->'name:ty'),
-	get_subcategory(tags),
-	get_category(tags) AS normalized_cat,
+	get_category1(tags) AS cat1,
+	get_category2(tags) AS cat2,
+	get_category3(tags) AS cat3,
 	COALESCE(tags->'brand', tags->'operator'),
 	COALESCE(tags->'brand:wikidata', tags->'operator:wikidata', tags->'wikidata'),
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
@@ -99,8 +101,9 @@ SELECT
 	CASE WHEN osm_id < 0 THEN concat('r', -osm_id) ELSE concat('w', osm_id) END,
 	ST_Centroid(way),
 	merge_names(COALESCE(tags->'name:fr', name), tags->'name:ty'),
-	get_subcategory(tags),
-	get_category(tags),
+	get_category1(tags) AS cat1,
+	get_category2(tags) AS cat2,
+	get_category3(tags) AS cat3,
 	COALESCE(tags->'brand', tags->'operator'),
 	COALESCE(tags->'brand:wikidata', tags->'operator:wikidata', tags->'wikidata'),
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
@@ -116,11 +119,11 @@ WHERE
 	-- Do not edit directly, run "yarn run categories" instead
 	("amenity" IN ('atm', 'bank', 'bar', 'bus_station', 'cafe', 'car_rental', 'childcare', 'cinema', 'clinic', 'college', 'doctors', 'drinking_water', 'fast_food', 'ferry_terminal', 'fuel', 'hospital', 'ice_cream', 'kindergarten', 'letter_box', 'library', 'marketplace', 'nightclub', 'parking', 'parking_space', 'pharmacy', 'police', 'post_box', 'post_office', 'pub', 'restaurant', 'school', 'swimming_pool', 'taxi', 'theatre', 'toilets', 'townhall', 'university', 'vending_machine') OR "office" IN ('association', 'company', 'government', 'insurance') OR "shop" IN ('alcohol', 'appliance', 'art', 'bag', 'bakery', 'bathroom_furnishing', 'beauty', 'bed', 'beverages', 'books', 'boutique', 'butcher', 'camera', 'cannery', 'carpet', 'charity', 'cheese', 'chemist', 'chocolate', 'clothes', 'coffee', 'computer', 'confectionery', 'convenience', 'cosmetics', 'craft', 'curtain', 'dairy', 'deli', 'department_store', 'doityourself', 'electrical', 'electronics', 'fabric', 'farm', 'fashion', 'fireplace', 'fishing', 'frozen_food', 'furniture', 'gas', 'general', 'glaziery', 'greengrocer', 'haberdashery', 'hairdresser', 'hardware', 'health_food', 'hearing_aids', 'hifi', 'honey', 'houseware', 'hunting', 'insurance', 'interior_decoration', 'jewelry', 'kiosk', 'kitchen', 'lighting', 'massage', 'medical_supply', 'mobile_phone', 'music', 'musical_instrument', 'newsagent', 'optician', 'outdoor', 'paint', 'pasta', 'pastry', 'perfumery', 'photo', 'pottery', 'printer_ink', 'seafood', 'second_hand', 'sewing', 'shoes', 'spices', 'sports', 'stationery', 'supermarket', 'tailor', 'tatoo', 'tea', 'tiles', 'variety_store', 'video', 'video_games', 'watches', 'wholesale', 'wine', 'winery', 'wool') OR "tourism" IN ('artwork', 'guest_house', 'hostel', 'hotel', 'museum', 'theme_park', 'viewpoint') OR "club" IN ('art', 'automobile', 'board_games', 'charity', 'computer', 'culture', 'dog', 'ethnic', 'fishing', 'freemasonry', 'game', 'history', 'linux', 'motorcycle', 'music', 'nature', 'religion', 'sailing', 'scout', 'shooting', 'social', 'sport', 'student', 'tourism', 'veterans', 'youth') OR "leisure" IN ('beach_resort', 'park', 'sports_centre', 'swimming_pool') OR "name" IN ('EDT', 'Electricité de Tahiti', 'Électricité de Tahiti') OR "craft" IN ('electronics_repair', 'optician', 'sewing') OR "school:FR" IN ('collège', 'lycée', 'maternelle', 'primaire', 'élémentaire') OR "healthcare" IN ('audiologist', 'centre', 'clinic', 'dentist', 'doctor', 'hospital', 'midwife', 'nurse', 'occupational_therapist', 'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist') OR "wheelchair" IN ('designated', 'yes') OR "highway" IN ('bus_stop', 'elevator') OR "public_transport" IN ('platform', 'stop_position') OR "aeroway" IN ('aerodrome') OR "natural" IN ('beach') OR "waterway" IN ('waterfall')) --CATEGORIES
 )
-INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, brand, brand_wikidata, brand_infos, status, status_order, delivery, takeaway, drive_through, tags)
+INSERT INTO poi_osm_next(fid, geom, name, cat1, cat2, cat3, brand, brand_wikidata, brand_infos, status, status_order, delivery, takeaway, drive_through, tags)
 SELECT *
 FROM selection
 -- Remove edge cases needing advanced filtering like vending machines
-WHERE normalized_cat IS NOT NULL AND NOT (tags ? 'access' AND tags->>'access' NOT IN ('yes', 'public', 'permissive'));
+WHERE cat1 IS NOT NULL AND NOT (tags ? 'access' AND tags->>'access' NOT IN ('yes', 'public', 'permissive'));
 
 
 -- Join custom tags from poi_cro
@@ -137,15 +140,15 @@ WHERE poi_osm_next.fid = c.osmid;
 UPDATE poi_osm_next
 SET
 	name = COALESCE(pc.name, poi_osm_next.name),
-	normalized_cat = pc.category,
-	cat = pc.subcategory,
+	cat1 = pc.category,
+	cat2 = pc.subcategory,
 	tags = CASE WHEN pc.tags IS NOT NULL THEN poi_osm_next.tags || pc.tags ELSE poi_osm_next.tags END
 FROM poi_custom pc
 WHERE
 	pc.osm_id IS NOT NULL
 	AND pc.osm_id = poi_osm_next.fid;
 
-INSERT INTO poi_osm_next(fid, geom, name, cat, normalized_cat, status, status_order, source_status, tags)
+INSERT INTO poi_osm_next(fid, geom, name, cat1, cat2, status, status_order, source_status, tags)
 WITH pc AS (
 	SELECT *, ST_Transform(ST_SetSRID(ST_Point(lng, lat), 4326), 3857) AS geom
 	FROM poi_custom
@@ -169,6 +172,9 @@ WHERE pc.osm_id IS NULL;
 REINDEX TABLE poi_osm_next;
 CREATE INDEX poi_osm_next_geom_idx ON poi_osm_next USING GIST(geom);
 CREATE INDEX poi_osm_next_status_idx ON poi_osm_next(status);
+CREATE INDEX poi_osm_next_cat1_idx ON poi_osm_next(cat1);
+CREATE INDEX poi_osm_next_cat2_idx ON poi_osm_next(cat2);
+CREATE INDEX poi_osm_next_cat3_idx ON poi_osm_next(cat3);
 
 CREATE SCHEMA IF NOT EXISTS previous;
 DROP TABLE IF EXISTS previous.poi_osm CASCADE;
@@ -179,9 +185,12 @@ ALTER TABLE poi_osm_next RENAME TO poi_osm;
 ALTER INDEX poi_osm_next_pkey RENAME TO poi_osm_pkey;
 ALTER INDEX poi_osm_next_geom_idx RENAME TO poi_osm_geom_idx;
 ALTER INDEX poi_osm_next_status_idx RENAME TO poi_osm_status_idx;
+ALTER INDEX poi_osm_next_cat1_idx RENAME TO poi_osm_cat1_idx;
+ALTER INDEX poi_osm_next_cat2_idx RENAME TO poi_osm_cat2_idx;
+ALTER INDEX poi_osm_next_cat3_idx RENAME TO poi_osm_cat3_idx;
 
 CREATE OR REPLACE VIEW poi_osm_light AS
-SELECT fid, fid AS id, geom, name, cat, normalized_cat, status, takeaway, delivery, drive_through
+SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, takeaway, delivery, drive_through
 FROM poi_osm;
 
 
@@ -190,7 +199,7 @@ FROM poi_osm;
 -- SELECT country, SUM((status NOT IN ('unknown', 'partial'))::int)::float / COUNT(*) * 100 AS pct_info_connue FROM poi_osm GROUP BY country;
 
 -- SELECT status, COUNT(*) FROM poi_osm GROUP BY status ORDER BY COUNT(*) DESC;
--- SELECT normalized_cat, COUNT(*) FROM poi_osm GROUP BY normalized_cat ORDER BY COUNT(*) DESC;
+-- SELECT cat1, COUNT(*) FROM poi_osm GROUP BY cat1 ORDER BY COUNT(*) DESC;
 
 -- SELECT country, brand, COUNT(*) FROM poi_osm WHERE status = 'unknown' GROUP BY country, brand HAVING COUNT(*) > 20 ORDER BY COUNT(*) DESC;
 -- SELECT country, cat, COUNT(*) FROM poi_osm WHERE status = 'unknown' GROUP BY country, cat HAVING COUNT(*) > 20 ORDER BY COUNT(*) DESC;

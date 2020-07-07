@@ -35,8 +35,8 @@ function tagsPerCategoryToSql(tpc) {
 					const values = v.split("|");
 					const rightpart =
 						values.length === 1 ?
-						(values[0] === "*" ? `!= ''` : `= '${values[0]}'`)
-						: `IN (${values.map(v => `'${v}'`).join(", ")})`;
+						(values[0] === "*" ? `!= ''` : `= '${values[0].replace(/'(?!')/g, "''")}'`)
+						: `IN (${values.map(v => `'${v.replace(/'(?!')/g, "''")}'`).join(", ")})`;
 					return `tags->'${k}' ${rightpart}`;
 				}
 			})
@@ -111,7 +111,7 @@ Object.entries(catg.categories).forEach(e => {
 	});
 });
 
-const catfct = `CREATE OR REPLACE FUNCTION get_category(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+const catfct = `CREATE OR REPLACE FUNCTION get_category1(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	${tagsPerCategoryToSql(tagsPerCategory)}
 	ELSIF tags->'opening_hours:covid19' != '' THEN
@@ -150,9 +150,49 @@ Object.values(catg.categories).forEach((cat, index) => {
 	});
 });
 
-const subcatfct = `CREATE OR REPLACE FUNCTION get_subcategory(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+const subcatfct = `CREATE OR REPLACE FUNCTION get_category2(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
 BEGIN
 	${tagsPerCategoryToSql(tagsPerSubcategory)}
+	ELSE
+		RETURN 'other';
+	END IF;
+END;
+$$ LANGUAGE plpgsql IMMUTABLE;
+`;
+
+
+// Look up all tags for subfilters
+const tagsPerSubfilter = {};
+Object.values(catg.categories).forEach((cat, index) => {
+	Object.entries(cat.subcategories).forEach(([ subcatId, subcat ], index2) => {
+		if (subcat.subfilters) {
+			Object.entries(subcat.subfilters).forEach(([ subfilterId, subfilter ], index3) => {
+				if (!tagsPerSubfilter[subfilterId]) {
+					tagsPerSubfilter[subfilterId] = subfilter.osm_tags.map(tags => Object.assign({}, tags, { cat2: subcatId }));
+				}
+
+				if ((subcat.areas && subcat.areas !== "all") || subcat['-areas']) {
+					const minusArea = subcat['-areas'] || [];
+					const areas = (subcat.areas || catg.countries).filter(a => !minusArea.includes(a));
+
+					tagsPerSubfilter[subfilterId] = tagsPerSubfilter[subfilterId].map(tags => {
+						if (tags.areas) {
+							tags.areas.push(...areas);
+							return tags;
+						} else {
+							return { ...tags, areas };
+						}
+					});
+				}
+			});
+		}
+	});
+});
+
+const subfilterfct = `CREATE OR REPLACE FUNCTION get_category3(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+BEGIN
+	tags := tags::hstore || CONCAT('cat2=>', get_category2(tags, area))::hstore;
+	${tagsPerCategoryToSql(tagsPerSubfilter)}
 	ELSE
 		RETURN 'other';
 	END IF;
@@ -168,11 +208,14 @@ const wholeSql = `--
 -- THEN RUN "yarn run categories" TO UPDATE
 --
 
--- Function for getting normalized category from OSM tags
+-- Function for getting normalized category (cat1) from OSM tags
 ${catfct}
 
--- Function for getting normalized subcategory from OSM tags
-${subcatfct}`;
+-- Function for getting normalized subcategory (cat2) from OSM tags
+${subcatfct}
+
+-- Function for getting normalized subfilter (cat3) from OSM tags
+${subfilterfct}`;
 
 fs.writeFile(CATEGORIES_SQL, wholeSql, (err) => {
 	if(err) { throw new Error(err); }

@@ -20,7 +20,42 @@
           "osm_tags": [
             { "office": "government" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "subfilters": {
+            "cps": {
+              "name": "Caisse de Prévoyance Sociale",
+              "osm_tags": [
+                { "name": "Caisse de Prévoyance Sociale" },
+                { "name": "CPS" },
+                { "short_name": "CPS" }
+              ]
+            },
+            "dsfe": {
+              "name": "Services sociaux",
+              "osm_tags": [
+                { "name": "Service des Affaires Sociales" },
+                { "name": "Direction des Solidarités, de la Famille et de l'Egalité" },
+                { "name": "DFSE" },
+                { "short_name": "DFSE" }
+              ]
+            },
+            "cotorep": {
+              "name": "COTOREP",
+              "osm_tags": [
+                { "name": "Commission Technique d'Orientation et de Reclassement Professionnel" },
+                { "name": "COTOREP" },
+                { "short_name": "COTOREP" }
+              ]
+            },
+            "sefi": {
+              "name": "SEFI (Pôle Emploi)",
+              "osm_tags": [
+                { "name": "Service de l'emploi, de la formation et de l'insertion professionnelles" },
+                { "name": "SEFI" },
+                { "short_name": "SEFI" }
+              ]
+            }
+          }
         },
         "police": {
           "name": "Police",
