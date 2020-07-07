@@ -12,7 +12,7 @@
       ref="chipsubcat"
     >
       <v-chip
-        v-for="{ subcategory, text} in sortedSubCategories"
+        v-for="{ subcategory, text } in subCategories"
         :key="subcategory"
         :value="`${category}/${subcategory}`"
         active-class="primary--text"
@@ -67,13 +67,13 @@ export default {
   computed: {
     ...mapGetters(['allCategories']),
 
-    sortedSubCategories() {
+    subCategories() {
       return Object.keys(this.allCategories[this.category].subcategories).map((subcategory) => {
         return {
           subcategory,
           text: this.$t(`categories.${subcategory}`)
         }
-      }).sort((a, b) => a.text.localeCompare(b.text));
+      });//.sort((a, b) => a.text.localeCompare(b.text));
     }
   }
 }

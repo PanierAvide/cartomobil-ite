@@ -99,18 +99,18 @@
           "areas": "all",
           "details_tags": [ "delivery", "takeaway" ]
         },
+        "bar": {
+          "name": "Bar",
+          "osm_tags": [ { "amenity": "bar|pub" } ],
+          "areas": "all",
+          "details_tags": [ "delivery", "takeaway" ]
+        },
         "cafe": {
           "name": "Coffee shop",
           "osm_tags": [
             { "amenity": "cafe|ice_cream" }
           ],
           "areas": "all"
-        },
-        "bar": {
-          "name": "Bar",
-          "osm_tags": [ { "amenity": "bar|pub" } ],
-          "areas": "all",
-          "details_tags": [ "delivery", "takeaway" ]
         },
         "nightclub": {
           "name": "Nightclub",
@@ -195,14 +195,6 @@
     "shop": {
       "name": "Shops",
       "subcategories": {
-        "clothes": {
-          "name": "Clothes",
-          "osm_tags": [
-            { "shop": "boutique|clothes|fashion|shoes|bag|jewelry|tailor|watches" }
-          ],
-          "areas": "all",
-          "forms": ["erp", "erp_clothes"]
-        },
         "food": {
           "name": "Food",
           "osm_tags": [
@@ -219,6 +211,22 @@
           "areas": "all",
           "form": "erp"
         },
+        "clothes": {
+          "name": "Clothes",
+          "osm_tags": [
+            { "shop": "boutique|clothes|fashion|shoes|bag|jewelry|tailor|watches" }
+          ],
+          "areas": "all",
+          "forms": ["erp", "erp_clothes"]
+        },
+        "sports": {
+          "name": "Sports",
+          "osm_tags": [
+            { "shop": "fishing|hunting|sports|outdoor" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
@@ -227,10 +235,11 @@
           "areas": "all",
           "form": "erp"
         },
-        "medical_supply": {
-          "name": "Medical supplies",
+        "edt": {
+          "name": "Tahiti Electricity",
           "osm_tags": [
-            { "shop": "medical_supply" }
+            { "office": "company", "name": "Electricité de Tahiti|EDT|Électricité de Tahiti" },
+            { "office": "company", "short_name": "EDT" }
           ],
           "areas": "all",
           "form": "erp"
@@ -249,44 +258,10 @@
           "areas": "all",
           "form": "erp"
         },
-        "variety_store": {
-          "name": "Variety store",
+        "medical_supply": {
+          "name": "Medical supplies",
           "osm_tags": [
-            { "shop": "variety_store|department_store|wholesale|second_hand|charity" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "sports": {
-          "name": "Sports",
-          "osm_tags": [
-            { "shop": "fishing|hunting|sports|outdoor" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "home": {
-          "name": "Home equipement",
-          "osm_tags": [
-            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "electronics": {
-          "name": "Electronics",
-          "osm_tags": [
-            { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
-            { "craft": "electronics_repair" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "edt": {
-          "name": "Tahiti Electricity",
-          "osm_tags": [
-            { "office": "company", "name": "Electricité de Tahiti|EDT|Électricité de Tahiti" },
-            { "office": "company", "short_name": "EDT" }
+            { "shop": "medical_supply" }
           ],
           "areas": "all",
           "form": "erp"
@@ -304,6 +279,31 @@
           "name": "Hearing aids",
           "osm_tags": [
             { "shop": "hearing_aids" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "variety_store": {
+          "name": "Variety store",
+          "osm_tags": [
+            { "shop": "variety_store|department_store|wholesale|second_hand|charity" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "home": {
+          "name": "Home equipement",
+          "osm_tags": [
+            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "electronics": {
+          "name": "Electronics",
+          "osm_tags": [
+            { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
+            { "craft": "electronics_repair" }
           ],
           "areas": "all",
           "form": "erp"
@@ -372,18 +372,11 @@
       "name": "Health",
       "form": "erp",
       "subcategories": {
-        "pharmacy": {
-          "name": "Pharmacy",
+        "centre": {
+          "name": "Centre",
           "osm_tags": [
-            { "amenity": "pharmacy" }
-          ],
-          "areas": "all"
-        },
-        "hospital": {
-          "name": "Hospital",
-          "osm_tags": [
-            { "healthcare": "hospital" },
-            { "amenity": "hospital" }
+            { "healthcare": "centre|rehabilitation|audiologist|dentist|midwife|nurse|podiatrist|psychotherapist|speech_therapist" },
+            { "amenity": "doctors" }
           ],
           "areas": "all"
         },
@@ -395,17 +388,19 @@
           ],
           "areas": "all"
         },
-        "centre": {
-          "name": "Centre",
+        "hospital": {
+          "name": "Hospital",
           "osm_tags": [
-            { "healthcare": "centre|rehabilitation|audiologist|dentist|midwife|nurse|podiatrist|psychotherapist|speech_therapist" },
-            { "amenity": "doctors" }
+            { "healthcare": "hospital" },
+            { "amenity": "hospital" }
           ],
           "areas": "all"
         },
-        "occupational_therapist": {
-          "name": "Occupational therapist",
-          "osm_tags": [ { "healthcare": "occupational_therapist" } ],
+        "pharmacy": {
+          "name": "Pharmacy",
+          "osm_tags": [
+            { "amenity": "pharmacy" }
+          ],
           "areas": "all"
         },
         "doctor": {
@@ -413,6 +408,11 @@
           "osm_tags": [
             { "healthcare": "doctor" }
           ],
+          "areas": "all"
+        },
+        "occupational_therapist": {
+          "name": "Occupational therapist",
+          "osm_tags": [ { "healthcare": "occupational_therapist" } ],
           "areas": "all"
         },
         "physiotherapist": {
@@ -425,38 +425,6 @@
     "mobility": {
       "name": "Mobility",
       "subcategories": {
-        "bus_stop": {
-          "name": "Bus stop",
-          "osm_tags": [
-            { "highway": "bus_stop" },
-            { "amenity": "bus_station" },
-            { "public_transport": "stop_position|platform", "bus": "yes" }
-          ],
-          "areas": "all",
-          "form": "bus_stop"
-        },
-        "ferry": {
-          "name": "Ferry",
-          "osm_tags": [
-            { "amenity": "ferry_terminal" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "taxi": {
-          "name": "Taxi",
-          "osm_tags": [
-            { "amenity": "taxi" }
-          ],
-          "areas": "all"
-        },
-        "airport": {
-          "name": "Airport",
-          "osm_tags": [
-            { "aeroway": "aerodrome" }
-          ],
-          "areas": "all"
-        },
         "parking_pmr": {
           "name": "Adapted parking space",
           "osm_tags": [
@@ -482,6 +450,38 @@
           ],
           "areas": "all",
           "form": "erp"
+        },
+        "taxi": {
+          "name": "Taxi",
+          "osm_tags": [
+            { "amenity": "taxi" }
+          ],
+          "areas": "all"
+        },
+        "bus_stop": {
+          "name": "Bus stop",
+          "osm_tags": [
+            { "highway": "bus_stop" },
+            { "amenity": "bus_station" },
+            { "public_transport": "stop_position|platform", "bus": "yes" }
+          ],
+          "areas": "all",
+          "form": "bus_stop"
+        },
+        "ferry": {
+          "name": "Ferry",
+          "osm_tags": [
+            { "amenity": "ferry_terminal" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "airport": {
+          "name": "Airport",
+          "osm_tags": [
+            { "aeroway": "aerodrome" }
+          ],
+          "areas": "all"
         },
         "elevator": {
           "name": "Elevator",
@@ -944,13 +944,13 @@
             "elvtr": {
               "type": "object",
               "title": "Ascenseur ?",
+              "x-props": {
+                "prependIcon": "osm-elevator"
+              },
               "oneOf": [
                 {
                   "title": "Oui",
                   "type": "object",
-                  "x-props": {
-                    "prependIcon": "osm-elevator"
-                  },
                   "properties": {
                     "elevator": {
                       "type": "string",
@@ -1467,104 +1467,116 @@
         "mandatory": true
       },
       "properties": {
-        "whch": {
+        "basics": {
+          "title": "Général",
           "type": "object",
-          "title": "Accessible en fauteuil roulant ?",
-          "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
-          "x-class": "form-hide-desc",
-          "x-props": {
-            "prependIcon": "osm-wheelchair"
-          },
-          "oneOf": [
-            {
-              "title": "Oui",
-              "properties": {
-                "wheelchair": {
-                  "type": "string",
-                  "const": "yes"
-                }
-              }
-            },
-            {
-              "title": "Limitée",
-              "properties": {
-                "wheelchair": {
-                  "type": "string",
-                  "const": "limited"
+          "properties": {
+            "whch": {
+              "type": "object",
+              "title": "Accessible en fauteuil roulant ?",
+              "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
+              "x-class": "form-hide-desc",
+              "x-props": {
+                "prependIcon": "osm-wheelchair"
+              },
+              "oneOf": [
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "yes"
+                    }
+                  }
                 },
-                "sign:wheelchair": {
-                  "title": "Signalétique PMR sur l'ascenseur",
-                  "type": "string",
-                  "oneOf": [
-                    { "title": "Oui", "const": "yes" },
-                    { "title": "Non", "const": "no" },
-                    { "title": "Ne sais pas", "const": "null" }
-                  ]
+                {
+                  "title": "Limitée",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "limited"
+                    },
+                    "sign:wheelchair": {
+                      "title": "Signalétique PMR sur l'ascenseur",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Oui", "const": "yes" },
+                        { "title": "Non", "const": "no" },
+                        { "title": "Ne sais pas", "const": "null" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "wheelchair": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
                 }
-              }
-            },
-            {
-              "title": "Non",
-              "properties": {
-                "wheelchair": {
-                  "type": "string",
-                  "const": "no"
-                }
-              }
-            },
-            {
-              "title": "Ne sais pas",
-              "properties": {
-                "wheelchair": {
-                  "type": "string",
-                  "const": "null"
-                }
-              }
+              ]
             }
-          ]
+          }
         },
-        "width": {
-          "type": "number",
-          "title": "Largeur cabine d'ascenseur (en mètres)",
-          "minimum": 0
-        },
-        "length": {
-          "type": "number",
-          "title": "Longueur cabine d'ascenseur (en mètres)",
-          "minimum": 0
-        },
-        "handrail": {
-          "title": "Main courante dans ascenseur ?",
-          "type": "string",
-          "oneOf": [
-            { "title": "Oui", "const": "yes" },
-            { "title": "Non", "const": "no" },
-            { "title": "Ne sais pas", "const": "null" }
-          ]
-        },
-        "mirror": {
-          "title": "Mirroir face à l'entrée dans ascenseur ?",
-          "type": "string",
-          "oneOf": [
-            { "title": "Oui", "const": "yes" },
-            { "title": "Non", "const": "no" },
-            { "title": "Ne sais pas", "const": "null" }
-          ]
-        },
-        "custom:buttons:height": {
-          "type": "number",
-          "title": "Hauteur du pavé numérique (en mètres)",
-          "minimum": 0
-        },
-        "button_operated:wheelchair": {
-          "title": "Bouton d'appel accessible ?",
-          "type": "string",
-          "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
-          "oneOf": [
-            { "title": "Oui", "const": "yes" },
-            { "title": "Non", "const": "no" },
-            { "title": "Ne sais pas", "const": "null" }
-          ]
+        "details": {
+          "title": "Détails",
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "number",
+              "title": "Largeur cabine d'ascenseur (en mètres)",
+              "minimum": 0
+            },
+            "length": {
+              "type": "number",
+              "title": "Longueur cabine d'ascenseur (en mètres)",
+              "minimum": 0
+            },
+            "handrail": {
+              "title": "Main courante dans ascenseur ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "mirror": {
+              "title": "Mirroir face à l'entrée dans ascenseur ?",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "custom:buttons:height": {
+              "type": "number",
+              "title": "Hauteur du pavé numérique (en mètres)",
+              "minimum": 0
+            },
+            "button_operated:wheelchair": {
+              "title": "Bouton d'appel accessible ?",
+              "type": "string",
+              "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            }
+          }
         }
       }
     },
