@@ -37,8 +37,8 @@ export default {
     },
 
     formDetails() {
-      const normalizedCat = this.place.properties.normalized_cat;
-      const cat = this.place.properties.cat;
+      const normalizedCat = this.place.properties.cat1;
+      const cat = this.place.properties.cat2;
       if (this.allCategories[normalizedCat] &&
           this.allCategories[normalizedCat].subcategories[cat] &&
           this.allCategories[normalizedCat].subcategories[cat].form_details) {

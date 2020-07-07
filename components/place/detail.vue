@@ -297,11 +297,11 @@ export default {
     services() {
       if(
         this.place
-        && categories[this.place.properties.normalized_cat]
-        && categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat]
-        && categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat].details_tags
+        && categories[this.place.properties.cat1]
+        && categories[this.place.properties.cat1].subcategories[this.place.properties.cat2]
+        && categories[this.place.properties.cat1].subcategories[this.place.properties.cat2].details_tags
       ) {
-        const details_tags = categories[this.place.properties.normalized_cat].subcategories[this.place.properties.cat].details_tags;
+        const details_tags = categories[this.place.properties.cat1].subcategories[this.place.properties.cat2].details_tags;
         const valuesAsIcons = { "yes": "check", "no": "close" };
 
         return details_tags
@@ -321,11 +321,11 @@ export default {
       let infos = [];
 
       // Category note
-      if(!this.$t(`categories_notes.${this.place.properties.normalized_cat}`).startsWith('categories_notes.')) {
-        infos.push(this.$t(`categories_notes.${this.place.properties.normalized_cat}`));
+      if(!this.$t(`categories_notes.${this.place.properties.cat1}`).startsWith('categories_notes.')) {
+        infos.push(this.$t(`categories_notes.${this.place.properties.cat1}`));
       }
-      if(!this.$t(`categories_notes.${this.place.properties.cat}`).startsWith('categories_notes.')) {
-        infos.push(this.$t(`categories_notes.${this.place.properties.cat}`));
+      if(!this.$t(`categories_notes.${this.place.properties.cat2}`).startsWith('categories_notes.')) {
+        infos.push(this.$t(`categories_notes.${this.place.properties.cat2}`));
       }
 
       // Custom POI description

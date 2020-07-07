@@ -133,7 +133,7 @@ describe('Detail', () => {
 
   it('display services depending of the tags', async () => {
     const detail = createWrapper({ id: '' });
-    detail.vm.place = { properties: { status: 'yes', normalized_cat: 'outside', cat: 'bar', tags: { takeaway: 'yes' } } };
+    detail.vm.place = { properties: { status: 'yes', cat1: 'outside', cat2: 'bar', tags: { takeaway: 'yes' } } };
     expect(detail.vm.services).toEqual([{ service: 'takeaway', label: 'details.details_tags.takeaway', value: 'check' }]);
   });
 });
