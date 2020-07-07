@@ -142,7 +142,7 @@ export default {
     },
 
     filterName() {
-      return this.hasSelectedSubCategory ? 'cat' : 'normalized_cat';
+      return this.hasSelectedSubCategory ? 'cat2' : 'cat1';
     },
 
     filterValue() {

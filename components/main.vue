@@ -321,11 +321,13 @@ export default {
 //        .then(area => {
 //          this.$store.commit('setArea', area);
           this.$store.commit('setArea', 'FR');
-          const [category, subcategory] = this.filter.split('/');
+          const [category, subcategory, subfilter] = this.filter.split('/');
           if (!this.categories.includes(category)) {
             this.filter = '';
           } else if (subcategory && !this.allCategories[category].subcategories[subcategory]) {
             this.filter = category;
+          } else if (subfilter && !this.allCategories[category].subcategories[subcategory].subfilters[subfilter]) {
+            this.filter = subcategory;
           }
 //        });
     },

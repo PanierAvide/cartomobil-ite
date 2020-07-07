@@ -7,11 +7,11 @@ export default {
     },
 
     category() {
-      return this.place.properties.cat === 'unknown' ? 'other' : this.place.properties.cat;
+      return this.place.properties.cat2 === 'unknown' ? 'other' : this.place.properties.cat2;
     },
 
     type() {
-      const key = `categories.${this.place.properties.cat}`;
+      const key = `categories.${this.place.properties.cat2}`;
       return this.$te(key) ? this.$t(key) : this.$t('categories.other');
     },
 

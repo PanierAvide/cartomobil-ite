@@ -137,8 +137,8 @@ function getLayers(theme) {
         ],
         "icon-image": [
           "coalesce",
-          ['image', ['get', 'cat']],
-          ['image', ['get', 'normalized_cat']],
+          ['image', ['get', 'cat2']],
+          ['image', ['get', 'cat1']],
           ['image', 'other']
         ],
         "icon-size": [
@@ -254,14 +254,16 @@ export default {
     },
 
     layers() {
-      const [ category, subcategory ] = this.filter.split('/');
+      const [ category, subcategory, subfilter ] = this.filter.split('/');
       const services = this.filterServices.map((service) => ['in', service, 'yes', 'only']);
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
-        if (subcategory) {
-          newLayer.filter.push(['==', 'cat', subcategory]);
+        if (subfilter) {
+          newLayer.filter.push(['==', 'cat3', subfilter]);
+        } else if (subcategory) {
+          newLayer.filter.push(['==', 'cat2', subcategory]);
         } else if (category !== '') {
-          newLayer.filter.push(['==', 'normalized_cat', category]);
+          newLayer.filter.push(['==', 'cat1', category]);
         }
         newLayer.filter.push(...services);
         return newLayer;
