@@ -167,7 +167,7 @@ BEGIN
 	ELSIF tags->'amenity' = 'toilets' THEN
 		result := 'toilets';
 	ELSE
-		result := NULL;
+		result := 'other';
 	END IF;
 	RETURN result;
 END;

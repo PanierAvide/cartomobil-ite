@@ -157,7 +157,7 @@ DECLARE
 BEGIN
 	${tagsPerCategoryToSql(tagsPerSubcategory)}
 	ELSE
-		result := NULL;
+		result := 'other';
 	END IF;
 	RETURN result;
 END;
