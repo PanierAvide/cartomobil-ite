@@ -52,7 +52,7 @@ function tagsPerCategoryToSql(tpc) {
 		const [ cat, sql ] = e;
 
 		conditionsSql += `${i === 0 ? '' : '\n\tELS'}IF ${sql} THEN
-		RETURN '${cat}';`;
+		result := '${cat}';`;
 	});
 
 	return conditionsSql;
@@ -112,13 +112,14 @@ Object.entries(catg.categories).forEach(e => {
 });
 
 const catfct = `CREATE OR REPLACE FUNCTION get_category1(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+DECLARE
+	result VARCHAR;
 BEGIN
 	${tagsPerCategoryToSql(tagsPerCategory)}
-	ELSIF tags->'opening_hours:covid19' != '' THEN
-		RETURN 'other';
 	ELSE
-		RETURN NULL;
+		result := NULL;
 	END IF;
+	RETURN result;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 `;
@@ -151,11 +152,14 @@ Object.values(catg.categories).forEach((cat, index) => {
 });
 
 const subcatfct = `CREATE OR REPLACE FUNCTION get_category2(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+DECLARE
+	result VARCHAR;
 BEGIN
 	${tagsPerCategoryToSql(tagsPerSubcategory)}
 	ELSE
-		RETURN 'other';
+		result := NULL;
 	END IF;
+	RETURN result;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 `;
@@ -190,12 +194,15 @@ Object.values(catg.categories).forEach((cat, index) => {
 });
 
 const subfilterfct = `CREATE OR REPLACE FUNCTION get_category3(tags HSTORE, area VARCHAR DEFAULT 'FR') RETURNS VARCHAR AS $$
+DECLARE
+	result VARCHAR;
 BEGIN
 	tags := tags::hstore || CONCAT('cat2=>', get_category2(tags, area))::hstore;
 	${tagsPerCategoryToSql(tagsPerSubfilter)}
 	ELSE
-		RETURN 'other';
+		result := 'other';
 	END IF;
+	RETURN result;
 END;
 $$ LANGUAGE plpgsql IMMUTABLE;
 `;

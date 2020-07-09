@@ -7,7 +7,9 @@ export default {
     },
 
     category() {
-      return this.place.properties.cat2 === 'unknown' ? 'other' : this.place.properties.cat2;
+      if(this.place.properties.cat3 !== 'other') { return this.place.properties.cat3; }
+      else if(this.place.properties.cat2 !== 'other') { return this.place.properties.cat2; }
+      else { return this.place.properties.cat1; }
     },
 
     type() {

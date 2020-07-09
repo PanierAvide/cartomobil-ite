@@ -137,6 +137,7 @@ function getLayers(theme) {
         ],
         "icon-image": [
           "coalesce",
+          ['image', ['get', 'cat3']],
           ['image', ['get', 'cat2']],
           ['image', ['get', 'cat1']],
           ['image', 'other']
