@@ -17,12 +17,12 @@
       @input="(v) => $emit('input', v)"
     />
 
-    <v-divider v-if="availableServices.length > 0" />
+    <v-divider v-if="availableSubfilters.length > 0" />
 
-    <filter-services
-      :value="services"
-      :services="availableServices"
-      @input="(s) => $emit('update:services', s)"
+    <filter-subfilters
+      :value="subfilter"
+      :subfilters="availableSubfilters"
+      @input="(s) => $emit('update:subfilter', s)"
     />
 
     <v-skeleton-loader
@@ -82,13 +82,13 @@ import { availableSubFilters } from '../lib/categories';
 import isMobile from './mixins/is_mobile';
 import PlaceDense from './place/dense';
 import FilterSubcategories from './filter_subcategories';
-import FilterServices from './filter_services';
+import FilterSubfilters from './filter_subfilters';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
 
 export default {
   components: {
-    FilterServices,
+    FilterSubfilters,
     FilterSubcategories,
     PlaceDense
   },
@@ -101,9 +101,10 @@ export default {
       required: true
     },
 
-    services: {
-      type: Array,
-      required: true
+    subfilter: {
+      type: String,
+      required: false,
+      default: undefined
     },
 
     mapBounds: {
@@ -149,7 +150,7 @@ export default {
       return this.hasSelectedSubCategory ? this.value.split('/')[1] : this.value;
     },
 
-    availableServices() {
+    availableSubfilters() {
       return availableSubFilters(this.allCategories, this.value);
     },
 
@@ -173,7 +174,7 @@ export default {
       this.fetchResults();
     },
 
-    services() {
+    subfilter() {
       this.results = null;
       this.offset = 0;
       this.loading = true;
@@ -184,7 +185,7 @@ export default {
   methods: {
     clearSelection() {
       this.$emit('input', '');
-      this.$emit('update:services', []);
+      this.$emit('update:subfilter', undefined);
     },
 
     goPrev() {
@@ -218,8 +219,10 @@ export default {
         ['bbox', this.mapBounds],
         [this.filterName, this.filterValue],
         ['orderBy', 'status_order'],
-        ...this.services.map(service => [service, 'yes,only'])
       ];
+      if(this.subfilter) {
+        params.push(['cat3', this.subfilter]);
+      }
       fetch(`${poiFeature}?${new URLSearchParams(params)}`)
         .then(res => res.json())
         .then((json) => {

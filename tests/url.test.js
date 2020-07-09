@@ -70,38 +70,27 @@ describe('URL Params', () => {
 
   describe('encodeFilter', () => {
     it('encode the filter', () => {
-      const filter = encodeFilter('test', []);
+      const filter = encodeFilter('test', undefined);
       expect(filter).toEqual('test');
     });
 
     it('encode the filter and the service', () => {
-      const filter = encodeFilter('food', ['takeaway']);
+      const filter = encodeFilter('food', 'takeaway');
       expect(filter).toEqual('food,takeaway');
-    });
-
-    it('encode the filter and the services', () => {
-      const filter = encodeFilter('food', ['takeaway', 'delivery']);
-      expect(filter).toEqual('food,takeaway,delivery');
     });
   });
 
   describe('decodeFilter', () => {
     it('returns the filter', () => {
-      const { filter, services } = decodeFilter('test');
+      const { filter, subfilter } = decodeFilter('test');
       expect(filter).toEqual('test');
-      expect(services).toEqual([]);
+      expect(subfilter).toEqual(undefined);
     });
 
-    it('returns the filter and the service', () => {
-      const { filter, services } = decodeFilter('test,takeaway');
+    it('returns the filter and the subfilter', () => {
+      const { filter, subfilter } = decodeFilter('test,takeaway');
       expect(filter).toEqual('test');
-      expect(services).toEqual(['takeaway']);
-    });
-
-    it('returns the filter and the services', () => {
-      const { filter, services } = decodeFilter('test,takeaway,delivery');
-      expect(filter).toEqual('test');
-      expect(services).toEqual(['takeaway', 'delivery']);
+      expect(subfilter).toEqual('takeaway');
     });
   });
 });

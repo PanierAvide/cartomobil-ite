@@ -20,6 +20,13 @@ Object.entries(catg.categories).forEach(e => {
 	Object.entries(cat.subcategories).forEach(sce => {
 		const [ sckey, sccat ] = sce;
 		locales.categories[sckey] = sccat.name;
+
+		if(sccat.subfilters) {
+			Object.entries(sccat.subfilters).forEach(scfe => {
+				const [ scfkey, scfilter ] = scfe;
+				locales.categories[scfkey] = scfilter.name;
+			});
+		}
 	});
 });
 

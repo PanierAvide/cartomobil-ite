@@ -59,28 +59,28 @@ describe('availableSubFilters', () => {
   const categories = {
     police: {
       subcategories: {
-        police: { form_details: ['delivery', 'access'] },
+        police: { subfilters: { "gendarmerie": {}, "police": {} } },
         police2: { },
-        police3: { form_details: ['takeaway'] },
-        police4: { form_details: ['takeaway'] }
+        police3: { subfilters: { "gendarmerie": {} } },
+        police4: { subfilters: { "gendarmerie": {} } }
       }
     }
   };
 
   it('when a category is selected', () => {
     const result = availableSubFilters(categories, 'police');
-    expect(result).toEqual(['delivery', 'takeaway']);
+    expect(result).toEqual([]);
   });
 
   it('when a subcategory is selected', () => {
     let result = availableSubFilters(categories, 'police/police');
-    expect(result).toEqual(['delivery']);
+    expect(result).toEqual(['gendarmerie', 'police']);
 
     result = availableSubFilters(categories, 'police/police2');
     expect(result).toEqual([]);
 
     result = availableSubFilters(categories, 'police/police3');
-    expect(result).toEqual(['takeaway']);
+    expect(result).toEqual(['gendarmerie']);
 
     result = availableSubFilters(categories, 'police/doesnotexist');
     expect(result).toEqual([]);

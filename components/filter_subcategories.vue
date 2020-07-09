@@ -59,7 +59,7 @@ export default {
   },
 
   mounted() {
-    if(this.$refs.chipsubcat.$refs.content.clientWidth <= this.$refs.chipsubcat.$refs.wrapper.clientWidth) {
+    if(this.$refs.chipsubcat && this.$refs.chipsubcat.$refs.content.clientWidth <= this.$refs.chipsubcat.$refs.wrapper.clientWidth) {
       this.hideExpandButton = true;
     }
   },

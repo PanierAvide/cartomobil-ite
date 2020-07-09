@@ -285,13 +285,33 @@
           "areas": "all",
           "form": "erp"
         },
-        "stationery": {
-          "name": "Stationery / books",
+        "craft": {
+          "name": "Craft",
+          "osm_tags": [ { "craft": "*" } ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "office_supply": {
+          "name": "Office supplies",
           "osm_tags": [
             { "shop": "stationery|printer_ink|books|kiosk|newsagent" }
           ],
           "areas": "all",
-          "form": "erp"
+          "form": "erp",
+          "subfilters": {
+            "stationery": {
+              "name": "Stationery",
+              "osm_tags": [ { "shop": "stationery|printer_ink" } ]
+            },
+            "newsagent": {
+              "name": "Newsagent",
+              "osm_tags": [ { "shop": "kiosk|newsagent" } ]
+            },
+            "books": {
+              "name": "Books",
+              "osm_tags": [ { "shop": "books" } ]
+            }
+          }
         },
         "medical_supply": {
           "name": "Medical supplies",
@@ -318,37 +338,36 @@
           "areas": "all",
           "form": "erp"
         },
-        "variety_store": {
-          "name": "Variety store",
+        "shop_others": {
+          "name": "Others",
           "osm_tags": [
-            { "shop": "variety_store|department_store|wholesale|second_hand|charity" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "home": {
-          "name": "Home equipement",
-          "osm_tags": [
-            { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "electronics": {
-          "name": "Electronics",
-          "osm_tags": [
-            { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
-            { "craft": "electronics_repair" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "condoms": {
-          "name": "Condoms vending machine",
-          "osm_tags": [
+            { "shop": "variety_store|department_store|wholesale|second_hand|charity|bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles|obile_phone|computer|electronics|appliance|hifi" },
+            { "craft": "electronics_repair" },
             { "amenity": "vending_machine", "vending": "condoms" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp",
+          "subfilters": {
+            "home": {
+              "name": "Home equipement",
+              "osm_tags": [ { "shop": "bathroom_furnishing|carpet|curtain|furniture|kitchen|houseware|interior_decoration|pottery|lighting|bed|doityourself|electrical|fireplace|glaziery|hardware|paint|tiles" } ]
+            },
+            "electronics": {
+              "name": "Electronics",
+              "osm_tags": [
+                { "shop": "mobile_phone|computer|electronics|appliance|hifi" },
+                { "craft": "electronics_repair" }
+              ]
+            },
+            "condoms": {
+              "name": "Condoms vending machine",
+              "osm_tags": [ { "amenity": "vending_machine", "vending": "condoms" } ]
+            },
+            "variety_store": {
+              "name": "Variety store",
+              "osm_tags": [ { "shop": "variety_store|department_store|wholesale|second_hand|charity" } ]
+            }
+          }
         }
       }
     },
@@ -536,19 +555,73 @@
     "tourism": {
       "name": "Tourism",
       "subcategories": {
-        "beach_resort": {
-          "name": "Beach resort",
-          "osm_tags": [
-            { "leisure": "beach_resort" }, { "natural": "beach" }
-          ],
-          "areas": "all"
+        "housing": {
+          "name": "Housing",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "tourism": "guest_house|hotel|hostel" } ],
+          "subfilters": {
+            "guest_house": {
+              "name": "Guest house",
+              "osm_tags": [ { "tourism": "guest_house" } ]
+            },
+            "hotel": {
+              "name": "Hotel",
+              "osm_tags": [ { "tourism": "hotel" } ]
+            },
+            "hostel": {
+              "name": "Hostel",
+              "osm_tags": [ { "tourism": "hostel" } ]
+            }
+          }
         },
-        "park": {
-          "name": "Park",
+        "marketplace": {
+          "name": "Marketplace",
           "osm_tags": [
-            { "leisure": "park" }
+            { "amenity": "marketplace", "tourism": "attraction" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "erp"
+        },
+        "tourism_outside": {
+          "name": "Outside activities",
+          "osm_tags": [
+            { "leisure": "beach_resort|park" },
+            { "natural": "beach" },
+            { "tourism": "viewpoint|artwork" },
+            { "waterway": "waterfall" },
+            { "tourism": "*", "historic": "*" }
+          ],
+          "areas": "all",
+          "form": "erp",
+          "subfilters": {
+            "beach_resort": {
+              "name": "Beach resort",
+              "osm_tags": [
+                { "leisure": "beach_resort" }, { "natural": "beach" }
+              ]
+            },
+            "park": {
+              "name": "Park",
+              "osm_tags": [ { "leisure": "park" } ]
+            },
+            "viewpoint": {
+              "name": "View point",
+              "osm_tags": [ { "tourism": "viewpoint" } ]
+            },
+            "waterfall": {
+              "name": "Waterfall",
+              "osm_tags": [ { "waterway": "waterfall" } ]
+            },
+            "artwork": {
+              "name": "Artwork",
+              "osm_tags": [ { "tourism": "artwork" } ]
+            },
+            "historic": {
+              "name": "Historical site",
+              "osm_tags": [ { "tourism": "*", "historic": "*" } ]
+            }
+          }
         },
         "drinking_water": {
           "name": "Drinking water",
@@ -564,48 +637,6 @@
           ],
           "areas": "all",
           "form": "toilets"
-        },
-        "viewpoint": {
-          "name": "View point",
-          "osm_tags": [
-            { "tourism": "viewpoint" }
-          ],
-          "areas": "all"
-        },
-        "artwork": {
-          "name": "Artwork",
-          "osm_tags": [
-            { "tourism": "artwork" }
-          ],
-          "areas": "all"
-        },
-        "waterfall": {
-          "name": "Waterfall",
-          "osm_tags": [
-            { "waterway": "waterfall" }
-          ],
-          "areas": "all"
-        }
-      }
-    },
-    "housing": {
-      "name": "Housing",
-      "forms": [ "erp", "erp_housing" ],
-      "subcategories": {
-        "guest_house": {
-          "name": "Guest house",
-          "osm_tags": [ { "tourism": "guest_house" } ],
-          "areas": "all"
-        },
-        "hotel": {
-          "name": "Hotel",
-          "osm_tags": [ { "tourism": "hotel" } ],
-          "areas": "all"
-        },
-        "hostel": {
-          "name": "Hostel",
-          "osm_tags": [ { "tourism": "hostel" } ],
-          "areas": "all"
         }
       }
     }

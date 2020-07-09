@@ -4,18 +4,18 @@
     :show-arrows="false"
     :mobile-break-point="10000"
     class="px-2"
-    multiple
+    column
     @change="(v) => $emit('input', v)"
   >
     <v-chip
-      v-for="service in services"
-      :key="service"
-      :value="service"
+      v-for="subfilter in subfilters"
+      :key="subfilter"
+      :value="subfilter"
       label
       active-class="primary--text"
     >
-      <v-icon small>{{ `osm-${service}` }}</v-icon>
-      <span class="pl-1">{{ $t(`services.${service}`) }}</span>
+      <v-icon small>{{ `osm-${subfilter}` }}</v-icon>
+      <span class="pl-1">{{ $t(`categories.${subfilter}`) }}</span>
     </v-chip>
   </v-chip-group>
 </template>
@@ -24,11 +24,12 @@
 export default {
   props: {
     value: {
-      type: Array,
-      required: true
+      type: String,
+      required: false,
+      default: undefined
     },
 
-    services: {
+    subfilters: {
       type: Array,
       required: true
     }

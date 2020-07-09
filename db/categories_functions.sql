@@ -19,7 +19,7 @@ BEGIN
 		RETURN 'leisure';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') THEN
 		RETURN 'sport';
-	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'fishing', 'hunting', 'sports', 'outdoor', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tatoo', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'medical_supply', 'optician', 'hearing_aids', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'mobile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' IN ('sewing', 'optician', 'electronics_repair')) THEN
+	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'fishing', 'hunting', 'sports', 'outdoor', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tatoo', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'medical_supply', 'optician', 'hearing_aids', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'obile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' IN ('sewing', '*', 'optician', 'electronics_repair')) THEN
 		RETURN 'shop';
 	ELSIF (tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire')) OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'collège') OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée') OR (tags->'amenity' IN ('childcare', 'kindergarten', 'university', 'college')) THEN
 		RETURN 'education';
@@ -27,10 +27,8 @@ BEGIN
 		RETURN 'health';
 	ELSIF (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' IN ('parking', 'parking_space') AND tags->'capacity:disabled' != '') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'amenity' IN ('fuel', 'car_rental', 'taxi', 'bus_station', 'ferry_terminal')) OR (tags->'shop' = 'gas') OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'aeroway' = 'aerodrome') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
 		RETURN 'mobility';
-	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'amenity' IN ('drinking_water', 'toilets')) OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') THEN
+	ELSIF (tags->'amenity' = 'marketplace' AND tags->'tourism' = 'attraction') OR (tags->'tourism' != '' AND tags->'historic' != '') OR (tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'viewpoint', 'artwork')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'waterway' = 'waterfall') OR (tags->'amenity' IN ('drinking_water', 'toilets')) THEN
 		RETURN 'tourism';
-	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel') THEN
-		RETURN 'housing';
 	ELSIF tags->'opening_hours:covid19' != '' THEN
 		RETURN 'other';
 	ELSE
@@ -101,22 +99,18 @@ BEGIN
 		RETURN 'edt';
 	ELSIF (tags->'shop' IN ('fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games')) OR (tags->'craft' = 'sewing') THEN
 		RETURN 'art';
+	ELSIF tags->'craft' != '' THEN
+		RETURN 'craft';
 	ELSIF tags->'shop' IN ('stationery', 'printer_ink', 'books', 'kiosk', 'newsagent') THEN
-		RETURN 'stationery';
+		RETURN 'office_supply';
 	ELSIF tags->'shop' = 'medical_supply' THEN
 		RETURN 'medical_supply';
 	ELSIF (tags->'shop' = 'optician') OR (tags->'craft' = 'optician') THEN
 		RETURN 'optician';
 	ELSIF tags->'shop' = 'hearing_aids' THEN
 		RETURN 'hearing_aids';
-	ELSIF tags->'shop' IN ('variety_store', 'department_store', 'wholesale', 'second_hand', 'charity') THEN
-		RETURN 'variety_store';
-	ELSIF tags->'shop' IN ('bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles') THEN
-		RETURN 'home';
-	ELSIF (tags->'shop' IN ('mobile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'craft' = 'electronics_repair') THEN
-		RETURN 'electronics';
-	ELSIF tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms' THEN
-		RETURN 'condoms';
+	ELSIF (tags->'shop' IN ('variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'obile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'craft' = 'electronics_repair') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') THEN
+		RETURN 'shop_others';
 	ELSIF tags->'amenity' = 'childcare' THEN
 		RETURN 'childcare';
 	ELSIF tags->'amenity' = 'kindergarten' THEN
@@ -161,26 +155,14 @@ BEGIN
 		RETURN 'airport';
 	ELSIF (tags->'highway' = 'elevator') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
 		RETURN 'elevator';
-	ELSIF (tags->'leisure' = 'beach_resort') OR (tags->'natural' = 'beach') THEN
-		RETURN 'beach_resort';
-	ELSIF tags->'leisure' = 'park' THEN
-		RETURN 'park';
+	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel') THEN
+		RETURN 'housing';
+	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'tourism' != '' AND tags->'historic' != '') THEN
+		RETURN 'tourism_outside';
 	ELSIF tags->'amenity' = 'drinking_water' THEN
 		RETURN 'drinking_water';
 	ELSIF tags->'amenity' = 'toilets' THEN
 		RETURN 'toilets';
-	ELSIF tags->'tourism' = 'viewpoint' THEN
-		RETURN 'viewpoint';
-	ELSIF tags->'tourism' = 'artwork' THEN
-		RETURN 'artwork';
-	ELSIF tags->'waterway' = 'waterfall' THEN
-		RETURN 'waterfall';
-	ELSIF tags->'tourism' = 'guest_house' THEN
-		RETURN 'guest_house';
-	ELSIF tags->'tourism' = 'hotel' THEN
-		RETURN 'hotel';
-	ELSIF tags->'tourism' = 'hostel' THEN
-		RETURN 'hostel';
 	ELSE
 		RETURN 'other';
 	END IF;
@@ -200,6 +182,38 @@ BEGIN
 		RETURN 'cotorep';
 	ELSIF (tags->'name' = 'Service de l''emploi, de la formation et de l''insertion professionnelles' AND tags->'cat2' = 'government') OR (tags->'name' = 'SEFI' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'SEFI' AND tags->'cat2' = 'government') THEN
 		RETURN 'sefi';
+	ELSIF tags->'shop' IN ('stationery', 'printer_ink') AND tags->'cat2' = 'office_supply' THEN
+		RETURN 'stationery';
+	ELSIF tags->'shop' IN ('kiosk', 'newsagent') AND tags->'cat2' = 'office_supply' THEN
+		RETURN 'newsagent';
+	ELSIF tags->'shop' = 'books' AND tags->'cat2' = 'office_supply' THEN
+		RETURN 'books';
+	ELSIF tags->'shop' IN ('bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles') AND tags->'cat2' = 'shop_others' THEN
+		RETURN 'home';
+	ELSIF (tags->'shop' IN ('mobile_phone', 'computer', 'electronics', 'appliance', 'hifi') AND tags->'cat2' = 'shop_others') OR (tags->'craft' = 'electronics_repair' AND tags->'cat2' = 'shop_others') THEN
+		RETURN 'electronics';
+	ELSIF tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms' AND tags->'cat2' = 'shop_others' THEN
+		RETURN 'condoms';
+	ELSIF tags->'shop' IN ('variety_store', 'department_store', 'wholesale', 'second_hand', 'charity') AND tags->'cat2' = 'shop_others' THEN
+		RETURN 'variety_store';
+	ELSIF tags->'tourism' = 'guest_house' AND tags->'cat2' = 'housing' THEN
+		RETURN 'guest_house';
+	ELSIF tags->'tourism' = 'hotel' AND tags->'cat2' = 'housing' THEN
+		RETURN 'hotel';
+	ELSIF tags->'tourism' = 'hostel' AND tags->'cat2' = 'housing' THEN
+		RETURN 'hostel';
+	ELSIF (tags->'leisure' = 'beach_resort' AND tags->'cat2' = 'tourism_outside') OR (tags->'natural' = 'beach' AND tags->'cat2' = 'tourism_outside') THEN
+		RETURN 'beach_resort';
+	ELSIF tags->'leisure' = 'park' AND tags->'cat2' = 'tourism_outside' THEN
+		RETURN 'park';
+	ELSIF tags->'tourism' = 'viewpoint' AND tags->'cat2' = 'tourism_outside' THEN
+		RETURN 'viewpoint';
+	ELSIF tags->'waterway' = 'waterfall' AND tags->'cat2' = 'tourism_outside' THEN
+		RETURN 'waterfall';
+	ELSIF tags->'tourism' = 'artwork' AND tags->'cat2' = 'tourism_outside' THEN
+		RETURN 'artwork';
+	ELSIF tags->'tourism' != '' AND tags->'historic' != '' AND tags->'cat2' = 'tourism_outside' THEN
+		RETURN 'historic';
 	ELSE
 		RETURN 'other';
 	END IF;

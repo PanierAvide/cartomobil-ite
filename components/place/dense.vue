@@ -12,14 +12,7 @@
       >{{ `osm-${category}` }}</v-icon>
     </v-list-item-icon>
     <v-list-item-content class="py-2">
-      <v-list-item-title>{{ title || type }}
-        <v-icon
-          v-for="filter in SUB_FILTERS"
-          v-if="['yes', 'only'].includes(place.properties[filter])"
-          :key="filter"
-          x-small
-        >{{ `osm-${filter}` }}</v-icon>
-      </v-list-item-title>
+      <v-list-item-title>{{ title || type }}</v-list-item-title>
       <v-list-item-subtitle v-if="title && displayType">{{ type }}</v-list-item-subtitle>
       <v-list-item-subtitle
         v-if="!$vuetify.breakpoint.smAndDown && (contact('phone') || contact('mobile'))"
@@ -49,7 +42,6 @@
 <script>
 import placeMixin from '../mixins/place';
 import { rawColorForStatus } from '../../lib/place';
-import { SUB_FILTERS } from '../../lib/categories';
 import DenseOpeningHours from './dense_opening_hours';
 
 export default {
@@ -77,9 +69,7 @@ export default {
   },
 
   data() {
-    return {
-       SUB_FILTERS
-    };
+    return {};
   },
 
   computed: {

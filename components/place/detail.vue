@@ -327,6 +327,9 @@ export default {
       if(!this.$t(`categories_notes.${this.place.properties.cat2}`).startsWith('categories_notes.')) {
         infos.push(this.$t(`categories_notes.${this.place.properties.cat2}`));
       }
+      if(!this.$t(`categories_notes.${this.place.properties.cat3}`).startsWith('categories_notes.')) {
+        infos.push(this.$t(`categories_notes.${this.place.properties.cat3}`));
+      }
 
       // Custom POI description
       if (this.place.properties.tags['description:cro']) {

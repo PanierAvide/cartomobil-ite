@@ -225,9 +225,10 @@ export default {
       required: true
     },
 
-    filterServices: {
-      type: Array,
-      required: true
+    filterSubfilter: {
+      type: String,
+      required: false,
+      default: undefined
     },
 
     sidebar: {
@@ -254,18 +255,16 @@ export default {
     },
 
     layers() {
-      const [ category, subcategory, subfilter ] = this.filter.split('/');
-      const services = this.filterServices.map((service) => ['in', service, 'yes', 'only']);
+      const [ category, subcategory ] = this.filter.split('/');
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
-        if (subfilter) {
-          newLayer.filter.push(['==', 'cat3', subfilter]);
+        if (this.filterSubfilter) {
+          newLayer.filter.push(['==', 'cat3', this.filterSubfilter]);
         } else if (subcategory) {
           newLayer.filter.push(['==', 'cat2', subcategory]);
         } else if (category !== '') {
           newLayer.filter.push(['==', 'cat1', category]);
         }
-        newLayer.filter.push(...services);
         return newLayer;
       });
     },
