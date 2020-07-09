@@ -13,8 +13,9 @@ export default {
     },
 
     type() {
-      const key = `categories.${this.place.properties.cat2}`;
-      return this.$te(key) ? this.$t(key) : this.$t('categories.other');
+      if(this.$te(`categories.${this.place.properties.cat3}`)) { return this.$t(`categories.${this.place.properties.cat3}`); }
+      else if(this.$te(`categories.${this.place.properties.cat2}`)) { return this.$t(`categories.${this.place.properties.cat2}`); }
+      else { return this.$t('categories.other'); }
     },
 
     contact() {
