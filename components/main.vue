@@ -212,11 +212,14 @@ export default {
 
   methods: {
     loadAndOverrideMapStyle() {
-      return new Promise(resolve => {
-        this.mapStyle = {
+      let getStylePromise;
+      if(config.mapboxStyle && config.mapboxToken) {
+        getStylePromise = fetch(config.mapboxStyle+"?access_token="+config.mapboxToken).then(res => res.json());
+      }
+      else {
+        getStylePromise = new Promise(resolve => resolve({
             version: 8,
             name: "Cartomobil'ité",
-            sprite: `${window.location.origin}/sprite/caresteouvert`,
             glyphs: `${config.fontsUrl}/{fontstack}/{range}.pbf`,
             sources: {
                 osm: {
@@ -233,8 +236,13 @@ export default {
                     type: "raster"
                 }
             ]
-        };
-        resolve();
+        }));
+      }
+
+      return getStylePromise
+      .then(data => {
+        data.sprite = `${window.location.origin}/sprite/caresteouvert`;
+        this.mapStyle = data;
       });
     },
 
@@ -295,6 +303,13 @@ export default {
     },
 
     updateMapBounds(bbox) {
+      if(bbox.length === 5) {
+        const placeId = bbox.pop();
+        if(placeId) {
+          setTimeout(() => this.$router.push({ name: 'place', params: { id: placeId, featuresAndLocation: this.featuresAndLocation } }), 500);
+        }
+      }
+
       this.$refs.map.$emit('updateMapBounds', bbox);
     },
 

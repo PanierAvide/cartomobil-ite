@@ -4,6 +4,7 @@
     :zoom="mapZoom"
     :map-style="mapStyle"
     :max-bounds="mapLimits"
+    :accessToken="accessToken"
     @load="load"
     @rotateend="maprotated"
     @update:center="updateMapCenter"
@@ -158,7 +159,7 @@ function getLayers(theme) {
         "text-anchor": "top",
         "text-field": ["get", "name"],
         "text-font": [
-          "Noto Sans Regular"
+          config.mapboxToken ? "Open Sans Regular" : "Noto Sans Regular"
         ],
         "text-max-width": 9,
         "text-offset": [
@@ -283,6 +284,10 @@ export default {
 
     placeColor() {
       return rawColorForStatus(this.place.properties.status, this.$vuetify.theme.themes.light);
+    },
+
+    accessToken() {
+      return config.mapboxToken || undefined;
     }
   },
 

@@ -13,6 +13,8 @@
   "minZoomPoi": 12,
   "maxZoomPoi": 13,
   "mapillaryClientId": "eDhQTTdnRmZJNXdYZWUwRDQxc1Nwdzo5ZDhkMDM5NzU5NDVjODBm",
+  "mapboxToken": "pk.eyJ1IjoidmlvbGFpbmVkb3V0cmVsZWF1IiwiYSI6ImNrNWltZHlkdTBhamYzbnA4dGU4YnBnOHcifQ.oxUii0-HQVw20oGrLOu-0w",
+  "mapboxStyle": "https://api.mapbox.com/styles/v1/violainedoutreleau/ckcnc91fk1ddq1ipfdolix161",
   "brands": {
     "DEFAULT": {
       "brand_text": "Cartomobil 'ite",

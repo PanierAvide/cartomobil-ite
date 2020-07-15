@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { nominatimUrl } from '../config.json';
+import { nominatimUrl, mapBounds } from '../config.json';
 import { countries } from '../categories.json';
 import debounce from 'lodash.debounce';
 
@@ -67,7 +67,11 @@ export default {
       this.controller = new AbortController();
       const signal = this.controller.signal;
       const boundary = countries.join(',').toLowerCase();
-      const url = `${nominatimUrl}/search?q=${encodeURIComponent(this.search)}&format=json&countrycodes=${boundary}&limit=5&accept-language=${this.$i18n.locale}`;
+      let url = `${nominatimUrl}/search?q=${encodeURIComponent(this.search)}&format=json&countrycodes=${boundary}&limit=5&accept-language=${this.$i18n.locale}`;
+      if(mapBounds) {
+        const [[minlon, minlat], [maxlon, maxlat]] = mapBounds;
+        url += `&viewbox=${minlon},${minlat},${maxlon},${maxlat}&bounded=1`
+      }
 
       fetch(url, { signal })
         .then(res => res.json())
@@ -76,10 +80,11 @@ export default {
           this.items = results.map(r => {
             const labels = r.display_name.split(', ');
             const [ minlat, maxlat, minlon, maxlon ] = r.boundingbox.map(v => parseFloat(v));
+            const osmid = r.osm_type && r.osm_id ? `${r.osm_type.substring(0,1)}${r.osm_id}` : null;
             return {
               text: labels[0],
               region: labels.splice(1).join(", "),
-              value: [minlon, minlat, maxlon, maxlat]
+              value: [minlon, minlat, maxlon, maxlat, osmid]
             };
           });
           if(directCoordinates) { this.items.unshift(directCoordinates); }

@@ -12,6 +12,7 @@ describe('FilterResults', () => {
   beforeEach(() => {
     localVue = createLocalVue();
     localVue.prototype.$t = t => t;
+    localVue.prototype.$te = () => false;
     localVue.prototype.$vuetify = { breakpoint: {} };
     localVue.use(Vuex);
     localVue.directive('touch', {});

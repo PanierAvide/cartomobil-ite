@@ -48,7 +48,7 @@
               ]
             },
             "sefi": {
-              "name": "SEFI (Pôle Emploi)",
+              "name": "SEFI",
               "osm_tags": [
                 { "name": "Service de l'emploi, de la formation et de l'insertion professionnelles" },
                 { "name": "SEFI" },
@@ -75,7 +75,31 @@
             { "amenity": "bank" }
           ],
           "areas": "all",
-          "form": "erp"
+          "form": "erp",
+          "subfilters": {
+            "opt": {
+              "name": "OPT",
+              "osm_tags": [
+                { "name": "OPT|Office des Postes et Télécommunication" },
+                { "operator": "Office des Postes et Télécommunication" },
+                { "short_name": "OPT" }
+              ]
+            },
+            "socredo": {
+              "name": "Socredo",
+              "osm_tags": [
+                { "name": "Banque Socredo" },
+                { "operator": "Banque Socredo" }
+              ]
+            },
+            "banquepolynesie": {
+              "name": "Banque de Polynésie",
+              "osm_tags": [
+                { "name": "Banque de Polynésie" },
+                { "operator": "Banque de Polynésie" }
+              ]
+            }
+          }
         },
         "atm": {
           "name": "ATM",

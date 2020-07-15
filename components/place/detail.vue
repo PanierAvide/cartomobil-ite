@@ -327,13 +327,13 @@ export default {
       let infos = [];
 
       // Category note
-      if(!this.$t(`categories_notes.${this.place.properties.cat1}`).startsWith('categories_notes.')) {
+      if(this.$te(`categories_notes.${this.place.properties.cat1}`)) {
         infos.push(this.$t(`categories_notes.${this.place.properties.cat1}`));
       }
-      if(!this.$t(`categories_notes.${this.place.properties.cat2}`).startsWith('categories_notes.')) {
+      if(this.$te(`categories_notes.${this.place.properties.cat2}`)) {
         infos.push(this.$t(`categories_notes.${this.place.properties.cat2}`));
       }
-      if(!this.$t(`categories_notes.${this.place.properties.cat3}`).startsWith('categories_notes.')) {
+      if(this.$te(`categories_notes.${this.place.properties.cat3}`)) {
         infos.push(this.$t(`categories_notes.${this.place.properties.cat3}`));
       }
 

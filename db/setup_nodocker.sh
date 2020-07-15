@@ -42,7 +42,7 @@ sudo apt-get install default-jre
 
 # Osmosis
 mkdir -p /tmp/osmosis && cd /tmp/osmosis
-wget -N https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-0.47.4.zip && unzip -o osmosis-0.47.4.zip 
+wget -N https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-0.47.4.zip && unzip -o osmosis-0.47.4.zip
 sudo mv bin/osmosis /usr/bin
 sudo chmod a+x /usr/bin/osmosis
 sudo mv config /usr/config

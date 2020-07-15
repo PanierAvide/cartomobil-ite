@@ -25,6 +25,16 @@
       @input="(s) => $emit('update:subfilter', s)"
     />
 
+    <template v-if="notes.length > 0">
+      <v-divider />
+      <p
+        v-for="note in notes"
+        :key="note"
+        v-html="note"
+        class="body-2 font-weight-light ma-4 my-2"
+      />
+    </template>
+
     <v-skeleton-loader
       v-if="loading && !results"
       type="list-item-two-line@10"
@@ -146,6 +156,10 @@ export default {
       return this.value.split('/')[0];
     },
 
+    subcategory() {
+      return this.hasSelectedSubCategory ? this.value.split('/')[1] : null;
+    },
+
     hasSelectedSubCategory() {
       return this.value.includes('/');
     },
@@ -174,6 +188,23 @@ export default {
       const currentPage = Math.ceil(this.offset / PAGE_SIZE) + 1;
       const totalPages = Math.ceil(this.nbPlacesVisible / PAGE_SIZE);
       return this.loading || !this.nbPlacesVisible || currentPage > totalPages ? "" : currentPage + " / " + totalPages;
+    },
+
+    notes() {
+      const notes = [];
+
+      // Category note
+      if(this.category && this.$te(`categories_notes.${this.category}`)) {
+        notes.push(this.$t(`categories_notes.${this.category}`));
+      }
+      if(this.subcategory && this.hasSelectedSubCategory && this.$te(`categories_notes.${this.subcategory}`)) {
+        notes.push(this.$t(`categories_notes.${this.subcategory}`));
+      }
+      if(this.subfilter && this.$te(`categories_notes.${this.subfilter}`)) {
+        notes.push(this.$t(`categories_notes.${this.subfilter}`));
+      }
+
+      return notes;
     }
   },
 

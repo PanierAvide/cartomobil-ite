@@ -14,7 +14,7 @@ describe('Detail', () => {
 
   beforeEach(() => {
     localVue = createLocalVue();
-    localVue.prototype.$te = () => true;
+    localVue.prototype.$te = () => false;
     localVue.prototype.$t = (key) => key;
     localVue.prototype.$vuetify = { breakpoint: {} };
     localVue.use(Vuex);

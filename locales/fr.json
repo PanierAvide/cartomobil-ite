@@ -224,11 +224,11 @@
     "cps": "Caisse de Prévoyance Sociale",
     "dsfe": "Services sociaux",
     "cotorep": "COTOREP",
-    "sefi": "SEFI (Pôle Emploi)",
+    "sefi": "SEFI",
     "financial": "Banque / assurance",
     "post_service": "Poste",
     "post_office": "Bureau",
-    "post_box": "Boîte postale",
+    "post_box": "BP (Boîte postale)",
     "letter_box": "Boîte aux lettres",
     "stamps": "Distributeur de timbres",
     "parcel": "Pose/prise de colis",
@@ -239,7 +239,7 @@
     "nightclub": "Discothèque",
     "swimming_pool": "Piscine",
     "museum": "Musée",
-    "association": "Assocation",
+    "association": "Association",
     "leisure_club": "Club",
     "library": "Bibliothèque",
     "theme_park": "Parc d'attraction",
@@ -408,8 +408,7 @@
     "waterfall": "Cascade"
   },
   "categories_notes": {
-    "fuel": "Les stations essences de Polynésie française sont accessibles, les employés venant remplir systématiquement l'essence pour vous, pas besoin de sortir de la voiture.",
-    "cotorep": "Les démarches pour constituer un dossier sont à faire soit auprès de la COTOREP à l’immeuble TE HOTU, soit auprès de la circonscription des solidarités, de la famille et de l’égalité de votre commune de résidence."
+    "fuel": "Les stations essences de Polynésie française sont accessibles, les employés venant remplir systématiquement l'essence pour vous, pas besoin de sortir de la voiture."
   },
   "external": {
     "mobile": {

@@ -188,6 +188,12 @@ BEGIN
 		result := 'cotorep';
 	ELSIF (tags->'name' = 'Service de l''emploi, de la formation et de l''insertion professionnelles' AND tags->'cat2' = 'government') OR (tags->'name' = 'SEFI' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'SEFI' AND tags->'cat2' = 'government') THEN
 		result := 'sefi';
+	ELSIF (tags->'name' IN ('OPT', 'Office des Postes et Télécommunication') AND tags->'cat2' = 'bank') OR (tags->'operator' = 'Office des Postes et Télécommunication' AND tags->'cat2' = 'bank') OR (tags->'short_name' = 'OPT' AND tags->'cat2' = 'bank') THEN
+		result := 'opt';
+	ELSIF (tags->'name' = 'Banque Socredo' AND tags->'cat2' = 'bank') OR (tags->'operator' = 'Banque Socredo' AND tags->'cat2' = 'bank') THEN
+		result := 'socredo';
+	ELSIF (tags->'name' = 'Banque de Polynésie' AND tags->'cat2' = 'bank') OR (tags->'operator' = 'Banque de Polynésie' AND tags->'cat2' = 'bank') THEN
+		result := 'banquepolynesie';
 	ELSIF tags->'shop' IN ('stationery', 'printer_ink') AND tags->'cat2' = 'office_supply' THEN
 		result := 'stationery';
 	ELSIF tags->'shop' IN ('kiosk', 'newsagent') AND tags->'cat2' = 'office_supply' THEN
