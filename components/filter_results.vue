@@ -62,6 +62,7 @@
       >
         <v-icon>osm-chevron_left</v-icon>
       </v-btn>
+      {{pageText}}
       <v-btn
         :disabled="!canGoNext"
         icon
@@ -85,6 +86,7 @@ import FilterSubcategories from './filter_subcategories';
 import FilterSubfilters from './filter_subfilters';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
+const PAGE_SIZE = 10;
 
 export default {
   components: {
@@ -116,6 +118,12 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+
+    nbPlacesVisible: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
 
@@ -159,7 +167,13 @@ export default {
     },
 
     canGoNext() {
-      return !this.loading && this.results && this.results.numberReturned === 10;
+      return !this.loading && this.results && this.results.numberReturned === PAGE_SIZE && (this.nbPlacesVisible === 0 || this.offset * PAGE_SIZE + this.results.numberReturned < this.nbPlacesVisible);
+    },
+
+    pageText() {
+      const currentPage = Math.ceil(this.offset / PAGE_SIZE) + 1;
+      const totalPages = Math.ceil(this.nbPlacesVisible / PAGE_SIZE);
+      return this.loading || !this.nbPlacesVisible || currentPage > totalPages ? "" : currentPage + " / " + totalPages;
     }
   },
 
@@ -190,13 +204,13 @@ export default {
 
     goPrev() {
       if (this.canGoPrev) {
-        this.updateOffset(this.offset - 10);
+        this.updateOffset(this.offset - PAGE_SIZE);
       }
     },
 
     goNext() {
       if (this.canGoNext) {
-        this.updateOffset(this.offset + 10);
+        this.updateOffset(this.offset + PAGE_SIZE);
       }
     },
 
@@ -214,11 +228,11 @@ export default {
       }
       this.loading = true;
       const params = [
-        ['limit', 10],
+        ['limit', PAGE_SIZE],
         ['offset', this.offset],
         ['bbox', this.mapBounds],
         [this.filterName, this.filterValue],
-        ['orderBy', 'status_order'],
+        ['orderby', 'status_order'],
       ];
       if(this.subfilter) {
         params.push(['cat3', this.subfilter]);

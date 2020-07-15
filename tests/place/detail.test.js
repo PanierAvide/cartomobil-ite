@@ -35,14 +35,14 @@ describe('Detail', () => {
 
   it('display opening_hours', async () => {
     const detail = createWrapper({ id: '' });
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: { opening_hours: 'Mo-Sa 09:00-18:00' }, country: 'FR' }, geometry: { coordinates: [ 48.7, -1.2 ] } };
+    detail.vm.place = { properties: { status: 'yes', cat1: 'shop', tags: { opening_hours: 'Mo-Sa 09:00-18:00' }, country: 'FR' }, geometry: { coordinates: [ 48.7, -1.2 ] } };
     await Vue.nextTick();
     expect(detail.findComponent(DetailOpeningHours).exists()).toBe(true);
   });
 
   it('dont display opening_hours when "open"', async () => {
     const detail = createWrapper({ id: '' });
-    detail.vm.place = { properties: { status: 'yes', cat: '', tags: {}, country: 'FR' }, geometry: { coordinates: [ 48.7, -1.2 ] } };
+    detail.vm.place = { properties: { status: 'yes', cat1: 'shop', tags: {}, country: 'FR' }, geometry: { coordinates: [ 48.7, -1.2 ] } };
     await Vue.nextTick();
     expect(detail.vm.hasSpecificOpeningHours).toBe(false);
     expect(detail.findComponent(DetailOpeningHours).exists()).toBe(false);

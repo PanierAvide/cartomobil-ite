@@ -3,12 +3,16 @@
     :center="mapCenter"
     :zoom="mapZoom"
     :map-style="mapStyle"
-    :max-bounds="mapBounds"
+    :max-bounds="mapLimits"
     @load="load"
     @rotateend="maprotated"
     @update:center="updateMapCenter"
     @update:zoom="updateMapZoom"
     @update:bounds="updateMapBounds"
+    @moveend="refreshMapBounds"
+    @zoomend="refreshMapBounds"
+    @rotate="refreshMapBounds"
+    @pitch="refreshMapBounds"
   >
     <MglMarker
       v-if="place"
@@ -136,11 +140,13 @@ function getLayers(theme) {
           2
         ],
         "icon-image": [
-          "coalesce",
-          ['image', ['get', 'cat3']],
-          ['image', ['get', 'cat2']],
-          ['image', ['get', 'cat1']],
-          ['image', 'other']
+          'image', [
+            'case',
+            ['!=', ['get', 'cat3'], 'other'], ['get', 'cat3'],
+            ['!=', ['get', 'cat2'], 'other'], ['get', 'cat2'],
+            ['!=', ['get', 'cat1'], 'other'], ['get', 'cat1'],
+            'other'
+          ]
         ],
         "icon-size": [
           'interpolate',
@@ -217,6 +223,11 @@ export default {
     },
 
     mapBounds: {
+      type: Array,
+      required: true
+    },
+
+    mapLimits: {
       type: Array,
       required: false
     },
@@ -315,8 +326,40 @@ export default {
       this.map.addControl(this.navcontrol, 'top-right');
       this.map.addControl(this.geoloccontrol, 'top-right');
 
+      // Count places
+      this.map.on('moveend', this.countPlaces.bind(this));
+      this.map.on('zoomend', this.countPlaces.bind(this));
+      this.map.on('rotate', this.countPlaces.bind(this));
+      this.map.on('pitch', this.countPlaces.bind(this));
+
       this.$emit('loaded');
       this.updateMapBounds(map.getBounds());
+    },
+
+    countPlaces() {
+      const features = this.map.queryRenderedFeatures({ layers: ['poi-background'] });
+
+      if (features) {
+        const uniqueFeatures = this.getUniqueFeatures(features, 'fid');
+        this.$emit('placesCounted', uniqueFeatures.length);
+      }
+      else {
+        this.$emit('placesCounted', 0);
+      }
+    },
+
+    getUniqueFeatures(array, comparatorProperty) {
+      const existingFeatureKeys = {};
+      const uniqueFeatures = array.filter(function(el) {
+        if (existingFeatureKeys[el.properties[comparatorProperty]]) {
+          return false;
+        } else {
+          existingFeatureKeys[el.properties[comparatorProperty]] = true;
+          return true;
+        }
+      });
+
+      return uniqueFeatures;
     },
 
     updateMapCenter(mapCenter) {
@@ -325,6 +368,10 @@ export default {
 
     updateMapZoom(mapZoom) {
       this.$emit('update:mapZoom', mapZoom);
+    },
+
+    refreshMapBounds() {
+      this.updateMapBounds(this.map.getBounds());
     },
 
     updateMapBounds: debounce(function (mapBounds) {

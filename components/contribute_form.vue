@@ -21,7 +21,7 @@
         </v-col>
         <v-col cols="6">
           <v-btn
-            :loading="loading"
+            :disabled="loading"
             color="secondary"
             @click="close"
             block
@@ -92,27 +92,27 @@ export default {
     submit() {
       const [ type, id ] = this.id.split('/');
       this.loading = true;
-      fetch(
-        `${apiUrl}/contribute/${type}/${id}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(this.payload)
-        }
-      ).then((response) => {
-        if (response.status === 200) {
-          this.$emit('success');
-          this.$store.commit('setContribution', [
-             this.place.properties.fid,
-             this.payload.tags.wheelchair,
-             parseInt((Date.now() / 1000).toFixed(0))
-           ]);
-        }
-      }).finally(() => {
-        this.loading = false
-      });
+//       fetch(
+//         `${apiUrl}/contribute/${type}/${id}`,
+//         {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json'
+//           },
+//           body: JSON.stringify(this.payload)
+//         }
+//       ).then((response) => {
+//         if (response.status === 200) {
+//           this.$emit('success');
+//           this.$store.commit('setContribution', [
+//              this.place.properties.fid,
+//              this.payload.tags.wheelchair,
+//              parseInt((Date.now() / 1000).toFixed(0))
+//            ]);
+//         }
+//       }).finally(() => {
+//         this.loading = false
+//       });
     },
 
     close() {

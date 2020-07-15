@@ -24,7 +24,7 @@
           :title="title"
           class="ml-3 toolbar-title toolbar-title-long"
         >
-          {{ title || type }}
+          {{ limitedTitle || type }}
           <template v-if="title">
             <br>
             <span class="subtitle-1">{{ type }}</span>
@@ -267,6 +267,12 @@ export default {
 
   computed: {
     ...mapState(['country']),
+
+    limitedTitle() {
+      return this.title && this.title.length > 50 ?
+        this.title.split(" ").filter((t,i) => this.title.split(" ").slice(0, i+1).join(" ").length <= 47).join(" ")+"..."
+        : this.title;
+    },
 
     hasVending() {
       return this.$te(`details.vending.${this.place.properties.tags.vending}`);

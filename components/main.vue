@@ -23,6 +23,7 @@
           :subfilter.sync="filterSubfilter"
           :featuresAndLocation="featuresAndLocation"
           :map-bounds="mapBounds"
+          :nbPlacesVisible="nbPlacesVisible"
         />
         <main-menu
           v-else
@@ -45,11 +46,13 @@
             :map-style="mapStyle"
             :map-center.sync="mapCenter"
             :map-zoom.sync="mapZoom"
-            :map-bounds="mapBounds"
+            :map-bounds.sync="mapBounds"
+            :map-limits="mapLimits"
             :filter="filter"
             :filter-subfilter="filterSubfilter"
             :featuresAndLocation="featuresAndLocation"
             @loaded="mapLoaded = true"
+            @placesCounted="nbPlacesVisible = $event"
           />
           <v-slide-y-reverse-transition>
             <v-chip
@@ -75,6 +78,7 @@
             :subfilter.sync="filterSubfilter"
             :featuresAndLocation="featuresAndLocation"
             :map-bounds="mapBounds"
+            :nbPlacesVisible="nbPlacesVisible"
           />
           <main-menu
             v-else
@@ -147,7 +151,8 @@ export default {
       filter: '',
       filterSubfilter: null,
       loadMap: false,
-      mapBounds: config.mapBounds || undefined,
+      mapLimits: config.mapBounds || undefined,
+      mapBounds: [],
       mapCenter: { lat: 0, lng: 0 },
       mapLoaded: false,
       mapStyle: null,
@@ -155,6 +160,7 @@ export default {
       minZoomPoi: config.minZoomPoi,
       rgpdBannerHidden: false,
       sidebar: false,
+      nbPlacesVisible: 0,
     };
   },
 

@@ -16,6 +16,7 @@
 
 <script>
 import { getForm, getModelForForm, getTagsFromModel, getReadOnlyForm } from '../../lib/form';
+let delaySubmitTags = null;
 
 export default {
   components: {},
@@ -34,7 +35,7 @@ export default {
 
   data() {
     return {
-      valid: null,
+      valid: false,
       model: {},
       schema: {},
       formOptions: {
@@ -66,21 +67,38 @@ export default {
   },
 
   methods: {
-    submitTags() {
-      if(!this.model || !this.place || !this.valid) {
-        return this.$emit('invalidModel');
+    submitTags(e, skipValidate) {
+      if(delaySubmitTags) {
+        clearTimeout(delaySubmitTags);
+        delaySubmitTags = null;
       }
 
-      const newTags = getTagsFromModel(this.model);
-      for(let e of Object.entries(newTags)) {
-        const [editedKey, editedVal] = e;
-        if(
-          (editedVal !== "null" && this.place.properties.tags[editedKey] !== editedVal)
-          || (editedVal === "null" && this.place.properties.tags[editedKey] !== undefined)
-        ) {
-          return this.$emit('modelChanged', newTags);
-        }
+      if(this.readOnly || !this.$refs.form || !this.place) {
+        return false;
       }
+
+      delaySubmitTags = setTimeout(() => {
+        delaySubmitTags = null;
+        if(!skipValidate && !this.valid) {
+          this.$refs.form.validate();
+          return this.$nextTick(() => this.submitTags(e, true));
+        }
+
+        if(!this.model || !this.valid) {
+          return this.$emit('invalidModel');
+        }
+
+        const newTags = getTagsFromModel(this.model);
+        for(let e of Object.entries(newTags)) {
+          const [editedKey, editedVal] = e;
+          if(
+            (editedVal !== "null" && this.place.properties.tags[editedKey] !== editedVal)
+            || (editedVal === "null" && this.place.properties.tags[editedKey] !== undefined)
+          ) {
+            return this.$emit('modelChanged', newTags);
+          }
+        }
+      }, 500);
     }
   }
 };
