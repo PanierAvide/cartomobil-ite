@@ -33,10 +33,13 @@ function tagsPerCategoryToSql(tpc) {
 				}
 				else {
 					const values = v.split("|");
-					const rightpart =
-						values.length === 1 ?
-						(values[0] === "*" ? `!= ''` : `= '${values[0].replace(/'(?!')/g, "''")}'`)
-						: `IN (${values.map(v => `'${v.replace(/'(?!')/g, "''")}'`).join(", ")})`;
+					let rightpart;
+					if(values.length === 1) {
+						rightpart = values[0] === "*" ? `!= ''` : `= '${values[0].replace(/'(?!')/g, "''")}'`;
+					}
+					else {
+						rightpart = values.includes('*') ? `!= ''` : `IN (${values.map(v => `'${v.replace(/'(?!')/g, "''")}'`).join(", ")})`;
+					}
 					return `tags->'${k}' ${rightpart}`;
 				}
 			})
@@ -252,7 +255,12 @@ Object.values(catg.categories)
 	});
 });
 
-const sqlCond = `\n\t(`+Object.entries(tagsForCondition).map(e => `"${e[0]}" IN (${[...e[1]].sort().map(v => `'${v}'`).join(', ')})`).join(" OR ")+`) --CATEGORIES\n`;
+const sqlCond = `\n\t(`+Object.entries(tagsForCondition).map(e => {
+	let txt = `"${e[0]}" `;
+	const values = [...e[1]];
+	txt += values.includes('*') ? `!= ''` : `IN (${values.sort().map(v => `'${v}'`).join(', ')})`;
+	return txt;
+}).join(" OR ")+`) --CATEGORIES\n`;
 
 fs.readFile(POI_SQL, 'utf8', (err, txt) => {
 	if(err) { throw new Error(err); }
