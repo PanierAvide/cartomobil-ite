@@ -1,11 +1,17 @@
 <template>
-  <div>
+  <v-form
+    ref="form"
+    v-model="valid"
+  >
     <h1 class="title">{{ $t('contribute_form.title') }}</h1>
-    <detail-schema
-      :place="place"
-      @modelChanged="editedTags = $event"
-      @invalidModel="editedTags = null"
+
+    <v-jsf
+      v-model="model"
+      :schema="schema"
+      :options="formOptions"
+      class="pb-0"
     />
+
     <v-container class="pt-0">
       <v-row>
         <v-col cols="6">
@@ -31,7 +37,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-form>
 </template>
 
 <script>
@@ -39,6 +45,7 @@ import { apiUrl } from '../config.json';
 import parseId from '../lib/parse_id';
 import DetailSchema from './place/detail_schema';
 import equals from 'fast-deep-equal';
+import { getForm, getModelForForm, getTagsFromModel, getFormOptions, completeModel } from '../lib/form';
 
 export default {
   components: {
@@ -56,9 +63,20 @@ export default {
     return {
       details: '',
       loading: false,
-      valid: null,
-      editedTags: null
+      valid: false,
+      model: {},
+      schema: {},
+      formOptions: getFormOptions(this.$i18n.locale, false)
     };
+  },
+
+  mounted() {
+    if(this.place) {
+      this.schema = getForm(this.place) || {};
+      if(Object.keys(this.schema).length > 0) {
+        this.model = getModelForForm(this.schema, this.place);
+      }
+    }
   },
 
   computed: {
@@ -72,7 +90,25 @@ export default {
     },
 
     canSubmit() {
-      return this.editedTags !== null;
+      return this.valid && this.haveTagsChanged;
+    },
+
+    editedTags() {
+      return getTagsFromModel(this.model);
+    },
+
+    haveTagsChanged() {
+      for(let e of Object.entries(this.editedTags)) {
+        const [editedKey, editedVal] = e;
+        if(
+          (editedVal !== "null" && this.place.properties.tags[editedKey] !== editedVal)
+          || (editedVal === "null" && this.place.properties.tags[editedKey] !== undefined)
+        ) {
+          return true;
+        }
+      }
+
+      return false;
     },
 
     payload() {
@@ -92,31 +128,30 @@ export default {
     submit() {
       const [ type, id ] = this.id.split('/');
       this.loading = true;
-//       fetch(
-//         `${apiUrl}/contribute/${type}/${id}`,
-//         {
-//           method: 'POST',
-//           headers: {
-//             'Content-Type': 'application/json'
-//           },
-//           body: JSON.stringify(this.payload)
-//         }
-//       ).then((response) => {
-//         if (response.status === 200) {
-//           this.$emit('success');
-//           this.$store.commit('setContribution', [
-//              this.place.properties.fid,
-//              this.payload.tags.wheelchair,
-//              parseInt((Date.now() / 1000).toFixed(0))
-//            ]);
-//         }
-//       }).finally(() => {
-//         this.loading = false
-//       });
+      fetch(
+        `${apiUrl}/contribute/${type}/${id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(this.payload)
+        }
+      ).then((response) => {
+        if (response.status === 200) {
+          this.$emit('success');
+          this.$store.commit('setContribution', [
+             this.place.properties.fid,
+             this.payload.tags.wheelchair,
+             parseInt((Date.now() / 1000).toFixed(0))
+           ]);
+        }
+      }).finally(() => {
+        this.loading = false
+      });
     },
 
     close() {
-      this.editedTags = null;
       this.$emit('close');
     }
   }

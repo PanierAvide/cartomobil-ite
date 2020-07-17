@@ -89,10 +89,7 @@
             />
           </v-list>
 
-          <detail-schema
-            :place="place"
-            readOnly
-          />
+          <detail-schema :place="place" />
 
           <template v-if="services.length > 0">
             <v-subheader>{{ $t('details.services') }}</v-subheader>

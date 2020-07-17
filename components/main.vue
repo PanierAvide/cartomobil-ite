@@ -406,4 +406,25 @@ export default {
 .v-navigation-drawer__content {
   display: flex;
 }
+.form-hide-desc p {
+  display: none;
+}
+.form-field-readonly .v-select__selections > div {
+  color: black !important;
+}
+.form-field-readonly .v-input__slot::before {
+  border: none !important;
+}
+.vjsf-tooltip {
+  max-width: 300px;
+  background: rgb(55, 52, 52);
+}
+.vjsf-property-equipments.pl-2,
+.vjsf-property-basics.pl-2,
+.vjsf-property-details.pl-2,
+.vjsf-property-equipments.pl-2 > div > .vjsf-property.pl-2,
+.vjsf-property-basics.pl-2 > div > .vjsf-property.pl-2,
+.vjsf-property-details.pl-2 > div > .vjsf-property.pl-2 {
+  padding: 0 !important;
+}
 </style>
