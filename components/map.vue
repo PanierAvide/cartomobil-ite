@@ -60,6 +60,7 @@ import isMobile from './mixins/is_mobile';
 
 const source = "public.poi_osm_light";
 const contribSource = "poi-contrib-src";
+let delayCounting = null;
 
 function getColorStroke(theme, contribs = readContributionFromStorage()) {
   return [
@@ -318,6 +319,14 @@ export default {
         this.map.setPaintProperty('poi-background', 'circle-stroke-color', getColorStroke(this.$vuetify.theme.themes.light, pushContribution(contribution)));
         this.$store.commit('setContribution', null);
       }
+    },
+
+    filter(filter) {
+      this.countPlaces();
+    },
+
+    filterSubfilter(filterSubfilter) {
+      this.countPlaces();
     }
   },
 
@@ -336,21 +345,37 @@ export default {
       this.map.on('zoomend', this.countPlaces.bind(this));
       this.map.on('rotate', this.countPlaces.bind(this));
       this.map.on('pitch', this.countPlaces.bind(this));
+      this.map.on('data', this.countPlaces.bind(this));
+      this.map.on('load', this.countPlaces.bind(this));
 
       this.$emit('loaded');
       this.updateMapBounds(map.getBounds());
     },
 
     countPlaces() {
-      const features = this.map.queryRenderedFeatures({ layers: ['poi-background'] });
+      if(delayCounting) {
+        clearTimeout(delayCounting);
+        delayCounting = null;
+      }
 
-      if (features) {
-        const uniqueFeatures = this.getUniqueFeatures(features, 'fid');
-        this.$emit('placesCounted', uniqueFeatures.length);
-      }
-      else {
-        this.$emit('placesCounted', 0);
-      }
+      delayCounting = setTimeout(() => {
+        const layerId = 'poi-background';
+        if(this.map.getLayer(layerId)) {
+          const layer = this.layers.find(l => l.id === layerId);
+          const features = this.map.queryRenderedFeatures({ layers: [layerId], filter: layer ? layer.filter : undefined });
+
+          if (features) {
+            const uniqueFeatures = this.getUniqueFeatures(features, 'fid');
+            this.$emit('placesCounted', uniqueFeatures.length);
+          }
+          else {
+            this.$emit('placesCounted', 0);
+          }
+        }
+        else {
+          this.$emit('placesCounted', 0);
+        }
+      }, 100);
     },
 
     getUniqueFeatures(array, comparatorProperty) {

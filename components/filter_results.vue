@@ -181,13 +181,13 @@ export default {
     },
 
     canGoNext() {
-      return !this.loading && this.results && this.results.numberReturned === PAGE_SIZE && (this.nbPlacesVisible === 0 || this.offset * PAGE_SIZE + this.results.numberReturned < this.nbPlacesVisible);
+      return !this.loading && this.results && this.results.numberReturned === PAGE_SIZE && (this.nbPlacesVisible === 0 || this.offset + this.results.numberReturned < this.nbPlacesVisible);
     },
 
     pageText() {
       const currentPage = Math.ceil(this.offset / PAGE_SIZE) + 1;
       const totalPages = Math.ceil(this.nbPlacesVisible / PAGE_SIZE);
-      return this.loading || !this.nbPlacesVisible || currentPage > totalPages ? "" : currentPage + " / " + totalPages;
+      return this.loading || !this.nbPlacesVisible || currentPage > totalPages ? "" : currentPage + " / " + (this.canGoNext ? totalPages : currentPage);
     },
 
     notes() {

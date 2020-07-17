@@ -18,7 +18,7 @@
         "government": {
           "name": "Administration",
           "osm_tags": [
-            { "office": "government" }
+            { "office": "government|employment_agency" }
           ],
           "areas": "all",
           "subfilters": {
@@ -81,7 +81,7 @@
               "name": "OPT",
               "osm_tags": [
                 { "name": "OPT|Office des Postes et Télécommunication" },
-                { "operator": "Office des Postes et Télécommunication" },
+                { "operator": "OPT|Office des Postes et Télécommunication" },
                 { "short_name": "OPT" }
               ]
             },
@@ -213,7 +213,7 @@
         "leisure_club": {
           "name": "Club",
           "osm_tags": [
-            { "club": "scout|social|freemasonry|music|automobile|culture|veterans|sailing|youth|shooting|charity|fishing|motorcycle|game|ethnic|history|tourism|computer|board_games|dog|religion|linux|student|art|nature" }
+            { "club": "*" }
           ],
           "areas": "all"
         },
