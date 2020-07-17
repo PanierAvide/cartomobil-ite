@@ -9,7 +9,7 @@ CREATE OR REPLACE FUNCTION get_category1(tags HSTORE, area VARCHAR DEFAULT 'FR')
 DECLARE
 	result VARCHAR;
 BEGIN
-	IF (tags->'amenity' IN ('townhall', 'police')) OR (tags->'office' = 'government') THEN
+	IF (tags->'amenity' IN ('townhall', 'police')) OR (tags->'office' IN ('government', 'employment_agency')) THEN
 		result := 'administration';
 	ELSIF (tags->'amenity' IN ('bank', 'atm')) OR (tags->'office' = 'insurance') OR (tags->'shop' = 'insurance') THEN
 		result := 'financial';
@@ -17,7 +17,7 @@ BEGIN
 		result := 'post_service';
 	ELSIF tags->'amenity' IN ('restaurant', 'fast_food', 'bar', 'pub', 'cafe', 'ice_cream', 'nightclub') THEN
 		result := 'outside';
-	ELSIF (tags->'office' = 'association' AND tags->'association:for' = 'disabled') OR (tags->'amenity' IN ('cinema', 'theatre', 'library')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'club' IN ('scout', 'social', 'freemasonry', 'music', 'automobile', 'culture', 'veterans', 'sailing', 'youth', 'shooting', 'charity', 'fishing', 'motorcycle', 'game', 'ethnic', 'history', 'tourism', 'computer', 'board_games', 'dog', 'religion', 'linux', 'student', 'art', 'nature')) THEN
+	ELSIF (tags->'office' = 'association' AND tags->'association:for' = 'disabled') OR (tags->'amenity' IN ('cinema', 'theatre', 'library')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'club' != '') THEN
 		result := 'leisure';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') THEN
 		result := 'sport';
@@ -46,7 +46,7 @@ DECLARE
 BEGIN
 	IF tags->'amenity' = 'townhall' THEN
 		result := 'townhall';
-	ELSIF tags->'office' = 'government' THEN
+	ELSIF tags->'office' IN ('government', 'employment_agency') THEN
 		result := 'government';
 	ELSIF tags->'amenity' = 'police' THEN
 		result := 'police';
@@ -78,7 +78,7 @@ BEGIN
 		result := 'museum';
 	ELSIF tags->'office' = 'association' AND tags->'association:for' = 'disabled' THEN
 		result := 'association';
-	ELSIF tags->'club' IN ('scout', 'social', 'freemasonry', 'music', 'automobile', 'culture', 'veterans', 'sailing', 'youth', 'shooting', 'charity', 'fishing', 'motorcycle', 'game', 'ethnic', 'history', 'tourism', 'computer', 'board_games', 'dog', 'religion', 'linux', 'student', 'art', 'nature') THEN
+	ELSIF tags->'club' != '' THEN
 		result := 'leisure_club';
 	ELSIF tags->'amenity' = 'library' THEN
 		result := 'library';
@@ -188,7 +188,7 @@ BEGIN
 		result := 'cotorep';
 	ELSIF (tags->'name' = 'Service de l''emploi, de la formation et de l''insertion professionnelles' AND tags->'cat2' = 'government') OR (tags->'name' = 'SEFI' AND tags->'cat2' = 'government') OR (tags->'short_name' = 'SEFI' AND tags->'cat2' = 'government') THEN
 		result := 'sefi';
-	ELSIF (tags->'name' IN ('OPT', 'Office des Postes et Télécommunication') AND tags->'cat2' = 'bank') OR (tags->'operator' = 'Office des Postes et Télécommunication' AND tags->'cat2' = 'bank') OR (tags->'short_name' = 'OPT' AND tags->'cat2' = 'bank') THEN
+	ELSIF (tags->'name' IN ('OPT', 'Office des Postes et Télécommunication') AND tags->'cat2' = 'bank') OR (tags->'operator' IN ('OPT', 'Office des Postes et Télécommunication') AND tags->'cat2' = 'bank') OR (tags->'short_name' = 'OPT' AND tags->'cat2' = 'bank') THEN
 		result := 'opt';
 	ELSIF (tags->'name' = 'Banque Socredo' AND tags->'cat2' = 'bank') OR (tags->'operator' = 'Banque Socredo' AND tags->'cat2' = 'bank') THEN
 		result := 'socredo';

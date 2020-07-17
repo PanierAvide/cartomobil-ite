@@ -306,7 +306,7 @@ export default {
       if(bbox.length === 5) {
         const placeId = bbox.pop();
         if(placeId) {
-          setTimeout(() => this.$router.push({ name: 'place', params: { id: placeId, featuresAndLocation: this.featuresAndLocation } }), 500);
+          setTimeout(() => this.$router.push({ name: 'place', params: { id: placeId, featuresAndLocation: encodeURIComponent(this.featuresAndLocation) } }), 500);
         }
       }
 

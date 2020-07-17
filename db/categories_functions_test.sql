@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(432);
+SELECT plan(386);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -13,6 +13,10 @@ SELECT is(get_category2('amenity=>townhall'::hstore, 'FR'), 'townhall', 'get_cat
 SELECT is(get_category1('office=>government'::hstore, 'FR'), 'administration', 'get_category1 office=>government for FR should be administration');
 
 SELECT is(get_category2('office=>government'::hstore, 'FR'), 'government', 'get_category2 office=>government for FR should be government');
+
+SELECT is(get_category1('office=>employment_agency'::hstore, 'FR'), 'administration', 'get_category1 office=>employment_agency for FR should be administration');
+
+SELECT is(get_category2('office=>employment_agency'::hstore, 'FR'), 'government', 'get_category2 office=>employment_agency for FR should be government');
 
 SELECT is(get_category1('amenity=>police'::hstore, 'FR'), 'administration', 'get_category1 amenity=>police for FR should be administration');
 
@@ -90,105 +94,9 @@ SELECT is(get_category1('office=>association, association:for=>disabled'::hstore
 
 SELECT is(get_category2('office=>association, association:for=>disabled'::hstore, 'FR'), 'association', 'get_category2 office=>association, association:for=>disabled for FR should be association');
 
-SELECT is(get_category1('club=>scout'::hstore, 'FR'), 'leisure', 'get_category1 club=>scout for FR should be leisure');
+SELECT is(get_category1('club=>*'::hstore, 'FR'), 'leisure', 'get_category1 club=>* for FR should be leisure');
 
-SELECT is(get_category2('club=>scout'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>scout for FR should be leisure_club');
-
-SELECT is(get_category1('club=>social'::hstore, 'FR'), 'leisure', 'get_category1 club=>social for FR should be leisure');
-
-SELECT is(get_category2('club=>social'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>social for FR should be leisure_club');
-
-SELECT is(get_category1('club=>freemasonry'::hstore, 'FR'), 'leisure', 'get_category1 club=>freemasonry for FR should be leisure');
-
-SELECT is(get_category2('club=>freemasonry'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>freemasonry for FR should be leisure_club');
-
-SELECT is(get_category1('club=>music'::hstore, 'FR'), 'leisure', 'get_category1 club=>music for FR should be leisure');
-
-SELECT is(get_category2('club=>music'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>music for FR should be leisure_club');
-
-SELECT is(get_category1('club=>automobile'::hstore, 'FR'), 'leisure', 'get_category1 club=>automobile for FR should be leisure');
-
-SELECT is(get_category2('club=>automobile'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>automobile for FR should be leisure_club');
-
-SELECT is(get_category1('club=>culture'::hstore, 'FR'), 'leisure', 'get_category1 club=>culture for FR should be leisure');
-
-SELECT is(get_category2('club=>culture'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>culture for FR should be leisure_club');
-
-SELECT is(get_category1('club=>veterans'::hstore, 'FR'), 'leisure', 'get_category1 club=>veterans for FR should be leisure');
-
-SELECT is(get_category2('club=>veterans'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>veterans for FR should be leisure_club');
-
-SELECT is(get_category1('club=>sailing'::hstore, 'FR'), 'leisure', 'get_category1 club=>sailing for FR should be leisure');
-
-SELECT is(get_category2('club=>sailing'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>sailing for FR should be leisure_club');
-
-SELECT is(get_category1('club=>youth'::hstore, 'FR'), 'leisure', 'get_category1 club=>youth for FR should be leisure');
-
-SELECT is(get_category2('club=>youth'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>youth for FR should be leisure_club');
-
-SELECT is(get_category1('club=>shooting'::hstore, 'FR'), 'leisure', 'get_category1 club=>shooting for FR should be leisure');
-
-SELECT is(get_category2('club=>shooting'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>shooting for FR should be leisure_club');
-
-SELECT is(get_category1('club=>charity'::hstore, 'FR'), 'leisure', 'get_category1 club=>charity for FR should be leisure');
-
-SELECT is(get_category2('club=>charity'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>charity for FR should be leisure_club');
-
-SELECT is(get_category1('club=>fishing'::hstore, 'FR'), 'leisure', 'get_category1 club=>fishing for FR should be leisure');
-
-SELECT is(get_category2('club=>fishing'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>fishing for FR should be leisure_club');
-
-SELECT is(get_category1('club=>motorcycle'::hstore, 'FR'), 'leisure', 'get_category1 club=>motorcycle for FR should be leisure');
-
-SELECT is(get_category2('club=>motorcycle'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>motorcycle for FR should be leisure_club');
-
-SELECT is(get_category1('club=>game'::hstore, 'FR'), 'leisure', 'get_category1 club=>game for FR should be leisure');
-
-SELECT is(get_category2('club=>game'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>game for FR should be leisure_club');
-
-SELECT is(get_category1('club=>ethnic'::hstore, 'FR'), 'leisure', 'get_category1 club=>ethnic for FR should be leisure');
-
-SELECT is(get_category2('club=>ethnic'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>ethnic for FR should be leisure_club');
-
-SELECT is(get_category1('club=>history'::hstore, 'FR'), 'leisure', 'get_category1 club=>history for FR should be leisure');
-
-SELECT is(get_category2('club=>history'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>history for FR should be leisure_club');
-
-SELECT is(get_category1('club=>tourism'::hstore, 'FR'), 'leisure', 'get_category1 club=>tourism for FR should be leisure');
-
-SELECT is(get_category2('club=>tourism'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>tourism for FR should be leisure_club');
-
-SELECT is(get_category1('club=>computer'::hstore, 'FR'), 'leisure', 'get_category1 club=>computer for FR should be leisure');
-
-SELECT is(get_category2('club=>computer'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>computer for FR should be leisure_club');
-
-SELECT is(get_category1('club=>board_games'::hstore, 'FR'), 'leisure', 'get_category1 club=>board_games for FR should be leisure');
-
-SELECT is(get_category2('club=>board_games'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>board_games for FR should be leisure_club');
-
-SELECT is(get_category1('club=>dog'::hstore, 'FR'), 'leisure', 'get_category1 club=>dog for FR should be leisure');
-
-SELECT is(get_category2('club=>dog'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>dog for FR should be leisure_club');
-
-SELECT is(get_category1('club=>religion'::hstore, 'FR'), 'leisure', 'get_category1 club=>religion for FR should be leisure');
-
-SELECT is(get_category2('club=>religion'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>religion for FR should be leisure_club');
-
-SELECT is(get_category1('club=>linux'::hstore, 'FR'), 'leisure', 'get_category1 club=>linux for FR should be leisure');
-
-SELECT is(get_category2('club=>linux'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>linux for FR should be leisure_club');
-
-SELECT is(get_category1('club=>student'::hstore, 'FR'), 'leisure', 'get_category1 club=>student for FR should be leisure');
-
-SELECT is(get_category2('club=>student'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>student for FR should be leisure_club');
-
-SELECT is(get_category1('club=>art'::hstore, 'FR'), 'leisure', 'get_category1 club=>art for FR should be leisure');
-
-SELECT is(get_category2('club=>art'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>art for FR should be leisure_club');
-
-SELECT is(get_category1('club=>nature'::hstore, 'FR'), 'leisure', 'get_category1 club=>nature for FR should be leisure');
-
-SELECT is(get_category2('club=>nature'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>nature for FR should be leisure_club');
+SELECT is(get_category2('club=>*'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>* for FR should be leisure_club');
 
 SELECT is(get_category1('amenity=>library'::hstore, 'FR'), 'leisure', 'get_category1 amenity=>library for FR should be leisure');
 
