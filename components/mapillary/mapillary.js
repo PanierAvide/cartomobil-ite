@@ -3,7 +3,7 @@ export function findImage({ lng, lat }, pano, users, clientId) {
   const params = {
     client_id: clientId,
     closeto: [lng, lat].join(','),
-    radius: 30
+    radius: 25
   };
 
   if(pano) {

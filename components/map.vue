@@ -327,8 +327,8 @@ export default {
 
       // Controls
       this.navcontrol = new NavigationControl({ showCompass: false, showZoom: !this.isMobile });
-      this.geoloccontrol = new GeolocateControl({ positionOptions: { enableHighAccuracy: true } });
       this.map.addControl(this.navcontrol, 'top-right');
+      this.geoloccontrol = new GeolocateControl({ positionOptions: { enableHighAccuracy: true } });
       this.map.addControl(this.geoloccontrol, 'top-right');
 
       // Count places
@@ -450,5 +450,11 @@ export default {
 .sm .mapboxgl-control-container button {
   width: 35px;
   height: 35px;
+}
+
+@media (min-width: 600px) {
+  .mapboxgl-ctrl-geolocate {
+    display: none !important;
+  }
 }
 </style>
