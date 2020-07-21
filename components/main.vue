@@ -418,13 +418,22 @@ export default {
 .vjsf-tooltip {
   max-width: 300px;
   background: rgb(55, 52, 52);
+  z-index: 150 !important;
 }
 .vjsf-property-equipments.pl-2,
 .vjsf-property-basics.pl-2,
 .vjsf-property-details.pl-2,
 .vjsf-property-equipments.pl-2 > div > .vjsf-property.pl-2,
 .vjsf-property-basics.pl-2 > div > .vjsf-property.pl-2,
-.vjsf-property-details.pl-2 > div > .vjsf-property.pl-2 {
+.vjsf-property-details.pl-2 > div > .vjsf-property.pl-2,
+.vjsf-property .v-expansion-panel-content .pl-2 {
   padding: 0 !important;
+}
+.v-menu__content {
+  z-index: 150 !important;
+}
+.form-field-readonly .v-input__icon--append .v-icon--disabled.mdi-menu-down,
+.vjsf-property .v-select__slot .v-input__icon--clear {
+  display: none;
 }
 </style>

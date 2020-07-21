@@ -31,7 +31,8 @@ export default {
   ** Global CSS
   */
   css: [
-    './font/osm.css'
+    './font/osm.css',
+    '@mdi/font/css/materialdesignicons.min.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -39,7 +40,7 @@ export default {
   plugins: [
     { src: '~/plugins/map', mode: 'client' },
     { src: '~/plugins/matomo', mode: 'client' },
-	{ src: '~/plugins/mapillary', mode: 'client' },
+    { src: '~/plugins/mapillary', mode: 'client' },
     { src: '~/plugins/vjsf' },
     { src: '~/plugins/linkified' },
     { src: '~/plugins/url' }
