@@ -90,9 +90,9 @@ SELECT is(get_category1('tourism=>museum'::hstore, 'FR'), 'leisure', 'get_catego
 
 SELECT is(get_category2('tourism=>museum'::hstore, 'FR'), 'museum', 'get_category2 tourism=>museum for FR should be museum');
 
-SELECT is(get_category1('office=>association, association:for=>disabled'::hstore, 'FR'), 'leisure', 'get_category1 office=>association, association:for=>disabled for FR should be leisure');
+SELECT is(get_category1('office=>association'::hstore, 'FR'), 'leisure', 'get_category1 office=>association for FR should be leisure');
 
-SELECT is(get_category2('office=>association, association:for=>disabled'::hstore, 'FR'), 'association', 'get_category2 office=>association, association:for=>disabled for FR should be association');
+SELECT is(get_category2('office=>association'::hstore, 'FR'), 'association', 'get_category2 office=>association for FR should be association');
 
 SELECT is(get_category1('club=>*'::hstore, 'FR'), 'leisure', 'get_category1 club=>* for FR should be leisure');
 
@@ -306,9 +306,9 @@ SELECT is(get_category1('shop=>chemist'::hstore, 'FR'), 'shop', 'get_category1 s
 
 SELECT is(get_category2('shop=>chemist'::hstore, 'FR'), 'beauty', 'get_category2 shop=>chemist for FR should be beauty');
 
-SELECT is(get_category1('shop=>tatoo'::hstore, 'FR'), 'shop', 'get_category1 shop=>tatoo for FR should be shop');
+SELECT is(get_category1('shop=>tattoo'::hstore, 'FR'), 'shop', 'get_category1 shop=>tattoo for FR should be shop');
 
-SELECT is(get_category2('shop=>tatoo'::hstore, 'FR'), 'beauty', 'get_category2 shop=>tatoo for FR should be beauty');
+SELECT is(get_category2('shop=>tattoo'::hstore, 'FR'), 'beauty', 'get_category2 shop=>tattoo for FR should be beauty');
 
 SELECT is(get_category1('office=>company, name=>Electricité de Tahiti'::hstore, 'FR'), 'shop', 'get_category1 office=>company, name=>Electricité de Tahiti for FR should be shop');
 

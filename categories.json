@@ -206,7 +206,7 @@
         "association": {
           "name": "Association",
           "osm_tags": [
-            { "office": "association", "association:for": "disabled" }
+            { "office": "association" }
           ],
           "areas": "all"
         },
@@ -289,7 +289,7 @@
         "beauty": {
           "name": "Beauty",
           "osm_tags": [
-            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist|tatoo" }
+            { "shop": "beauty|cosmetics|hairdresser|massage|perfumery|chemist|tattoo" }
           ],
           "areas": "all",
           "form": "erp"

@@ -16,7 +16,7 @@
   height: 100vh;
   width: 100vw;
   z-index: 30;
-  background-color: #0060B1;
+  background-color: #1982C2;
 }
 .title img {
   max-width: 100%;

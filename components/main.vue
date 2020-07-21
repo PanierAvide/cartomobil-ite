@@ -222,20 +222,18 @@ export default {
             name: "Cartomobil'ité",
             glyphs: `${config.fontsUrl}/{fontstack}/{range}.pbf`,
             sources: {
-                osm: {
-                    type: "raster",
-                    tiles: [ "https://tile.openstreetmap.org/{z}/{x}/{y}.png" ],
-                    maxzoom: 19,
-                    attribution: "&copy; OpenStreetMap"
-                }
+              osm: {
+                type: "raster",
+                tiles: [ "https://tile.openstreetmap.org/{z}/{x}/{y}.png" ],
+                maxzoom: 19,
+                attribution: "&copy; OpenStreetMap"
+              }
             },
-            layers: [
-                {
-                    id: "osm",
-                    source: "osm",
-                    type: "raster"
-                }
-            ]
+            layers: [{
+              id: "osm",
+              source: "osm",
+              type: "raster"
+            }]
         }));
       }
 
@@ -418,7 +416,7 @@ export default {
 .vjsf-tooltip {
   max-width: 300px;
   background: rgb(55, 52, 52);
-  z-index: 150 !important;
+  z-index: 2500 !important;
 }
 .vjsf-property-equipments.pl-2,
 .vjsf-property-basics.pl-2,
@@ -430,10 +428,15 @@ export default {
   padding: 0 !important;
 }
 .v-menu__content {
-  z-index: 150 !important;
+  z-index: 2500 !important;
 }
 .form-field-readonly .v-input__icon--append .v-icon--disabled.mdi-menu-down,
 .vjsf-property .v-select__slot .v-input__icon--clear {
   display: none;
+}
+.toolbar-title-unlimited-height,
+.toolbar-title-unlimited-height > .v-toolbar__content {
+  min-height: 64px !important;
+  height: unset !important;
 }
 </style>

@@ -17,14 +17,14 @@
         v-if="place"
         tile
         dark
-        class="flex-grow-0"
+        class="flex-grow-0 toolbar-title-unlimited-height"
       >
         <v-icon>{{ `osm-${category}` }}</v-icon>
         <v-toolbar-title
           :title="title"
           class="ml-3 toolbar-title toolbar-title-long"
         >
-          {{ limitedTitle || type }}
+          {{ title || type }}
           <template v-if="title">
             <br>
             <span class="subtitle-1">{{ type }}</span>
@@ -265,12 +265,6 @@ export default {
   computed: {
     ...mapState(['country']),
 
-    limitedTitle() {
-      return this.title && this.title.length > 50 ?
-        this.title.split(" ").filter((t,i) => this.title.split(" ").slice(0, i+1).join(" ").length <= 47).join(" ")+"..."
-        : this.title;
-    },
-
     hasVending() {
       return this.$te(`details.vending.${this.place.properties.tags.vending}`);
     },
@@ -480,6 +474,7 @@ export default {
 }
 .toolbar-title.toolbar-title-long {
   white-space: unset;
+  font-size: 1.15rem;
 }
 .left-sidebar {
   width: 400px;
