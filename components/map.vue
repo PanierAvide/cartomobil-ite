@@ -50,6 +50,7 @@ import { mapState } from 'vuex';
 import debounce from 'lodash.debounce';
 import * as config from '../config.json';
 import { readContributionFromStorage, pushContribution } from '../lib/recent_contributions';
+import { decodeFilter } from '../lib/categories';
 import { rawColorForStatus } from '../lib/place';
 import {
   MglMap,
@@ -240,12 +241,6 @@ export default {
       required: true
     },
 
-    filterSubfilter: {
-      type: String,
-      required: false,
-      default: undefined
-    },
-
     sidebar: {
       type: Boolean,
       required: true
@@ -270,13 +265,13 @@ export default {
     },
 
     layers() {
-      const [ category, subcategory ] = this.filter.split('/');
+      const [ category, subcategories, subfilters ] = decodeFilter(this.filter);
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
-        if (this.filterSubfilter) {
-          newLayer.filter.push(['==', 'cat3', this.filterSubfilter]);
-        } else if (subcategory) {
-          newLayer.filter.push(['==', 'cat2', subcategory]);
+        if (subfilters) {
+          newLayer.filter.push(['in', ['get', 'cat3'], ['literal', subfilters]]);
+        } else if (subcategories) {
+          newLayer.filter.push(['in', ['get', 'cat2'], ['literal', subcategories]]);
         } else if (category !== '') {
           newLayer.filter.push(['==', 'cat1', category]);
         }
@@ -323,10 +318,6 @@ export default {
     },
 
     filter(filter) {
-      this.countPlaces();
-    },
-
-    filterSubfilter(filterSubfilter) {
       this.countPlaces();
     }
   },

@@ -20,7 +20,6 @@
         <filter-results
           v-if="hasFilter"
           v-model="filter"
-          :subfilter.sync="filterSubfilter"
           :featuresAndLocation="featuresAndLocation"
           :map-bounds="mapBounds"
           :nbPlacesVisible="nbPlacesVisible"
@@ -55,7 +54,6 @@
             :map-bounds.sync="mapBounds"
             :map-limits="mapLimits"
             :filter="filter"
-            :filter-subfilter="filterSubfilter"
             :featuresAndLocation="featuresAndLocation"
             @loaded="mapLoaded = true"
             @placesCounted="nbPlacesVisible = $event"
@@ -81,7 +79,6 @@
           <filter-results
             v-if="hasFilter"
             v-model="filter"
-            :subfilter.sync="filterSubfilter"
             :featuresAndLocation="featuresAndLocation"
             :map-bounds="mapBounds"
             :nbPlacesVisible="nbPlacesVisible"
@@ -117,7 +114,7 @@ import { mapGetters } from 'vuex';
 import debounce from 'lodash.debounce';
 import config from '../config.json';
 import { getCookie, setCookie } from '../lib/cookie';
-import { encode, decode, encodePosition, decodePosition, encodeFilter, decodeFilter, findBrand } from '../lib/url';
+import { encode, decode, encodePosition, decodePosition, findBrand } from '../lib/url';
 import isMobile from './mixins/is_mobile';
 import AppsSheet from './apps_sheet';
 import MainMenu from './main_menu';
@@ -157,7 +154,6 @@ export default {
   data() {
     return {
       filter: '',
-      filterSubfilter: null,
       loadMap: false,
       mapLimits: config.mapBounds || undefined,
       mapBounds: [],
@@ -175,10 +171,8 @@ export default {
   mounted() {
     this.sidebar = !this.isMobile;
 
-    const { filter: filterPart, location } = decode(this.featuresAndLocation);
-    const { filter, subfilter } = decodeFilter(filterPart);
+    const { filter, location } = decode(this.featuresAndLocation);
     this.filter = filter;
-    this.filterSubfilter = subfilter;
 
     Promise.all([
       this.loadInitialLocation(location),
@@ -210,10 +204,6 @@ export default {
     },
 
     filter() {
-      this.updateRoute();
-    },
-
-    filterSubfilter() {
       this.updateRoute();
     }
   },
@@ -292,7 +282,7 @@ export default {
         this.lastFeaturesAndLocation = this.featuresAndLocation;
       }
       const newFeaturesAndLocation = encode(
-        encodeFilter(this.filter, this.filterSubfilter),
+        this.filter,
         encodePosition(this.mapCenter.lat, this.mapCenter.lng, this.mapZoom)
       );
       if (this.lastFeaturesAndLocation === newFeaturesAndLocation) {
@@ -343,19 +333,19 @@ export default {
 
     getCurrentCountry() {
       const { lat, lng } = this.mapCenter;
+      this.$store.commit('setArea', 'FR');
 //      fetch(`${config.apiUrl}/country?lat=${lat}&lon=${lng}`)
 //        .then(res => res.text())
 //        .then(area => {
 //          this.$store.commit('setArea', area);
-          this.$store.commit('setArea', 'FR');
-          const [category, subcategory, subfilter] = this.filter.split('/');
-          if (!this.categories.includes(category)) {
-            this.filter = '';
-          } else if (subcategory && !this.allCategories[category].subcategories[subcategory]) {
-            this.filter = category;
-          } else if (subfilter && !this.allCategories[category].subcategories[subcategory].subfilters[subfilter]) {
-            this.filter = subcategory;
-          }
+//           const [category, subcategory, subfilter] = this.filter.split('/');
+//           if (!this.categories.includes(category)) {
+//             this.filter = '';
+//           } else if (subcategory && !this.allCategories[category].subcategories[subcategory]) {
+//             this.filter = category;
+//           } else if (subfilter && !this.allCategories[category].subcategories[subcategory].subfilters[subfilter]) {
+//             this.filter = subcategory;
+//           }
 //        });
     },
 

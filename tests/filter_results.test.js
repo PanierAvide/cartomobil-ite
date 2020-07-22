@@ -37,12 +37,17 @@ describe('FilterResults', () => {
     const wrapper = createWrapper({ value: 'test/test2', mapBounds: [], services: [] });
     expect(wrapper.vm.hasSelectedSubCategory).toBe(true);
     expect(wrapper.vm.filterName).toEqual('cat2');
-    expect(wrapper.vm.filterValue).toEqual('test2');
+    expect(wrapper.vm.filterValue).toEqual(['test2']);
 
     wrapper.setProps({ value: 'cro' });
     expect(wrapper.vm.hasSelectedSubCategory).toBe(false);
     expect(wrapper.vm.filterName).toEqual('cat1');
     expect(wrapper.vm.filterValue).toEqual('cro');
+
+    wrapper.setProps({ value: 'cro/cro2/cro3,cro4' });
+    expect(wrapper.vm.hasSelectedSubCategory).toBe(true);
+    expect(wrapper.vm.filterName).toEqual('cat3');
+    expect(wrapper.vm.filterValue).toEqual(['cro3','cro4']);
   });
 
   it('fetch the data', async () => {

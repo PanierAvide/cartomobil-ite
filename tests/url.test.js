@@ -67,30 +67,4 @@ describe('URL Params', () => {
       expect(position).toEqual('@1.123457,3.678912,4.32');
     });
   });
-
-  describe('encodeFilter', () => {
-    it('encode the filter', () => {
-      const filter = encodeFilter('test', undefined);
-      expect(filter).toEqual('test');
-    });
-
-    it('encode the filter and the service', () => {
-      const filter = encodeFilter('food', 'takeaway');
-      expect(filter).toEqual('food,takeaway');
-    });
-  });
-
-  describe('decodeFilter', () => {
-    it('returns the filter', () => {
-      const { filter, subfilter } = decodeFilter('test');
-      expect(filter).toEqual('test');
-      expect(subfilter).toEqual(undefined);
-    });
-
-    it('returns the filter and the subfilter', () => {
-      const { filter, subfilter } = decodeFilter('test,takeaway');
-      expect(filter).toEqual('test');
-      expect(subfilter).toEqual('takeaway');
-    });
-  });
 });

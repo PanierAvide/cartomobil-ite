@@ -17,13 +17,15 @@
       @input="(v) => $emit('input', v)"
     />
 
-    <v-divider v-if="availableSubfilters.length > 0" />
+    <template v-if="subcategories && subcategories.length === 1 && availableSubfilters.length > 0">
+      <v-divider />
 
-    <filter-subfilters
-      :value="subfilter"
-      :subfilters="availableSubfilters"
-      @input="(s) => $emit('update:subfilter', s)"
-    />
+      <filter-subfilters
+        :value="value"
+        :subfilters="availableSubfilters"
+        @input="(v) => $emit('input', v)"
+      />
+    </template>
 
     <template v-if="notes.length > 0">
       <v-divider />
@@ -89,7 +91,7 @@
 import { mapGetters } from 'vuex';
 import _debounce from 'lodash.debounce';
 import { poiFeature } from '../config.json';
-import { availableSubFilters } from '../lib/categories';
+import { availableSubFilters, decodeFilter } from '../lib/categories';
 import isMobile from './mixins/is_mobile';
 import PlaceDense from './place/dense';
 import FilterSubcategories from './filter_subcategories';
@@ -111,12 +113,6 @@ export default {
     value: {
       type: String,
       required: true
-    },
-
-    subfilter: {
-      type: String,
-      required: false,
-      default: undefined
     },
 
     mapBounds: {
@@ -153,23 +149,34 @@ export default {
     ...mapGetters(['allCategories']),
 
     category() {
-      return this.value.split('/')[0];
+      return decodeFilter(this.value)[0];
     },
 
-    subcategory() {
-      return this.hasSelectedSubCategory ? this.value.split('/')[1] : null;
+    subcategories() {
+      return this.hasSelectedSubCategory ? decodeFilter(this.value)[1] : null;
     },
 
     hasSelectedSubCategory() {
       return this.value.includes('/');
     },
 
+    subfilters() {
+      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      return subfilts;
+    },
+
     filterName() {
-      return this.hasSelectedSubCategory ? 'cat2' : 'cat1';
+      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      if(subfilts) { return 'cat3'; }
+      else if(subcats) { return 'cat2'; }
+      else { return 'cat1'; }
     },
 
     filterValue() {
-      return this.hasSelectedSubCategory ? this.value.split('/')[1] : this.value;
+      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      if(subfilts) { return subfilts; }
+      else if(subcats) { return subcats; }
+      else { return cat; }
     },
 
     availableSubfilters() {
@@ -197,11 +204,19 @@ export default {
       if(this.category && this.$te(`categories_notes.${this.category}`)) {
         notes.push(this.$t(`categories_notes.${this.category}`));
       }
-      if(this.subcategory && this.hasSelectedSubCategory && this.$te(`categories_notes.${this.subcategory}`)) {
-        notes.push(this.$t(`categories_notes.${this.subcategory}`));
+      if(this.subcategories) {
+        this.subcategories.forEach(sc => {
+          if(this.$te(`categories_notes.${sc}`)) {
+            notes.push(this.$t(`categories_notes.${sc}`));
+          }
+        });
       }
-      if(this.subfilter && this.$te(`categories_notes.${this.subfilter}`)) {
-        notes.push(this.$t(`categories_notes.${this.subfilter}`));
+      if(this.subfilters) {
+        this.subfilters.forEach(sf => {
+          if(this.$te(`categories_notes.${sf}`)) {
+            notes.push(this.$t(`categories_notes.${sf}`));
+          }
+        });
       }
 
       return notes;
@@ -215,11 +230,6 @@ export default {
     },
 
     value() {
-      this.offset = 0;
-      this.fetchResults();
-    },
-
-    subfilter() {
       this.results = null;
       this.offset = 0;
       this.loading = true;
@@ -230,7 +240,6 @@ export default {
   methods: {
     clearSelection() {
       this.$emit('input', '');
-      this.$emit('update:subfilter', undefined);
     },
 
     goPrev() {
@@ -265,9 +274,6 @@ export default {
         [this.filterName, this.filterValue],
         ['orderby', 'status_order'],
       ];
-      if(this.subfilter) {
-        params.push(['cat3', this.subfilter]);
-      }
       fetch(`${poiFeature}?${new URLSearchParams(params)}`)
         .then(res => res.json())
         .then((json) => {

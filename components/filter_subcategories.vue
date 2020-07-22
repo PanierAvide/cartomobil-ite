@@ -5,16 +5,17 @@
   >
     <v-chip-group
       :show-arrows="false"
-      :value="value"
+      :value="chipValues"
       :column="expand"
       :mobile-break-point="10000"
-      @change="(v) => $emit('input', v || category)"
+      multiple
+      @change="onChange"
       ref="chipsubcat"
     >
       <v-chip
         v-for="{ subcategory, text } in subCategories"
         :key="subcategory"
-        :value="`${category}/${subcategory}`"
+        :value="subcategory"
         active-class="primary--text"
       >
         <v-icon small>{{ `osm-${subcategory}` }}</v-icon>
@@ -74,6 +75,23 @@ export default {
           text: this.$t(`categories.${subcategory}`)
         }
       });//.sort((a, b) => a.text.localeCompare(b.text));
+    },
+
+    chipValues() {
+      const parts = this.value.split("/");
+      if(parts.length > 1) {
+        return parts[1].split(",");
+      }
+      else {
+        return [];
+      }
+    }
+  },
+
+  methods: {
+    onChange(v) {
+      const newValue = v.length > 0 ? `${this.category}/${v.join(",")}` : this.category;
+      this.$emit('input', newValue);
     }
   }
 }

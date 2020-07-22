@@ -1,4 +1,4 @@
-import categoriesForCountry, { availableSubFilters } from '../lib/categories';
+import categoriesForCountry, { availableSubFilters, encodeFilter, decodeFilter } from '../lib/categories';
 
 describe('categoriesForCountry', () => {
   it('returns all categories for the given country', () => {
@@ -89,5 +89,69 @@ describe('availableSubFilters', () => {
   it('when a category doesnt exists', () => {
     let result = availableSubFilters(categories, 'police2');
     expect(result).toEqual([]);
+  });
+});
+
+describe('encodeFilter', () => {
+  it('handles cat only', () => {
+    const result = encodeFilter('administration');
+    expect(result).toEqual('administration');
+  });
+
+  it('handles cat + subcat', () => {
+    const result = encodeFilter('administration', ['townhall']);
+    expect(result).toEqual('administration/townhall');
+  });
+
+  it('handles cat + subcats', () => {
+    const result = encodeFilter('administration', ['government', 'townhall']);
+    expect(result).toEqual('administration/government,townhall');
+  });
+
+  it('handles cat + subcat + subfilter', () => {
+    const result = encodeFilter('administration', ['government'], ['pref']);
+    expect(result).toEqual('administration/government/pref');
+  });
+
+  it('handles cat + subcat + subfilters', () => {
+    const result = encodeFilter('administration', ['government'], ['pref','etat']);
+    expect(result).toEqual('administration/government/pref,etat');
+  });
+
+  it('cleans empty arrays', () => {
+    const result = encodeFilter('administration', ['government'], []);
+    expect(result).toEqual('administration/government');
+  });
+});
+
+describe('decodeFilter', () => {
+  it('handles cat only', () => {
+    const result = decodeFilter('administration');
+    expect(result).toEqual(['administration']);
+  });
+
+  it('handles cat + subcat', () => {
+    const result = decodeFilter('administration/townhall');
+    expect(result).toEqual(['administration', ['townhall']]);
+  });
+
+  it('handles cat + subcats', () => {
+    const result = decodeFilter('administration/government,townhall');
+    expect(result).toEqual(['administration', ['government', 'townhall']]);
+  });
+
+  it('handles cat + subcat + subfilter', () => {
+    const result = decodeFilter('administration/government/pref');
+    expect(result).toEqual(['administration', ['government'], ['pref']]);
+  });
+
+  it('handles cat + subcat + subfilters', () => {
+    const result = decodeFilter('administration/government/pref,etat');
+    expect(result).toEqual(['administration', ['government'], ['pref','etat']]);
+  });
+
+  it('cleans empty arrays', () => {
+    const result = decodeFilter('administration/government/');
+    expect(result).toEqual(['administration', ['government']]);
   });
 });
