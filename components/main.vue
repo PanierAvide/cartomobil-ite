@@ -257,7 +257,7 @@ export default {
         this.mapCenter = center;
         this.mapZoom = zoom;
         promise = Promise.resolve();
-      } else {
+      } else if(config.geoIpUrl) {
         promise = this.centerMapViaGeoIP();
       }
       return promise;

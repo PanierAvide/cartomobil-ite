@@ -1,13 +1,11 @@
 {
-  "maptilerApiKey": "",
   "mapZoom": 10,
   "mapCenter": [-149.3845, -17.6937],
   "mapBounds": [[-150.3918, -18.0989], [-148.8922, -17.2562]],
-  "tilesUrl": "https://tiles.cartomobilite.avoscartes.pf",
-  "poiFeature": "https://features.cartomobilite.avoscartes.pf/collections/public.poi_osm/items",
-  "apiUrl": "https://api.cartomobilite.avoscartes.pf",
-  "geoIpUrl": "https://geo.cartomobilite.avoscartes.pf/me",
-  "fontsUrl": "https://fonts.cartomobilite.avoscartes.pf",
+  "tilesUrl": "https://tiles.carto.mobilite.xyz",
+  "poiFeature": "https://features.carto.mobilite.xyz/collections/public.poi_osm/items",
+  "apiUrl": "https://api.carto.mobilite.xyz",
+  "fontsUrl": "https://fonts.carto.mobilite.xyz",
   "osmUrl": "https://www.openstreetmap.org",
   "nominatimUrl": "https://nominatim.openstreetmap.org",
   "minZoomPoi": 12,
@@ -27,8 +25,8 @@
   },
   "locales": {
     "DEFAULT": {
-      "about": "https://blog.cartomobilite.pf/about/",
-      "disclaimer": "https://blog.cartomobilite.pf/mentions-legales/"
+      "about": "https://www.avoscartes.pf",
+      "disclaimer": "https://www.avoscartes.pf"
     }
   }
 }
