@@ -1129,7 +1129,10 @@
                             "elevator:width": {
                               "type": "number",
                               "title": "Largeur cabine d'ascenseur (en mètres)",
-                              "minimum": 0
+                              "minimum": 0,
+                              "x-slots": {
+                                "before": "#### Plus de détails (optionnel)"
+                              }
                             },
                             "elevator:length": {
                               "type": "number",

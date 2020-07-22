@@ -29,6 +29,12 @@
           v-else
           :style="{ width: '350px' }"
         >
+          <geocoder
+            v-show="true"
+            @select="updateMapBounds"
+            :style="{ margin: '5px' }"
+          />
+
           <filter-list v-model="filter" />
         </main-menu>
       </v-navigation-drawer>
@@ -121,6 +127,7 @@ import TopToolbar from './top_toolbar';
 import BottomMenu from './bottom_menu';
 import RgpdBanner from './rgpd_banner';
 import SplashScreen from './splash_screen';
+import Geocoder from './geocoder';
 
 const MAP_VIEW_COOKIE = 'mapView';
 
@@ -134,6 +141,7 @@ export default {
     RgpdBanner,
     SplashScreen,
     TopToolbar,
+    Geocoder
   },
 
   mixins: [isMobile],
@@ -160,7 +168,7 @@ export default {
       minZoomPoi: config.minZoomPoi,
       rgpdBannerHidden: false,
       sidebar: false,
-      nbPlacesVisible: 0,
+      nbPlacesVisible: 0
     };
   },
 
@@ -396,7 +404,7 @@ export default {
   transform: translateX(350px);
 }
 .sidebar-big-opened .search, .place-opened .search {
-  transform: translateX(400px);
+  display: none;
 }
 .text-pre {
   white-space: pre-line;

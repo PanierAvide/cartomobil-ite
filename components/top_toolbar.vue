@@ -2,7 +2,7 @@
   <v-toolbar
     :dense="!isMobile || !geocoder"
     :height="isMobile && geocoder ? '70px' : undefined"
-    class="search ml-md-5 mt-md-5"
+    class="search mt-md-5"
   >
     <v-tooltip
       v-if="!isMobile"
@@ -12,43 +12,46 @@
         <v-btn
           icon
           v-on="on"
-          @click.native="$emit('toggleSidebar')"
+          @click.native="clickExpand"
         >
-          <v-icon>osm-filter_list</v-icon>
+          <v-icon>{{ expanded ? "osm-chevron_left" : "osm-chevron_right" }}</v-icon>
         </v-btn>
       </template>
       <span>{{ $t('menu') }}</span>
     </v-tooltip>
 
-    <template v-if="!geocoder">
-      <img
-        :alt="$t('subtitle')"
-        :src="logoMobile"
-        class="img-header-mobile"
-      />
-      <v-spacer></v-spacer>
-    </template>
-    <v-tooltip
-      v-if="!geocoder"
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          icon
-          v-on="on"
-          @click="geocoder = true"
-        >
-          <v-icon>osm-magnify</v-icon>
-        </v-btn>
+    <template v-if="isMobile">
+      <template v-if="!geocoder">
+        <img
+          :alt="$t('subtitle')"
+          :src="logoMobile"
+          class="img-header-mobile"
+        />
+        <v-spacer></v-spacer>
       </template>
-      <span>{{ $t('search') }}</span>
-    </v-tooltip>
 
-    <geocoder
-      v-show="geocoder"
-      @select="onGeocoderSelect"
-      @blur="onGeocoderBlur"
-    />
+      <v-tooltip
+        v-if="!geocoder"
+        bottom
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            v-on="on"
+            @click="geocoder = true"
+          >
+            <v-icon>osm-magnify</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ $t('search') }}</span>
+      </v-tooltip>
+
+      <geocoder
+        v-show="geocoder"
+        @select="onGeocoderSelect"
+        @blur="onGeocoderBlur"
+      />
+    </template>
   </v-toolbar>
 </template>
 
@@ -66,28 +69,24 @@ export default {
 
   data() {
     return {
-      geocoder: false
+      geocoder: false,
+      expanded: true
     };
   },
 
-  mounted() {
-    this.geocoder = !this.isMobile;
-  },
-
-  watch: {
-    isMobile() {
-      this.geocoder = !this.isMobile;
-    }
-  },
-
   methods: {
+    clickExpand() {
+      this.$emit('toggleSidebar');
+      this.expanded = !this.expanded;
+    },
+
     onGeocoderSelect(bbox) {
-      this.geocoder = !this.isMobile;
+      this.geocoder = false;
       this.$emit('onGeocode', bbox);
     },
 
     onGeocoderBlur() {
-      this.geocoder = !this.isMobile;
+      this.geocoder = false;
     }
   }
 }
@@ -104,5 +103,8 @@ export default {
 .img-header-mobile {
   max-height: 40px;
   max-width: 80%;
+}
+.v-application--is-ltr .v-toolbar__content > .v-btn.v-btn--icon {
+  margin-right: -12px;
 }
 </style>

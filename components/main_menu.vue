@@ -18,10 +18,6 @@
       </v-card-subtitle>
     </v-card>
 
-    <!--governement-alert /-->
-
-    <v-divider v-if="showBrand"></v-divider>
-
     <slot />
 
     <v-spacer />

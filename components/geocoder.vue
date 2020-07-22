@@ -10,6 +10,8 @@
     hide-no-data
     hide-details
     no-filter
+    outlined
+    dense
     background-color="white"
     prepend-inner-icon="osm-magnify"
     @blur="$emit('blur')"
@@ -96,6 +98,7 @@ export default {
           this.isLoading = false;
         });
     }, 350, { maxWait: 500 }),
+
     selected(val) {
       if (Array.isArray(val)) {
         this.$emit('select', val);

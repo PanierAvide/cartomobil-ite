@@ -5,6 +5,7 @@
     :map-style="mapStyle"
     :max-bounds="mapLimits"
     :accessToken="accessToken"
+    :maxZoom="20"
     @load="load"
     @rotateend="maprotated"
     @update:center="updateMapCenter"
