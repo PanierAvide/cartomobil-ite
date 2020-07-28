@@ -1160,7 +1160,7 @@
                           ]
                         },
                         "elevator:mirror": {
-                          "title": "Mirroir face à l'entrée ?",
+                          "title": "Miroir face à l'entrée ?",
                           "type": "string",
                           "oneOf": [
                             { "title": "Présent", "const": "yes" },
@@ -1707,7 +1707,7 @@
               "title": "Longueur cabine d'ascenseur (en mètres)"
             },
             "mirror": {
-              "title": "Mirroir face à l'entrée dans ascenseur ?",
+              "title": "Miroir face à l'entrée dans ascenseur ?",
               "type": "string",
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
