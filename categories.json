@@ -715,6 +715,7 @@
                   "title": "Précisions",
                   "type": "string",
                   "format": "text",
+                  "x-display": "textarea",
                   "maxLength": 250
                 },
                 "srvwch": {
@@ -734,6 +735,7 @@
                           "title": "Précisions",
                           "type": "string",
                           "format": "text",
+                          "x-display": "textarea",
                           "maxLength": 250
                         }
                       }
@@ -781,6 +783,7 @@
             "details": {
               "type": "object",
               "title": "Plus de détails (optionnel)",
+              "title-readOnly": "Détails",
               "properties": {
                 "sgnwch": {
                   "title": "Signalétique fauteuil roulant ?",
@@ -798,6 +801,7 @@
                           "title": "Type de signalétique",
                           "description": "Pictogramme, plan d'information, signalétique horizontale...",
                           "format": "text",
+                          "x-display": "textarea",
                           "maxLength": 250
                         },
                         "custom:sign:wheelchair:quality": {
@@ -1002,6 +1006,7 @@
                           "title": "Précisions sur l'accessibilité",
                           "type": "string",
                           "format": "text",
+                          "x-display": "textarea",
                           "maxLength": 250
                         },
                         "toilets:sign:wheelchair": {
@@ -1118,6 +1123,7 @@
                           "title": "Précisions",
                           "type": "string",
                           "format": "text",
+                          "x-display": "textarea",
                           "maxLength": 250
                         },
                         "elevator:sign:wheelchair": {
@@ -1478,7 +1484,7 @@
         "mandatory": true
       },
       "x-display": "expansion-panels",
-      "x-class-readOnly": "pa-2",
+      "x-class-readOnly": "pa-2 pb-4",
       "properties": {
         "secgen": {
           "type": "object",
@@ -1504,6 +1510,7 @@
               "title": "Précisions",
               "type": "string",
               "format": "text",
+              "x-display": "textarea",
               "maxLength": 250
             },
             "sign:disabled": {
@@ -1533,6 +1540,7 @@
         "secdet": {
           "type": "object",
           "title": "Plus de détails (optionnel)",
+          "title-readOnly": "Détails",
           "properties": {
             "sit_height": {
               "title": "Hauteur d'assise (en mètres)",
@@ -1601,7 +1609,7 @@
         "mandatory": true
       },
       "x-display": "expansion-panels",
-      "x-class-readOnly": "pa-2",
+      "x-class-readOnly": "pa-2 pb-4",
       "properties": {
         "secgen": {
           "type": "object",
@@ -1627,6 +1635,7 @@
               "title": "Précisions",
               "type": "string",
               "format": "text",
+              "x-display": "textarea",
               "maxLength": 250
             },
             "sign:disabled": {
@@ -1644,6 +1653,7 @@
         "secdet": {
           "type": "object",
           "title": "Plus de détails (optionnel)",
+          "title-readOnly": "Détails",
           "properties": {
             "hdr": {
               "title": "Main courante dans ascenseur ?",
@@ -1732,7 +1742,7 @@
         "mandatory": true
       },
       "x-display": "expansion-panels",
-      "x-class-readOnly": "pa-2",
+      "x-class-readOnly": "pa-2 pb-4",
       "properties": {
         "secgen": {
           "type": "object",
@@ -1758,6 +1768,7 @@
               "title": "Précisions",
               "type": "string",
               "format": "text",
+              "x-display": "textarea",
               "maxLength": 250
             },
             "sign:disabled": {
@@ -1775,6 +1786,7 @@
         "secdet": {
           "type": "object",
           "title": "Plus de détails (optionnel)",
+          "title-readOnly": "Détails",
           "properties": {
             "width": {
               "title": "Largeur de la place (en mètres)",
@@ -1831,6 +1843,7 @@
           "title": "Précisions",
           "type": "string",
           "format": "text",
+          "x-display": "textarea",
           "maxLength": 250
         },
         "sign:disabled": {

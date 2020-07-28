@@ -41,10 +41,10 @@ export default {
       handler() {
         const theme = this.$vuetify.theme.themes.light;
         if (this.colorBlind) {
-          theme.success = '#0C7BDC';
+          theme.success = '#3785c3';
           theme.error = '#FFC20A';
         } else {
-          theme.success = colors.green.base;
+          theme.success = '#4ea438';
           theme.error = colors.red.accent2;
         }
         setCookie(COLOR_BLIND_COOKIE, this.colorBlind);
