@@ -508,10 +508,18 @@
           "osm_tags": [
             { "amenity": "parking_space", "parking_space": "disabled" },
             { "amenity": "parking_space", "wheelchair": "yes|designated" },
-            { "amenity": "parking|parking_space", "capacity:disabled": "*" }
+            { "amenity": "parking_space", "capacity:disabled": "*" }
           ],
           "areas": "all",
           "form": "parking_pmr"
+        },
+        "parking": {
+          "name": "Parking",
+          "osm_tags": [
+            { "amenity": "parking" }
+          ],
+          "areas": "all",
+          "form": "parking"
         },
         "fuel": {
           "name": "Fuel station",
@@ -1703,91 +1711,59 @@
     },
     "parking_pmr": {
       "type": "object",
-      "x-display": "tabs",
       "x-props": {
         "tile": true,
         "mandatory": true
       },
+      "x-display": "expansion-panels",
+      "x-class-readOnly": "pa-2",
       "properties": {
-        "basics": {
-          "title": "Général",
+        "secgen": {
           "type": "object",
+          "title": "Général",
           "properties": {
-            "whch": {
-              "type": "object",
+            "wheelchair": {
+              "type": "string",
               "title": "Accessible en fauteuil roulant ?",
               "description": "__Oui__ : place aux normes (largeur > 3.30 m, pente < 2%) + cheminement vers trottoir (largeur > 80 cm).\n\n__Non__ : place pas aux normes et inaccessible même avec de l'aide.\n\n__Limité__ : place difficile d'accès (dimensions pas aux normes) ou revêtement inadapté. Accès possible avec de l'aide.",
               "x-class": "form-hide-desc",
+              "x-hide-readOnly": true,
               "x-props": {
                 "prependIcon": "osm-wheelchair"
               },
               "oneOf": [
-                {
-                  "title": "Oui, la place est aux normes",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "yes"
-                    }
-                  },
-                  "x-hide-readOnly": true
-                },
-                {
-                  "title": "Limité, seulement avec de l'aide",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "limited"
-                    },
-                    "sign:disabled": {
-                      "title": "Signalétique PMR",
-                      "description": "Panneau ou peinture au sol",
-                      "type": "string",
-                      "oneOf": [
-                        { "title": "Oui", "const": "yes" },
-                        { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "null" }
-                      ]
-                    }
-                  }
-                },
-                {
-                  "title": "Non, place inaccessible même avec de l'aide",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "no"
-                    }
-                  },
-                  "x-hide-readOnly": true
-                },
-                {
-                  "title": "Ne sais pas",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "null"
-                    }
-                  }
-                }
+                { "title": "Oui", "const": "yes" },
+                { "title": "Limité", "const": "limited" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "wheelchair:description": {
+              "title": "Précisions",
+              "type": "string",
+              "format": "text",
+              "maxLength": 250
+            },
+            "sign:disabled": {
+              "title": "Signalétique PMR",
+              "description": "Panneau ou peinture au sol",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
               ]
             }
           }
         },
-        "details": {
-          "title": "Détails",
+        "secdet": {
           "type": "object",
+          "title": "Plus de détails (optionnel)",
           "properties": {
             "width": {
               "title": "Largeur de la place (en mètres)",
               "type": "number",
               "minimum": 0
-            },
-            "wheelchair:description": {
-              "title": "Description",
-              "type": "string",
-              "format": "text",
-              "maxLength": 250
             },
             "crossfall": {
               "title": "Dévers (en %)",
@@ -1802,6 +1778,68 @@
               "maximum": 100
             }
           }
+        }
+      }
+    },
+    "parking": {
+      "type": "object",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "allOf": [
+        { "$ref": "#/definitions/wheelchair-requires-capacitydisabled" }
+      ],
+      "defintions": {
+        "wheelchair-requires-capacitydisabled": {
+          "anyOf": [
+            { "not": { "$ref": "#/definitions/empty-capacitydisabled" } },
+            { "required": "wheelchair" }
+          ]
+        },
+        "empty-capacitydisabled": {
+          "properties": {
+            "capacity:disabled": { "enum": [ "", 0 ] }
+          }
+        }
+      },
+      "properties": {
+        "capacity:disabled": {
+          "title": "Nombre de places PMR du parking",
+          "type": "number",
+          "minimum": 0
+        },
+        "wheelchair": {
+          "type": "string",
+          "title": "Sont-elles accessibles ?",
+          "description": "__Oui__ : toutes les places sont aux normes (largeur > 3.30 m, pente < 2%) et disposent d'un cheminement accessible vers le trottoir (largeur > 80 cm).\n\n__Non__ : aucune place aux normes et toutes sont inaccessibles même avec de l'aide.\n\n__Limité__ : une partie des places sont difficiles d'accès (dimensions pas aux normes) ou le revêtement rend impossible la circulation pour une personne en fauteuil seule. Accès possible avec l'aide d'une tierce personne.",
+          "x-class": "form-hide-desc",
+          "x-hide-readOnly": true,
+          "x-props": {
+            "prependIcon": "osm-wheelchair"
+          },
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Limité", "const": "limited" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        },
+        "wheelchair:description": {
+          "title": "Précisions",
+          "type": "string",
+          "format": "text",
+          "maxLength": 250
+        },
+        "sign:disabled": {
+          "title": "Signalétique PMR",
+          "description": "Panneau ou peinture au sol",
+          "type": "string",
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
         }
       }
     }

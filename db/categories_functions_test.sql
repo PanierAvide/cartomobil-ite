@@ -654,13 +654,13 @@ SELECT is(get_category1('amenity=>parking_space, wheelchair=>designated'::hstore
 
 SELECT is(get_category2('amenity=>parking_space, wheelchair=>designated'::hstore, 'FR'), 'parking_pmr', 'get_category2 amenity=>parking_space, wheelchair=>designated for FR should be parking_pmr');
 
-SELECT is(get_category1('amenity=>parking, capacity:disabled=>*'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>parking, capacity:disabled=>* for FR should be mobility');
-
-SELECT is(get_category2('amenity=>parking, capacity:disabled=>*'::hstore, 'FR'), 'parking_pmr', 'get_category2 amenity=>parking, capacity:disabled=>* for FR should be parking_pmr');
-
 SELECT is(get_category1('amenity=>parking_space, capacity:disabled=>*'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>parking_space, capacity:disabled=>* for FR should be mobility');
 
 SELECT is(get_category2('amenity=>parking_space, capacity:disabled=>*'::hstore, 'FR'), 'parking_pmr', 'get_category2 amenity=>parking_space, capacity:disabled=>* for FR should be parking_pmr');
+
+SELECT is(get_category1('amenity=>parking'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>parking for FR should be mobility');
+
+SELECT is(get_category2('amenity=>parking'::hstore, 'FR'), 'parking', 'get_category2 amenity=>parking for FR should be parking');
 
 SELECT is(get_category1('amenity=>fuel'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>fuel for FR should be mobility');
 
