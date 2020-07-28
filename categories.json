@@ -683,563 +683,584 @@
       },
       "properties": {
         "basics": {
-          "title": "Général",
+          "title": "Lieu",
           "type": "object",
+          "x-props": {
+            "tile": true,
+            "mandatory": true
+          },
+          "x-display": "expansion-panels",
           "properties": {
-            "name": {
-              "type": "string",
-              "title": "Nom du lieu",
-              "format": "text",
-              "x-hide-readOnly": true
-            },
-            "whch": {
+            "general": {
               "type": "object",
-              "title": "Accessible en fauteuil roulant ?",
-              "x-class": "form-hide-desc",
-              "x-props": {
-                "prependIcon": "osm-wheelchair"
-              },
-              "description": "__Oui__ : aucune difficulté d'accès, pas de marches, caisse adaptée (cordon CB extensible, hauteur de caisse 70 cm au-dessus des genoux, tablette à moins de 80 cm, vide de 30 cm), commandes accessibles (pavé < 1.3 m).\n\n__Limitée__ : accessible avec de l'aide, marche inférieure à 7 cm, certaines zones accessibles sans marches, d'autres accessibles avec de l'aide. Les espaces principaux sont accessibles.\n\n__Non__ : inaccessible.",
-              "oneOf": [
-                {
-                  "title": "Oui, complètement aménagé",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "yes"
-                    }
+              "title": "Général",
+              "properties": {
+                "wheelchair": {
+                  "type": "string",
+                  "title": "Accessible en fauteuil roulant ?",
+                  "description": "__Oui__ : aucune difficulté d'accès, pas de marches, caisse adaptée (cordon CB extensible, hauteur de caisse 70 cm au-dessus des genoux, tablette à moins de 80 cm, vide de 30 cm), commandes accessibles (pavé < 1.3 m).\n\n__Limitée__ : accessible avec de l'aide, marche inférieure à 7 cm, certaines zones accessibles sans marches, d'autres accessibles avec de l'aide. Les espaces principaux sont accessibles.\n\n__Non__ : inaccessible.",
+                  "x-class": "form-hide-desc",
+                  "x-hide-readOnly": true,
+                  "x-props": {
+                    "prependIcon": "osm-wheelchair"
                   },
-                  "x-hide-readOnly": true
+                  "oneOf": [
+                    { "title": "Oui", "const": "yes" },
+                    { "title": "Limité", "const": "limited" },
+                    { "title": "Non", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
                 },
-                {
-                  "title": "Oui, mais il manque certains équipements",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "limited"
-                    },
-                    "sgnwch": {
-                      "title": "Signalétique PMR",
-                      "type": "object",
-                      "oneOf": [
-                        {
-                          "title": "Oui",
-                          "properties": {
-                            "sign:wheelchair": {
-                              "type": "string",
-                              "const": "yes"
-                            },
-                            "custom:sign:wheelchair:quality": {
-                              "type": "string",
-                              "title": "Accessibilité des informations",
-                              "description": "__Bonne__ : bien positionnée, visible, déchiffrable.\n\n__Mauvaise__ : existante mais pas adaptée (peu lisible, trop petite, peu de contraste...).",
-                              "oneOf": [
-                                { "title": "Bonne", "const": "good" },
-                                { "title": "Mauvaise", "const": "limited" },
-                                { "title": "Ne sais pas", "const": "null" }
-                              ]
-                            },
-                            "custom:sign:wheelchair:description": {
-                              "type": "string",
-                              "title": "Précisions sur la signalétique",
-                              "format": "text",
-                              "maxLength": 250
-                            }
-                          }
+                "wheelchair:description": {
+                  "title": "Précisions",
+                  "type": "string",
+                  "format": "text",
+                  "maxLength": 250
+                },
+                "srvwch": {
+                  "type": "object",
+                  "title": "Service adapté aux personnes en fauteuil roulant ?",
+                  "x-class": "form-hide-desc",
+                  "description": "Le service que propose le lieu peut être plus ou moins adapté. Par exemple, on peut trouver des clubs de parapente qui adaptent leur service pour permettre aux personnes en situation de handicap de voler (matériel, formation des accompagnateurs par exemple). Dans certains cas cela ne sera pas applicable car le service n’a pas besoin d’être adapté.",
+                  "oneOf": [
+                    {
+                      "title": "Oui",
+                      "properties": {
+                        "service:wheelchair": {
+                          "type": "string",
+                          "const": "yes"
                         },
-                        {
-                          "title": "Non",
-                          "properties": {
-                            "sign:wheelchair": {
-                              "type": "string",
-                              "const": "no"
-                            }
-                          }
-                        },
-                        {
-                          "title": "Ne sais pas",
-                          "properties": {
-                            "sign:wheelchair": {
-                              "type": "string",
-                              "const": "null"
-                            }
-                          }
+                        "service:wheelchair:description": {
+                          "title": "Précisions",
+                          "type": "string",
+                          "format": "text",
+                          "maxLength": 250
                         }
-                      ]
+                      }
+                    },
+                    {
+                      "title": "Non",
+                      "properties": {
+                        "service:wheelchair": {
+                          "type": "string",
+                          "const": "no"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Ne sais pas / non applicable",
+                      "properties": {
+                        "service:wheelchair": {
+                          "type": "string",
+                          "const": "null"
+                        }
+                      }
                     }
-                  }
+                  ]
                 },
-                {
-                  "title": "Non, complètement inaccessible",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "no"
+                "custom:wheelchair:priority_line": {
+                  "title": "File prioritaire PMR ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Existante", "const": "yes" },
+                    { "title": "Absente", "const": "no" },
+                    { "title": "Ne sais pas / non applicable", "const": "null" }
+                  ]
+                },
+                "custom:reception:visibility": {
+                  "title": "Accueil repérable ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Oui", "const": "yes" },
+                    { "title": "Non", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
+            },
+            "details": {
+              "type": "object",
+              "title": "Plus de détails (optionnel)",
+              "properties": {
+                "sgnwch": {
+                  "title": "Signalétique fauteuil roulant ?",
+                  "type": "object",
+                  "oneOf": [
+                    {
+                      "title": "Présente",
+                      "properties": {
+                        "sign:wheelchair": {
+                          "type": "string",
+                          "const": "yes"
+                        },
+                        "custom:sign:wheelchair:description": {
+                          "type": "string",
+                          "title": "Type de signalétique",
+                          "description": "Pictogramme, plan d'information, signalétique horizontale...",
+                          "format": "text",
+                          "maxLength": 250
+                        },
+                        "custom:sign:wheelchair:quality": {
+                          "type": "string",
+                          "title": "Accessibilité des informations",
+                          "description": "__Bonne__ : bien positionnée, visible, déchiffrable.\n\n__Mauvaise__ : existante mais pas adaptée (peu lisible, trop petite, peu de contraste...).",
+                          "oneOf": [
+                            { "title": "Bonne", "const": "good" },
+                            { "title": "Limitée", "const": "limited" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "title": "Absente",
+                      "properties": {
+                        "sign:wheelchair": {
+                          "type": "string",
+                          "const": "no"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Ne sais pas",
+                      "properties": {
+                        "sign:wheelchair": {
+                          "type": "string",
+                          "const": "null"
+                        }
+                      }
                     }
+                  ]
+                },
+                "access:wheelchair": {
+                  "title": "Personnel formé à l'accueil PMR ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Oui", "const": "yes" },
+                    { "title": "Non", "const": "no" },
+                    { "title": "Ne sais pas / non applicable", "const": "null" }
+                  ]
+                },
+                "custom:reception:height": {
+                  "title": "Hauteur du comptoir/caisse (en mètres)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                },
+                "custom:cordon:width": {
+                  "title": "Taille du cordon (en mètres)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
+              }
+            },
+            "contact": {
+              "type": "object",
+              "title": "Contact",
+              "properties": {
+                "phone:wheelchair": {
+                  "type": "string",
+                  "title": "N° de téléphone dédié à l'accueil PMR",
+                  "format": "text",
+                  "description": "N° au format international, par exemple __+689 xx xx xx xx__",
+                  "pattern": "^(\\+689([0-9]{8}|( [0-9]{2}){4})|)$",
+                  "x-props": {
+                    "prependIcon": "osm-wheelchair"
                   },
                   "x-hide-readOnly": true
                 },
-                {
-                  "title": "Ne sais pas",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "null"
-                    }
-                  }
+                "phone": {
+                  "type": "string",
+                  "title": "N° de téléphone (standard)",
+                  "format": "text",
+                  "description": "N° au format international, par exemple __+689 xx xx xx xx__",
+                  "pattern": "^(\\+689([0-9]{8}|( [0-9]{2}){4})|)$",
+                  "x-props": {
+                    "prependIcon": "osm-phone"
+                  },
+                  "x-hide-readOnly": true
+                },
+                "email": {
+                  "type": "string",
+                  "title": "Courriel",
+                  "format": "text",
+                  "pattern": "^(|[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)$",
+                  "x-props": {
+                    "prependIcon": "osm-mail"
+                  },
+                  "x-hide-readOnly": true
+                },
+                "website": {
+                  "type": "string",
+                  "title": "Site web",
+                  "format": "text",
+                  "description": "Adresse complète, exemple __https://monsite.web/__",
+                  "pattern": "^(|((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\/[\\+~%\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\/\\\\w]*))?))$",
+                  "x-props": {
+                    "prependIcon": "osm-link"
+                  },
+                  "x-hide-readOnly": true
+                },
+                "facebook": {
+                  "type": "string",
+                  "title": "Page Facebook",
+                  "format": "text",
+                  "description": "Adresse complète, exemple __https://www.facebook.com/MonCommerce__, ou nom de la page seule, exemple __MonCommerce__",
+                  "x-props": {
+                    "prependIcon": "osm-fcbk"
+                  },
+                  "x-hide-readOnly": true
                 }
-              ]
-            },
-            "email": {
-              "type": "string",
-              "title": "Courriel",
-              "format": "text",
-              "pattern": "^(|[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)$",
-              "x-props": {
-                "prependIcon": "osm-mail"
-              },
-              "x-hide-readOnly": true
-            },
-            "phone": {
-              "type": "string",
-              "title": "Téléphone",
-              "format": "text",
-              "description": "N° au format international, par exemple __+689 xx xx xx xx__",
-              "pattern": "^(\\+689([0-9]{8}|( [0-9]{2}){4})|)$",
-              "x-props": {
-                "prependIcon": "osm-phone"
-              },
-              "x-hide-readOnly": true
-            },
-            "website": {
-              "type": "string",
-              "title": "Site web",
-              "format": "text",
-              "description": "Adresse complète, exemple __https://monsite.web/__",
-              "pattern": "^(|((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\\-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9\\.\\-]+|(?:www\\.|[\\-;:&=\\+\\$,\\w]+@)[A-Za-z0-9\\.\\-]+)((?:\/[\\+~%\/\\.\\w\\-_]*)?\\??(?:[\\-\\+=&;%@\\.\\w_]*)#?(?:[\\.\\!\/\\\\w]*))?))$",
-              "x-props": {
-                "prependIcon": "osm-link"
-              },
-              "x-hide-readOnly": true
+              }
             }
           }
         },
         "equipments": {
           "title": "Équipements",
           "type": "object",
+          "x-props": {
+            "tile": true,
+            "mandatory": true
+          },
+          "x-display": "expansion-panels",
           "properties": {
-            "sections": {
+            "sectlts": {
               "type": "object",
-              "x-props": {
-                "tile": true,
-                "mandatory": true
-              },
-              "x-display": "expansion-panels",
+              "title": "Toilettes",
               "properties": {
-                "secbtn": {
+                "tlts": {
                   "type": "object",
-                  "title": "Bouton d'appel",
-                  "properties": {
-                    "btn": {
-                      "type": "object",
-                      "title": "Bouton d'appel à l'entrée ?",
-                      "oneOf": [
-                        {
-                          "title": "Oui",
-                          "properties": {
-                            "button_operated": {
-                              "type": "string",
-                              "const": "yes"
-                            },
-                            "button_operated:wheelchair": {
-                              "title": "Bouton accessible PMR ?",
-                              "type": "string",
-                              "oneOf": [
-                                { "title": "Oui", "const": "yes" },
-                                { "title": "Non", "const": "no" },
-                                { "title": "Ne sais pas", "const": "null" }
-                              ]
-                            },
-                            "button_operated:height": {
-                              "title": "Hauteur du bouton (en mètres)",
-                              "type": "number",
-                              "minimum": 0
-                            }
-                          }
-                        },
-                        {
-                          "title": "Non",
-                          "properties": {
-                            "button_operated": {
-                              "type": "string",
-                              "const": "no"
-                            }
-                          }
-                        },
-                        {
-                          "title": "Ne sais pas",
-                          "properties": {
-                            "button_operated": {
-                              "type": "string",
-                              "const": "null"
-                            }
-                          }
-                        }
-                      ]
-                    }
-                  }
-                },
-                "sectlts": {
-                  "type": "object",
-                  "title": "Toilettes",
-                  "properties": {
-                    "tlts": {
-                      "type": "object",
-                      "title": "Toilettes ?",
-                      "x-props": {
-                        "prependIcon": "osm-toilets"
-                      },
-                      "oneOf": [
-                        {
-                          "title": "Oui",
-                          "properties": {
-                            "toilets": { "type": "string", "const": "yes" },
-                            "whch": {
-                              "type": "object",
-                              "title": "Toilettes accessible en fauteuil roulant ?",
-                              "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
-                              "x-props": {
-                                "prependIcon": "osm-wheelchair"
-                              },
-                              "x-class": "form-hide-desc",
-                              "oneOf": [
-                                {
-                                  "title": "Oui, complètement aménagé",
-                                  "properties": {
-                                    "toilets:wheelchair": {
-                                      "type": "string",
-                                      "const": "yes"
-                                    },
-                                    "hdr": {
-                                      "type": "object",
-                                      "title": "Barre de transfert ?",
-                                      "oneOf": [
-                                        {
-                                          "title": "Oui",
-                                          "properties": {
-                                            "toilets:handrail": {
-                                              "type": "string",
-                                              "const": "yes"
-                                            },
-                                            "toilets:handrail:wheelchair": {
-                                              "title": "Barre de transfert adaptée PMR ?",
-                                              "type": "string",
-                                              "description": "__Oui__ : distance entre l'axe de la cuvette et la barre entre 40 et 45 cm. Hauteur de la barre d'appui latérale entre 70 et 80 cm du sol.\n\n__Limitée__ : barre de transfert mal positionnée.\n\n__Non__ : barre de transfert fragile ou inutilisable.",
-                                              "oneOf": [
-                                                { "title": "Oui", "const": "yes" },
-                                                { "title": "Limitée", "const": "limited" },
-                                                { "title": "Non", "const": "no" },
-                                                { "title": "Ne sais pas", "const": "null" }
-                                              ]
-                                            }
-                                          }
-                                        },
-                                        {
-                                          "title": "Non",
-                                          "properties": {
-                                            "toilets:handrail": {
-                                              "type": "string",
-                                              "const": "no"
-                                            }
-                                          }
-                                        },
-                                        {
-                                          "title": "Ne sais pas",
-                                          "properties": {
-                                            "toilets:handrail": {
-                                              "type": "string",
-                                              "const": "null"
-                                            }
-                                          }
-                                        }
-                                      ]
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Oui, mais il manque certains équipements",
-                                  "properties": {
-                                    "toilets:wheelchair": {
-                                      "type": "string",
-                                      "const": "limited"
-                                    },
-                                    "toilets:sign:wheelchair": {
-                                      "title": "Signalétique PMR pour les toilettes ?",
-                                      "type": "string",
-                                      "oneOf": [
-                                        { "title": "Oui", "const": "yes" },
-                                        { "title": "Non", "const": "no" },
-                                        { "title": "Ne sais pas", "const": "null" }
-                                      ]
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Non, complètement inaccessible",
-                                  "properties": {
-                                    "toilets:wheelchair": {
-                                      "type": "string",
-                                      "const": "no"
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Ne sais pas",
-                                  "properties": {
-                                    "toilets:wheelchair": {
-                                      "type": "string",
-                                      "const": "null"
-                                    }
-                                  }
-                                }
-                              ]
-                            },
-                            "hdwsh": {
-                              "type": "object",
-                              "title": "Lavabo ?",
-                              "x-props": {
-                                "prependIcon": "osm-hydroalcoholic_gel"
-                              },
-                              "oneOf": [
-                                {
-                                  "title": "Oui",
-                                  "properties": {
-                                    "toilets:handwashing": {
-                                      "type": "string",
-                                      "const": "yes"
-                                    },
-                                    "toilets:handwashing:length": {
-                                      "title": "Profondeur du lavabo (en mètres)",
-                                      "type": "number",
-                                      "minimum": 0
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Non",
-                                  "properties": {
-                                    "toilets:handwashing": {
-                                      "type": "string",
-                                      "const": "no"
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Ne sais pas",
-                                  "properties": {
-                                    "toilets:handwashing": {
-                                      "type": "string",
-                                      "const": "null"
-                                    }
-                                  }
-                                }
-                              ]
-                            }
-                          }
-                        },
-                        {
-                          "title": "Non",
-                          "properties": { "toilets": { "type": "string", "const": "no" } }
-                        },
-                        {
-                          "title": "Ne sais pas",
-                          "properties": { "toilets": { "type": "string", "const": "null" } }
-                        }
-                      ]
-                    }
-                  }
-                },
-                "secelv": {
-                  "type": "object",
-                  "title": "Ascenseur",
-                  "properties": {
-                    "elvtr": {
-                      "type": "object",
-                      "title": "Ascenseur ?",
-                      "x-props": {
-                        "prependIcon": "osm-elevator"
-                      },
-                      "oneOf": [
-                        {
-                          "title": "Oui",
+                  "title": "Toilettes ?",
+                  "x-props": {
+                    "prependIcon": "osm-toilets"
+                  },
+                  "oneOf": [
+                    {
+                      "title": "Présents",
+                      "properties": {
+                        "toilets": { "type": "string", "const": "yes" },
+                        "hdwsh": {
                           "type": "object",
-                          "properties": {
-                            "elevator": {
-                              "type": "string",
-                              "const": "yes"
-                            },
-                            "whch": {
-                              "type": "object",
-                              "title": "Ascenseur accessible en fauteuil roulant ?",
-                              "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
-                              "x-class": "form-hide-desc",
-                              "x-props": {
-                                "prependIcon": "osm-wheelchair"
-                              },
-                              "oneOf": [
-                                {
-                                  "title": "Oui",
-                                  "properties": {
-                                    "elevator:wheelchair": {
-                                      "type": "string",
-                                      "const": "yes"
-                                    }
-                                  }
+                          "title": "Lavabo ?",
+                          "x-props": {
+                            "prependIcon": "osm-hydroalcoholic_gel"
+                          },
+                          "oneOf": [
+                            {
+                              "title": "Oui",
+                              "properties": {
+                                "toilets:handwashing": {
+                                  "type": "string",
+                                  "const": "yes"
                                 },
-                                {
-                                  "title": "Limitée",
-                                  "properties": {
-                                    "elevator:wheelchair": {
-                                      "type": "string",
-                                      "const": "limited"
-                                    },
-                                    "elevator:sign:wheelchair": {
-                                      "title": "Signalétique PMR sur l'ascenseur",
-                                      "type": "string",
-                                      "oneOf": [
-                                        { "title": "Oui", "const": "yes" },
-                                        { "title": "Non", "const": "no" },
-                                        { "title": "Ne sais pas", "const": "null" }
-                                      ]
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Non",
-                                  "properties": {
-                                    "elevator:wheelchair": {
-                                      "type": "string",
-                                      "const": "no"
-                                    }
-                                  }
-                                },
-                                {
-                                  "title": "Ne sais pas",
-                                  "properties": {
-                                    "elevator:wheelchair": {
-                                      "type": "string",
-                                      "const": "null"
-                                    }
-                                  }
+                                "toilets:handwashing:length": {
+                                  "title": "Profondeur du lavabo (en mètres)",
+                                  "type": "string",
+                                  "format": "text",
+                                  "pattern": "^(|\\d+(\\.\\d+)?)$"
                                 }
-                              ]
-                            },
-                            "elevator:width": {
-                              "type": "number",
-                              "title": "Largeur cabine d'ascenseur (en mètres)",
-                              "minimum": 0,
-                              "x-slots": {
-                                "before": "#### Plus de détails (optionnel)"
                               }
                             },
-                            "elevator:length": {
-                              "type": "number",
-                              "title": "Longueur cabine d'ascenseur (en mètres)",
-                              "minimum": 0
+                            {
+                              "title": "Non",
+                              "properties": {
+                                "toilets:handwashing": {
+                                  "type": "string",
+                                  "const": "no"
+                                }
+                              }
                             },
-                            "elevator:handrail": {
-                              "title": "Main courante dans ascenseur ?",
-                              "type": "string",
-                              "oneOf": [
-                                { "title": "Oui", "const": "yes" },
-                                { "title": "Non", "const": "no" },
-                                { "title": "Ne sais pas", "const": "null" }
-                              ]
-                            },
-                            "elevator:mirror": {
-                              "title": "Mirroir face à l'entrée dans ascenseur ?",
-                              "type": "string",
-                              "oneOf": [
-                                { "title": "Oui", "const": "yes" },
-                                { "title": "Non", "const": "no" },
-                                { "title": "Ne sais pas", "const": "null" }
-                              ]
-                            },
-                            "custom:elevator:buttons:height": {
-                              "type": "number",
-                              "title": "Hauteur du pavé numérique (en mètres)",
-                              "minimum": 0
-                            },
-                            "elevator:button_operated:wheelchair": {
-                              "title": "Bouton d'appel accessible ?",
-                              "type": "string",
-                              "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
-                              "oneOf": [
-                                { "title": "Oui", "const": "yes" },
-                                { "title": "Non", "const": "no" },
-                                { "title": "Ne sais pas", "const": "null" }
-                              ]
+                            {
+                              "title": "Ne sais pas",
+                              "properties": {
+                                "toilets:handwashing": {
+                                  "type": "string",
+                                  "const": "null"
+                                }
+                              }
                             }
-                          }
+                          ]
                         },
-                        {
-                          "title": "Non",
-                          "type": "object",
-                          "properties": {
-                            "elevator": {
-                              "type": "string",
-                              "const": "no"
-                            }
-                          }
+                        "toilets:wheelchair": {
+                          "type": "string",
+                          "title": "Accessibles en fauteuil roulant ?",
+                          "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
+                          "x-class": "form-hide-desc",
+                          "x-hide-readOnly": true,
+                          "x-props": {
+                            "prependIcon": "osm-wheelchair"
+                          },
+                          "oneOf": [
+                            { "title": "Oui", "const": "yes" },
+                            { "title": "Limité", "const": "limited" },
+                            { "title": "Non", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
                         },
-                        {
-                          "title": "Ne sais pas",
+                        "wheelchair:description": {
+                          "title": "Précisions sur l'accessibilité",
+                          "type": "string",
+                          "format": "text",
+                          "maxLength": 250
+                        },
+                        "toilets:sign:wheelchair": {
+                          "title": "Signalétique fauteuil roulant ?",
+                          "type": "string",
+                          "oneOf": [
+                            { "title": "Présente", "const": "yes" },
+                            { "title": "Absente", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "toilets:sit_height": {
+                          "x-slots": {
+                            "before": "#### Plus de détails (optionnel)"
+                          },
+                          "title": "Hauteur d'assise (en mètres)",
+                          "type": "string",
+                          "format": "text",
+                          "pattern": "^(|\\d+(\\.\\d+)?)$"
+                        },
+                        "hdr": {
                           "type": "object",
-                          "properties": {
-                            "elevator": {
-                              "type": "string",
-                              "const": "null"
+                          "title": "Barre de transfert ?",
+                          "oneOf": [
+                            {
+                              "title": "Présente",
+                              "properties": {
+                                "toilets:handrail": {
+                                  "type": "string",
+                                  "const": "yes"
+                                },
+                                "toilets:handrail:wheelchair": {
+                                  "title": "Barre de transfert accessible ?",
+                                  "type": "string",
+                                  "description": "__Oui__ : distance entre l'axe de la cuvette et la barre entre 40 et 45 cm. Hauteur de la barre d'appui latérale entre 70 et 80 cm du sol.\n\n__Limitée__ : barre de transfert mal positionnée.\n\n__Non__ : barre de transfert fragile ou inutilisable.",
+                                  "oneOf": [
+                                    { "title": "Oui", "const": "yes" },
+                                    { "title": "Limitée", "const": "limited" },
+                                    { "title": "Non", "const": "no" },
+                                    { "title": "Ne sais pas", "const": "null" }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "title": "Absente",
+                              "properties": {
+                                "toilets:handrail": {
+                                  "type": "string",
+                                  "const": "no"
+                                }
+                              }
+                            },
+                            {
+                              "title": "Ne sais pas",
+                              "properties": {
+                                "toilets:handrail": {
+                                  "type": "string",
+                                  "const": "null"
+                                }
+                              }
                             }
-                          }
+                          ]
                         }
-                      ]
+                      }
+                    },
+                    {
+                      "title": "Absents",
+                      "properties": { "toilets": { "type": "string", "const": "no" } }
+                    },
+                    {
+                      "title": "Ne sais pas",
+                      "properties": { "toilets": { "type": "string", "const": "null" } }
                     }
-                  }
+                  ]
                 }
               }
-            }
-          }
-        },
-        "details": {
-          "title": "Détails",
-          "type": "object",
-          "properties": {
-            "custom:reception:visibility": {
-              "title": "Accueil repérable ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
             },
-            "access:wheelchair": {
-              "title": "Personnel formé à l'accueil PMR ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
+            "secelv": {
+              "type": "object",
+              "title": "Ascenseur",
+              "properties": {
+                "elvtr": {
+                  "type": "object",
+                  "title": "Ascenseur ?",
+                  "x-props": {
+                    "prependIcon": "osm-elevator"
+                  },
+                  "oneOf": [
+                    {
+                      "title": "Présent",
+                      "type": "object",
+                      "properties": {
+                        "elevator": {
+                          "type": "string",
+                          "const": "yes"
+                        },
+                        "elevator:wheelchair": {
+                          "type": "string",
+                          "title": "Accessible en fauteuil roulant ?",
+                          "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
+                          "x-class": "form-hide-desc",
+                          "x-props": {
+                            "prependIcon": "osm-wheelchair"
+                          },
+                          "oneOf": [
+                            { "title": "Oui", "const": "yes" },
+                            { "title": "Limité", "const": "limited" },
+                            { "title": "Non", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "elevator:wheelchair:description": {
+                          "title": "Précisions",
+                          "type": "string",
+                          "format": "text",
+                          "maxLength": 250
+                        },
+                        "elevator:sign:wheelchair": {
+                          "title": "Signalétique fauteuil roulant ?",
+                          "type": "string",
+                          "oneOf": [
+                            { "title": "Présente", "const": "yes" },
+                            { "title": "Absente", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "elevator:width": {
+                          "title": "Largeur de la cabine (en mètres)",
+                          "type": "string",
+                          "format": "text",
+                          "pattern": "^(|\\d+(\\.\\d+)?)$",
+                          "x-slots": {
+                            "before": "#### Plus de détails (optionnel)"
+                          }
+                        },
+                        "elevator:length": {
+                          "title": "Longueur de la cabine (en mètres)",
+                          "type": "string",
+                          "format": "text",
+                          "pattern": "^(|\\d+(\\.\\d+)?)$"
+                        },
+                        "elevator:handrail": {
+                          "title": "Main courante ?",
+                          "type": "string",
+                          "oneOf": [
+                            { "title": "Présente", "const": "yes" },
+                            { "title": "Absente", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "elevator:mirror": {
+                          "title": "Mirroir face à l'entrée ?",
+                          "type": "string",
+                          "oneOf": [
+                            { "title": "Présent", "const": "yes" },
+                            { "title": "Absent", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "custom:elevator:buttons:height": {
+                          "title": "Hauteur du pavé numérique (en mètres)",
+                          "type": "string",
+                          "format": "text",
+                          "pattern": "^(|\\d+(\\.\\d+)?)$"
+                        },
+                        "elevator:button_operated:wheelchair": {
+                          "title": "Bouton d'appel accessible ?",
+                          "type": "string",
+                          "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
+                          "oneOf": [
+                            { "title": "Oui", "const": "yes" },
+                            { "title": "Non", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "title": "Absent",
+                      "type": "object",
+                      "properties": {
+                        "elevator": {
+                          "type": "string",
+                          "const": "no"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Ne sais pas",
+                      "type": "object",
+                      "properties": {
+                        "elevator": {
+                          "type": "string",
+                          "const": "null"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
             },
-            "custom:wheelchair:priority_line": {
-              "title": "File prioritaire PMR ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
+            "secbtn": {
+              "type": "object",
+              "title": "Bouton d'appel",
+              "properties": {
+                "btn": {
+                  "type": "object",
+                  "title": "Bouton à l'entrée ?",
+                  "oneOf": [
+                    {
+                      "title": "Présent",
+                      "properties": {
+                        "button_operated": {
+                          "type": "string",
+                          "const": "yes"
+                        },
+                        "button_operated:wheelchair": {
+                          "title": "Accessibilité du bouton ?",
+                          "type": "string",
+                          "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
+                          "oneOf": [
+                            { "title": "Oui", "const": "yes" },
+                            { "title": "Non", "const": "no" },
+                            { "title": "Ne sais pas", "const": "null" }
+                          ]
+                        },
+                        "button_operated:height": {
+                          "title": "Hauteur du bouton (en mètres)",
+                          "type": "string",
+                          "format": "text",
+                          "pattern": "^(|\\d+(\\.\\d+)?)$",
+                          "x-slots": {
+                            "before": "#### Plus de détails (optionnel)"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "title": "Absent",
+                      "properties": {
+                        "button_operated": {
+                          "type": "string",
+                          "const": "no"
+                        }
+                      }
+                    },
+                    {
+                      "title": "Ne sais pas",
+                      "properties": {
+                        "button_operated": {
+                          "type": "string",
+                          "const": "null"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
             }
           }
         }
@@ -1247,28 +1268,32 @@
     },
     "erp_housing": {
       "x-type": "form-extension",
-      "x-map-tags": {
-        "rooms": "details.rooms",
-        "rooms:disabled": "details.rooms:disabled"
-      },
       "properties": {
-        "details": {
+        "equipments": {
           "properties": {
-            "rooms": {
-              "type": "integer",
-              "title": "Nombre de chambres",
-              "minimum": 0,
-              "x-props": {
-                "prependIcon": "osm-hotel"
-              }
-            },
-            "rooms:disabled": {
-              "type": "integer",
-              "title": "Nombre de chambres adaptées PMR",
-              "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre)\n* Portes facilement ouvrables et suffisamment larges (> 80cm)\n* Pas de marches\n* Espace de retournement (170*170cm)\n* Hauteur du siège de toilette adapté (entre 45 et 55 cm)\n* Main courante à bonne hauteur (entre 70 et 80 cm du sol)\n* Lavabo accessible (à moins de 80cm du sol)\n* L’espace de transfert est adapté (80 x 130 cm)",
-              "minimum": 0,
-              "x-props": {
-                "prependIcon": "osm-wheelchair"
+            "sechsg": {
+              "type": "object",
+              "title": "Chambres",
+              "properties": {
+                "rooms": {
+                  "title": "Nombre de chambres",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$",
+                  "x-props": {
+                    "prependIcon": "osm-hotel"
+                  }
+                },
+                "rooms:disabled": {
+                  "title": "Nombre de chambres accessibles",
+                  "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre)\n* Portes facilement ouvrables et suffisamment larges (> 80cm)\n* Pas de marches\n* Espace de retournement (170*170cm)\n* Hauteur du siège de toilette adapté (entre 45 et 55 cm)\n* Main courante à bonne hauteur (entre 70 et 80 cm du sol)\n* Lavabo accessible (à moins de 80cm du sol)\n* L’espace de transfert est adapté (80 x 130 cm)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$",
+                  "x-props": {
+                    "prependIcon": "osm-wheelchair"
+                  }
+                }
               }
             }
           }
@@ -1278,32 +1303,41 @@
     "erp_clothes": {
       "x-type": "form-extension",
       "properties": {
-        "basics": {
+        "equipments": {
           "properties": {
-            "custom:nb_cabines_pmr": {
-              "type": "integer",
-              "title": "Nombre de cabines accessibles",
-              "description": "Aucune difficulté d’accès : pas de marches, largeur d'entrée de la cabine > 80 cm, espace de retournement de 1.7 * 1.7 m",
-              "minimum": 0
-            },
-            "custom:nb_cabines_signale_pmr": {
-              "type": "integer",
-              "title": "Nombre de cabines avec signalétique PMR",
-              "minimum": 0
-            }
-          }
-        },
-        "details": {
-          "properties": {
-            "custom:cabine_width": {
-              "type": "number",
-              "title": "Largeur de la cabine",
-              "minimum": 0
-            },
-            "custom:cabine_length": {
-              "type": "number",
-              "title": "Longueur de la cabine",
-              "minimum": 0
+            "seccab": {
+              "type": "object",
+              "title": "Cabines",
+              "properties": {
+                "custom:nb_cabines_pmr": {
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$",
+                  "title": "Nombre de cabines accessibles",
+                  "description": "Aucune difficulté d’accès : pas de marches, largeur d'entrée de la cabine > 80 cm, espace de retournement de 1.7 * 1.7 m"
+                },
+                "custom:nb_cabines_signale_pmr": {
+                  "title": "Nombre de cabines avec signalétique PMR",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$"
+                },
+                "custom:cabine_width": {
+                  "title": "Largeur de la cabine",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$",
+                  "x-slots": {
+                    "before": "#### Plus de détails (optionnel)"
+                  }
+                },
+                "custom:cabine_length": {
+                  "title": "Longueur de la cabine",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
+              }
             }
           }
         }
@@ -1318,16 +1352,16 @@
       },
       "properties": {
         "basics": {
-          "title": "Général",
+          "title": "Lieu",
           "type": "object",
           "properties": {
             "wheelchair": {
               "type": "string",
               "title": "Accessible en fauteuil roulant ?",
-              "description": "__Oui__ : largeur suffisante (> 120 cm si aucun mur ou barrière sur les côtés, > 140 cm sinon), faible dévers (< 1%), faible inclinaison (< 5%, pas de rampe ou découpe au niveau des rampes), surface du trottoir praticable (assez dur et ferme, pas de trou ou fente > 2 cm).\n\n__Non__ : impossible d'accéder ou de circuler sur le trottoir.\n\n__Limitée__ : les abaissées de trottoirs sont moyennement accessibles (3 cm de haut ou pente > 5% ou caniveau qui creuse l'accès), la circulation sur le trottoir est difficile. Possible d'accéder avec de l'aide.",
+              "description": "__Oui__ : largeur suffisante (> 120 cm si aucun mur ou barrière sur les côtés, > 140 cm sinon), faible dévers (< 1%), faible inclinaison (< 5%, pas de rampe ou découpe au niveau des rampes), surface du trottoir praticable (assez dur et ferme, pas de trou ou fente > 2 cm).\n\n__Non__ : impossible d'accéder ou de circuler sur le trottoir.\n\n__Limité__ : les abaissées de trottoirs sont moyennement accessibles (3 cm de haut ou pente > 5% ou caniveau qui creuse l'accès), la circulation sur le trottoir est difficile. Possible d'accéder avec de l'aide.",
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
-                { "title": "Difficilement, avec de l'aide", "const": "limited" },
+                { "title": "Limité", "const": "limited" },
                 { "title": "Non", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ],
@@ -1337,16 +1371,17 @@
               }
             },
             "height": {
-              "type": "number",
               "title": "Hauteur de la plateforme (en mètres)",
-              "minimum": 0
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
             "sign:wheelchair": {
               "title": "Signalétique PMR",
               "type": "string",
               "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
+                { "title": "Présente", "const": "yes" },
+                { "title": "Absente", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
             }
@@ -1355,64 +1390,82 @@
         "details": {
           "title": "Détails",
           "type": "object",
+          "x-props": {
+            "tile": true,
+            "mandatory": true
+          },
+          "x-display": "expansion-panels",
           "properties": {
-            "name": {
-              "type": "string",
-              "title": "Nom de l'arrêt",
-              "format": "text",
-              "x-hide-readOnly": true
+            "secarret": {
+              "type": "object",
+              "title": "Arrêt",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Nom de l'arrêt",
+                  "format": "text",
+                  "x-hide-readOnly": true
+                },
+                "information": {
+                  "type": "string",
+                  "title": "Tableau d'informations ?",
+                  "oneOf": [
+                    { "title": "Présent", "const": "board" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                },
+                "passenger_information_display": {
+                  "title": "Panneau d'affichage électronique temps réel ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Présent", "const": "yes" },
+                    { "title": "Absent", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                },
+                "bench": {
+                  "title": "Banc ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Présent", "const": "yes" },
+                    { "title": "Absent", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                },
+                "shelter": {
+                  "title": "Abri ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Présent", "const": "yes" },
+                    { "title": "Absent", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
             },
-            "information": {
-              "type": "string",
-              "title": "Tableau d'informations ?",
-              "oneOf": [
-                { "title": "Oui", "const": "board" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
-            },
-            "passenger_information_display": {
-              "title": "Panneau d'affichage électronique temps réel ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
-            },
-            "bench": {
-              "title": "Banc ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
-            },
-            "width": {
-              "type": "number",
-              "title": "Largeur de passage du quai (en mètres)",
-              "minimum": 0
-            },
-            "crossfall": {
-              "title": "Dévers (en %)",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "incline": {
-              "title": "Inclinaison (en %)",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
-            },
-            "shelter": {
-              "title": "Abri ?",
-              "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
+            "secaccs": {
+              "type": "object",
+              "title": "Accessibilité",
+              "properties": {
+                "width": {
+                  "title": "Largeur de passage du quai (en mètres)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                },
+                "crossfall": {
+                  "title": "Dévers (en %)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$"
+                },
+                "incline": {
+                  "title": "Inclinaison (en %)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+)$"
+                }
+              }
             }
           }
         }
@@ -1420,84 +1473,72 @@
     },
     "toilets": {
       "type": "object",
-      "x-display": "tabs",
       "x-props": {
         "tile": true,
         "mandatory": true
       },
+      "x-display": "expansion-panels",
+      "x-class-readOnly": "pa-2",
       "properties": {
-        "basics": {
-          "title": "Général",
+        "secgen": {
           "type": "object",
+          "title": "Général",
           "properties": {
-            "whch": {
-              "type": "object",
+            "wheelchair": {
+              "type": "string",
               "title": "Accessible en fauteuil roulant ?",
               "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
               "x-class": "form-hide-desc",
+              "x-hide-readOnly": true,
               "x-props": {
                 "prependIcon": "osm-wheelchair"
               },
               "oneOf": [
-                {
-                  "title": "Oui, complètement aménagé",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "yes"
-                    }
-                  },
-                  "x-hide-readOnly": true
-                },
-                {
-                  "title": "Oui, mais il manque certains équipements",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "limited"
-                    },
-                    "sign:wheelchair": {
-                      "title": "Signalétique PMR",
-                      "type": "string",
-                      "oneOf": [
-                        { "title": "Oui", "const": "yes" },
-                        { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "null" }
-                      ]
-                    }
-                  }
-                },
-                {
-                  "title": "Non, complètement inaccessible",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "no"
-                    }
-                  },
-                  "x-hide-readOnly": true
-                },
-                {
-                  "title": "Ne sais pas",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "null"
-                    }
-                  }
-                }
+                { "title": "Oui", "const": "yes" },
+                { "title": "Limité", "const": "limited" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "wheelchair:description": {
+              "title": "Précisions",
+              "type": "string",
+              "format": "text",
+              "maxLength": 250
+            },
+            "sign:disabled": {
+              "title": "Signalétique PMR",
+              "description": "Panneau ou pictogramme",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "handwashing": {
+              "title": "Lavabo ?",
+              "x-props": {
+                "prependIcon": "osm-hydroalcoholic_gel"
+              },
+              "type": "string",
+              "oneOf": [
+                { "title": "Présent", "const": "yes" },
+                { "title": "Absent", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
               ]
             }
           }
         },
-        "details": {
-          "title": "Détails",
+        "secdet": {
           "type": "object",
+          "title": "Plus de détails (optionnel)",
           "properties": {
             "sit_height": {
               "title": "Hauteur d'assise (en mètres)",
-              "type": "number",
-              "minimum": 0
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
             "hdr": {
               "type": "object",
@@ -1543,46 +1584,11 @@
                 }
               ]
             },
-            "hdwsh": {
-              "type": "object",
-              "title": "Lavabo ?",
-              "x-props": {
-                "prependIcon": "osm-hydroalcoholic_gel"
-              },
-              "oneOf": [
-                {
-                  "title": "Oui",
-                  "properties": {
-                    "handwashing": {
-                      "type": "string",
-                      "const": "yes"
-                    },
-                    "handwashing:length": {
-                      "title": "Profondeur du lavabo (en mètres)",
-                      "type": "number",
-                      "minimum": 0
-                    }
-                  }
-                },
-                {
-                  "title": "Non",
-                  "properties": {
-                    "handwashing": {
-                      "type": "string",
-                      "const": "no"
-                    }
-                  }
-                },
-                {
-                  "title": "Ne sais pas",
-                  "properties": {
-                    "handwashing": {
-                      "type": "string",
-                      "const": "null"
-                    }
-                  }
-                }
-              ]
+            "handwashing:length": {
+              "title": "Profondeur du lavabo (en mètres)",
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$"
             }
           }
         }
@@ -1590,56 +1596,78 @@
     },
     "elevator": {
       "type": "object",
-      "x-display": "tabs",
       "x-props": {
         "tile": true,
         "mandatory": true
       },
+      "x-display": "expansion-panels",
+      "x-class-readOnly": "pa-2",
       "properties": {
-        "basics": {
-          "title": "Général",
+        "secgen": {
           "type": "object",
+          "title": "Général",
           "properties": {
-            "whch": {
-              "type": "object",
+            "wheelchair": {
+              "type": "string",
               "title": "Accessible en fauteuil roulant ?",
               "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
               "x-class": "form-hide-desc",
+              "x-hide-readOnly": true,
               "x-props": {
                 "prependIcon": "osm-wheelchair"
               },
               "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Limité", "const": "limited" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            },
+            "wheelchair:description": {
+              "title": "Précisions",
+              "type": "string",
+              "format": "text",
+              "maxLength": 250
+            },
+            "sign:disabled": {
+              "title": "Signalétique PMR",
+              "description": "Panneau ou pictogramme",
+              "type": "string",
+              "oneOf": [
+                { "title": "Oui", "const": "yes" },
+                { "title": "Non", "const": "no" },
+                { "title": "Ne sais pas", "const": "null" }
+              ]
+            }
+          }
+        },
+        "secdet": {
+          "type": "object",
+          "title": "Plus de détails (optionnel)",
+          "properties": {
+            "hdr": {
+              "title": "Main courante dans ascenseur ?",
+              "type": "object",
+              "oneOf": [
                 {
-                  "title": "Oui",
+                  "title": "Présente",
                   "properties": {
-                    "wheelchair": {
+                    "handrail": {
                       "type": "string",
                       "const": "yes"
-                    }
-                  }
-                },
-                {
-                  "title": "Limitée",
-                  "properties": {
-                    "wheelchair": {
-                      "type": "string",
-                      "const": "limited"
                     },
-                    "sign:wheelchair": {
-                      "title": "Signalétique PMR sur l'ascenseur",
+                    "handrail:height": {
+                      "title": "Hauteur de la main courante (en mètres)",
                       "type": "string",
-                      "oneOf": [
-                        { "title": "Oui", "const": "yes" },
-                        { "title": "Non", "const": "no" },
-                        { "title": "Ne sais pas", "const": "null" }
-                      ]
+                      "format": "text",
+                      "pattern": "^(|\\d+(\\.\\d+)?)$"
                     }
                   }
                 },
                 {
-                  "title": "Non",
+                  "title": "Absente",
                   "properties": {
-                    "wheelchair": {
+                    "handrail": {
                       "type": "string",
                       "const": "no"
                     }
@@ -1648,38 +1676,25 @@
                 {
                   "title": "Ne sais pas",
                   "properties": {
-                    "wheelchair": {
+                    "handrail": {
                       "type": "string",
                       "const": "null"
                     }
                   }
                 }
               ]
-            }
-          }
-        },
-        "details": {
-          "title": "Détails",
-          "type": "object",
-          "properties": {
+            },
             "width": {
-              "type": "number",
-              "title": "Largeur cabine d'ascenseur (en mètres)",
-              "minimum": 0
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$",
+              "title": "Largeur cabine d'ascenseur (en mètres)"
             },
             "length": {
-              "type": "number",
-              "title": "Longueur cabine d'ascenseur (en mètres)",
-              "minimum": 0
-            },
-            "handrail": {
-              "title": "Main courante dans ascenseur ?",
               "type": "string",
-              "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
-              ]
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$",
+              "title": "Longueur cabine d'ascenseur (en mètres)"
             },
             "mirror": {
               "title": "Mirroir face à l'entrée dans ascenseur ?",
@@ -1690,11 +1705,6 @@
                 { "title": "Ne sais pas", "const": "null" }
               ]
             },
-            "custom:buttons:height": {
-              "type": "number",
-              "title": "Hauteur du pavé numérique (en mètres)",
-              "minimum": 0
-            },
             "button_operated:wheelchair": {
               "title": "Bouton d'appel accessible ?",
               "type": "string",
@@ -1704,6 +1714,12 @@
                 { "title": "Non", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
+            },
+            "custom:buttons:height": {
+              "title": "Hauteur du pavé numérique (en mètres)",
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$"
             }
           }
         }
@@ -1762,20 +1778,21 @@
           "properties": {
             "width": {
               "title": "Largeur de la place (en mètres)",
-              "type": "number",
-              "minimum": 0
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
             "crossfall": {
               "title": "Dévers (en %)",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+)$"
             },
             "incline": {
               "title": "Inclinaison (en %)",
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 100
+              "type": "string",
+              "format": "text",
+              "pattern": "^(|\\d+)$"
             }
           }
         }
@@ -1787,27 +1804,12 @@
         "tile": true,
         "mandatory": true
       },
-      "allOf": [
-        { "$ref": "#/definitions/wheelchair-requires-capacitydisabled" }
-      ],
-      "defintions": {
-        "wheelchair-requires-capacitydisabled": {
-          "anyOf": [
-            { "not": { "$ref": "#/definitions/empty-capacitydisabled" } },
-            { "required": "wheelchair" }
-          ]
-        },
-        "empty-capacitydisabled": {
-          "properties": {
-            "capacity:disabled": { "enum": [ "", 0 ] }
-          }
-        }
-      },
       "properties": {
         "capacity:disabled": {
           "title": "Nombre de places PMR du parking",
-          "type": "number",
-          "minimum": 0
+          "type": "string",
+          "format": "text",
+          "pattern": "^(|\\d+)$"
         },
         "wheelchair": {
           "type": "string",
