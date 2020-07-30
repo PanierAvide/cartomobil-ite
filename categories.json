@@ -698,7 +698,7 @@
                 "wheelchair": {
                   "type": "string",
                   "title": "Accessible en fauteuil roulant ?",
-                  "description": "__Oui__ : aucune difficulté d'accès, pas de marches, caisse adaptée (cordon CB extensible, hauteur de caisse 70 cm au-dessus des genoux, tablette à moins de 80 cm, vide de 30 cm), commandes accessibles (pavé < 1.3 m).\n\n__Limitée__ : accessible avec de l'aide, marche inférieure à 7 cm, certaines zones accessibles sans marches, d'autres accessibles avec de l'aide. Les espaces principaux sont accessibles.\n\n__Non__ : inaccessible.",
+                  "description": "__Oui__ : aucune difficulté d'accès, pas de marche ou ressaut < 3 cm, caisse adaptée le cas échéant (cordon CB extensible, hauteur du mobilier entre 90 et 130 cm, tablette entre 70 - 80 cm, vide de 30 cm), commandes accessibles (hauteur < 1.3 m).\n\n__Limitée__ : accessible avec de l'aide, marche inférieure à 7 cm, certaines zones accessibles sans marches, les espaces principaux sont accessibles.\n\n__Non__ : inaccessible.",
                   "x-class": "form-hide-desc",
                   "x-hide-readOnly": true,
                   "x-props": {
@@ -712,7 +712,7 @@
                   ]
                 },
                 "wheelchair:description": {
-                  "title": "Précisions",
+                  "title": "Précisions sur l'accessibilité",
                   "type": "string",
                   "format": "text",
                   "x-display": "textarea",
@@ -732,7 +732,7 @@
                           "const": "yes"
                         },
                         "service:wheelchair:description": {
-                          "title": "Précisions",
+                          "title": "Précisions sur l'accessibilité du service",
                           "type": "string",
                           "format": "text",
                           "x-display": "textarea",
@@ -750,7 +750,7 @@
                       }
                     },
                     {
-                      "title": "Ne sais pas / non applicable",
+                      "title": "Non applicable",
                       "properties": {
                         "service:wheelchair": {
                           "type": "string",
@@ -760,33 +760,10 @@
                     }
                   ]
                 },
-                "custom:wheelchair:priority_line": {
-                  "title": "File prioritaire PMR ?",
-                  "type": "string",
-                  "oneOf": [
-                    { "title": "Existante", "const": "yes" },
-                    { "title": "Absente", "const": "no" },
-                    { "title": "Ne sais pas / non applicable", "const": "null" }
-                  ]
-                },
-                "custom:reception:visibility": {
-                  "title": "Accueil repérable ?",
-                  "type": "string",
-                  "oneOf": [
-                    { "title": "Oui", "const": "yes" },
-                    { "title": "Non", "const": "no" },
-                    { "title": "Ne sais pas", "const": "null" }
-                  ]
-                }
-              }
-            },
-            "details": {
-              "type": "object",
-              "title": "Plus de détails (optionnel)",
-              "title-readOnly": "Détails",
-              "properties": {
                 "sgnwch": {
                   "title": "Signalétique fauteuil roulant ?",
+                  "x-class": "form-hide-desc",
+                  "description": "Pictogramme, plan d'information, signalétique horizontale...",
                   "type": "object",
                   "oneOf": [
                     {
@@ -796,13 +773,19 @@
                           "type": "string",
                           "const": "yes"
                         },
-                        "custom:sign:wheelchair:description": {
-                          "type": "string",
+                        "information:wheelchair": {
+                          "type": "array",
                           "title": "Type de signalétique",
-                          "description": "Pictogramme, plan d'information, signalétique horizontale...",
-                          "format": "text",
-                          "x-display": "textarea",
-                          "maxLength": 250
+                          "items": {
+                            "type": "string",
+                            "oneOf": [
+                              {"enum": ["sign"], "title": "Pictogramme"},
+                              {"enum": ["board"], "title": "Panneau"},
+                              {"enum": ["map"], "title": "Plan d'information"},
+                              {"enum": ["mark"], "title": "Marquage au sol"},
+                              {"enum": ["yes"], "title": "Autre"}
+                            ]
+                          }
                         },
                         "custom:sign:wheelchair:quality": {
                           "type": "string",
@@ -836,13 +819,39 @@
                     }
                   ]
                 },
+                "custom:wheelchair:priority_line": {
+                  "title": "File prioritaire PMR ?",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Existante", "const": "yes" },
+                    { "title": "Absente", "const": "no" },
+                    { "title": "Non applicable", "const": "null" }
+                  ]
+                },
+                "custom:reception:visibility": {
+                  "title": "Accueil repérable ?",
+                  "description": "L'accueil peut être repérable grâce à la signalétique, le contraste ou son positionnement.",
+                  "type": "string",
+                  "oneOf": [
+                    { "title": "Oui", "const": "yes" },
+                    { "title": "Non", "const": "no" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
+            },
+            "details": {
+              "type": "object",
+              "title": "Plus de détails (optionnel)",
+              "title-readOnly": "Détails",
+              "properties": {
                 "access:wheelchair": {
                   "title": "Personnel formé à l'accueil PMR ?",
                   "type": "string",
                   "oneOf": [
                     { "title": "Oui", "const": "yes" },
                     { "title": "Non", "const": "no" },
-                    { "title": "Ne sais pas / non applicable", "const": "null" }
+                    { "title": "Non applicable", "const": "null" }
                   ]
                 },
                 "custom:reception:height": {
@@ -852,7 +861,7 @@
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 },
                 "custom:cordon:width": {
-                  "title": "Taille du cordon (en mètres)",
+                  "title": "Taille du cordon CB (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
@@ -872,7 +881,7 @@
                   "x-props": {
                     "prependIcon": "osm-wheelchair"
                   },
-                  "x-hide-readOnly": true
+                  "x-link": "phone"
                 },
                 "phone": {
                   "type": "string",
@@ -883,7 +892,7 @@
                   "x-props": {
                     "prependIcon": "osm-phone"
                   },
-                  "x-hide-readOnly": true
+                  "x-link": "phone"
                 },
                 "email": {
                   "type": "string",
@@ -893,7 +902,7 @@
                   "x-props": {
                     "prependIcon": "osm-mail"
                   },
-                  "x-hide-readOnly": true
+                  "x-link": "email"
                 },
                 "website": {
                   "type": "string",
@@ -904,7 +913,7 @@
                   "x-props": {
                     "prependIcon": "osm-link"
                   },
-                  "x-hide-readOnly": true
+                  "x-link": "url"
                 },
                 "facebook": {
                   "type": "string",
@@ -914,7 +923,17 @@
                   "x-props": {
                     "prependIcon": "osm-fcbk"
                   },
-                  "x-hide-readOnly": true
+                  "x-link": "facebook"
+                },
+                "opening_hours": {
+                  "type": "string",
+                  "title": "Horaires d'ouverture",
+                  "format": "text",
+                  "description": "Voir <a href=\"https://wiki.openstreetmap.org/wiki/FR:Key:opening_hours\" target=\"_blank\">la documentation pour l'écriture des horaires d'ouverture</a>, ou utiliser <a href=\"https://projets.pavie.info/yohours/\" target=\"_blank\">l'outil YoHours</a> qui vous simplifie l'écriture dans le bon format.",
+                  "x-props": {
+                    "prependIcon": "osm-time"
+                  },
+                  "x-link": "opening_hours"
                 }
               }
             }
@@ -952,7 +971,7 @@
                           },
                           "oneOf": [
                             {
-                              "title": "Oui",
+                              "title": "Présent",
                               "properties": {
                                 "toilets:handwashing": {
                                   "type": "string",
@@ -967,7 +986,7 @@
                               }
                             },
                             {
-                              "title": "Non",
+                              "title": "Absent",
                               "properties": {
                                 "toilets:handwashing": {
                                   "type": "string",
@@ -989,9 +1008,8 @@
                         "toilets:wheelchair": {
                           "type": "string",
                           "title": "Accessibles en fauteuil roulant ?",
-                          "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
+                          "description": "__Oui__ : porte(s) facile(s) à ouvrir et large (> 90 cm), pas de marche ou ressaut < 3 cm, espace de retournement (170 * 170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80 * 130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 80 cm minimum, espace de transfert 80 * 130 cm) mais problème sur certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement (170 * 170 cm).\n\n__Non__ : inaccessible.",
                           "x-class": "form-hide-desc",
-                          "x-hide-readOnly": true,
                           "x-props": {
                             "prependIcon": "osm-wheelchair"
                           },
@@ -1002,7 +1020,7 @@
                             { "title": "Ne sais pas", "const": "null" }
                           ]
                         },
-                        "wheelchair:description": {
+                        "toilets:wheelchair:description": {
                           "title": "Précisions sur l'accessibilité",
                           "type": "string",
                           "format": "text",
@@ -1012,6 +1030,7 @@
                         "toilets:sign:wheelchair": {
                           "title": "Signalétique fauteuil roulant ?",
                           "type": "string",
+                          "description": "Panneau ou pictogramme",
                           "oneOf": [
                             { "title": "Présente", "const": "yes" },
                             { "title": "Absente", "const": "no" },
@@ -1107,7 +1126,7 @@
                         "elevator:wheelchair": {
                           "type": "string",
                           "title": "Accessible en fauteuil roulant ?",
-                          "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
+                          "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur d'homme en fauteuil (0.7 - 1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
                           "x-class": "form-hide-desc",
                           "x-props": {
                             "prependIcon": "osm-wheelchair"
@@ -1120,7 +1139,7 @@
                           ]
                         },
                         "elevator:wheelchair:description": {
-                          "title": "Précisions",
+                          "title": "Précisions sur l'accessibilité",
                           "type": "string",
                           "format": "text",
                           "x-display": "textarea",
@@ -1145,7 +1164,7 @@
                           }
                         },
                         "elevator:length": {
-                          "title": "Longueur de la cabine (en mètres)",
+                          "title": "Profondeur de la cabine (en mètres)",
                           "type": "string",
                           "format": "text",
                           "pattern": "^(|\\d+(\\.\\d+)?)$"
@@ -1160,7 +1179,7 @@
                           ]
                         },
                         "elevator:mirror": {
-                          "title": "Miroir face à l'entrée ?",
+                          "title": "Miroir sur le côté opposé à l'entrée ?",
                           "type": "string",
                           "oneOf": [
                             { "title": "Présent", "const": "yes" },
@@ -1292,7 +1311,7 @@
                 },
                 "rooms:disabled": {
                   "title": "Nombre de chambres accessibles",
-                  "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre)\n* Portes facilement ouvrables et suffisamment larges (> 80cm)\n* Pas de marches\n* Espace de retournement (170*170cm)\n* Hauteur du siège de toilette adapté (entre 45 et 55 cm)\n* Main courante à bonne hauteur (entre 70 et 80 cm du sol)\n* Lavabo accessible (à moins de 80cm du sol)\n* L’espace de transfert est adapté (80 x 130 cm)",
+                  "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre) : __porte(s)__ facilement ouvrable(s) et suffisamment large(s) (> 90 cm), __pas de marche__ ou ressaut < 3 cm, __espace de retournement__ (170 * 170 cm), __hauteur du siège__ de toilette adapté (45 - 55 cm), __main courante__ à bonne hauteur (70 - 80 cm du sol), __lavabo__ accessible (< 80 cm du sol), __espace de transfert__ adapté (80 * 130 cm)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+)$",
@@ -1320,7 +1339,7 @@
                   "format": "text",
                   "pattern": "^(|\\d+)$",
                   "title": "Nombre de cabines accessibles",
-                  "description": "Aucune difficulté d’accès : pas de marches, largeur d'entrée de la cabine > 80 cm, espace de retournement de 1.7 * 1.7 m"
+                  "description": "Aucune difficulté d’accès : pas de marche ou ressaut < 3 cm, largeur d'entrée de la cabine > 80 cm, espace de retournement de 1.7 * 1.7 m"
                 },
                 "custom:nb_cabines_signale_pmr": {
                   "title": "Nombre de cabines avec signalétique PMR",
@@ -1329,7 +1348,7 @@
                   "pattern": "^(|\\d+)$"
                 },
                 "custom:cabine_width": {
-                  "title": "Largeur de la cabine",
+                  "title": "Largeur de la cabine (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$",
@@ -1338,7 +1357,7 @@
                   }
                 },
                 "custom:cabine_length": {
-                  "title": "Longueur de la cabine",
+                  "title": "Longueur de la cabine (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
@@ -1364,7 +1383,7 @@
             "wheelchair": {
               "type": "string",
               "title": "Accessible en fauteuil roulant ?",
-              "description": "__Oui__ : largeur suffisante (> 120 cm si aucun mur ou barrière sur les côtés, > 140 cm sinon), faible dévers (< 1%), faible inclinaison (< 5%, pas de rampe ou découpe au niveau des rampes), surface du trottoir praticable (assez dur et ferme, pas de trou ou fente > 2 cm).\n\n__Non__ : impossible d'accéder ou de circuler sur le trottoir.\n\n__Limité__ : les abaissées de trottoirs sont moyennement accessibles (3 cm de haut ou pente > 5% ou caniveau qui creuse l'accès), la circulation sur le trottoir est difficile. Possible d'accéder avec de l'aide.",
+              "description": "__Oui__ : largeur de cheminement suffisante (> 120 cm si aucun mur ou barrière sur les côtés, > 140 cm sinon), pas de marche ou ressaut < 3 cm, faible dévers (< 1%), faible inclinaison (< 5%, pas de rampe), revêtement du trottoir praticable (assez dur et ferme, pas de trou ou fente > 2 cm).\n\n__Limité__ : les abaissées de trottoirs sont moyennement accessibles (3 cm de haut ou pente > 5% ou caniveau qui creuse l'accès), la circulation sur le trottoir est difficile. Possible d'accéder avec de l'aide.\n\n__Non__ : impossible d'accéder ou de circuler sur le trottoir.",
               "oneOf": [
                 { "title": "Oui", "const": "yes" },
                 { "title": "Limité", "const": "limited" },
@@ -1375,6 +1394,13 @@
               "x-props": {
                 "prependIcon": "osm-wheelchair"
               }
+            },
+            "wheelchair:description": {
+              "title": "Précisions sur l'accessibilité",
+              "type": "string",
+              "format": "text",
+              "x-display": "textarea",
+              "maxLength": 250
             },
             "height": {
               "title": "Hauteur de la plateforme (en mètres)",
@@ -1412,11 +1438,12 @@
                   "format": "text",
                   "x-hide-readOnly": true
                 },
-                "information": {
+                "information:board": {
                   "type": "string",
                   "title": "Tableau d'informations ?",
                   "oneOf": [
-                    { "title": "Présent", "const": "board" },
+                    { "title": "Présent", "const": "yes" },
+                    { "title": "Absent", "const": "no" },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
                 },
@@ -1459,14 +1486,14 @@
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 },
-                "crossfall": {
-                  "title": "Dévers (en %)",
+                "incline": {
+                  "title": "Inclinaison (en %)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+)$"
                 },
-                "incline": {
-                  "title": "Inclinaison (en %)",
+                "crossfall": {
+                  "title": "Dévers (en %)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+)$"
@@ -1493,7 +1520,7 @@
             "wheelchair": {
               "type": "string",
               "title": "Accessible en fauteuil roulant ?",
-              "description": "__Oui__ : porte facile à ouvrir et large (> 90 cm), pas de marche, espace de retournement (170x170 cm), hauteur de siège adaptée (45 - 55 cm), main courante (hauteur 70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80x130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, porte de 90 cm minimum, espace de transfert 80x130 cm) mais manque certains équipements (hauteur du siège, main courante, lavabo) ou manque l'espace de retournement.\n\n__Non__ : complètement inaccessible.",
+              "description": "__Oui__ : porte(s) facile(s) à ouvrir et lare (> 90 cm), pas de marche ou ressaut < 3 cm, espace de retournement (170 * 170 cm), hauteur de siège adaptée (45-55 cm), main courante (70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80 * 130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, portes de 80 cm minimum, espace de transfert 80 * 130 cm) mais problème sur certains équipements (main courante, hauteur du siège, lavabo) ou manque l’espace de retournement (170 * 170 cm).\n\n__Non__ : complètement inaccessible.",
               "x-class": "form-hide-desc",
               "x-hide-readOnly": true,
               "x-props": {
@@ -1507,7 +1534,7 @@
               ]
             },
             "wheelchair:description": {
-              "title": "Précisions",
+              "title": "Précisions sur l'accessibilité",
               "type": "string",
               "format": "text",
               "x-display": "textarea",
@@ -1518,8 +1545,8 @@
               "description": "Panneau ou pictogramme",
               "type": "string",
               "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
+                { "title": "Existante", "const": "yes" },
+                { "title": "Absente", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
             },
@@ -1553,7 +1580,7 @@
               "title": "Barre de transfert ?",
               "oneOf": [
                 {
-                  "title": "Oui",
+                  "title": "Présente",
                   "properties": {
                     "handrail": {
                       "type": "string",
@@ -1573,7 +1600,7 @@
                   }
                 },
                 {
-                  "title": "Non",
+                  "title": "Absente",
                   "properties": {
                     "handrail": {
                       "type": "string",
@@ -1618,7 +1645,7 @@
             "wheelchair": {
               "type": "string",
               "title": "Accessible en fauteuil roulant ?",
-              "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur en fauteuil (1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
+              "description": "__Oui__ : largeur de porte > 80 cm, dimensions aux normes (> 1 m de large, > 1.3 m de profondeur), dispose d'une main courante à l'intérieur, boutons à hauteur d'homme en fauteuil (0.7 - 1.3 m), précision d'arrêt de la cabine à 2 cm.\n\n__Limitée__ : ascenseur accessible mais sans main courante, les boutons sont à bonne hauteur et la porte est assez large.\n\n__Non__ : inaccessible.",
               "x-class": "form-hide-desc",
               "x-hide-readOnly": true,
               "x-props": {
@@ -1632,7 +1659,7 @@
               ]
             },
             "wheelchair:description": {
-              "title": "Précisions",
+              "title": "Précisions sur l'accessibilité",
               "type": "string",
               "format": "text",
               "x-display": "textarea",
@@ -1643,8 +1670,8 @@
               "description": "Panneau ou pictogramme",
               "type": "string",
               "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
+                { "title": "Présente", "const": "yes" },
+                { "title": "Absente", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
             }
@@ -1698,25 +1725,25 @@
               "type": "string",
               "format": "text",
               "pattern": "^(|\\d+(\\.\\d+)?)$",
-              "title": "Largeur cabine d'ascenseur (en mètres)"
+              "title": "Largeur de la cabine (en mètres)"
             },
             "length": {
               "type": "string",
               "format": "text",
               "pattern": "^(|\\d+(\\.\\d+)?)$",
-              "title": "Longueur cabine d'ascenseur (en mètres)"
+              "title": "Profondeur de la cabine (en mètres)"
             },
             "mirror": {
               "title": "Miroir face à l'entrée dans ascenseur ?",
               "type": "string",
               "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
+                { "title": "Présent", "const": "yes" },
+                { "title": "Absent", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
             },
             "button_operated:wheelchair": {
-              "title": "Bouton d'appel accessible ?",
+              "title": "Bouton d'appel accessible en fauteuil roulant ?",
               "type": "string",
               "description": "__Oui__ : bouton entre 70 et 130 cm du sol.\n\n__Non__ : bouton < 70 cm ou > 130 cm du sol.",
               "oneOf": [
@@ -1765,7 +1792,7 @@
               ]
             },
             "wheelchair:description": {
-              "title": "Précisions",
+              "title": "Précisions sur l'accessibilité",
               "type": "string",
               "format": "text",
               "x-display": "textarea",
@@ -1776,8 +1803,8 @@
               "description": "Panneau ou peinture au sol",
               "type": "string",
               "oneOf": [
-                { "title": "Oui", "const": "yes" },
-                { "title": "Non", "const": "no" },
+                { "title": "Existante", "const": "yes" },
+                { "title": "Absente", "const": "no" },
                 { "title": "Ne sais pas", "const": "null" }
               ]
             }
@@ -1825,7 +1852,7 @@
         },
         "wheelchair": {
           "type": "string",
-          "title": "Sont-elles accessibles ?",
+          "title": "Sont-elles accessibles, le cas échéant ?",
           "description": "__Oui__ : toutes les places sont aux normes (largeur > 3.30 m, pente < 2%) et disposent d'un cheminement accessible vers le trottoir (largeur > 80 cm).\n\n__Non__ : aucune place aux normes et toutes sont inaccessibles même avec de l'aide.\n\n__Limité__ : une partie des places sont difficiles d'accès (dimensions pas aux normes) ou le revêtement rend impossible la circulation pour une personne en fauteuil seule. Accès possible avec l'aide d'une tierce personne.",
           "x-class": "form-hide-desc",
           "x-hide-readOnly": true,
@@ -1840,7 +1867,7 @@
           ]
         },
         "wheelchair:description": {
-          "title": "Précisions",
+          "title": "Précisions sur l'accessibilité",
           "type": "string",
           "format": "text",
           "x-display": "textarea",
@@ -1851,8 +1878,8 @@
           "description": "Panneau ou peinture au sol",
           "type": "string",
           "oneOf": [
-            { "title": "Oui", "const": "yes" },
-            { "title": "Non", "const": "no" },
+            { "title": "Existante", "const": "yes" },
+            { "title": "Absente", "const": "no" },
             { "title": "Ne sais pas", "const": "null" }
           ]
         }

@@ -26,7 +26,7 @@
           <v-icon>osm-close</v-icon>
         </v-btn>
       </v-card-title>
-      <v-card-text>
+      <!--v-card-text>
         <p class="text-pre">{{ $t('learnmore.description', { brand }) }}</p>
         <v-row>
           <v-col
@@ -83,7 +83,7 @@
             </ul>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-text-->
     </v-card>
   </v-dialog>
 </template>

@@ -10,14 +10,14 @@
           <v-icon small>osm-plus</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="ml-2">
-          <v-list-item-title class="body-1">{{ $t('missing_shop') }}</v-list-item-title>
+          <v-list-item-title class="body-1">{{ $t('learnmore.contribute') }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </template>
 
     <v-card>
       <v-card-title>
-        {{ $t('missing_shop') }}
+        {{ $t('learnmore.contribute') }}
         <v-spacer></v-spacer>
         <v-btn
           icon
@@ -26,7 +26,7 @@
           <v-icon>osm-close</v-icon>
         </v-btn>
       </v-card-title>
-      <v-card-text>
+      <!--v-card-text>
         <p class="text-pre">{{ $t('missing_shop_dialog.description', { brand }) }}</p>
         <v-row>
           <v-col
@@ -92,7 +92,7 @@
             >Contactez nous</v-btn>
           </v-col>
         </v-row>
-      </v-card-text>
+      </v-card-text-->
     </v-card>
   </v-dialog>
 </template>

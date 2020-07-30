@@ -18,7 +18,7 @@ export default {
       else { return this.$t('categories.other'); }
     },
 
-    contact() {
+    link() {
       const phoneText = (p) => {
         return new PhoneNumber(p).getNumber('national');
       };
@@ -39,7 +39,6 @@ export default {
       const transform = {
         phone,
         mobile: phone,
-        "phone:covid19": phone,
         email(email) {
           return { text: email, href: `mailto:${email}` };
         },
@@ -56,10 +55,10 @@ export default {
         }
       };
       const tags = Object.assign({ website: this.place.properties.brand_hours || undefined }, this.place.properties.tags);
-      return (name) => {
+      return (name, type = null) => {
         const value = tags[name] || tags[`contact:${name}`];
         if (!value) return;
-        return value.split(';').map(transform[name] || (v => { return { text: v, href: v }; }));
+        return value.split(';').map(transform[name] || transform[type] || (v => { return { text: v, href: v }; }));
       };
     },
 

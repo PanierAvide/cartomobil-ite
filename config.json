@@ -9,6 +9,7 @@
   "osmUrl": "https://www.openstreetmap.org",
   "nominatimUrl": "https://nominatim.openstreetmap.org",
   "minZoomPoi": 12,
+  "minZoomAllPoi": 14.5,
   "maxZoomPoi": 13,
   "mapillaryClientId": "eDhQTTdnRmZJNXdYZWUwRDQxc1Nwdzo5ZDhkMDM5NzU5NDVjODBm",
   "mapboxToken": "pk.eyJ1IjoidmlvbGFpbmVkb3V0cmVsZWF1IiwiYSI6ImNrNWltZHlkdTBhamYzbnA4dGU4YnBnOHcifQ.oxUii0-HQVw20oGrLOu-0w",

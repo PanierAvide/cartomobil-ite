@@ -60,11 +60,11 @@
           />
           <v-slide-y-reverse-transition>
             <v-chip
-              v-if="mapZoom < minZoomPoi"
+              v-if="mapZoom < minZoomAllPoi"
               color="primary"
               class="zoom-chip mb-6"
               :class="{ 'push-up': !rgpdBannerHidden }"
-              @click="mapZoom = minZoomPoi"
+              @click="mapZoom = minZoomAllPoi"
             >
               {{ $t('zoomtosee') }}
             </v-chip>
@@ -162,6 +162,7 @@ export default {
       mapStyle: null,
       mapZoom: 0,
       minZoomPoi: config.minZoomPoi,
+      minZoomAllPoi: config.minZoomAllPoi,
       rgpdBannerHidden: false,
       sidebar: false,
       nbPlacesVisible: 0
@@ -415,6 +416,10 @@ export default {
   max-width: 300px;
   background: rgb(55, 52, 52);
   z-index: 2500 !important;
+  pointer-events: unset !important;
+}
+.vjsf-tooltip a {
+  color: #c5e2ff !important;
 }
 .vjsf-property-equipments.pl-2,
 .vjsf-property-basics.pl-2,

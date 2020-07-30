@@ -81,69 +81,16 @@
                 />
               </v-list-item-content>
             </v-list-item>
-
-            <detail-link
-              v-if="hasVending"
-              :title="$t(`details.vending.${place.properties.tags.vending}`)"
-              icon="osm-vending_machine"
-            />
           </v-list>
 
           <detail-schema :place="place" />
-
-          <template v-if="services.length > 0">
-            <v-subheader>{{ $t('details.services') }}</v-subheader>
-            <v-list class="py-0">
-              <detail-service
-                v-for="{ service, label, value } in services"
-                :key="service"
-                :title="label"
-                :icon="`osm-${service}`"
-                :icon2="value && `osm-${value}`"
-              />
-            </v-list>
-          </template>
-
-          <template v-if="place.properties.tags.opening_hours">
-            <v-subheader>{{ $t('details.normal_opening_hours') }}</v-subheader>
-            <v-list class="py-0">
-              <detail-opening-hours
-                :value="place.properties.tags.opening_hours"
-                :country="place.properties.country"
-                :coordinates="place.geometry.coordinates"
-              />
-            </v-list>
-          </template>
-
-          <template v-if="hasContactInfos">
-            <v-subheader>{{ $t('details.contact') }}</v-subheader>
-            <v-list class="py-0">
-              <template v-for="c in contactsDisplayed">
-                <template v-if="contact(c)">
-                  <detail-link
-                    v-for="value in contact(c)"
-                    :key="value.text"
-                    :href="value.href"
-                    :title="value.text"
-                    :icon="contacts[c]"
-                    :external="value.href.startsWith('http')"
-                  />
-                </template>
-              </template>
-            </v-list>
-          </template>
-
-          <!--update-detail-dialog
-            v-if="country === 'FR' && place.properties.brand"
-            :place="place"
-          /-->
 
           <mapillary-viewer
             v-if="mapillaryImage"
             :m-key="mapillaryImage"
             :cover="true"
             :marker="place.geometry"
-            class="card-mapillary"
+            class="card-mapillary ma-2"
           />
         </template>
       </div>
@@ -167,8 +114,6 @@ import { getRecentContribution } from '../../lib/recent_contributions';
 import isMobile from '../mixins/is_mobile';
 import placeMixin from '../mixins/place';
 import DetailHygiene from './detail_hygiene';
-import DetailLink from './detail_link';
-import DetailOpeningHours from './detail_opening_hours';
 import DetailState from './detail_state';
 import DetailService from './detail_service';
 import DetailSchema from './detail_schema';
@@ -178,20 +123,9 @@ import { categories } from '../../categories.json';
 import ContributeForm from '../contribute_form';
 import { findImage } from '../mapillary/mapillary';
 
-const CONTACTS = {
-  'phone:covid19': 'osm-phone_covid',
-  phone: 'osm-phone',
-  mobile: 'osm-mobile_phone',
-  email: 'osm-mail',
-  facebook: 'osm-fcbk',
-  website: 'osm-link'
-};
-
 export default {
   components: {
     DetailHygiene,
-    DetailLink,
-    DetailOpeningHours,
     DetailState,
     DetailService,
     DetailSchema,
@@ -277,41 +211,6 @@ export default {
       return !!(this.hasSpecificOpeningHours
                || this.place.properties.tags.opening_hours
                || this.place.properties.brand_hours);
-    },
-
-    hasContactInfos() {
-      return !!this.contactsDisplayed.find((c) => this.contact(c));
-    },
-
-    contacts() {
-      return CONTACTS;
-    },
-
-    contactsDisplayed() {
-      return Object.keys(CONTACTS);
-    },
-
-    services() {
-      if(
-        this.place
-        && categories[this.place.properties.cat1]
-        && categories[this.place.properties.cat1].subcategories[this.place.properties.cat2]
-        && categories[this.place.properties.cat1].subcategories[this.place.properties.cat2].details_tags
-      ) {
-        const details_tags = categories[this.place.properties.cat1].subcategories[this.place.properties.cat2].details_tags;
-        const valuesAsIcons = { "yes": "check", "no": "close" };
-
-        return details_tags
-          .filter(tagname => this.place.properties.tags[tagname])
-          .map(tagname => {
-            const osmVal = this.place.properties.tags[tagname];
-            const label = this.$t(`details.details_tags.${tagname}`) + (valuesAsIcons[osmVal] ? '' : ' : '+osmVal);
-            return { service: tagname, label: label, value: valuesAsIcons[osmVal] };
-          });
-      }
-      else {
-        return [];
-      }
     },
 
     infos() {

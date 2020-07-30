@@ -1030,11 +1030,12 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@koumoul/vjsf@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@koumoul/vjsf/-/vjsf-1.10.2.tgz#8e3d2ae9caf688d1100bb32ec243c5572c857fca"
-  integrity sha512-iAXmPR1ZGA3F4QbrFpd5bfVUTXzouNeRDRneQ98We82EzOASm0or5HVEQzyPtp/fIEGMnyMbSwm3vm4TelEFGg==
+"@koumoul/vjsf@^1.11.1":
+  version "1.11.3"
+  resolved "https://registry.yarnpkg.com/@koumoul/vjsf/-/vjsf-1.11.3.tgz#eb4de67648f59c4647f8636ef7cb2b932c4b91d5"
+  integrity sha512-WIZnFSJsDjwXznqKXprn4cUymEXxxTSMvyVCLkp9GdKWCyoddimq4EjEeveIdqZb32RiBaAm/or/SDrhv5OeMQ==
   dependencies:
+    debounce "^1.2.0"
     markdown-it "^8.4.2"
     match-all "^1.2.5"
     property-expr "^1.5.1"
@@ -3459,6 +3460,11 @@ de-indent@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/de-indent/-/de-indent-1.0.2.tgz#b2038e846dc33baa5796128d0804b455b8c1e21d"
   integrity sha1-sgOOhG3DO6pXlhKNCAS0VbjB4h0=
+
+debounce@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.0.tgz#44a540abc0ea9943018dc0eaa95cce87f65cd131"
+  integrity sha512-mYtLl1xfZLi1m4RtQYlZgJUNQjl4ZxVnHzIR8nLLgi4q1YT8o/WM+MK/f8yfcc9s5Ir5zRaPZyZU6xs1Syoocg==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
