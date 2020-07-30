@@ -32,13 +32,17 @@
     "about": "À propos",
     "contribute": "Contribuer",
     "missing_shop": "Un lieu est manquant ? Rajoutez le !",
-    "description": "« {brand} » est l’outil indispensable pour éviter les déplacements infructueux autour de chez vous durant la crise sanitaire et limiter ainsi le risque de contagion.\nCette carte collaborative vous permet de partager simplement les lieux ouverts ou fermés dans votre quartier. C’est la manière la plus efficace et la plus solidaire pour informer au mieux vos voisins et les habitants de votre ville.",
+    "description": "« {brand} » est l’outil indispensable pour des déplacements durables (« qui ne compromettent pas la capacité des générations futures à répondre à leurs besoins ») et donc inclusifs. Contraints de vous déplacer en fauteuil roulant, cette carte est faite pour vous !\n\nCette carte collaborative vous permet de partager les lieux accessibles pour les personnes en fauteuil roulant, et de remonter des obstacles au déplacement, pour une mobilité facilitée ! Pas besoin d’être en fauteuil pour participer, c’est la manière la plus solidaire de faciliter les déplacements de vos voisins, amis, familles, ou habitants de votre quartier qui se déplacent en fauteuil roulant.",
     "title": "En savoir plus",
     "press": "Presse",
     "disclaimer": "Mentions légales",
     "blog": "Blog",
     "townhalls": "Solution de communication de crise pour les mairies",
-    "osm_contributors": "Documentation pour contributeur OpenStreetMap"
+    "osm_contributors": "Documentation pour contributeur OpenStreetMap",
+    "contact_us": "Nous contacter",
+    "email": "Par courriel",
+    "bugs": "Remonter un bug sur la carte via GitHub",
+    "category": "Demander l'ajout d'une catégorie via GitHub"
   },
   "rgpd": {
     "consent": "En ces temps de crise sanitaire, vous prendriez bien un cookie sur votre ordinateur pour nos statistiques ?",
@@ -274,7 +278,7 @@
     "ferry": "Ferry",
     "taxi": "Taxi",
     "airport": "Aéroport",
-    "parking_pmr": "Parking PMR",
+    "parking_pmr": "Place PMR",
     "parking": "Parking",
     "tourism": "Tourisme",
     "beach_resort": "Plage",

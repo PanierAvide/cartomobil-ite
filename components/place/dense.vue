@@ -15,8 +15,8 @@
       <v-list-item-title>{{ title || type }}</v-list-item-title>
       <v-list-item-subtitle v-if="title && displayType">{{ type }}</v-list-item-subtitle>
       <v-list-item-subtitle
-        v-if="!$vuetify.breakpoint.smAndDown && (contact('phone') || contact('mobile'))"
-        v-text="(contact('phone') || contact('mobile'))[0].text"
+        v-if="!$vuetify.breakpoint.smAndDown && (link('phone') || link('mobile'))"
+        v-text="(link('phone') || link('mobile'))[0].text"
       />
       <dense-opening-hours
         v-if="place.properties.tags.opening_hours"
@@ -25,11 +25,11 @@
       <v-list-item-subtitle v-else>{{ $t(`details.state_short.${place.properties.status}`) }}</v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action
-      v-if="$vuetify.breakpoint.smAndDown && (contact('phone') || contact('mobile'))"
+      v-if="$vuetify.breakpoint.smAndDown && (link('phone') || link('mobile'))"
       class="my-1"
     >
       <v-btn
-        :href="(contact('phone') || contact('mobile'))[0].href"
+        :href="(link('phone') || link('mobile'))[0].href"
         icon
         @click.stop
       >

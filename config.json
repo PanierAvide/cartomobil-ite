@@ -27,7 +27,9 @@
   "locales": {
     "DEFAULT": {
       "about": "https://www.avoscartes.pf",
-      "disclaimer": "https://www.avoscartes.pf"
+      "disclaimer": "https://www.avoscartes.pf",
+      "email": "mailto:cartomobilite@avoscartes.pf",
+      "issues": "https://github.com/PanierAvide/cartomobil-ite/issues/new"
     }
   }
 }

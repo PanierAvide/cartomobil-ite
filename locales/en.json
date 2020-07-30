@@ -32,13 +32,17 @@
     "about": "About",
     "contribute": "Contribute",
     "missing_shop": "Report a missing shop",
-    "description": "« {brand} » is the essential tool to avoid unsuccessful movement around your home during lockdown and thus limit the risk of contagion.\nThis collaborative map allows you to easily share open or closed places in your neighborhood. It is the most effective and united way to better inform your neighbors and the inhabitants of your city.",
+    "description": "« {brand} » is the indispensable tool for sustainable (« that does not compromise the ability of future generations to meet their needs ») and therefore inclusive travel. Forced to move around in a wheelchair, this card is made for you!\n\nThis collaborative map allows you to share wheelchair-accessible places, and to warn about obstacles to movement, for easier mobility! No need to be in a wheelchair to participate, it's the most supportive way to facilitate the mobility of your neighbours, friends, family, or people in your neighbourhood who use wheelchairs.",
     "title": "Learn more",
     "press": "Press",
     "disclaimer": "Disclaimer",
     "blog": "Blog",
     "townhalls": "Crisis communication solution for townhalls",
-    "osm_contributors": "Documentation for OpenStreetMap contributors"
+    "osm_contributors": "Documentation for OpenStreetMap contributors",
+    "contact_us": "Contact us",
+    "email": "By email",
+    "bugs": "Warn us about a bug on map on GitHub",
+    "category": "Ask for new categories on GitHub"
   },
   "rgpd": {
     "consent": "In these times of lockdown, would you take a cookie on your computer for our statistics?",

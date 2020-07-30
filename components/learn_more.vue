@@ -26,37 +26,12 @@
           <v-icon>osm-close</v-icon>
         </v-btn>
       </v-card-title>
-      <!--v-card-text>
+      <v-card-text>
         <p class="text-pre">{{ $t('learnmore.description', { brand }) }}</p>
         <v-row>
           <v-col
             cols="12"
-            md="6"
-          >
-            <h2 class="mb-3">{{ $t('learnmore.contribute') }}</h2>
-            <ul>
-              <li>
-                <a :href="links.shopMissing" target="_blank" rel="noopener">
-                  {{ $t('learnmore.missing_shop') }}
-                </a>
-              </li>
-              <li>
-                <a :href="links.townhalls" target="_blank" rel="noopener">
-                  {{ $t('learnmore.townhalls', { brand }) }}
-                </a>
-              </li>
-              <li
-                v-if="$i18n.locale.startsWith('fr')"
-              >
-                <a href="https://wiki.openstreetmap.org/wiki/France/Covid-19" target="_blank" rel="noopener">
-                  {{ $t('learnmore.osm_contributors') }}
-                </a>
-              </li>
-            </ul>
-          </v-col>
-          <v-col
-            cols="12"
-            md="6"
+            md="5"
           >
             <h2 class="mb-3">{{ $t('learnmore.about') }}</h2>
             <ul>
@@ -71,19 +46,37 @@
                 </a>
               </li>
               <li>
-                <a :href="links.press" target="_blank" rel="noopener">
-                  {{ $t('learnmore.press') }}
-                </a>
-              </li>
-              <li>
                 <a :href="links.disclaimer" target="_blank" rel="noopener">
                   {{ $t('learnmore.disclaimer') }}
                 </a>
               </li>
             </ul>
           </v-col>
+          <v-col
+            cols="12"
+            md="7"
+          >
+            <h2 class="mb-3">{{ $t('learnmore.contact_us') }}</h2>
+            <ul>
+              <li>
+                <a :href="links.email" target="_blank" rel="noopener">
+                  {{ $t('learnmore.email') }}
+                </a>
+              </li>
+              <li>
+                <a :href="links.issues" target="_blank" rel="noopener">
+                  {{ $t('learnmore.bugs') }}
+                </a>
+              </li>
+              <li>
+                <a :href="links.issues" target="_blank" rel="noopener">
+                  {{ $t('learnmore.category') }}
+                </a>
+              </li>
+            </ul>
+          </v-col>
         </v-row>
-      </v-card-text-->
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
