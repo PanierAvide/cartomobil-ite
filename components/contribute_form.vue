@@ -142,7 +142,7 @@ export default {
           this.$emit('success');
           this.$store.commit('setContribution', [
              this.place.properties.fid,
-             this.payload.tags.wheelchair,
+             this.payload.tags.wheelchair === 'null' ? 'unknown' : this.payload.tags.wheelchair,
              parseInt((Date.now() / 1000).toFixed(0))
            ]);
         }
