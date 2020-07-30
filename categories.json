@@ -933,7 +933,8 @@
                   "x-props": {
                     "prependIcon": "osm-time"
                   },
-                  "x-link": "opening_hours"
+                  "x-link": "opening_hours",
+                  "x-rules": [ "opening_hours" ]
                 }
               }
             }
