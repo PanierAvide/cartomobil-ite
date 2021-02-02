@@ -45,7 +45,7 @@ import { apiUrl } from '../config.json';
 import parseId from '../lib/parse_id';
 import DetailSchema from './place/detail_schema';
 import equals from 'fast-deep-equal';
-import { getForm, getModelForForm, getTagsFromModel, getFormOptions, completeModel } from '../lib/form';
+import { getForm, getModelForForm, getTagsFromModel, getFormOptions, completeModel, getTagsToSendAsNotes } from '../lib/form';
 
 export default {
   components: {
@@ -61,7 +61,6 @@ export default {
 
   data() {
     return {
-      details: '',
       loading: false,
       valid: false,
       model: {},
@@ -111,6 +110,31 @@ export default {
       return false;
     },
 
+    details() {
+      let detailsTxt = null;
+
+      // Find changed tags
+      let changedTags = [];
+      for(let e of Object.entries(this.editedTags)) {
+        const [editedKey, editedVal] = e;
+        if(
+          (editedVal !== "null" && this.place.properties.tags[editedKey] !== editedVal)
+          || (editedVal === "null" && this.place.properties.tags[editedKey] !== undefined)
+        ) {
+          changedTags.push(editedKey);
+        }
+      }
+
+      // Check if changed tags should be sent as note
+      const tagsAsNotes = getTagsToSendAsNotes(this.schema);
+      if(Object.keys(tagsAsNotes).filter(k => changedTags.includes(k)).length > 0) {
+        detailsTxt = 'Ces attributs sont à vérifier attentivement : ';
+        detailsTxt += changedTags.filter(k => tagsAsNotes[k] !== undefined).map(k => `${k} (${tagsAsNotes[k]})`).join(", ");
+      }
+
+      return detailsTxt;
+    },
+
     payload() {
       const [ lon, lat ] = this.place.geometry.coordinates;
 
@@ -119,7 +143,8 @@ export default {
         lat,
         lon,
         lang: this.$i18n.locale,
-        tags: this.editedTags
+        tags: this.editedTags,
+        details: this.details
       };
     }
   },

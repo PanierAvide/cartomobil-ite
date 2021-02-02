@@ -716,7 +716,8 @@
                   "type": "string",
                   "format": "text",
                   "x-display": "textarea",
-                  "maxLength": 250
+                  "maxLength": 250,
+                  "x-asNoteReason": "Est-ce un descriptif valide ?"
                 },
                 "srvwch": {
                   "type": "object",
@@ -736,7 +737,8 @@
                           "type": "string",
                           "format": "text",
                           "x-display": "textarea",
-                          "maxLength": 250
+                          "maxLength": 250,
+                          "x-asNoteReason": "Est-ce un descriptif valide ?"
                         }
                       }
                     },
@@ -881,7 +883,8 @@
                   "x-props": {
                     "prependIcon": "osm-wheelchair"
                   },
-                  "x-link": "phone"
+                  "x-link": "phone",
+                  "x-asNoteReason": "Est-ce un numéro public ?"
                 },
                 "phone": {
                   "type": "string",
@@ -892,7 +895,8 @@
                   "x-props": {
                     "prependIcon": "osm-phone"
                   },
-                  "x-link": "phone"
+                  "x-link": "phone",
+                  "x-asNoteReason": "Est-ce un numéro public ?"
                 },
                 "email": {
                   "type": "string",
@@ -902,7 +906,8 @@
                   "x-props": {
                     "prependIcon": "osm-mail"
                   },
-                  "x-link": "email"
+                  "x-link": "email",
+                  "x-asNoteReason": "Est-ce un courriel public ?"
                 },
                 "website": {
                   "type": "string",
@@ -1026,7 +1031,8 @@
                           "type": "string",
                           "format": "text",
                           "x-display": "textarea",
-                          "maxLength": 250
+                          "maxLength": 250,
+                          "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
                         "toilets:sign:wheelchair": {
                           "title": "Signalétique fauteuil roulant ?",
@@ -1144,7 +1150,8 @@
                           "type": "string",
                           "format": "text",
                           "x-display": "textarea",
-                          "maxLength": 250
+                          "maxLength": 250,
+                          "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
                         "elevator:sign:wheelchair": {
                           "title": "Signalétique fauteuil roulant ?",
@@ -1401,7 +1408,8 @@
               "type": "string",
               "format": "text",
               "x-display": "textarea",
-              "maxLength": 250
+              "maxLength": 250,
+              "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
             "height": {
               "title": "Hauteur de la plateforme (en mètres)",
@@ -1539,7 +1547,8 @@
               "type": "string",
               "format": "text",
               "x-display": "textarea",
-              "maxLength": 250
+              "maxLength": 250,
+              "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
             "sign:disabled": {
               "title": "Signalétique PMR",
@@ -1664,7 +1673,8 @@
               "type": "string",
               "format": "text",
               "x-display": "textarea",
-              "maxLength": 250
+              "maxLength": 250,
+              "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
             "sign:disabled": {
               "title": "Signalétique PMR",
@@ -1797,7 +1807,8 @@
               "type": "string",
               "format": "text",
               "x-display": "textarea",
-              "maxLength": 250
+              "maxLength": 250,
+              "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
             "sign:disabled": {
               "title": "Signalétique PMR",
@@ -1872,7 +1883,8 @@
           "type": "string",
           "format": "text",
           "x-display": "textarea",
-          "maxLength": 250
+          "maxLength": 250,
+          "x-asNoteReason": "Est-ce un descriptif valide ?"
         },
         "sign:disabled": {
           "title": "Signalétique PMR",
