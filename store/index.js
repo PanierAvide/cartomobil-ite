@@ -9,7 +9,8 @@ export const state = () => ({
   categories: [],
   place: null,
   highlightPlace: null,
-  contribution: null
+  contribution: null,
+  newPlaceType: null
 });
 
 export const mutations = {
@@ -20,6 +21,7 @@ export const mutations = {
 
   setPlace (state, place) {
     state.place = place;
+    state.newPlaceType = null;
   },
 
   setBrandId (state, brandId) {
@@ -32,6 +34,10 @@ export const mutations = {
 
   setContribution (state, contribution) {
     state.contribution = contribution
+  },
+
+  addNewPlaceType (state, type) {
+    state.newPlaceType = type;
   },
 };
 

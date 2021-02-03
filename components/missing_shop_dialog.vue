@@ -2,7 +2,6 @@
   <v-dialog
     v-model="dialog"
     :eager="true"
-    :width="600"
   >
     <template v-slot:activator="{ on }">
       <v-list-item v-on="on">
@@ -26,73 +25,113 @@
           <v-icon>osm-close</v-icon>
         </v-btn>
       </v-card-title>
-      <!--v-card-text>
-        <p class="text-pre">{{ $t('missing_shop_dialog.description', { brand }) }}</p>
+      <v-card-text>
+        <p class="mb-0">{{ $t('missing_shop_dialog.contribute') }}</p>
         <v-row>
           <v-col
             cols="12"
-            md="7"
-          >
-            {{ $t('missing_shop_dialog.add_osm') }}
-          </v-col>
-          <v-col
-            cols="12"
-            md="5"
+            md="6"
+            lg="3"
           >
             <v-btn
-              :href="links.shopMissing"
               class="full-width"
               outlined
               color="primary"
-              target="_blank"
+              @click="addNewPlace('barrier')"
             >
-              {{ $t('missing_shop_dialog.add_osm_cta') }}
+              {{ $t('missing_shop_dialog.cta_add_barrier') }}
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+            lg="3"
+          >
+            <v-btn
+              class="full-width"
+              outlined
+              color="primary"
+              @click="addNewPlace('parking_pmr')"
+            >
+              {{ $t('missing_shop_dialog.cta_add_pmr_parking') }}
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+            lg="3"
+          >
+            <v-btn
+              class="full-width"
+              outlined
+              color="primary"
+              @click="addNewPlace('toilets')"
+            >
+              {{ $t('missing_shop_dialog.cta_add_toilets') }}
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="12"
+            md="6"
+            lg="3"
+          >
+            <v-btn
+              class="full-width"
+              outlined
+              color="secondary"
+              @click="addNewPlace('note')"
+            >
+              {{ $t('missing_shop_dialog.cta_note') }}
             </v-btn>
           </v-col>
         </v-row>
+
+        <p class="mb-0 mt-2">{{ $t('missing_shop_dialog.read_docs') }}</p>
+
         <v-row>
           <v-col
             cols="12"
-            md="7"
+            md="4"
           >
-            {{ $t('missing_shop_dialog.add_category') }}
+            <v-btn
+              :href="links.contribute_cro"
+              class="full-width"
+              outlined
+              color="secondary"
+              target="_blank"
+            >
+              {{ $t('missing_shop_dialog.cta_edit') }}
+            </v-btn>
           </v-col>
           <v-col
             cols="12"
-            md="5"
+            md="4"
           >
             <v-btn
-              href="https://github.com/osmontrouge/caresteouvert/issues/new?assignees=&labels=categories&template=missing_category.md&title=Missing+category%3A+%28name+of+category%29"
+              :href="links.contribute_osm"
               class="full-width"
               outlined
-              color="primary"
+              color="secondary"
               target="_blank"
             >
-              {{ $t('missing_shop_dialog.add_category_cta') }}
+              {{ $t('missing_shop_dialog.cta_add_new') }}
+            </v-btn>
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
+          >
+            <v-btn
+              :href="links.email"
+              class="full-width"
+              outlined
+              color="secondary"
+            >
+              {{ $t('missing_shop_dialog.cta_contact') }}
             </v-btn>
           </v-col>
         </v-row>
-        <v-row v-if="country === 'FR'">
-          <v-col
-            cols="12"
-            md="7"
-          >
-            <p>Vous avez votre propre établissement et vous avez besoin d'aide pour le rajouter :</p>
-          </v-col>
-          <v-col
-            cols="12"
-            md="5"
-          >
-            <v-btn
-              href="https://airtable.com/shrwKi4g2nJu0rwUK"
-              class="full-width"
-              outlined
-              color="primary"
-              target="_blank"
-            >Contactez nous</v-btn>
-          </v-col>
-        </v-row>
-      </v-card-text-->
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
@@ -116,6 +155,12 @@ export default {
     dialog(value) {
       if (!value) return;
       _paq.push(['trackEvent', 'MissingShop', 'Open']);
+    }
+  },
+
+  methods: {
+    addNewPlace(category) {
+      this.$store.commit('addNewPlaceType', category);
     }
   }
 };

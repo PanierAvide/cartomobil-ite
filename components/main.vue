@@ -24,6 +24,12 @@
           :map-bounds="mapBounds"
           :nbPlacesVisible="nbPlacesVisible"
         />
+        <note-form
+          v-else-if="newPlaceType !== null"
+          :type="newPlaceType"
+          :position="mapCenter"
+          @close="closeNote"
+        />
         <main-menu
           v-else
           :style="{ width: '350px' }"
@@ -83,6 +89,12 @@
             :map-bounds="mapBounds"
             :nbPlacesVisible="nbPlacesVisible"
           />
+          <note-form
+            v-else-if="newPlaceType !== null"
+            :type="newPlaceType"
+            :position="mapCenter"
+            @close="closeNote"
+          />
           <main-menu
             v-else
             :show-brand="false"
@@ -110,7 +122,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import debounce from 'lodash.debounce';
 import config from '../config.json';
 import { getCookie, setCookie } from '../lib/cookie';
@@ -125,6 +137,7 @@ import BottomMenu from './bottom_menu';
 import RgpdBanner from './rgpd_banner';
 import SplashScreen from './splash_screen';
 import Geocoder from './geocoder';
+import NoteForm from './note_form';
 
 const MAP_VIEW_COOKIE = 'mapView';
 
@@ -138,7 +151,8 @@ export default {
     RgpdBanner,
     SplashScreen,
     TopToolbar,
-    Geocoder
+    Geocoder,
+    NoteForm,
   },
 
   mixins: [isMobile],
@@ -186,6 +200,8 @@ export default {
 
   computed: {
     ...mapGetters(['categories', 'allCategories']),
+
+    ...mapState(['newPlaceType']),
 
     hasFilter() {
       return this.filter !== '';
@@ -276,6 +292,10 @@ export default {
 
     closePlace() {
       this.$router.push({ name: 'index', params: { featuresAndLocation: this.featuresAndLocation } })
+    },
+
+    closeNote() {
+      this.$store.commit('addNewPlaceType', null);
     },
 
     updateRoute() {

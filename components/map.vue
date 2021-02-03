@@ -11,6 +11,7 @@
     @update:center="updateMapCenter"
     @update:zoom="updateMapZoom"
     @update:bounds="updateMapBounds"
+    @move="updateMapCenterDynamic"
     @moveend="refreshMapBounds"
     @zoomend="refreshMapBounds"
     @rotate="refreshMapBounds"
@@ -28,6 +29,13 @@
       :coordinates="highlightPlace.geometry.coordinates"
       :offset="{ x: 0, y: -15 }"
       color="red"
+    />
+    <MglMarker
+      v-if="newPlaceType"
+      ref="posmarker"
+      :coordinates="[ mapCenter.lng, mapCenter.lat ]"
+      :offset="{ x: 0, y: -15 }"
+      color="orange"
     />
     <MglVectorLayer
       v-for="layer in layers"
@@ -254,7 +262,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['place', 'highlightPlace', 'contribution']),
+    ...mapState(['place', 'highlightPlace', 'contribution', 'newPlaceType']),
 
     poiSource() {
       return {
@@ -319,7 +327,7 @@ export default {
 
     filter(filter) {
       this.countPlaces();
-    }
+    },
   },
 
   methods: {
@@ -390,6 +398,12 @@ export default {
 
     updateMapZoom(mapZoom) {
       this.$emit('update:mapZoom', mapZoom);
+    },
+
+    updateMapCenterDynamic(mapCenter) {
+      if(this.$refs && this.$refs.posmarker) {
+        this.$refs.posmarker.marker.setLngLat(this.map.getCenter());
+      }
     },
 
     refreshMapBounds() {

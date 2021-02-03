@@ -41,6 +41,7 @@
 
 <script>
 import { getCookie, setCookie } from '../lib/cookie';
+import { mapState } from 'vuex';
 
 const ANIMATE_MENU_COOKIE = 'animateMenu';
 
@@ -55,9 +56,17 @@ export default {
   data() {
     return {
       open: false,
-      height: 50,
+      height: this.middleStep,
       animate: getCookie(ANIMATE_MENU_COOKIE) ? false : true
     };
+  },
+
+  computed: {
+    ...mapState(['newPlaceType']),
+
+    middleStep() {
+      return this.newPlaceType !== null ? 35 : 50;
+    }
   },
 
   mounted() {
@@ -74,7 +83,7 @@ export default {
     },
 
     moveDown() {
-      this.height == 50 ? this.open = false : this.height = 50;
+      this.height == this.middleStep ? this.open = false : this.height = this.middleStep;
     }
   },
 
@@ -89,11 +98,24 @@ export default {
     '$route'(route, oldRoute) {
       if (route.name === 'place') {
         this.open = false;
-        this.height = 50;
+        this.height = this.middleStep;
       } else if (oldRoute.name === 'place' && this.filter !== '') {
         this.open = true;
       }
-    }
+    },
+
+    newPlaceType(val, oldVal) {
+      if(val !== oldVal) {
+        // Opens new note form
+        if(val !== null) {
+          this.height = this.middleStep;
+        }
+        // Go from new note form to other menu
+        else if(val === null && this.height === 35) {
+          this.height = this.middleStep;
+        }
+      }
+    },
   }
 }
 </script>

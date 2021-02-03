@@ -29,7 +29,9 @@
       "about": "https://www.avoscartes.pf",
       "disclaimer": "https://www.avoscartes.pf",
       "email": "mailto:cartomobilite@avoscartes.pf",
-      "issues": "https://github.com/PanierAvide/cartomobil-ite/issues/new"
+      "issues": "https://github.com/PanierAvide/cartomobil-ite/issues/new",
+      "contribute_osm": "https://learnosm.org/fr/",
+      "contribute_cro": "https://www.avoscartes.pf"
     }
   }
 }

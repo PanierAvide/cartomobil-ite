@@ -10,11 +10,15 @@
   "missing_shop": "Report a missing shop",
   "backtolist": "Back to the list",
   "missing_shop_dialog": {
-    "description": "« {brand} » is intended to display only places that are allowed to open during the lockdown. There are several possible reasons if some are missing:",
-    "add_osm": "The place is not in OpenStreetMap, add it:",
-    "add_osm_cta": "Follow the guide",
-    "add_category": "A category of places is missing:",
-    "add_category_cta": "Request addition"
+    "contribute": "Found an incomplete or missing place ? You can help improve the map !",
+    "cta_add_barrier": "Add an obstacle",
+    "cta_add_pmr_parking": "Add wheelchair parking",
+    "cta_add_toilets": "Add public toilets",
+    "cta_note": "Other info",
+    "read_docs": "To help you, our documentation is here:",
+    "cta_edit": "Edit a place",
+    "cta_add_new": "Add / delete a place",
+    "cta_contact": "Contact us"
   },
   "change_lang": "Change the language",
   "zoomtosee": "Zoom in to display information",
@@ -100,6 +104,15 @@
     },
     "submit": "Publish",
     "cancel": "Cancel"
+  },
+  "note_form": {
+    "title": {
+      "parking_pmr": "Add wheelchair parking",
+      "barrier": "Add obstacle",
+      "toilets": "Add public toilets",
+      "note": "Suggest map improvement"
+    },
+    "move_marker": "Move marker to exact location of concerned place"
   },
   "details": {
     "signal_warning": "You were editing this placce. It'll not be saved. Do you want to continue?",

@@ -10,11 +10,15 @@
   "missing_shop": "Commerce manquant ?",
   "backtolist": "Retour à la liste",
   "missing_shop_dialog": {
-    "description": "« {brand} » a pour but de n'afficher que les lieux qui sont autorisés à ouvrir pendant la crise sanitaire.\nPlusieurs raisons sont possibles en cas de manque :",
-    "add_osm": "Il n'est pas dans OpenStreetMap, ajoutez le :",
-    "add_osm_cta": "Suivez le guide",
-    "add_category": "Une catégorie de commerces est manquante :",
-    "add_category_cta": "Demander l'ajout"
+    "contribute": "Un lieu est incomplet ou manquant ? Aidez-nous à compléter la carte !",
+    "cta_add_barrier": "Ajouter un obstacle",
+    "cta_add_pmr_parking": "Ajouter une place PMR",
+    "cta_add_toilets": "Ajouter des WC extérieurs",
+    "cta_note": "Autre signalement",
+    "read_docs": "Pour vous accompagner, notre documentation est là :",
+    "cta_edit": "Modifier un lieu",
+    "cta_add_new": "Ajouter / supprimer un lieu",
+    "cta_contact": "Nous contacter"
   },
   "change_lang": "Changer la langue",
   "zoomtosee": "Zoomez pour voir les informations",
@@ -100,6 +104,15 @@
     },
     "submit": "Publier",
     "cancel": "Annuler"
+  },
+  "note_form": {
+    "title": {
+      "parking_pmr": "Ajouter une place PMR",
+      "barrier": "Ajouter un obstacle",
+      "toilets": "Ajouter des WC extérieurs",
+      "note": "Signaler une amélioration"
+    },
+    "move_marker": "Déplacez le marqueur de la carte sur la position exacte du lieu concerné"
   },
   "details": {
     "signal_warning": "Vous étiez en train de modifier ce lieu, si vous partez il ne sera pas sauvegardé. Voulez-vous vraiment quitter la page ?",

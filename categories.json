@@ -1521,6 +1521,7 @@
       },
       "x-display": "expansion-panels",
       "x-class-readOnly": "pa-2 pb-4",
+      "x-objectName": "Toilettes publiques",
       "properties": {
         "secgen": {
           "type": "object",
@@ -1529,7 +1530,7 @@
             "wheelchair": {
               "type": "string",
               "title": "Accessible en fauteuil roulant ?",
-              "description": "__Oui__ : porte(s) facile(s) à ouvrir et lare (> 90 cm), pas de marche ou ressaut < 3 cm, espace de retournement (170 * 170 cm), hauteur de siège adaptée (45-55 cm), main courante (70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80 * 130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, portes de 80 cm minimum, espace de transfert 80 * 130 cm) mais problème sur certains équipements (main courante, hauteur du siège, lavabo) ou manque l’espace de retournement (170 * 170 cm).\n\n__Non__ : complètement inaccessible.",
+              "description": "__Oui__ : porte(s) facile(s) à ouvrir et large (> 90 cm), pas de marche ou ressaut < 3 cm, espace de retournement (170 * 170 cm), hauteur de siège adaptée (45-55 cm), main courante (70-80 cm du sol), lavabo accessible (< 80 cm du sol), espace de transfert adapté (80 * 130 cm).\n\n__Limitée__ : accès possible (pas de marche ou < 3 cm, portes de 80 cm minimum, espace de transfert 80 * 130 cm) mais problème sur certains équipements (main courante, hauteur du siège, lavabo) ou manque l’espace de retournement (170 * 170 cm).\n\n__Non__ : complètement inaccessible.",
               "x-class": "form-hide-desc",
               "x-hide-readOnly": true,
               "x-props": {
@@ -1781,6 +1782,7 @@
       },
       "x-display": "expansion-panels",
       "x-class-readOnly": "pa-2 pb-4",
+      "x-objectName": "Stationnement PMR",
       "properties": {
         "secgen": {
           "type": "object",
@@ -1895,6 +1897,72 @@
             { "title": "Absente", "const": "no" },
             { "title": "Ne sais pas", "const": "null" }
           ]
+        }
+      }
+    },
+    "barrier": {
+      "type": "object",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-objectName": "Obstacle au cheminement",
+      "properties": {
+        "obstacle": {
+          "type": "string",
+          "title": "Type d'obstacle",
+          "x-class": "form-hide-desc",
+          "oneOf": [
+            { "title": "Marche", "const": "steps" },
+            { "title": "Travaux", "const": "roadworks" },
+            { "title": "Parking sauvage", "const": "informal_parking" },
+            { "title": "Poteau", "const": "pole" },
+            { "title": "Arbre ", "const": "tree" },
+            { "title": "Bloc de béton", "const": "block" },
+            { "title": "Pente", "const": "incline" },
+            { "title": "Dévers", "const": "cant" },
+            { "title": "Rétrécissement de trottoir", "const": "small_width" },
+            { "title": "Revêtement", "const": "surface" }
+          ]
+        },
+        "obstacle:wheelchair": {
+          "type": "string",
+          "title": "Accessible en fauteuil roulant ?",
+          "description": "__Non__ : passage de largeur insuffisante (< 90 cm).\n\n__Limité__ : passage possible (largeur >= 90 cm) mais difficile.",
+          "x-class": "form-hide-desc",
+          "x-hide-readOnly": true,
+          "x-props": {
+            "prependIcon": "osm-wheelchair"
+          },
+          "oneOf": [
+            { "title": "Limité", "const": "limited" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        },
+        "obstacle:wheelchair:description": {
+          "title": "Description",
+          "type": "string",
+          "format": "text",
+          "x-display": "textarea",
+          "maxLength": 250
+        }
+      }
+    },
+    "note": {
+      "type": "object",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-objectName": "Autre signalement",
+      "properties": {
+        "note": {
+          "title": "Que manque-t'il à la carte ?",
+          "type": "string",
+          "format": "text",
+          "x-display": "textarea",
+          "maxLength": 250
         }
       }
     }
