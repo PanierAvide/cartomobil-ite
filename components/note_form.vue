@@ -25,7 +25,7 @@
       v-model="model"
       :schema="schema"
       :options="formOptions"
-      class="pb-0 mx-3"
+      class="pb-0 mx-3 pl-2"
     />
 
     <v-container class="pt-0">

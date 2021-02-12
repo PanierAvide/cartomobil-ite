@@ -2,6 +2,7 @@
   <v-dialog
     v-model="dialog"
     :eager="true"
+    max-width="900"
   >
     <template v-slot:activator="{ on }">
       <v-list-item v-on="on">
@@ -39,6 +40,7 @@
               color="primary"
               @click="addNewPlace('barrier')"
             >
+              <v-icon class="mr-1">osm-plus</v-icon>
               {{ $t('missing_shop_dialog.cta_add_barrier') }}
             </v-btn>
           </v-col>
@@ -53,6 +55,7 @@
               color="primary"
               @click="addNewPlace('parking_pmr')"
             >
+              <v-icon class="mr-1">osm-plus</v-icon>
               {{ $t('missing_shop_dialog.cta_add_pmr_parking') }}
             </v-btn>
           </v-col>
@@ -67,6 +70,7 @@
               color="primary"
               @click="addNewPlace('toilets')"
             >
+              <v-icon class="mr-1">osm-plus</v-icon>
               {{ $t('missing_shop_dialog.cta_add_toilets') }}
             </v-btn>
           </v-col>
@@ -81,6 +85,7 @@
               color="secondary"
               @click="addNewPlace('note')"
             >
+              <v-icon class="mr-1">osm-plus</v-icon>
               {{ $t('missing_shop_dialog.cta_note') }}
             </v-btn>
           </v-col>

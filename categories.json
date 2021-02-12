@@ -1523,6 +1523,7 @@
       "x-class-readOnly": "pa-2 pb-4",
       "x-objectName": "Toilettes publiques",
       "properties": {
+        "amenity": { "type": "string", "const": "toilets" },
         "secgen": {
           "type": "object",
           "title": "Général",
@@ -1784,6 +1785,7 @@
       "x-class-readOnly": "pa-2 pb-4",
       "x-objectName": "Stationnement PMR",
       "properties": {
+        "amenity": { "type": "string", "const": "parking_space" },
         "secgen": {
           "type": "object",
           "title": "Général",
@@ -1908,29 +1910,145 @@
       },
       "x-objectName": "Obstacle au cheminement",
       "properties": {
-        "obstacle": {
-          "type": "string",
+        "obstc": {
+          "type": "object",
           "title": "Type d'obstacle",
           "x-class": "form-hide-desc",
           "oneOf": [
-            { "title": "Marche", "const": "steps" },
-            { "title": "Travaux", "const": "roadworks" },
-            { "title": "Parking sauvage", "const": "informal_parking" },
-            { "title": "Poteau", "const": "pole" },
-            { "title": "Arbre ", "const": "tree" },
-            { "title": "Bloc de béton", "const": "block" },
-            { "title": "Pente", "const": "incline" },
-            { "title": "Dévers", "const": "cant" },
-            { "title": "Rétrécissement de trottoir", "const": "small_width" },
-            { "title": "Revêtement", "const": "surface" }
+            {
+              "title": "Marche",
+              "properties": {
+                "obstacle": {
+                  "type": "string",
+                  "const": "steps"
+                },
+                "step_height": {
+                  "type": "string",
+                  "title": "Hauteur de marche ?",
+                  "description": "__Surélevé__ : > 6 cm\n\n__Abaissé__ : autour de 3 cm\n\n__À niveau__ : pas de ressaut proche de 0 cm",
+                  "oneOf": [
+                    { "title": "Surélevé", "const": "high" },
+                    { "title": "Abaissé", "const": "lowered" },
+                    { "title": "À niveau", "const": "flat" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
+            },
+            {
+              "title": "Travaux",
+              "properties": { "obstacle": { "type": "string", "const": "roadworks" } }
+            },
+            {
+              "title": "Parking sauvage",
+              "properties": { "obstacle": { "type": "string", "const": "informal_parking" } }
+            },
+            {
+              "title": "Poteau",
+              "properties": {
+                "obstacle": {
+                  "type": "string",
+                  "const": "pole"
+                },
+                "pole": {
+                  "type": "string",
+                  "title": "Type de poteau",
+                  "oneOf": [
+                    { "title": "Électrique", "const": "power" },
+                    { "title": "Lampadaire", "const": "street_lamp" },
+                    { "title": "Potelet", "const": "bollard" },
+                    { "title": "Signalisation routière", "const": "traffic_sign" },
+                    { "title": "Panneau de direction", "const": "direction_sign" },
+                    { "title": "Panneau d'affichage", "const": "billboard" },
+                    { "title": "Panneau avec une carte", "const": "map" },
+                    { "title": "Feu de circulation", "const": "traffic_signals" },
+                    { "title": "Barrière pour ralentir les cyclistes", "const": "bicycle_barrier" },
+                    { "title": "Ne sais pas", "const": "null" }
+                  ]
+                }
+              }
+            },
+            {
+              "title": "Arbre",
+              "properties": { "obstacle": { "type": "string", "const": "tree" } }
+            }
+            ,
+            {
+              "title": "Bloc de béton",
+              "properties": { "obstacle": { "type": "string", "const": "block" } }
+            },
+            {
+              "title": "Pente",
+              "properties": {
+                "obstacle": { "type": "string", "const": "incline" },
+                "incline": {
+                  "title": "Inclinaison (en %)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|100|\\d{1,2})$"
+                }
+              }
+            },
+            {
+              "title": "Dévers",
+              "properties": {
+                "obstacle": { "type": "string", "const": "crossfall" },
+                "incline": {
+                  "title": "Dévers (en %)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|100|\\d{1,2})$"
+                }
+              }
+            },
+            {
+              "title": "Rétrécissement de trottoir",
+              "properties": {
+                "obstacle": { "type": "string", "const": "sidewalk_width" },
+                "sidewalk:width": {
+                  "title": "Largeur du trottoir à cet endroit (en mètres)",
+                  "type": "string",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
+              }
+            },
+            {
+              "title": "Revêtement",
+              "properties": {
+                "obstacle": { "type": "string", "const": "surface" },
+                "material": {
+                  "type": "string",
+                  "title": "Type de surface ?",
+                  "oneOf": [
+                    { "title": "Métal", "const": "metal" },
+                    { "title": "Bois", "const": "wood" },
+                    { "title": "Compacté", "const": "compacted" },
+                    { "title": "Graviers", "const": "gravel" },
+                    { "title": "Pavés", "const": "paved" },
+                    { "title": "Sable", "const": "sand" },
+                    { "title": "Terre", "const": "ground" },
+                    { "title": "Autre ne posant pas de soucis", "const": "null" }
+                  ]
+                },
+                "smoothness": {
+                  "type": "string",
+                  "title": "Niveau de praticabilité ?",
+                  "description": "__Mauvaise__ : je peux y passer en VTT.\n\n__Horrible__ : je peux y passer en quad.",
+                  "oneOf": [
+                    { "title": "Mauvaise", "const": "bad" },
+                    { "title": "Horrible", "const": "horrible" },
+                    { "title": "Correct", "const": "null" }
+                  ]
+                }
+              }
+            }
           ]
         },
-        "obstacle:wheelchair": {
+        "wheelchair": {
           "type": "string",
-          "title": "Accessible en fauteuil roulant ?",
-          "description": "__Non__ : passage de largeur insuffisante (< 90 cm).\n\n__Limité__ : passage possible (largeur >= 90 cm) mais difficile.",
-          "x-class": "form-hide-desc",
-          "x-hide-readOnly": true,
+          "title": "Accessibilité du cheminement en fauteuil roulant ?",
+          "description": "__Limité__ : accessible avec aide extérieure (largeur de passage utile > 80 cm).\n\n__Non__ : non accessible.",
           "x-props": {
             "prependIcon": "osm-wheelchair"
           },
@@ -1940,7 +2058,7 @@
             { "title": "Ne sais pas", "const": "null" }
           ]
         },
-        "obstacle:wheelchair:description": {
+        "wheelchair:description": {
           "title": "Description",
           "type": "string",
           "format": "text",

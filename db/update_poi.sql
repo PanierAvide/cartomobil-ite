@@ -193,6 +193,54 @@ CREATE OR REPLACE VIEW poi_osm_light AS
 SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, takeaway, delivery, drive_through
 FROM poi_osm;
 
+CREATE OR REPLACE FUNCTION json_to_hstore(json)
+	RETURNS hstore
+	IMMUTABLE
+	STRICT
+	LANGUAGE sql
+AS $func$
+	SELECT hstore(array_agg(key), array_agg(value))
+	FROM json_each_text($1)
+$func$;
+
+CREATE OR REPLACE VIEW poi_recent_notes AS
+SELECT
+	id AS fid,
+	geom,
+	tags->'name' AS name,
+	CASE
+		WHEN get_category1(tags) != '' THEN get_category1(tags)
+		WHEN tags->'obstacle' IS NOT NULL THEN 'obstacle'
+		WHEN tags->'note' IS NOT NULL THEN 'note'
+	END AS cat1,
+	get_category2(tags) AS cat2,
+	get_category3(tags) AS cat3,
+	tags->'brand' AS brand,
+	tags->'brand:wikidata' AS brand_wikidata,
+	NULL AS brand_hours,
+	NULL AS brand_infos,
+	get_state(tags) AS status,
+	status_order_value(get_state(tags)) AS status_order,
+	'cro' AS source_status,
+	tags->'delivery' AS delivery,
+	tags->'takeaway' AS takeaway,
+	tags->'drive_through' AS drive_through,
+	tags::json,
+	last_update
+FROM (
+	SELECT
+		id,
+		ST_Transform(geom, 3857)::Geometry(Point, 3857) AS geom,
+		json_to_hstore((COALESCE(tags, '{}'::jsonb) || COALESCE(cro_tags, '{}'::jsonb))::json) AS tags,
+		ts AS last_update
+	FROM contributions
+	WHERE NOT sent_to_osm AND osmid = 'new' AND ts >= (current_timestamp - '01:00:00'::time)
+) a;
+
+CREATE OR REPLACE VIEW poi_recent_notes_light AS
+SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, takeaway, delivery, drive_through
+FROM poi_recent_notes;
+
 
 -- Analysis requests
 -- SELECT country, SUM((status != 'unknown')::int)::float / COUNT(*) * 100 AS pct_info_connue FROM poi_osm GROUP BY country;

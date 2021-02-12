@@ -13,7 +13,7 @@
       >
         {{ lastUpdateText }}
       </p>
-      <template v-if="hasForm && !success">
+      <template v-if="hasForm && !success && allowContribute">
         <br>
         <v-btn
           :disabled="contribute || lastUpdateTooRecent"
@@ -63,6 +63,12 @@ export default {
     contribute: {
       type: Boolean,
       required: false
+    },
+
+    allowContribute: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
 
@@ -76,7 +82,7 @@ export default {
     },
 
     lastUpdateTooRecent() {
-      return this.lastUpdate && Date.now() - this.lastUpdate.getTime() < 1000*60*60;
+      return this.lastUpdate && this.allowContribute && Date.now() - this.lastUpdate.getTime() < 1000*60*60;
     },
 
     lastUpdateText() {

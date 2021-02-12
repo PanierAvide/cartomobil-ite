@@ -49,6 +49,18 @@
       @click="clickPoi"
       @mouseleave="mouseleave"
     />
+    <MglVectorLayer
+      v-for="layer in noteLayers"
+      :key="layer.id"
+      :clear-source="false"
+      :layer-id="layer.id"
+      :layer="layer"
+      :source="noteSource"
+      source-id="poi-note"
+      @mouseenter="mouseenter"
+      @click="clickPoiNote"
+      @mouseleave="mouseleave"
+    />
   </MglMap>
 </template>
 
@@ -69,6 +81,7 @@ import { GeolocateControl, NavigationControl } from 'mapbox-gl';
 import isMobile from './mixins/is_mobile';
 
 const source = "public.poi_osm_light";
+const noteSource = "public.poi_recent_notes_light";
 const contribSource = "poi-contrib-src";
 let delayCounting = null;
 
@@ -101,7 +114,7 @@ function getLayers(theme) {
     15, 1
   ];
 
-  return [
+  const layers = [
     {
       id: "poi-background",
       type: "circle",
@@ -133,6 +146,7 @@ function getLayers(theme) {
           15, [
             'case',
             ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
+            ["in", ["get", "cat1"], ["literal", ["note", "obstacle"]]], 3,
             6
           ],
           19, 13
@@ -199,6 +213,8 @@ function getLayers(theme) {
       }
     }
   ];
+
+  return layers.concat(layers.map(ls => Object.assign({}, ls, { id: ls.id+"-note", "source-layer": noteSource })));
 }
 
 const SIDEBAR_SIZE = 400;
@@ -272,7 +288,16 @@ export default {
       };
     },
 
-    layers() {
+    noteSource() {
+      return {
+        type: "vector",
+        minzoom: config.minZoomPoi,
+        maxzoom: config.maxZoomPoi,
+        tiles: [ `${config.tilesUrl}/${noteSource}/{z}/{x}/{y}.pbf?rdm=${Date.now()}` ]
+      };
+    },
+
+    allLayers() {
       const [ category, subcategories, subfilters ] = decodeFilter(this.filter);
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
@@ -285,6 +310,14 @@ export default {
         }
         return newLayer;
       });
+    },
+
+    layers() {
+      return this.allLayers.filter(l => !l.id.endsWith('-note'));
+    },
+
+    noteLayers() {
+      return this.allLayers.filter(l => l.id.endsWith('-note'));
     },
 
     placeColor() {
@@ -457,7 +490,31 @@ export default {
           featuresAndLocation: this.featuresAndLocation
         }
       });
-    }
+    },
+
+    clickPoiNote(e) {
+      const id = e.mapboxEvent.features[0].properties.fid;
+      if (this.$route.name === 'note' && this.$route.params.id === id) {
+        return;
+      }
+      this.$router.push({
+        name: 'note',
+        params: {
+          id: 'n'+id,
+          featuresAndLocation: this.featuresAndLocation
+        }
+      });
+    },
+
+    reloadNotesLayer() {
+      this.noteLayers.forEach(l => this.map.removeLayer(l.id));
+      this.map.removeSource('poi-note');
+      this.map.addSource('poi-note', this.noteSource);
+      this.noteLayers.forEach(l => {
+        l.source = 'poi-note';
+        this.map.addLayer(l);
+      });
+    },
   }
 }
 </script>

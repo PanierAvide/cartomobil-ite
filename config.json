@@ -4,6 +4,7 @@
   "mapBounds": [[-150.3918, -18.0989], [-148.8922, -17.2562]],
   "tilesUrl": "https://tiles.carto.mobilite.xyz",
   "poiFeature": "https://features.carto.mobilite.xyz/collections/public.poi_osm/items",
+  "noteFeature": "https://features.carto.mobilite.xyz/collections/public.poi_recent_notes/items",
   "apiUrl": "https://api.carto.mobilite.xyz",
   "fontsUrl": "https://fonts.carto.mobilite.xyz",
   "osmUrl": "https://www.openstreetmap.org",

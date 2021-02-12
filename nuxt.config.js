@@ -105,7 +105,8 @@ export default {
         ...routes[index],
         path: '/:featuresAndLocation?'
       };
-      routes[index].children[0].name = 'place';
+      routes[index].children[0].name = 'note';
+      routes[index].children[1].name = 'place';
     }
   }
 }

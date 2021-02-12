@@ -29,6 +29,7 @@
           :type="newPlaceType"
           :position="mapCenter"
           @close="closeNote"
+          @success="onSuccessNote"
         />
         <main-menu
           v-else
@@ -94,6 +95,7 @@
             :type="newPlaceType"
             :position="mapCenter"
             @close="closeNote"
+            @success="onSuccessNote"
           />
           <main-menu
             v-else
@@ -298,6 +300,10 @@ export default {
       this.$store.commit('addNewPlaceType', null);
     },
 
+    onSuccessNote() {
+      this.$refs.map.reloadNotesLayer();
+    },
+
     updateRoute() {
       if (!this.lastFeaturesAndLocation) {
         this.lastFeaturesAndLocation = this.featuresAndLocation;
@@ -447,6 +453,8 @@ export default {
 .vjsf-property-equipments.pl-2 > div > .vjsf-property.pl-2,
 .vjsf-property-basics.pl-2 > div > .vjsf-property.pl-2,
 .vjsf-property-details.pl-2 > div > .vjsf-property.pl-2,
+.vjsf-property-root.pl-2 > div > .vjsf-property.pl-2,
+.vjsf-property-root.pl-2 > div > .vjsf-property.pl-2 .vjsf-property.pl-2,
 .vjsf-property .v-expansion-panel-content .pl-2 {
   padding: 0 !important;
 }
