@@ -40,6 +40,14 @@
         </v-btn>
       </v-toolbar>
       <div v-if="place">
+        <v-alert
+          type="warning"
+          tile
+          class="mb-0"
+        >
+          <span class="text-pre">{{ $t('details.signal_note') }}</span>
+        </v-alert>
+
         <detail-state
           ref="state"
           :place="place"
@@ -84,6 +92,7 @@
 import { mapState } from 'vuex';
 import { noteFeature, osmUrl, mapillaryClientId } from '../../config.json';
 import { encodePosition } from '../../lib/url';
+import { osmNoteToFeature } from '../../lib/note';
 import parseId from '../../lib/parse_id';
 import { getRecentContribution } from '../../lib/recent_contributions';
 import isMobile from '../mixins/is_mobile';
@@ -256,15 +265,34 @@ export default {
 
     updatePlace() {
       const recentNote = this.id.startsWith('n');
+      const myId = this.id.substring(1);
       const promises = [];
 
       if(recentNote) {
-        const myId = this.id.substring(1);
         promises.push(fetch(`${noteFeature}.json?fid=${myId}&precision=7`)
         .then(data => data.json())
         .then((geojson) => {
           if(geojson.features.length == 1) {
             this.place = geojson.features[0];
+  //           this.$store.commit('setPlace', note);
+
+            this.mapillaryImage = this.place.properties.tags.mapillary;
+            if(!this.mapillaryImage) {
+              this.fetchMapillaryImage();
+            }
+          }
+          else { throw new Error("No feature"); }
+        })
+        .catch(() => {
+          this.$nuxt.context.redirect(`/${this.$route.params.featuresAndLocation || ''}`);
+        }));
+      }
+      else {
+        promises.push(fetch(`${osmUrl}/api/0.6/notes/${myId}.json`)
+        .then(data => data.json())
+        .then((data) => {
+          if(data.type === "Feature") {
+            this.place = osmNoteToFeature(data);
   //           this.$store.commit('setPlace', note);
 
             this.mapillaryImage = this.place.properties.tags.mapillary;

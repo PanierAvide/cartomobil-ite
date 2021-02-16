@@ -118,6 +118,7 @@
     "signal_warning": "You were editing this placce. It'll not be saved. Do you want to continue?",
     "signal": "Edit this place",
     "signal_done": "Your edit has been saved, thank you! It'll appear in a while.",
+    "signal_note": "This information was given by an anonymous contributor and hasn't been reviewed yet.",
     "normal_opening_hours": "Opening hours",
     "facebook": "Facebook page",
     "not_accessible": "No physical reception on site",
@@ -335,7 +336,8 @@
     "artwork": "Artwork",
     "historic": "Historical site",
     "drinking_water": "Drinking water",
-    "toilets": "Toilets"
+    "toilets": "Toilets",
+    "barrier": "Obstacle"
   },
   "qa": {
     "title": "Quality assurance"

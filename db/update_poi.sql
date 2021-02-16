@@ -210,7 +210,7 @@ SELECT
 	tags->'name' AS name,
 	CASE
 		WHEN get_category1(tags) != '' THEN get_category1(tags)
-		WHEN tags->'obstacle' IS NOT NULL THEN 'obstacle'
+		WHEN tags->'obstacle' IS NOT NULL THEN 'barrier'
 		WHEN tags->'note' IS NOT NULL THEN 'note'
 	END AS cat1,
 	get_category2(tags) AS cat2,

@@ -118,6 +118,7 @@
     "signal_warning": "Vous étiez en train de modifier ce lieu, si vous partez il ne sera pas sauvegardé. Voulez-vous vraiment quitter la page ?",
     "signal": "Modifier ce lieu",
     "signal_done": "Votre modification a été enregistrée, merci ! Elle apparaitra dans un moment sur la carte.",
+    "signal_note": "Ces informations sont issues d'une contribution anonyme et n'ont pas encore été validées.",
     "normal_opening_hours": "Horaires d'ouverture",
     "facebook": "Page Facebook",
     "not_accessible": "Pas d'accueil physique sur place",
@@ -423,7 +424,8 @@
     "tyres": "Pneus",
     "housing": "Hébergement",
     "doctor": "Docteur",
-    "waterfall": "Cascade"
+    "waterfall": "Cascade",
+    "barrier": "Obstacle"
   },
   "categories_notes": {
     "fuel": "Les stations essences de Polynésie française sont accessibles, les employés venant remplir systématiquement l'essence pour vous, pas besoin de sortir de la voiture."

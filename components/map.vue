@@ -61,6 +61,18 @@
       @click="clickPoiNote"
       @mouseleave="mouseleave"
     />
+    <MglGeojsonLayer
+      v-for="layer in osmNoteLayers"
+      :key="layer.id"
+      :clear-source="false"
+      :layer-id="layer.id"
+      :layer="layer"
+      :source="osmNoteSource"
+      source-id="poi-osm-note"
+      @mouseenter="mouseenter"
+      @click="clickPoiNote"
+      @mouseleave="mouseleave"
+    />
   </MglMap>
 </template>
 
@@ -72,10 +84,12 @@ import * as config from '../config.json';
 import { readContributionFromStorage, pushContribution } from '../lib/recent_contributions';
 import { decodeFilter } from '../lib/categories';
 import { rawColorForStatus } from '../lib/place';
+import { osmNoteToFeature } from '../lib/note';
 import {
   MglMap,
   MglMarker,
   MglVectorLayer,
+  MglGeojsonLayer,
 } from 'vue-mapbox/dist/vue-mapbox.umd';
 import { GeolocateControl, NavigationControl } from 'mapbox-gl';
 import isMobile from './mixins/is_mobile';
@@ -214,7 +228,14 @@ function getLayers(theme) {
     }
   ];
 
-  return layers.concat(layers.map(ls => Object.assign({}, ls, { id: ls.id+"-note", "source-layer": noteSource })));
+  const newLayers = layers
+    .concat(layers.map(ls => Object.assign({}, ls, { id: ls.id+"-note", "source-layer": noteSource })))
+    .concat(layers.map(ls => {
+      const newls = Object.assign({}, ls, { id: ls.id+"-note-osm" });
+      delete newls["source-layer"];
+      return newls;
+    }));
+  return newLayers;
 }
 
 const SIDEBAR_SIZE = 400;
@@ -224,6 +245,7 @@ export default {
     MglMap,
     MglMarker,
     MglVectorLayer,
+    MglGeojsonLayer,
   },
 
   mixins: [isMobile],
@@ -271,6 +293,12 @@ export default {
     }
   },
 
+  data() {
+    return {
+      osmNoteSource: { type: "geojson", data: { type: "FeatureCollection", features: [] } }
+    };
+  },
+
   mounted() {
     this.$on('updateMapBounds', (bbox) => {
       this.map.fitBounds(bbox, { duration: 0 });
@@ -313,11 +341,15 @@ export default {
     },
 
     layers() {
-      return this.allLayers.filter(l => !l.id.endsWith('-note'));
+      return this.allLayers.filter(l => !l.id.endsWith('-note') && !l.id.endsWith('-note-osm'));
     },
 
     noteLayers() {
       return this.allLayers.filter(l => l.id.endsWith('-note'));
+    },
+
+    osmNoteLayers() {
+      return this.allLayers.filter(l => l.id.endsWith('-note-osm'));
     },
 
     placeColor() {
@@ -383,6 +415,7 @@ export default {
 
       this.$emit('loaded');
       this.updateMapBounds(map.getBounds());
+      this.loadOsmNotes();
     },
 
     countPlaces() {
@@ -493,14 +526,14 @@ export default {
     },
 
     clickPoiNote(e) {
-      const id = e.mapboxEvent.features[0].properties.fid;
+      const id = e.mapboxEvent.features[0].properties.fid.toString();
       if (this.$route.name === 'note' && this.$route.params.id === id) {
         return;
       }
       this.$router.push({
         name: 'note',
         params: {
-          id: 'n'+id,
+          id: id.startsWith('o') ? id : 'n'+id,
           featuresAndLocation: this.featuresAndLocation
         }
       });
@@ -513,6 +546,15 @@ export default {
       this.noteLayers.forEach(l => {
         l.source = 'poi-note';
         this.map.addLayer(l);
+      });
+    },
+
+    loadOsmNotes() {
+      fetch(`${config.osmUrl}/api/0.6/notes/search.json?q=cartomobilite`)
+      .then(data => data.json())
+      .then(geojson => {
+        geojson.features = geojson.features.map(osmNoteToFeature);
+        this.osmNoteSource.data = geojson;
       });
     },
   }
