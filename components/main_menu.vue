@@ -24,6 +24,8 @@
 
     <v-list class="pb-0">
       <v-divider></v-divider>
+      <map-settings :filter="filter" />
+      <v-divider></v-divider>
       <missing-shop-dialog />
       <learn-more />
     </v-list>
@@ -46,6 +48,7 @@ import LearnMore from './learn_more';
 import GovernementAlert from './governement_alert';
 import ToggleColor from './toggle_color';
 import i18nMixin from './mixins/i18n';
+import MapSettings from './map_settings';
 
 export default {
   components: {
@@ -54,6 +57,7 @@ export default {
     LearnMore,
     MissingShopDialog,
     ToggleColor,
+    MapSettings,
   },
 
   mixins: [i18nMixin],
@@ -63,7 +67,12 @@ export default {
       type: Boolean,
       required: false,
       default: true
-    }
+    },
+
+    filter: {
+      type: String,
+      required: true
+    },
   }
 }
 </script>

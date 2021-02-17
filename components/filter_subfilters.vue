@@ -39,15 +39,15 @@ export default {
 
   computed: {
     chipValues() {
-      const [ category, subcategories, subfilters ] = decodeFilter(this.value);
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.value);
       return subfilters;
     }
   },
 
   methods: {
     onChange(v) {
-      const [ category, subcategories, subfilters ] = decodeFilter(this.value);
-      this.$emit('input', encodeFilter(category, subcategories, v));
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.value);
+      this.$emit('input', encodeFilter(category, subcategories, v, status));
     }
   }
 };

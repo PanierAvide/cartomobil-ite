@@ -326,7 +326,7 @@ export default {
     },
 
     allLayers() {
-      const [ category, subcategories, subfilters ] = decodeFilter(this.filter);
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
         if (subfilters) {
@@ -334,7 +334,15 @@ export default {
         } else if (subcategories) {
           newLayer.filter.push(['in', ['get', 'cat2'], ['literal', subcategories]]);
         } else if (category !== '') {
-          newLayer.filter.push(['==', 'cat1', category]);
+          newLayer.filter.push(['==', ['get', 'cat1'], category]);
+        }
+        if(status) {
+          if(status.place) {
+            newLayer.filter.push(['==', ['get', 'status'], status.place]);
+          }
+          if(status.service) {
+            newLayer.filter.push(['==', ['get', 'status_service'], status.service]);
+          }
         }
         return newLayer;
       });
@@ -550,7 +558,7 @@ export default {
     },
 
     loadOsmNotes() {
-      fetch(`${config.osmUrl}/api/0.6/notes/search.json?q=cartomobilite`)
+      fetch(`${config.osmUrl}/api/0.6/notes/search.json?q=cartomobilite&closed=0`)
       .then(data => data.json())
       .then(geojson => {
         geojson.features = geojson.features.map(osmNoteToFeature);

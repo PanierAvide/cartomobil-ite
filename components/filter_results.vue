@@ -91,7 +91,7 @@
 import { mapGetters } from 'vuex';
 import _debounce from 'lodash.debounce';
 import { poiFeature } from '../config.json';
-import { availableSubFilters, decodeFilter } from '../lib/categories';
+import { availableSubFilters, decodeFilter, encodeFilter } from '../lib/categories';
 import isMobile from './mixins/is_mobile';
 import PlaceDense from './place/dense';
 import FilterSubcategories from './filter_subcategories';
@@ -161,19 +161,35 @@ export default {
     },
 
     subfilters() {
-      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      const [cat,subcats,subfilts,status] = decodeFilter(this.value);
       return subfilts;
     },
 
+    filterParams() {
+      const params = [];
+      const [cat,subcats,subfilts,status] = decodeFilter(this.value);
+
+      if(subfilts) { params.push(['cat3',subfilts]); }
+      else if(subcats) { params.push(['cat2',subcats]); }
+      else { params.push(['cat1', cat]); }
+
+      if(status) {
+        if(status.place) { params.push(['status', status.place]); }
+        if(status.service) { params.push(['status_service', status.service]); }
+      }
+
+      return params;
+    },
+
     filterName() {
-      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      const [cat,subcats,subfilts,status] = decodeFilter(this.value);
       if(subfilts) { return 'cat3'; }
       else if(subcats) { return 'cat2'; }
       else { return 'cat1'; }
     },
 
     filterValue() {
-      const [cat,subcats,subfilts] = decodeFilter(this.value);
+      const [cat,subcats,subfilts,status] = decodeFilter(this.value);
       if(subfilts) { return subfilts; }
       else if(subcats) { return subcats; }
       else { return cat; }
@@ -239,7 +255,8 @@ export default {
 
   methods: {
     clearSelection() {
-      this.$emit('input', '');
+      const [cat,subcats,subfilts,status] = decodeFilter(this.value);
+      this.$emit('input', encodeFilter(null, null, null, status));
     },
 
     goPrev() {
@@ -271,8 +288,8 @@ export default {
         ['limit', PAGE_SIZE],
         ['offset', this.offset],
         ['bbox', this.mapBounds],
-        [this.filterName, this.filterValue],
         ['orderby', 'status_order'],
+        ...this.filterParams
       ];
       fetch(`${poiFeature}?${new URLSearchParams(params)}`)
         .then(res => res.json())

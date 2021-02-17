@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS poi_osm_next(
 	status VARCHAR DEFAULT 'unknown',
 	status_order INTEGER,
 	source_status VARCHAR DEFAULT 'osm',
+	status_service VARCHAR,
 	delivery VARCHAR,
 	takeaway VARCHAR,
 	drive_through VARCHAR,
@@ -87,6 +88,7 @@ AS
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
 	get_state(tags),
 	status_order_value(get_state(tags)),
+	COALESCE(tags->'service:wheelchair', 'unknown'),
 	tags->'delivery',
 	tags->'takeaway',
 	tags->'drive_through',
@@ -109,6 +111,7 @@ SELECT
 	COALESCE(tags->'description:covid19', tags->'note:covid19'),
 	get_state(tags),
 	status_order_value(get_state(tags)),
+	COALESCE(tags->'service:wheelchair', 'unknown'),
 	tags->'delivery',
 	tags->'takeaway',
 	tags->'drive_through',
@@ -119,7 +122,7 @@ WHERE
 	-- Do not edit directly, run "yarn run categories" instead
 	("amenity" IN ('atm', 'bank', 'bar', 'bus_station', 'cafe', 'car_rental', 'childcare', 'cinema', 'clinic', 'college', 'doctors', 'drinking_water', 'fast_food', 'ferry_terminal', 'fuel', 'hospital', 'ice_cream', 'kindergarten', 'letter_box', 'library', 'marketplace', 'nightclub', 'parking', 'parking_space', 'pharmacy', 'police', 'post_box', 'post_office', 'pub', 'restaurant', 'school', 'swimming_pool', 'taxi', 'theatre', 'toilets', 'townhall', 'university', 'vending_machine') OR "office" IN ('association', 'company', 'employment_agency', 'government', 'insurance') OR "shop" IN ('alcohol', 'appliance', 'art', 'bag', 'bakery', 'bathroom_furnishing', 'beauty', 'bed', 'beverages', 'books', 'boutique', 'butcher', 'camera', 'cannery', 'carpet', 'charity', 'cheese', 'chemist', 'chocolate', 'clothes', 'coffee', 'computer', 'confectionery', 'convenience', 'cosmetics', 'craft', 'curtain', 'dairy', 'deli', 'department_store', 'doityourself', 'electrical', 'electronics', 'fabric', 'farm', 'fashion', 'fireplace', 'fishing', 'frozen_food', 'furniture', 'gas', 'general', 'glaziery', 'greengrocer', 'haberdashery', 'hairdresser', 'hardware', 'health_food', 'hearing_aids', 'hifi', 'honey', 'houseware', 'hunting', 'insurance', 'interior_decoration', 'jewelry', 'kiosk', 'kitchen', 'lighting', 'massage', 'medical_supply', 'music', 'musical_instrument', 'newsagent', 'obile_phone', 'optician', 'outdoor', 'paint', 'pasta', 'pastry', 'perfumery', 'photo', 'pottery', 'printer_ink', 'seafood', 'second_hand', 'sewing', 'shoes', 'spices', 'sports', 'stationery', 'supermarket', 'tailor', 'tattoo', 'tea', 'tiles', 'variety_store', 'video', 'video_games', 'watches', 'wholesale', 'wine', 'winery', 'wool') OR "tourism" != '' OR "club" != '' OR "leisure" IN ('beach_resort', 'park', 'sports_centre', 'swimming_pool') OR "name" IN ('EDT', 'Electricité de Tahiti', 'Électricité de Tahiti') OR "craft" != '' OR "school:FR" IN ('collège', 'lycée', 'maternelle', 'primaire', 'élémentaire') OR "healthcare" IN ('audiologist', 'centre', 'clinic', 'dentist', 'doctor', 'hospital', 'midwife', 'nurse', 'occupational_therapist', 'physiotherapist', 'podiatrist', 'psychotherapist', 'rehabilitation', 'speech_therapist') OR "wheelchair" IN ('designated', 'yes') OR "highway" IN ('bus_stop', 'elevator') OR "public_transport" IN ('platform', 'stop_position') OR "aeroway" IN ('aerodrome') OR "natural" IN ('beach') OR "waterway" IN ('waterfall') OR "historic" != '') --CATEGORIES
 )
-INSERT INTO poi_osm_next(fid, geom, name, cat1, cat2, cat3, brand, brand_wikidata, brand_infos, status, status_order, delivery, takeaway, drive_through, tags)
+INSERT INTO poi_osm_next(fid, geom, name, cat1, cat2, cat3, brand, brand_wikidata, brand_infos, status, status_order, status_service, delivery, takeaway, drive_through, tags)
 SELECT *
 FROM selection
 -- Remove edge cases needing advanced filtering like vending machines
@@ -172,6 +175,7 @@ WHERE pc.osm_id IS NULL;
 REINDEX TABLE poi_osm_next;
 CREATE INDEX poi_osm_next_geom_idx ON poi_osm_next USING GIST(geom);
 CREATE INDEX poi_osm_next_status_idx ON poi_osm_next(status);
+CREATE INDEX poi_osm_next_status_service_idx ON poi_osm_next(status_service);
 CREATE INDEX poi_osm_next_cat1_idx ON poi_osm_next(cat1);
 CREATE INDEX poi_osm_next_cat2_idx ON poi_osm_next(cat2);
 CREATE INDEX poi_osm_next_cat3_idx ON poi_osm_next(cat3);
@@ -185,12 +189,13 @@ ALTER TABLE poi_osm_next RENAME TO poi_osm;
 ALTER INDEX poi_osm_next_pkey RENAME TO poi_osm_pkey;
 ALTER INDEX poi_osm_next_geom_idx RENAME TO poi_osm_geom_idx;
 ALTER INDEX poi_osm_next_status_idx RENAME TO poi_osm_status_idx;
+ALTER INDEX poi_osm_next_status_service_idx RENAME TO poi_osm_status_service_idx;
 ALTER INDEX poi_osm_next_cat1_idx RENAME TO poi_osm_cat1_idx;
 ALTER INDEX poi_osm_next_cat2_idx RENAME TO poi_osm_cat2_idx;
 ALTER INDEX poi_osm_next_cat3_idx RENAME TO poi_osm_cat3_idx;
 
 CREATE OR REPLACE VIEW poi_osm_light AS
-SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, takeaway, delivery, drive_through
+SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, status_service, takeaway, delivery, drive_through
 FROM poi_osm;
 
 CREATE OR REPLACE FUNCTION json_to_hstore(json)
@@ -222,6 +227,7 @@ SELECT
 	get_state(tags) AS status,
 	status_order_value(get_state(tags)) AS status_order,
 	'cro' AS source_status,
+	COALESCE(tags->'service:wheelchair', 'unknown') AS status_service,
 	tags->'delivery' AS delivery,
 	tags->'takeaway' AS takeaway,
 	tags->'drive_through' AS drive_through,
@@ -238,7 +244,7 @@ FROM (
 ) a;
 
 CREATE OR REPLACE VIEW poi_recent_notes_light AS
-SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, takeaway, delivery, drive_through
+SELECT fid, fid AS id, geom, name, cat1, cat2, cat3, status, status_service, takeaway, delivery, drive_through
 FROM poi_recent_notes;
 
 

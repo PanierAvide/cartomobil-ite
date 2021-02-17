@@ -39,6 +39,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { encodeFilter, decodeFilter } from '../lib/categories';
 
 export default {
   props: {
@@ -78,20 +79,15 @@ export default {
     },
 
     chipValues() {
-      const parts = this.value.split("/");
-      if(parts.length > 1) {
-        return parts[1].split(",");
-      }
-      else {
-        return [];
-      }
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.value);
+      return subcategories || [];
     }
   },
 
   methods: {
     onChange(v) {
-      const newValue = v.length > 0 ? `${this.category}/${v.join(",")}` : this.category;
-      this.$emit('input', newValue);
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.value);
+      this.$emit('input', encodeFilter(category, v, null, status));
     }
   }
 }

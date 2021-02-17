@@ -8,7 +8,7 @@
         cols="3"
         md="4"
         class="text-center category-col"
-        @click="updateValue(category)"
+        @click="updateCategory(category)"
       >
         <v-avatar color="grey darken-2">
           <v-icon color="white">{{ `osm-${category}` }}</v-icon>
@@ -21,6 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { encodeFilter, decodeFilter } from '../lib/categories';
 
 export default {
   props: {
@@ -33,8 +34,9 @@ export default {
   computed: mapGetters(['categories']),
 
   methods: {
-    updateValue(value) {
-      this.$emit('input', value);
+    updateCategory(category) {
+      const [ oldCategory, subcategories, subfilters, status ] = decodeFilter(this.value);
+      this.$emit('input', encodeFilter(category, null, null, status));
     }
   }
 }

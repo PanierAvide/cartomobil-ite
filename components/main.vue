@@ -4,21 +4,21 @@
        sm: isMobile,
       'place-opened': $route.name === 'place' && !isMobile,
       'sidebar-opened': sidebar && !isMobile,
-      'sidebar-big-opened': sidebar && hasFilter && !isMobile
+      'sidebar-big-opened': sidebar && hasCategoryFilter && !isMobile
     }"
   >
     <div>
       <v-navigation-drawer
         v-if="!isMobile"
         v-model="sidebar"
-        :width="hasFilter ? 400 : 350"
+        :width="hasCategoryFilter ? 400 : 350"
         temporary
         stateless
         hide-overlay
         fixed
       >
         <filter-results
-          v-if="hasFilter"
+          v-if="hasCategoryFilter"
           v-model="filter"
           :featuresAndLocation="featuresAndLocation"
           :map-bounds="mapBounds"
@@ -33,6 +33,7 @@
         />
         <main-menu
           v-else
+          :filter="filter"
           :style="{ width: '350px' }"
         >
           <geocoder
@@ -84,7 +85,7 @@
           :filter="filter"
         >
           <filter-results
-            v-if="hasFilter"
+            v-if="hasCategoryFilter"
             v-model="filter"
             :featuresAndLocation="featuresAndLocation"
             :map-bounds="mapBounds"
@@ -99,6 +100,7 @@
           />
           <main-menu
             v-else
+            :filter="filter"
             :show-brand="false"
           >
             <filter-list v-model="filter" />
@@ -107,7 +109,7 @@
       </v-content>
     </div>
     <router-view>
-      <div v-if="hasFilter">
+      <div v-if="hasCategoryFilter">
         <v-btn
           tile
           text
@@ -129,6 +131,7 @@ import debounce from 'lodash.debounce';
 import config from '../config.json';
 import { getCookie, setCookie } from '../lib/cookie';
 import { encode, decode, encodePosition, decodePosition, findBrand } from '../lib/url';
+import { encodeFilter, decodeFilter } from '../lib/categories';
 import isMobile from './mixins/is_mobile';
 import AppsSheet from './apps_sheet';
 import MainMenu from './main_menu';
@@ -191,6 +194,12 @@ export default {
     const { filter, location } = decode(this.featuresAndLocation);
     this.filter = filter;
 
+    // Store initial status values
+    const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
+    if(status) {
+      Object.entries(status).forEach(e => this.$store.commit('setStatus', e.join("=")));
+    }
+
     Promise.all([
       this.loadInitialLocation(location),
       this.loadAndOverrideMapStyle()
@@ -203,10 +212,10 @@ export default {
   computed: {
     ...mapGetters(['categories', 'allCategories']),
 
-    ...mapState(['newPlaceType']),
+    ...mapState(['newPlaceType', 'statusPlace', 'statusService']),
 
-    hasFilter() {
-      return this.filter !== '';
+    hasCategoryFilter() {
+      return this.filter.split("~")[0] !== '';
     }
   },
 
@@ -224,7 +233,15 @@ export default {
 
     filter() {
       this.updateRoute();
-    }
+    },
+
+    statusPlace() {
+      this.updateFilterStatus();
+    },
+
+    statusService() {
+      this.updateFilterStatus();
+    },
   },
 
   methods: {
@@ -334,6 +351,14 @@ export default {
       }
 
       this.$refs.map.$emit('updateMapBounds', bbox);
+    },
+
+    updateFilterStatus() {
+      const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
+      const newStatus = {};
+      if(this.statusService !== "") { newStatus.service = this.statusService; }
+      if(this.statusPlace !== "") { newStatus.place = this.statusPlace; }
+      this.filter = encodeFilter(category, subcategories, subfilters, newStatus);
     },
 
     savedMapView() {

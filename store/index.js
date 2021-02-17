@@ -10,7 +10,9 @@ export const state = () => ({
   place: null,
   highlightPlace: null,
   contribution: null,
-  newPlaceType: null
+  newPlaceType: null,
+  statusPlace: '',
+  statusService: ''
 });
 
 export const mutations = {
@@ -38,6 +40,11 @@ export const mutations = {
 
   addNewPlaceType (state, type) {
     state.newPlaceType = type;
+  },
+
+  setStatus(state, val) {
+    const parts = val.split("=");
+    state['status'+parts[0].substring(0,1).toUpperCase()+parts[0].substring(1)] = parts[1] || "";
   },
 };
 

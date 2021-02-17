@@ -48,6 +48,11 @@
     "bugs": "Warn us about a bug on map on GitHub",
     "category": "Ask for new categories on GitHub"
   },
+  "map_settings": {
+    "title": "Settings",
+    "place_status": "Place access",
+    "service_status": "Service access"
+  },
   "rgpd": {
     "consent": "In these times of lockdown, would you take a cookie on your computer for our statistics?",
     "yes": "Yes",

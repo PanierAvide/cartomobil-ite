@@ -127,31 +127,51 @@ describe('encodeFilter', () => {
 describe('decodeFilter', () => {
   it('handles cat only', () => {
     const result = decodeFilter('administration');
-    expect(result).toEqual(['administration']);
+    expect(result).toEqual(['administration', null, null, null]);
   });
 
   it('handles cat + subcat', () => {
     const result = decodeFilter('administration/townhall');
-    expect(result).toEqual(['administration', ['townhall']]);
+    expect(result).toEqual(['administration', ['townhall'], null, null]);
   });
 
   it('handles cat + subcats', () => {
     const result = decodeFilter('administration/government,townhall');
-    expect(result).toEqual(['administration', ['government', 'townhall']]);
+    expect(result).toEqual(['administration', ['government', 'townhall'], null, null]);
   });
 
   it('handles cat + subcat + subfilter', () => {
     const result = decodeFilter('administration/government/pref');
-    expect(result).toEqual(['administration', ['government'], ['pref']]);
+    expect(result).toEqual(['administration', ['government'], ['pref'], null]);
   });
 
   it('handles cat + subcat + subfilters', () => {
     const result = decodeFilter('administration/government/pref,etat');
-    expect(result).toEqual(['administration', ['government'], ['pref','etat']]);
+    expect(result).toEqual(['administration', ['government'], ['pref','etat'], null]);
   });
 
-  it('cleans empty arrays', () => {
-    const result = decodeFilter('administration/government/');
-    expect(result).toEqual(['administration', ['government']]);
+  it('keeps empty spaces', () => {
+    const result = decodeFilter('administration~place=yes');
+    expect(result).toEqual(['administration', null, null, {"place":"yes"}]);
+  });
+
+  it('handles cat, subcat, subfilters', () => {
+    const result = decodeFilter('administration/government/cps');
+    expect(result).toEqual(['administration', ['government'], ['cps'], null]);
+  });
+
+  it('handles several subfilters', () => {
+    const result = decodeFilter('administration/government/cps,onf,wtf');
+    expect(result).toEqual(['administration', ['government'], ['cps','onf','wtf'], null]);
+  });
+
+  it('handles cat, subcat, subfilters and status', () => {
+    const result = decodeFilter('administration/government/cps~place=yes');
+    expect(result).toEqual(['administration', ['government'], ['cps'], {"place": "yes"}]);
+  });
+
+  it('handles several statuses', () => {
+    const result = decodeFilter('administration/government/cps~place=yes&service=yes');
+    expect(result).toEqual(['administration', ['government'], ['cps'], {"place": "yes","service":"yes"}]);
   });
 });
