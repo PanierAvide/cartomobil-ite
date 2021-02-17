@@ -329,21 +329,22 @@ export default {
       const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
       return getLayers(this.$vuetify.theme.themes.light).map((layer) => {
         const newLayer = { ...layer, filter: ['all'] };
-        if (subfilters) {
+        if (subfilters && subfilters.length > 0) {
           newLayer.filter.push(['in', ['get', 'cat3'], ['literal', subfilters]]);
-        } else if (subcategories) {
+        } else if (subcategories && subcategories.length > 0) {
           newLayer.filter.push(['in', ['get', 'cat2'], ['literal', subcategories]]);
-        } else if (category !== '') {
+        } else if (category && category !== '') {
           newLayer.filter.push(['==', ['get', 'cat1'], category]);
         }
         if(status) {
-          if(status.place) {
+          if(status.place && status.place !== '') {
             newLayer.filter.push(['==', ['get', 'status'], status.place]);
           }
-          if(status.service) {
+          if(status.service && status.service !== '') {
             newLayer.filter.push(['==', ['get', 'status_service'], status.service]);
           }
         }
+        console.log(newLayer.filter);
         return newLayer;
       });
     },
