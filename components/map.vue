@@ -344,7 +344,6 @@ export default {
             newLayer.filter.push(['==', ['get', 'status_service'], status.service]);
           }
         }
-        console.log(newLayer.filter);
         return newLayer;
       });
     },
