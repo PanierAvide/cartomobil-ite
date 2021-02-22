@@ -74,7 +74,8 @@ export default {
 
   computed: {
     hasForm() {
-      return getForm(this.place) !== null;
+      const f = getForm(this.place);
+      return f !== null && f !== undefined;
     },
 
     type() {

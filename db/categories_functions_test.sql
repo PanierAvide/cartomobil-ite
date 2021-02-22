@@ -774,41 +774,41 @@ SELECT is(get_category1('barrier=>kerb, kerb=>raised'::hstore, 'FR'), 'mobility'
 
 SELECT is(get_category2('barrier=>kerb, kerb=>raised'::hstore, 'FR'), 'barrier', 'get_category2 barrier=>kerb, kerb=>raised for FR should be barrier');
 
-SELECT is(get_category1('smoothness=>bad'::hstore, 'FR'), 'mobility', 'get_category1 smoothness=>bad for FR should be mobility');
+SELECT is(get_category1('highway=>*, smoothness=>bad'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>bad for FR should be mobility');
 
-SELECT is(get_category2('smoothness=>bad'::hstore, 'FR'), 'barrier', 'get_category2 smoothness=>bad for FR should be barrier');
+SELECT is(get_category2('highway=>*, smoothness=>bad'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>bad for FR should be barrier');
 
-SELECT is(get_category1('smoothness=>horrible'::hstore, 'FR'), 'mobility', 'get_category1 smoothness=>horrible for FR should be mobility');
+SELECT is(get_category1('highway=>*, smoothness=>horrible'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>horrible for FR should be mobility');
 
-SELECT is(get_category2('smoothness=>horrible'::hstore, 'FR'), 'barrier', 'get_category2 smoothness=>horrible for FR should be barrier');
+SELECT is(get_category2('highway=>*, smoothness=>horrible'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>horrible for FR should be barrier');
 
-SELECT is(get_category1('surface=>metal'::hstore, 'FR'), 'mobility', 'get_category1 surface=>metal for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>metal'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>metal for FR should be mobility');
 
-SELECT is(get_category2('surface=>metal'::hstore, 'FR'), 'barrier', 'get_category2 surface=>metal for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>metal'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>metal for FR should be barrier');
 
-SELECT is(get_category1('surface=>wood'::hstore, 'FR'), 'mobility', 'get_category1 surface=>wood for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>wood'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>wood for FR should be mobility');
 
-SELECT is(get_category2('surface=>wood'::hstore, 'FR'), 'barrier', 'get_category2 surface=>wood for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>wood'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>wood for FR should be barrier');
 
-SELECT is(get_category1('surface=>compacted'::hstore, 'FR'), 'mobility', 'get_category1 surface=>compacted for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>compacted'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>compacted for FR should be mobility');
 
-SELECT is(get_category2('surface=>compacted'::hstore, 'FR'), 'barrier', 'get_category2 surface=>compacted for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>compacted'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>compacted for FR should be barrier');
 
-SELECT is(get_category1('surface=>fine_gravel'::hstore, 'FR'), 'mobility', 'get_category1 surface=>fine_gravel for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>fine_gravel'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>fine_gravel for FR should be mobility');
 
-SELECT is(get_category2('surface=>fine_gravel'::hstore, 'FR'), 'barrier', 'get_category2 surface=>fine_gravel for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>fine_gravel'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>fine_gravel for FR should be barrier');
 
-SELECT is(get_category1('surface=>unhewn_cobblestone'::hstore, 'FR'), 'mobility', 'get_category1 surface=>unhewn_cobblestone for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>unhewn_cobblestone'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>unhewn_cobblestone for FR should be mobility');
 
-SELECT is(get_category2('surface=>unhewn_cobblestone'::hstore, 'FR'), 'barrier', 'get_category2 surface=>unhewn_cobblestone for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>unhewn_cobblestone'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>unhewn_cobblestone for FR should be barrier');
 
-SELECT is(get_category1('surface=>sand'::hstore, 'FR'), 'mobility', 'get_category1 surface=>sand for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>sand'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>sand for FR should be mobility');
 
-SELECT is(get_category2('surface=>sand'::hstore, 'FR'), 'barrier', 'get_category2 surface=>sand for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>sand'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>sand for FR should be barrier');
 
-SELECT is(get_category1('surface=>ground'::hstore, 'FR'), 'mobility', 'get_category1 surface=>ground for FR should be mobility');
+SELECT is(get_category1('highway=>*, surface=>ground'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>ground for FR should be mobility');
 
-SELECT is(get_category2('surface=>ground'::hstore, 'FR'), 'barrier', 'get_category2 surface=>ground for FR should be barrier');
+SELECT is(get_category2('highway=>*, surface=>ground'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>ground for FR should be barrier');
 
 SELECT is(get_category1('tourism=>guest_house'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>guest_house for FR should be tourism');
 
