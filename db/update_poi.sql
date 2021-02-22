@@ -7,6 +7,12 @@ CREATE OR REPLACE FUNCTION get_state(tags HSTORE) RETURNS VARCHAR AS $$
 BEGIN
 	IF tags->'wheelchair' IN ('yes', 'no', 'limited') THEN
 		RETURN tags->'wheelchair';
+	ELSE IF
+		tags->'obstacle:wheelchair' = 'yes'
+		OR tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')
+		OR tags->'kerb' = 'raised'
+	THEN
+		RETURN 'no';
 	ELSE
 		RETURN 'unknown';
 	END IF;
