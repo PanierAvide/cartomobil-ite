@@ -27,12 +27,11 @@
   },
   "locales": {
     "DEFAULT": {
-      "about": "https://www.avoscartes.pf",
-      "disclaimer": "https://www.avoscartes.pf",
-      "email": "mailto:cartomobilite@avoscartes.pf",
+      "about": "https://mobilite.xyz/?PagePrincipale",
+      "disclaimer": "https://mobilite.xyz/?LegalCGU/",
+      "email": "mailto:info@mobilite.xyz",
       "issues": "https://github.com/PanierAvide/cartomobil-ite/issues/new",
-      "contribute_osm": "https://learnosm.org/fr/",
-      "contribute_cro": "https://www.avoscartes.pf"
+      "contribute_cro": "https://mobilite.xyz/?PagePrincipale#participer"
     }
   }
 }

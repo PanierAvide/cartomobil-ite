@@ -582,6 +582,25 @@
           "areas": "all",
           "form": "elevator"
         }
+        ,
+        "barrier": {
+          "name": "Obstacle",
+          "osm_tags": [
+            { "obstacle:wheelchair": "yes", "amenity": "parking", "informal": "yes" },
+            { "obstacle:wheelchair": "yes", "construction": "yes" },
+            { "obstacle:wheelchair": "yes", "power": "pole" },
+            { "obstacle:wheelchair": "yes", "highway": "street_lamp|traffic_signals" },
+            { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier|block" },
+            { "obstacle:wheelchair": "yes", "traffic_sign": "*" },
+            { "obstacle:wheelchair": "yes", "tourism": "information" },
+            { "obstacle:wheelchair": "yes", "natural": "tree" },
+            { "barrier": "kerb", "kerb": "raised" },
+            { "smoothness": "bad|horrible" },
+            { "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" }
+          ],
+          "areas": "all",
+          "form": "barrier"
+        }
       }
     },
     "tourism": {
@@ -1962,7 +1981,7 @@
                     { "title": "Panneau d'affichage", "const": "billboard" },
                     { "title": "Panneau avec une carte", "const": "map" },
                     { "title": "Feu de circulation", "const": "traffic_signals" },
-                    { "title": "Barrière pour ralentir les cyclistes", "const": "bicycle_barrier" },
+                    { "title": "Barrière à vélos", "const": "bicycle_barrier" },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
                 }

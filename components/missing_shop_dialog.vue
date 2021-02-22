@@ -96,7 +96,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="4"
+            md="6"
           >
             <v-btn
               :href="links.contribute_cro"
@@ -105,26 +105,12 @@
               color="secondary"
               target="_blank"
             >
-              {{ $t('missing_shop_dialog.cta_edit') }}
+              {{ $t('missing_shop_dialog.cta_improve') }}
             </v-btn>
           </v-col>
           <v-col
             cols="12"
-            md="4"
-          >
-            <v-btn
-              :href="links.contribute_osm"
-              class="full-width"
-              outlined
-              color="secondary"
-              target="_blank"
-            >
-              {{ $t('missing_shop_dialog.cta_add_new') }}
-            </v-btn>
-          </v-col>
-          <v-col
-            cols="12"
-            md="4"
+            md="6"
           >
             <v-btn
               :href="links.email"
