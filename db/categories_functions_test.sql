@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(386);
+SELECT plan(428);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -725,6 +725,90 @@ SELECT is(get_category2('building=>elevator'::hstore, 'FR'), 'elevator', 'get_ca
 SELECT is(get_category1('indoor=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 indoor=>elevator for FR should be mobility');
 
 SELECT is(get_category2('indoor=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 indoor=>elevator for FR should be elevator');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, amenity=>parking, informal=>yes'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, amenity=>parking, informal=>yes for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, amenity=>parking, informal=>yes'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, amenity=>parking, informal=>yes for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, construction=>yes'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, construction=>yes for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, construction=>yes'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, construction=>yes for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, power=>pole'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, power=>pole for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, power=>pole'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, power=>pole for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, highway=>street_lamp'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, highway=>street_lamp for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, highway=>street_lamp'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, highway=>street_lamp for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, highway=>traffic_signals'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, highway=>traffic_signals for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, highway=>traffic_signals'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, highway=>traffic_signals for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, barrier=>bollard'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, barrier=>bollard for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, barrier=>bollard'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, barrier=>bollard for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, barrier=>cycle_barrier'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, barrier=>cycle_barrier for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, barrier=>cycle_barrier'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, barrier=>cycle_barrier for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, barrier=>block'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, barrier=>block for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, barrier=>block'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, barrier=>block for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, traffic_sign=>*'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, traffic_sign=>* for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, traffic_sign=>*'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, traffic_sign=>* for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, tourism=>information'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, tourism=>information for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, tourism=>information'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, tourism=>information for FR should be barrier');
+
+SELECT is(get_category1('obstacle:wheelchair=>yes, natural=>tree'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, natural=>tree for FR should be mobility');
+
+SELECT is(get_category2('obstacle:wheelchair=>yes, natural=>tree'::hstore, 'FR'), 'barrier', 'get_category2 obstacle:wheelchair=>yes, natural=>tree for FR should be barrier');
+
+SELECT is(get_category1('barrier=>kerb, kerb=>raised'::hstore, 'FR'), 'mobility', 'get_category1 barrier=>kerb, kerb=>raised for FR should be mobility');
+
+SELECT is(get_category2('barrier=>kerb, kerb=>raised'::hstore, 'FR'), 'barrier', 'get_category2 barrier=>kerb, kerb=>raised for FR should be barrier');
+
+SELECT is(get_category1('smoothness=>bad'::hstore, 'FR'), 'mobility', 'get_category1 smoothness=>bad for FR should be mobility');
+
+SELECT is(get_category2('smoothness=>bad'::hstore, 'FR'), 'barrier', 'get_category2 smoothness=>bad for FR should be barrier');
+
+SELECT is(get_category1('smoothness=>horrible'::hstore, 'FR'), 'mobility', 'get_category1 smoothness=>horrible for FR should be mobility');
+
+SELECT is(get_category2('smoothness=>horrible'::hstore, 'FR'), 'barrier', 'get_category2 smoothness=>horrible for FR should be barrier');
+
+SELECT is(get_category1('surface=>metal'::hstore, 'FR'), 'mobility', 'get_category1 surface=>metal for FR should be mobility');
+
+SELECT is(get_category2('surface=>metal'::hstore, 'FR'), 'barrier', 'get_category2 surface=>metal for FR should be barrier');
+
+SELECT is(get_category1('surface=>wood'::hstore, 'FR'), 'mobility', 'get_category1 surface=>wood for FR should be mobility');
+
+SELECT is(get_category2('surface=>wood'::hstore, 'FR'), 'barrier', 'get_category2 surface=>wood for FR should be barrier');
+
+SELECT is(get_category1('surface=>compacted'::hstore, 'FR'), 'mobility', 'get_category1 surface=>compacted for FR should be mobility');
+
+SELECT is(get_category2('surface=>compacted'::hstore, 'FR'), 'barrier', 'get_category2 surface=>compacted for FR should be barrier');
+
+SELECT is(get_category1('surface=>fine_gravel'::hstore, 'FR'), 'mobility', 'get_category1 surface=>fine_gravel for FR should be mobility');
+
+SELECT is(get_category2('surface=>fine_gravel'::hstore, 'FR'), 'barrier', 'get_category2 surface=>fine_gravel for FR should be barrier');
+
+SELECT is(get_category1('surface=>unhewn_cobblestone'::hstore, 'FR'), 'mobility', 'get_category1 surface=>unhewn_cobblestone for FR should be mobility');
+
+SELECT is(get_category2('surface=>unhewn_cobblestone'::hstore, 'FR'), 'barrier', 'get_category2 surface=>unhewn_cobblestone for FR should be barrier');
+
+SELECT is(get_category1('surface=>sand'::hstore, 'FR'), 'mobility', 'get_category1 surface=>sand for FR should be mobility');
+
+SELECT is(get_category2('surface=>sand'::hstore, 'FR'), 'barrier', 'get_category2 surface=>sand for FR should be barrier');
+
+SELECT is(get_category1('surface=>ground'::hstore, 'FR'), 'mobility', 'get_category1 surface=>ground for FR should be mobility');
+
+SELECT is(get_category2('surface=>ground'::hstore, 'FR'), 'barrier', 'get_category2 surface=>ground for FR should be barrier');
 
 SELECT is(get_category1('tourism=>guest_house'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>guest_house for FR should be tourism');
 

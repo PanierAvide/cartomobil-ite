@@ -327,6 +327,7 @@
     "ferry": "Ferry",
     "airport": "Airport",
     "elevator": "Elevator",
+    "barrier": "Obstacle",
     "tourism": "Tourism",
     "housing": "Housing",
     "guest_house": "Guest house",
@@ -340,8 +341,7 @@
     "artwork": "Artwork",
     "historic": "Historical site",
     "drinking_water": "Drinking water",
-    "toilets": "Toilets",
-    "barrier": "Obstacle"
+    "toilets": "Toilets"
   },
   "qa": {
     "title": "Quality assurance"

@@ -84,6 +84,9 @@
         <v-icon>osm-chevron_right</v-icon>
       </v-btn>
     </div>
+
+    <v-divider />
+    <map-settings :filter="filter" />
   </div>
 </template>
 
@@ -92,10 +95,12 @@ import { mapGetters } from 'vuex';
 import _debounce from 'lodash.debounce';
 import { poiFeature } from '../config.json';
 import { availableSubFilters, decodeFilter, encodeFilter } from '../lib/categories';
+import { decode } from '../lib/url';
 import isMobile from './mixins/is_mobile';
 import PlaceDense from './place/dense';
 import FilterSubcategories from './filter_subcategories';
 import FilterSubfilters from './filter_subfilters';
+import MapSettings from './map_settings';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
 const PAGE_SIZE = 10;
@@ -104,7 +109,8 @@ export default {
   components: {
     FilterSubfilters,
     FilterSubcategories,
-    PlaceDense
+    PlaceDense,
+    MapSettings,
   },
 
   mixins: [isMobile],
@@ -137,12 +143,15 @@ export default {
     return {
       loading: true,
       offset: 0,
-      results: null
+      results: null,
+      filter: ''
     };
   },
 
   mounted() {
     this.fetchResults();
+    const { filter, location } = decode(this.featuresAndLocation);
+    this.filter = filter;
   },
 
   computed: {
