@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -e 
+set -e
 
-DATASET_URL="http://download.openstreetmap.fr/extracts/oceania/polynesie-latest.osm.pbf"
-REPLICATION_URL="http://download.openstreetmap.fr/replication/oceania/polynesie/minute/"
+DATASET_URL="http://download.openstreetmap.fr/extracts/south-america/polynesie-latest.osm.pbf"
+REPLICATION_URL="http://download.openstreetmap.fr/replication/south-america/polynesie/minute/"
 CONNEXION=${1}
 DATASET=`basename ${DATASET_URL}`
 IMPORT_FILE=`pwd`/import.yml
@@ -19,4 +19,4 @@ imposm import -write -connection "${CONNEXION}" -mapping "${IMPORT_FILE}" -cache
 
 cat /home/prod/data/diffs/last.state.txt|grep -v replicationUrl > /home/prod/data/diffs/state.txt
 echo "baseUrl=${REPLICATION_URL}" > /home/prod/data/diffs/configuration.txt
-echo maxInterval = 7200 >> /home/prod/data/diffs/configuration.txt 
+echo maxInterval = 7200 >> /home/prod/data/diffs/configuration.txt
