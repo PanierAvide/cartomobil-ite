@@ -338,10 +338,10 @@ export default {
         }
         if(status) {
           if(status.place && status.place !== '') {
-            newLayer.filter.push(['==', ['get', 'status'], status.place]);
+            newLayer.filter.push(['in', ['get', 'status'], ['literal', status.place.split(",")]]);
           }
           if(status.service && status.service !== '') {
-            newLayer.filter.push(['==', ['get', 'status_service'], status.service]);
+            newLayer.filter.push(['in', ['get', 'status_service'], ['literal', status.service.split(",")]]);
           }
         }
         return newLayer;

@@ -1,18 +1,18 @@
 <template>
   <v-btn-toggle
-    dense
+    dense multiple
     value="status"
     @change="onBtnChange"
   >
-    <v-btn :class="status == 'no' && 'status-switch-active'" value="no" small :title="$t('details.state_short.no')">
+    <v-btn :class="status.includes('no') && 'status-switch-active'" value="no" small :title="$t('details.state_short.no')">
       <v-icon>osm-status_no</v-icon>
     </v-btn>
 
-    <v-btn :class="status == 'limited' && 'status-switch-active'" value="limited" small :title="$t('details.state_short.limited')">
+    <v-btn :class="status.includes('limited') && 'status-switch-active'" value="limited" small :title="$t('details.state_short.limited')">
       <v-icon color="warning">osm-status_limited</v-icon>
     </v-btn>
 
-    <v-btn :class="status == 'yes' && 'status-switch-active'" value="yes" small :title="$t('details.state_short.yes')">
+    <v-btn :class="status.includes('yes') && 'status-switch-active'" value="yes" small :title="$t('details.state_short.yes')">
       <v-icon color="success">osm-status_yes</v-icon>
     </v-btn>
   </v-btn-toggle>

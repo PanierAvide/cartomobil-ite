@@ -54,14 +54,14 @@ export default {
 
   data() {
     return {
-      place_status: '',
-      service_status: ''
+      place_status: [],
+      service_status: []
     };
   },
 
   computed: {
     statusEnabled() {
-      return this.place_status !== '' || this.service_status !== '';
+      return this.place_status.length > 0 || this.service_status.length > 0;
     },
   },
 
@@ -75,13 +75,13 @@ export default {
     },
 
     place_status(newv, oldv) {
-      if(newv === undefined || newv === null || newv.trim() === "") { newv = ''; }
-      this.$store.commit('setStatus', 'place='+newv);
+      if(newv === undefined || newv === null || newv.length === 0 || newv.filter(v => v.trim() !== "").length === 0) { newv = []; }
+      this.$store.commit('setStatus', 'place='+newv.join(","));
     },
 
     service_status(newv, oldv) {
-      if(newv === undefined || newv === null || newv.trim() === "") { newv = ''; }
-      this.$store.commit('setStatus', 'service='+newv);
+      if(newv === undefined || newv === null || newv.length === 0 || newv.filter(v => v.trim() !== "").length === 0) { newv = []; }
+      this.$store.commit('setStatus', 'service='+newv.join(","));
     },
   },
 
@@ -89,12 +89,12 @@ export default {
     updateStatus() {
       const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
       if(status) {
-        this.place_status = status.place || '';
-        this.service_status = status.service || '';
+        this.place_status = (status.place || '').split(",");
+        this.service_status = (status.service || '').split(",");
       }
       else {
-        this.place_status = '';
-        this.service_status = '';
+        this.place_status = [];
+        this.service_status = [];
       }
     },
   },
