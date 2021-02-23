@@ -74,7 +74,7 @@
           </v-list-item>
         </v-list>
 
-        <detail-schema :place="place" />
+        <detail-schema class="mx-3 my-2" :place="place" />
 
         <mapillary-viewer
           v-if="mapillaryImage"

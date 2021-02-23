@@ -117,53 +117,117 @@ function getLayers(theme) {
     0, 0,
     12, [
       'case',
-      ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 0,
+      ["in", ["get", "status"], ["literal", ["unknown", "partial", "closed"]]], 0,
       1
     ],
     14, [
       'case',
-      ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 0,
+      ["in", ["get", "status"], ["literal", ["unknown", "partial", "closed"]]], 0,
       1
-    ],
-    15, 1
+    ]
+  ];
+
+  const stockWidth = [
+    'case',
+    ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 4,
+    2.5
   ];
 
   const layers = [
     {
-      id: "poi-background",
+      before: 'poi_label',
+      id: "poi-background-strock-under",
       type: "circle",
       "source-layer": source,
-      layout: {
-        'circle-sort-key': [
-          'case',
-          ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 2,
-          ["in", ["get", "status"], ["literal", ["no"]]], 1,
-          0
-        ]
-      },
+      maxzoom: 15,
       paint: {
-        'circle-color': 'white',
-        'circle-opacity': conditionalOpacity,
-        'circle-stroke-opacity': conditionalOpacity,
-        'circle-stroke-width': [
-          'case',
-          ["in", ["get", "status"], ["literal", ["yes", "limited"]]], 4,
-          2.5
-        ],
-        'circle-stroke-color': getColorStroke(theme),
+        'circle-opacity': [...conditionalOpacity, 15, 0],
+        'circle-color': getColorStroke(theme),
         'circle-radius': [
           'interpolate',
           ['linear'],
           ['zoom'],
           12, 0,
-          14, 2,
+          14, ['+', 3, stockWidth],
+          15, ['+', [
+              'case',
+              ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
+              5
+            ],
+            stockWidth
+          ],
+          19, ['+', 14, stockWidth]
+        ]
+      }
+    },
+    {
+      before: 'poi_label',
+      id: "poi-background-under",
+      type: "circle",
+      "source-layer": source,
+      maxzoom: 15,
+      paint: {
+        'circle-color': 'white',
+        'circle-opacity': [...conditionalOpacity, 15, 0],
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          12, 0,
+          14, 3,
           15, [
             'case',
             ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
-            ["in", ["get", "cat1"], ["literal", ["note", "obstacle"]]], 3,
-            6
+            5
+          ]
+        ]
+      }
+    },
+    {
+      id: "poi-background-strock",
+      type: "circle",
+      "source-layer": source,
+      minzoom: 14,
+      paint: {
+        'circle-opacity': [...conditionalOpacity, 15, 1],
+        'circle-color': getColorStroke(theme),
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          12, 0,
+          14, ['+', 3, stockWidth],
+          15, ['+', [
+              'case',
+              ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
+              5
+            ],
+            stockWidth
           ],
-          19, 13
+          19, ['+', 14, stockWidth]
+        ]
+      }
+    },
+    {
+      id: "poi-background",
+      type: "circle",
+      "source-layer": source,
+      minzoom: 14,
+      paint: {
+        'circle-color': 'white',
+        'circle-opacity': [...conditionalOpacity, 15, 1],
+        'circle-radius': [
+          'interpolate',
+          ['linear'],
+          ['zoom'],
+          12, 0,
+          14, 3,
+          15, [
+            'case',
+            ["in", ["get", "status"], ["literal", ["no", "unknown"]]], 4,
+            5
+          ],
+          19, 14
         ]
       }
     },
@@ -192,8 +256,8 @@ function getLayers(theme) {
           'interpolate',
           ['linear'],
           ['zoom'],
-          14, 0.3,
-          19, 0.9
+          15, 0.3,
+          19, 1
         ],
         "text-anchor": "top",
         "text-field": ["get", "name"],
@@ -209,15 +273,20 @@ function getLayers(theme) {
           19, ['literal', [0, 1.5]]
         ],
         "text-padding": 2,
-        "text-size": 12
+        "text-size": 12,
+        "text-optional": true
       },
       paint: {
-        "icon-opacity": conditionalOpacity,
+        "icon-opacity": [
+          'interpolate', ['linear'],
+          ['zoom'],
+          15, 0,
+          16, 1
+        ],
         "text-opacity": [
           'interpolate', ['linear'],
           ['zoom'],
-          0, 0,
-          16, 0,
+          15, 0,
           17, 1
         ],
         "text-color": "#666",
