@@ -429,7 +429,14 @@
     "housing": "Hébergement",
     "doctor": "Docteur",
     "waterfall": "Cascade",
-    "barrier": "Obstacle"
+    "barrier": "Obstacle",
+    "informal_parking": "Parking sauvage",
+    "roadworks": "Travaux",
+    "pole": "Poteau",
+    "block": "Bloc",
+    "tree": "Arbre",
+    "kerb": "Marche",
+    "surface": "Revêtement"
   },
   "categories_notes": {
     "fuel": "Les stations essences de Polynésie française sont accessibles, les employés venant remplir systématiquement l'essence pour vous, pas besoin de sortir de la voiture."

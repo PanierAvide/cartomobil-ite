@@ -45,6 +45,44 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Append custom tags
+CREATE OR REPLACE FUNCTION complete_tags(tags JSONB) RETURNS JSONB AS $$
+DECLARE
+	new_tags JSONB;
+BEGIN
+	new_tags := tags;
+
+	IF tags->>'barrier' = 'kerb' AND tags->>'kerb' = 'raised' THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"kerb"');
+	ELSIF tags->>'obstacle:wheelchair' = 'yes' AND tags->>'amenity' = 'parking' AND tags->>'informal' = 'yes' THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"informal_parking"');
+	ELSIF tags->>'obstacle:wheelchair' = 'yes' AND tags->>'construction' = 'yes' THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"roadworks"');
+	ELSIF
+		tags->>'obstacle:wheelchair' = 'yes' AND (
+			tags->>'power' = 'pole'
+			OR tags->>'highway' IN ('street_lamp', 'traffic_signals')
+			OR tags->>'barrier' IN ('cycle_barrier', 'bollard')
+			OR tags->>'traffic_sign' IS NOT NULL
+			OR tags->>'tourism' = 'information'
+		)
+	THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"pole"');
+	ELSIF tags->>'obstacle:wheelchair' = 'yes' AND tags->>'natural' = 'tree' THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"tree"');
+	ELSIF tags->>'obstacle:wheelchair' = 'yes' AND tags->>'barrier' = 'block' THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"block"');
+	ELSIF tags->>'highway' IS NOT NULL AND (
+		tags->>'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')
+		OR tags->>'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')
+	) THEN
+		new_tags = jsonb_set(new_tags, '{obstacle}', '"surface"');
+	END IF;
+
+	RETURN new_tags;
+END;
+$$ LANGUAGE plpgsql;
+
 -- Deprecated function to get normalized category label
 DROP INDEX IF EXISTS idx_imposm_osm_point_search;
 DROP INDEX IF EXISTS idx_imposm_osm_polygon_search;
@@ -175,6 +213,9 @@ SELECT
 	tags
 FROM pc
 WHERE pc.osm_id IS NULL;
+
+-- Update with custom tags
+UPDATE poi_osm_next SET tags = complete_tags(tags);
 
 
 -- Index creation and table switch

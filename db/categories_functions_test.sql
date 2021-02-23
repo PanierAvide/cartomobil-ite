@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(428);
+SELECT plan(434);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -778,9 +778,21 @@ SELECT is(get_category1('highway=>*, smoothness=>bad'::hstore, 'FR'), 'mobility'
 
 SELECT is(get_category2('highway=>*, smoothness=>bad'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>bad for FR should be barrier');
 
+SELECT is(get_category1('highway=>*, smoothness=>very_bad'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>very_bad for FR should be mobility');
+
+SELECT is(get_category2('highway=>*, smoothness=>very_bad'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>very_bad for FR should be barrier');
+
 SELECT is(get_category1('highway=>*, smoothness=>horrible'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>horrible for FR should be mobility');
 
 SELECT is(get_category2('highway=>*, smoothness=>horrible'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>horrible for FR should be barrier');
+
+SELECT is(get_category1('highway=>*, smoothness=>very_horrible'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>very_horrible for FR should be mobility');
+
+SELECT is(get_category2('highway=>*, smoothness=>very_horrible'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>very_horrible for FR should be barrier');
+
+SELECT is(get_category1('highway=>*, smoothness=>impassable'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, smoothness=>impassable for FR should be mobility');
+
+SELECT is(get_category2('highway=>*, smoothness=>impassable'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, smoothness=>impassable for FR should be barrier');
 
 SELECT is(get_category1('highway=>*, surface=>metal'::hstore, 'FR'), 'mobility', 'get_category1 highway=>*, surface=>metal for FR should be mobility');
 

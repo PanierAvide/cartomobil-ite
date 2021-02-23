@@ -595,10 +595,41 @@
             { "obstacle:wheelchair": "yes", "tourism": "information" },
             { "obstacle:wheelchair": "yes", "natural": "tree" },
             { "barrier": "kerb", "kerb": "raised" },
-            { "highway": "*", "smoothness": "bad|horrible" },
+            { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" },
             { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" }
           ],
-          "areas": "all"
+          "areas": "all",
+          "form": "barrier",
+          "subfilters": {
+            "informal_parking": {
+              "name": "Informal parking",
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "amenity": "parking", "informal": "yes" } ]
+            },
+            "roadworks": {
+              "name": "Roadworks",
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "construction": "yes" } ]
+            },
+            "pole": {
+              "name": "Pole",
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "power": "pole" }, { "obstacle:wheelchair": "yes", "highway": "street_lamp|traffic_signals" }, { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier" }, { "obstacle:wheelchair": "yes", "traffic_sign": "*" }, { "obstacle:wheelchair": "yes", "tourism": "information" } ]
+            },
+            "block": {
+              "name": "Block",
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "barrier": "block" } ]
+            },
+            "tree": {
+              "name": "Tree",
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "natural": "tree" } ]
+            },
+            "kerb": {
+              "name": "Kerb",
+              "osm_tags": [ { "barrier": "kerb", "kerb": "raised" } ]
+            },
+            "surface": {
+              "name": "Surface",
+              "osm_tags": [ { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" }, { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" } ]
+            }
+          }
         }
       }
     },
@@ -2087,6 +2118,7 @@
           "type": "string",
           "title": "Accessibilité du cheminement en fauteuil roulant ?",
           "description": "__Limité__ : accessible avec aide extérieure (largeur de passage utile > 80 cm).\n\n__Non__ : non accessible.",
+          "x-hide-readOnly": true,
           "x-props": {
             "prependIcon": "osm-wheelchair"
           },
