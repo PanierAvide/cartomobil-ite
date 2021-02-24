@@ -633,29 +633,42 @@
         }
       }
     },
+    "housing":{
+      "name":"Housing",
+      "subcategories":{
+        "guest_house":{
+          "name": "Guest house",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "tourism": "guest_house" } ],
+          "subfilters": {}
+        },
+        "hotel":{
+          "name": "Hotel",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "tourism": "hotel" } ],
+          "subfilters": {}          
+        },
+        "hostel":{
+          "name": "Hostel",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "tourism": "hostel" } ], 
+          "subfilters": {}
+        },
+        "camping":{
+          "name": "Camping",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "tourism": "camp_site" } ], 
+          "subfilters": {}
+        }
+      }
+    },
     "tourism": {
       "name": "Tourism",
       "subcategories": {
-        "housing": {
-          "name": "Housing",
-          "forms": [ "erp", "erp_housing" ],
-          "areas": "all",
-          "osm_tags": [ { "tourism": "guest_house|hotel|hostel" } ],
-          "subfilters": {
-            "guest_house": {
-              "name": "Guest house",
-              "osm_tags": [ { "tourism": "guest_house" } ]
-            },
-            "hotel": {
-              "name": "Hotel",
-              "osm_tags": [ { "tourism": "hotel" } ]
-            },
-            "hostel": {
-              "name": "Hostel",
-              "osm_tags": [ { "tourism": "hostel" } ]
-            }
-          }
-        },
         "marketplace": {
           "name": "Marketplace",
           "osm_tags": [
