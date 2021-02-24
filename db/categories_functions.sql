@@ -29,7 +29,9 @@ BEGIN
 		result := 'health';
 	ELSIF (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' = 'parking_space' AND tags->'capacity:disabled' != '') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) OR (tags->'amenity' IN ('parking', 'fuel', 'car_rental', 'taxi', 'bus_station', 'ferry_terminal')) OR (tags->'shop' = 'gas') OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'aeroway' = 'aerodrome') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
 		result := 'mobility';
-	ELSIF (tags->'amenity' = 'marketplace' AND tags->'tourism' = 'attraction') OR (tags->'tourism' != '' AND tags->'historic' != '') OR (tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'viewpoint', 'artwork')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'waterway' = 'waterfall') OR (tags->'amenity' IN ('drinking_water', 'toilets')) THEN
+	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site') THEN
+		result := 'housing';
+	ELSIF (tags->'amenity' = 'marketplace' AND tags->'tourism' = 'attraction') OR (tags->'tourism' != '' AND tags->'historic' != '') OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'amenity' IN ('drinking_water', 'toilets')) THEN
 		result := 'tourism';
 	ELSE
 		result := NULL;
@@ -162,8 +164,14 @@ BEGIN
 		result := 'elevator';
 	ELSIF (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) THEN
 		result := 'barrier';
-	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel') THEN
-		result := 'housing';
+	ELSIF tags->'tourism' = 'guest_house' THEN
+		result := 'guest_house';
+	ELSIF tags->'tourism' = 'hotel' THEN
+		result := 'hotel';
+	ELSIF tags->'tourism' = 'hostel' THEN
+		result := 'hostel';
+	ELSIF tags->'tourism' = 'camp_site' THEN
+		result := 'camping';
 	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'tourism' != '' AND tags->'historic' != '') THEN
 		result := 'tourism_outside';
 	ELSIF tags->'amenity' = 'drinking_water' THEN
@@ -226,12 +234,6 @@ BEGIN
 		result := 'kerb';
 	ELSIF (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable') AND tags->'cat2' = 'barrier') OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground') AND tags->'cat2' = 'barrier') THEN
 		result := 'surface';
-	ELSIF tags->'tourism' = 'guest_house' AND tags->'cat2' = 'housing' THEN
-		result := 'guest_house';
-	ELSIF tags->'tourism' = 'hotel' AND tags->'cat2' = 'housing' THEN
-		result := 'hotel';
-	ELSIF tags->'tourism' = 'hostel' AND tags->'cat2' = 'housing' THEN
-		result := 'hostel';
 	ELSIF (tags->'leisure' = 'beach_resort' AND tags->'cat2' = 'tourism_outside') OR (tags->'natural' = 'beach' AND tags->'cat2' = 'tourism_outside') THEN
 		result := 'beach_resort';
 	ELSIF tags->'leisure' = 'park' AND tags->'cat2' = 'tourism_outside' THEN

@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(434);
+SELECT plan(436);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -822,17 +822,21 @@ SELECT is(get_category1('highway=>*, surface=>ground'::hstore, 'FR'), 'mobility'
 
 SELECT is(get_category2('highway=>*, surface=>ground'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>ground for FR should be barrier');
 
-SELECT is(get_category1('tourism=>guest_house'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>guest_house for FR should be tourism');
+SELECT is(get_category1('tourism=>guest_house'::hstore, 'FR'), 'housing', 'get_category1 tourism=>guest_house for FR should be housing');
 
-SELECT is(get_category2('tourism=>guest_house'::hstore, 'FR'), 'housing', 'get_category2 tourism=>guest_house for FR should be housing');
+SELECT is(get_category2('tourism=>guest_house'::hstore, 'FR'), 'guest_house', 'get_category2 tourism=>guest_house for FR should be guest_house');
 
-SELECT is(get_category1('tourism=>hotel'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>hotel for FR should be tourism');
+SELECT is(get_category1('tourism=>hotel'::hstore, 'FR'), 'housing', 'get_category1 tourism=>hotel for FR should be housing');
 
-SELECT is(get_category2('tourism=>hotel'::hstore, 'FR'), 'housing', 'get_category2 tourism=>hotel for FR should be housing');
+SELECT is(get_category2('tourism=>hotel'::hstore, 'FR'), 'hotel', 'get_category2 tourism=>hotel for FR should be hotel');
 
-SELECT is(get_category1('tourism=>hostel'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>hostel for FR should be tourism');
+SELECT is(get_category1('tourism=>hostel'::hstore, 'FR'), 'housing', 'get_category1 tourism=>hostel for FR should be housing');
 
-SELECT is(get_category2('tourism=>hostel'::hstore, 'FR'), 'housing', 'get_category2 tourism=>hostel for FR should be housing');
+SELECT is(get_category2('tourism=>hostel'::hstore, 'FR'), 'hostel', 'get_category2 tourism=>hostel for FR should be hostel');
+
+SELECT is(get_category1('tourism=>camp_site'::hstore, 'FR'), 'housing', 'get_category1 tourism=>camp_site for FR should be housing');
+
+SELECT is(get_category2('tourism=>camp_site'::hstore, 'FR'), 'camping', 'get_category2 tourism=>camp_site for FR should be camping');
 
 SELECT is(get_category1('amenity=>marketplace, tourism=>attraction'::hstore, 'FR'), 'tourism', 'get_category1 amenity=>marketplace, tourism=>attraction for FR should be tourism');
 
