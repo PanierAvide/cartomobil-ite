@@ -10,12 +10,12 @@
   "missing_shop": "Commerce manquant ?",
   "backtolist": "Retour à la liste",
   "missing_shop_dialog": {
-    "contribute": "Un lieu est incomplet ou manquant ? Aidez-nous à compléter la carte !",
+    "contribute": "Un lieu est manquant ou incomplet? Aides-nous à compléter la carte ! Pour apporter de nouveaux éléments, c'est ici :",
     "cta_add_barrier": "Obstacle",
     "cta_add_pmr_parking": "Place PMR",
     "cta_add_toilets": "WC extérieurs",
     "cta_note": "Autre",
-    "read_docs": "Pour vous accompagner, notre documentation est là :",
+    "read_docs": "Pour t'accompagner dans les autres modes de contribution, notre documentation est là :",
     "cta_improve": "Améliorer la carte",
     "cta_contact": "Nous contacter"
   },
