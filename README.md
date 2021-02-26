@@ -11,13 +11,13 @@ Elle te permet de :
 
 ## Architecture
 
-To deploy a complete instance of "Cartomobil'ité", you needs:
+To deploy a complete instance of "Cartomobil'ité", you need:
 
 - this map (see the Developement section)
 - [postgres with postgis and data loaded](db/)
 - [pg_tileserv](https://access.crunchydata.com/documentation/pg_tileserv/latest/)
 - [pg_featureserv](https://access.crunchydata.com/documentation/pg_featureserv/latest/)
-- [Cartomobil'ité backend](https://github.com/osmontrouge/cartomobil-ite_backend) (complementary API)
+- [Cartomobil'ité backend](https://github.com/Cartomobil-ite/cartomobil-ite_backend) (complementary API)
 
 
 ## Development
@@ -46,12 +46,12 @@ Data used on our map comes from [OpenStreetMap](https://openstreetmap.org/), the
 
 ## License
 
-Copyright (c) "CartoMobil'ite" 2021.  
+Copyright (c) "CartoMobil'ite" 2021.
 
-## Thanks 
+## Thanks
 CartoMobil'ite is what it is because of some crazy people and free and open source projects. Let's name a few:
 
-* Violaine Doutreleau ([À Vos Cartes](https://avoscartes.pf/), GIS in French Polynesia): Project's mummy 
+* Violaine Doutreleau ([À Vos Cartes](https://avoscartes.pf/), GIS in French Polynesia): Project's mummy
 * Adrien Pavie (OpenLevelUp, YoHours): developper
 * OpenStreetMap (OSM)
 * Team [Ça reste ouvert](https://caresteouvert.fr) : CartoMobil'ite is a fork of this project.
