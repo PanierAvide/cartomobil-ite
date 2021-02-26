@@ -60,7 +60,7 @@ export default {
   ],
 
   redirect: [
-    { from: '^/about', to: 'https://blog.caresteouvert.fr/about' }
+    { from: '^/about', to: 'https://mobilite.xyz/?PagePrincipale' }
   ],
 
   /*

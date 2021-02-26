@@ -32,7 +32,6 @@ export default {
       title: `${this.title} - ${this.$t('title')}`,
       meta: [
         { hid: 'twittercard', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'twittersite', name: 'twitter:site', content: '@caresteouvert' },
         { hid: 'ogtype', property: 'og:type',  content: 'website' },
         { hid: 'ogurl', property: 'og:url',  content: `${this.$rootUrl}${this.$route.fullPath.substring(1)}` },
         { hid: 'ogtitle', property: 'og:title', content: this.title },
