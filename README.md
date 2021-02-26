@@ -1,6 +1,13 @@
 # Cartomobil'ité
+![CartoMobil'ite](static/favicon.png)
+[CartoMobil'ite](https://carto.mobilite.xyz/) est LA carte collaborative pour une mobilité durable, active et inclusive, à Tahiti et Moorea.
 
-[Cartomobil'ité](https://carto.mobilite.xyz/), la carte collaborative des mobilités actives à Tahiti.
+🎯 **Notre premier objectif :** ♿ la mobil'ite pour les fauteuils roulants.
+
+Elle te permet de :
+* partager les lieux accessibles, obstacles au déplacement, toilettes et places PMR. Pas besoin d’être en fauteuil roulant pour participer!
+* t'informer sur l'accessibilité en fauteuil roulant des lieux et cheminement
+
 
 ## Architecture
 
@@ -39,8 +46,17 @@ Data used on our map comes from [OpenStreetMap](https://openstreetmap.org/), the
 
 ## License
 
-Copyright (c) "Cartomobil'ité" 2020
+Copyright (c) "CartoMobil'ite" 2021.  
 
-Initial work by [Ça reste ouvert](https://caresteouvert.fr) team
+## Thanks 
+CartoMobil'ite is what it is because of some crazy people and free and open source projects. Let's name a few:
+
+* Violaine Doutreleau ([À Vos Cartes](https://avoscartes.pf/), GIS in French Polynesia): Project's mummy 
+* Adrien Pavie (OpenLevelUp, YoHours): developper
+* OpenStreetMap (OSM)
+* Team [Ça reste ouvert](https://caresteouvert.fr) : CartoMobil'ite is a fork of this project.
+* Mapbox (Website)
+
+Projet réalisé avec le concours de la Polynésie française.
 
 Released under the AGPL v3 terms, see the [LICENSE](LICENSE.txt) file to read the full text.
