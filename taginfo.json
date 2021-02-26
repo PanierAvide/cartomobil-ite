@@ -1,111 +1,97 @@
 {
   "data_format": 1,
-  "data_url": "https://raw.githubusercontent.com/osmontrouge/caresteouvert/master/taginfo.json",
+  "data_url": "https://raw.githubusercontent.com/Cartomobil-ite/cartomobil-ite/master/taginfo.json",
   "project": {
-    "name": "Ça reste ouvert (It stays open)",
-    "description": "A collaborative map of open places during COVID-19 lockdowns. Enables everyone to report changes using a simple and standardised form.",
-    "project_url": "https://www.caresteouvert.fr/",
-    "doc_url": "https://github.com/osmontrouge/caresteouvert",
-    "icon_url": "https://raw.githubusercontent.com/osmontrouge/caresteouvert/master/static/favicon.png",
-    "contact_name": "Florian Lainez",
-    "contact_email": "florian@caresteouvert.fr"
+    "name": "Cartomobil 'ite",
+    "description": "The collaborative map for sustainable, active and inclusive mobility in Tahiti and Moorea.",
+    "project_url": "https://carto.mobilite.xyz/",
+    "doc_url": "https://github.com/Cartomobil-ite/cartomobil-ite",
+    "icon_url": "https://github.com/Cartomobil-ite/cartomobil-ite/raw/master/static/favicon.png",
+    "contact_name": "Violaine Doutreleau",
+    "contact_email": "info@mobilite.xyz"
   },
   "tags": [
-    {
-      "key": "amenity",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "brand",
-      "description": "Used to correlate places without opening_hours:covid19 to their brand to adopt the brand-wide lockdown status, if defined."
-    },
-    {
-      "key": "brand:wikidata",
-      "description": "Used to correlate places without opening_hours:covid19 to their brand to adopt the brand-wide lockdown status, if defined."
-    },
-    {
-      "key": "craft",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "delivery",
-      "description": "Used to show if a place offers delivery, if delivery:covid19 is not defined."
-    },
-    {
-      "key": "delivery:covid19",
-      "description": "Used to show if a place offers delivery during COVID-19 lockdowns."
-    },
-    {
-      "key": "description:covid19",
-      "description": "Used to show non-standardised information about a place during COVID-19 lockdowns."
-    },
-    {
-      "key": "email",
-      "description": "Used to show the email address of a place."
-    },
-    {
-      "key": "facebook",
-      "description": "Used to show a link to the Facebook page of a place."
-    },
-    {
-      "key": "mobile",
-      "description": "Used to show the mobile number of a place."
-    },
-    {
-      "key": "name",
-      "description": "Used to correlate places without opening_hours:covid19 to their brand to adopt the brand-wide lockdown status, if defined."
-    },
-    {
-      "key": "note:covid19",
-      "description": "Used to show non-standardised information about a place during COVID-19 lockdowns, if description:covid19 is not defined."
-    },
-    {
-      "key": "office",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "opening_hours",
-      "description": "Used to show the regular opening hours of a place, if opening_hours:covid19 is not defined."
-    },
-    {
-      "key": "opening_hours:covid19",
-      "description": "Used to show the current opening hours of a place during COVID-19 lockdowns."
-    },
-    {
-      "key": "operator",
-      "description": "Used to correlate places without opening_hours:covid19 to their brand to adopt the brand-wide lockdown status, if defined."
-    },
-    {
-      "key": "operator:wikidata",
-      "description": "Used to correlate places without opening_hours:covid19 to their brand to adopt the brand-wide lockdown status, if defined."
-    },
-    {
-      "key": "phone",
-      "description": "Used to show the phone number of a place."
-    },
-    {
-      "key": "shop",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "takeaway",
-      "description": "Used to show if a place offers takeaway, if takeaway:covid19 is not defined."
-    },
-    {
-      "key": "takeaway:covid19",
-      "description": "Used to show if a place offers takeaway during COVID-19 lockdowns."
-    },
-    {
-      "key": "tobacco",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "vending",
-      "description": "Used to filter places that may be open during COVID-19 lockdowns."
-    },
-    {
-      "key": "website",
-      "description": "Used to show a link to the website of a place."
-    }
+    { "key": "amenity" },
+    { "key": "name" },
+    { "key": "short_name" },
+    { "key": "operator" },
+    { "key": "office" },
+    { "key": "shop" },
+    { "key": "tourism" },
+    { "key": "leisure" },
+    { "key": "wheelchair" },
+    { "key": "wheelchair:description" },
+    { "key": "club" },
+    { "key": "sport" },
+    { "key": "access" },
+    { "key": "craft" },
+    { "key": "vending" },
+    { "key": "school:FR" },
+    { "key": "healthcare" },
+    { "key": "parking_space" },
+    { "key": "capacity:disabled" },
+    { "key": "highway" },
+    { "key": "public_transport" },
+    { "key": "power", "value": "pole" },
+    { "key": "barrier" },
+    { "key": "traffic_sign" },
+    { "key": "natural", "value": "tree" },
+    { "key": "kerb" },
+    { "key": "smoothness" },
+    { "key": "surface" },
+    { "key": "aeroway", "value": "aerodrome" },
+    { "key": "waterway", "value": "waterfall" },
+    { "key": "historic" },
+    { "key": "service:wheelchair" },
+    { "key": "service:wheelchair:description" },
+    { "key": "sign:wheelchair" },
+    { "key": "information:wheelchair" },
+    { "key": "access:wheelchair" },
+    { "key": "phone:wheelchair" },
+    { "key": "phone" },
+    { "key": "email" },
+    { "key": "website" },
+    { "key": "facebook" },
+    { "key": "contact:phone" },
+    { "key": "contact:email" },
+    { "key": "contact:website" },
+    { "key": "contact:facebook" },
+    { "key": "opening_hours" },
+    { "key": "toilets:handwashing" },
+    { "key": "toilets:handwashing:length" },
+    { "key": "toilets:wheelchair" },
+    { "key": "toilets:wheelchair:description" },
+    { "key": "toilets:sign:wheelchair" },
+    { "key": "toilets:sit_height" },
+    { "key": "toilets:handrail" },
+    { "key": "toilets:handrail:wheelchair" },
+    { "key": "elevator:wheelchair" },
+    { "key": "elevator:wheelchair:description" },
+    { "key": "elevator:sign:wheelchair" },
+    { "key": "elevator:width" },
+    { "key": "elevator:length" },
+    { "key": "elevator:handrail" },
+    { "key": "elevator:mirror" },
+    { "key": "elevator:button_operated:wheelchair" },
+    { "key": "button_operated" },
+    { "key": "button_operated:wheelchair" },
+    { "key": "button_operated:height" },
+    { "key": "rooms" },
+    { "key": "rooms:disabled" },
+    { "key": "information:board" },
+    { "key": "passenger_information_display" },
+    { "key": "bench" },
+    { "key": "shelter" },
+    { "key": "width" },
+    { "key": "incline" },
+    { "key": "crossfall" },
+    { "key": "sign:disabled" },
+    { "key": "handwashing" },
+    { "key": "sit_height" },
+    { "key": "handrail:wheelchair" },
+    { "key": "handrail" },
+    { "key": "handwashing:length" },
+    { "key": "handrail:height" },
+    { "key": "mirror" }
   ]
 }
