@@ -521,29 +521,6 @@
           "areas": "all",
           "form": "parking"
         },
-        "fuel": {
-          "name": "Fuel station",
-          "osm_tags": [
-            { "amenity": "fuel" },
-            { "shop": "gas" }
-          ],
-          "areas": "all"
-        },
-        "car_rental": {
-          "name": "Car rental",
-          "osm_tags": [
-            { "amenity": "car_rental" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "taxi": {
-          "name": "Taxi",
-          "osm_tags": [
-            { "amenity": "taxi" }
-          ],
-          "areas": "all"
-        },
         "bus_stop": {
           "name": "Bus stop",
           "osm_tags": [
@@ -554,35 +531,6 @@
           "areas": "all",
           "form": "bus_stop"
         },
-        "ferry": {
-          "name": "Ferry",
-          "osm_tags": [
-            { "amenity": "ferry_terminal" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "airport": {
-          "name": "Airport",
-          "osm_tags": [
-            { "aeroway": "aerodrome" }
-          ],
-          "areas": "all"
-        },
-        "elevator": {
-          "name": "Elevator",
-          "osm_tags": [
-            { "highway": "elevator" },
-            { "room": "elevator" },
-            { "building:part": "elevator" },
-            { "buildingpart:verticalpassage": "elevator" },
-            { "building": "elevator" },
-            { "indoor": "elevator" }
-          ],
-          "areas": "all",
-          "form": "elevator"
-        }
-        ,
         "barrier": {
           "name": "Obstacle",
           "osm_tags": [
@@ -630,6 +578,58 @@
               "osm_tags": [ { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" }, { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" } ]
             }
           }
+        },
+        "elevator": {
+          "name": "Elevator",
+          "osm_tags": [
+            { "highway": "elevator" },
+            { "room": "elevator" },
+            { "building:part": "elevator" },
+            { "buildingpart:verticalpassage": "elevator" },
+            { "building": "elevator" },
+            { "indoor": "elevator" }
+          ],
+          "areas": "all",
+          "form": "elevator"
+        },
+        "taxi": {
+          "name": "Taxi",
+          "osm_tags": [
+            { "amenity": "taxi" }
+          ],
+          "areas": "all"
+        },
+        "fuel": {
+          "name": "Fuel station",
+          "osm_tags": [
+            { "amenity": "fuel" },
+            { "shop": "gas" }
+          ],
+          "areas": "all"
+        },
+        "car_rental": {
+          "name": "Car rental",
+          "osm_tags": [
+            { "amenity": "car_rental" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+
+        "ferry": {
+          "name": "Ferry",
+          "osm_tags": [
+            { "amenity": "ferry_terminal" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "airport": {
+          "name": "Airport",
+          "osm_tags": [
+            { "aeroway": "aerodrome" }
+          ],
+          "areas": "all"
         }
       }
     },
