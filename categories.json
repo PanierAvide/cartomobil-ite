@@ -666,57 +666,9 @@
         }
       }
     },
-    "tourism": {
-      "name": "Tourism",
+    "tourism_outside": {
+      "name": "Outside activities",
       "subcategories": {
-        "marketplace": {
-          "name": "Marketplace",
-          "osm_tags": [
-            { "amenity": "marketplace", "tourism": "attraction" }
-          ],
-          "areas": "all",
-          "form": "erp"
-        },
-        "tourism_outside": {
-          "name": "Outside activities",
-          "osm_tags": [
-            { "leisure": "beach_resort|park" },
-            { "natural": "beach" },
-            { "tourism": "viewpoint|artwork" },
-            { "waterway": "waterfall" },
-            { "tourism": "*", "historic": "*" }
-          ],
-          "areas": "all",
-          "form": "erp",
-          "subfilters": {
-            "beach_resort": {
-              "name": "Beach resort",
-              "osm_tags": [
-                { "leisure": "beach_resort" }, { "natural": "beach" }
-              ]
-            },
-            "park": {
-              "name": "Park",
-              "osm_tags": [ { "leisure": "park" } ]
-            },
-            "viewpoint": {
-              "name": "View point",
-              "osm_tags": [ { "tourism": "viewpoint" } ]
-            },
-            "waterfall": {
-              "name": "Waterfall",
-              "osm_tags": [ { "waterway": "waterfall" } ]
-            },
-            "artwork": {
-              "name": "Artwork",
-              "osm_tags": [ { "tourism": "artwork" } ]
-            },
-            "historic": {
-              "name": "Historical site",
-              "osm_tags": [ { "tourism": "*", "historic": "*" } ]
-            }
-          }
-        },
         "drinking_water": {
           "name": "Drinking water",
           "osm_tags": [
@@ -731,6 +683,59 @@
           ],
           "areas": "all",
           "form": "toilets"
+        },
+        "bench": {
+          "name": "Bench",
+          "osm_tags": [
+            { "amenity": "bench" }
+          ],
+          "areas": "all",
+        },        
+        "shower": {
+          "name": "Shower",
+          "osm_tags": [
+            { "amenity": "shower" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },        
+        "beach_resort": {
+          "name": "Beach resort",
+          "osm_tags": [
+            { "leisure": "beach_resort" }, { "natural": "beach" }
+          ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "park": {
+          "name": "Park",
+          "osm_tags": [ { "leisure": "park" } ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "viewpoint": {
+          "name": "View point",
+          "osm_tags": [ { "tourism": "viewpoint" } ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "waterfall": {
+          "name": "Waterfall",
+          "osm_tags": [ { "waterway": "waterfall" } ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "artwork": {
+          "name": "Artwork",
+          "osm_tags": [  { "tourism": "artwork" } ],
+          "areas": "all",
+          "form": "erp"
+        },
+        "historic": {
+          "name": "Historical site",
+          "osm_tags": [  { "historic": "*" } ],
+          "areas": "all",
+          "form": "erp"
         }
       }
     }

@@ -349,7 +349,9 @@
     "artwork": "Artwork",
     "historic": "Historical site",
     "drinking_water": "Drinking water",
-    "toilets": "Toilets"
+    "toilets": "Toilets",
+    "bench": "Bench",
+    "shower": "Shower"
   },
   "qa": {
     "title": "Quality assurance"
