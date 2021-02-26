@@ -27,12 +27,12 @@ BEGIN
 		result := 'education';
 	ELSIF (tags->'healthcare' IN ('centre', 'rehabilitation', 'audiologist', 'dentist', 'midwife', 'nurse', 'podiatrist', 'psychotherapist', 'speech_therapist', 'clinic', 'hospital', 'doctor', 'occupational_therapist', 'physiotherapist')) OR (tags->'amenity' IN ('doctors', 'clinic', 'hospital', 'pharmacy')) THEN
 		result := 'health';
-	ELSIF (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' = 'parking_space' AND tags->'capacity:disabled' != '') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) OR (tags->'amenity' IN ('parking', 'fuel', 'car_rental', 'taxi', 'bus_station', 'ferry_terminal')) OR (tags->'shop' = 'gas') OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'aeroway' = 'aerodrome') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
+	ELSIF (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' = 'parking_space' AND tags->'capacity:disabled' != '') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) OR (tags->'amenity' IN ('parking', 'bus_station', 'taxi', 'fuel', 'car_rental', 'ferry_terminal')) OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') OR (tags->'shop' = 'gas') OR (tags->'aeroway' = 'aerodrome') THEN
 		result := 'mobility';
 	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site') THEN
 		result := 'housing';
-	ELSIF (tags->'amenity' = 'marketplace' AND tags->'tourism' = 'attraction') OR (tags->'tourism' != '' AND tags->'historic' != '') OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'amenity' IN ('drinking_water', 'toilets')) THEN
-		result := 'tourism';
+	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
+		result := 'tourism_outside';
 	ELSE
 		result := NULL;
 	END IF;
@@ -148,22 +148,22 @@ BEGIN
 		result := 'parking_pmr';
 	ELSIF tags->'amenity' = 'parking' THEN
 		result := 'parking';
+	ELSIF (tags->'highway' = 'bus_stop') OR (tags->'amenity' = 'bus_station') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') THEN
+		result := 'bus_stop';
+	ELSIF (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) THEN
+		result := 'barrier';
+	ELSIF (tags->'highway' = 'elevator') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
+		result := 'elevator';
+	ELSIF tags->'amenity' = 'taxi' THEN
+		result := 'taxi';
 	ELSIF (tags->'amenity' = 'fuel') OR (tags->'shop' = 'gas') THEN
 		result := 'fuel';
 	ELSIF tags->'amenity' = 'car_rental' THEN
 		result := 'car_rental';
-	ELSIF tags->'amenity' = 'taxi' THEN
-		result := 'taxi';
-	ELSIF (tags->'highway' = 'bus_stop') OR (tags->'amenity' = 'bus_station') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') THEN
-		result := 'bus_stop';
 	ELSIF tags->'amenity' = 'ferry_terminal' THEN
 		result := 'ferry';
 	ELSIF tags->'aeroway' = 'aerodrome' THEN
 		result := 'airport';
-	ELSIF (tags->'highway' = 'elevator') OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') THEN
-		result := 'elevator';
-	ELSIF (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) THEN
-		result := 'barrier';
 	ELSIF tags->'tourism' = 'guest_house' THEN
 		result := 'guest_house';
 	ELSIF tags->'tourism' = 'hotel' THEN
@@ -172,12 +172,26 @@ BEGIN
 		result := 'hostel';
 	ELSIF tags->'tourism' = 'camp_site' THEN
 		result := 'camping';
-	ELSIF (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'tourism' != '' AND tags->'historic' != '') THEN
-		result := 'tourism_outside';
 	ELSIF tags->'amenity' = 'drinking_water' THEN
 		result := 'drinking_water';
 	ELSIF tags->'amenity' = 'toilets' THEN
 		result := 'toilets';
+	ELSIF tags->'amenity' = 'bench' THEN
+		result := 'bench';
+	ELSIF tags->'amenity' = 'shower' THEN
+		result := 'shower';
+	ELSIF (tags->'leisure' = 'beach_resort') OR (tags->'natural' = 'beach') THEN
+		result := 'beach_resort';
+	ELSIF tags->'leisure' = 'park' THEN
+		result := 'park';
+	ELSIF tags->'tourism' = 'viewpoint' THEN
+		result := 'viewpoint';
+	ELSIF tags->'waterway' = 'waterfall' THEN
+		result := 'waterfall';
+	ELSIF tags->'tourism' = 'artwork' THEN
+		result := 'artwork';
+	ELSIF tags->'historic' != '' THEN
+		result := 'historic';
 	ELSE
 		result := 'other';
 	END IF;
@@ -234,18 +248,6 @@ BEGIN
 		result := 'kerb';
 	ELSIF (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable') AND tags->'cat2' = 'barrier') OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground') AND tags->'cat2' = 'barrier') THEN
 		result := 'surface';
-	ELSIF (tags->'leisure' = 'beach_resort' AND tags->'cat2' = 'tourism_outside') OR (tags->'natural' = 'beach' AND tags->'cat2' = 'tourism_outside') THEN
-		result := 'beach_resort';
-	ELSIF tags->'leisure' = 'park' AND tags->'cat2' = 'tourism_outside' THEN
-		result := 'park';
-	ELSIF tags->'tourism' = 'viewpoint' AND tags->'cat2' = 'tourism_outside' THEN
-		result := 'viewpoint';
-	ELSIF tags->'waterway' = 'waterfall' AND tags->'cat2' = 'tourism_outside' THEN
-		result := 'waterfall';
-	ELSIF tags->'tourism' = 'artwork' AND tags->'cat2' = 'tourism_outside' THEN
-		result := 'artwork';
-	ELSIF tags->'tourism' != '' AND tags->'historic' != '' AND tags->'cat2' = 'tourism_outside' THEN
-		result := 'historic';
 	ELSE
 		result := 'other';
 	END IF;

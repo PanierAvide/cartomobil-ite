@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(436);
+SELECT plan(438);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -662,22 +662,6 @@ SELECT is(get_category1('amenity=>parking'::hstore, 'FR'), 'mobility', 'get_cate
 
 SELECT is(get_category2('amenity=>parking'::hstore, 'FR'), 'parking', 'get_category2 amenity=>parking for FR should be parking');
 
-SELECT is(get_category1('amenity=>fuel'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>fuel for FR should be mobility');
-
-SELECT is(get_category2('amenity=>fuel'::hstore, 'FR'), 'fuel', 'get_category2 amenity=>fuel for FR should be fuel');
-
-SELECT is(get_category1('shop=>gas'::hstore, 'FR'), 'mobility', 'get_category1 shop=>gas for FR should be mobility');
-
-SELECT is(get_category2('shop=>gas'::hstore, 'FR'), 'fuel', 'get_category2 shop=>gas for FR should be fuel');
-
-SELECT is(get_category1('amenity=>car_rental'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>car_rental for FR should be mobility');
-
-SELECT is(get_category2('amenity=>car_rental'::hstore, 'FR'), 'car_rental', 'get_category2 amenity=>car_rental for FR should be car_rental');
-
-SELECT is(get_category1('amenity=>taxi'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>taxi for FR should be mobility');
-
-SELECT is(get_category2('amenity=>taxi'::hstore, 'FR'), 'taxi', 'get_category2 amenity=>taxi for FR should be taxi');
-
 SELECT is(get_category1('highway=>bus_stop'::hstore, 'FR'), 'mobility', 'get_category1 highway=>bus_stop for FR should be mobility');
 
 SELECT is(get_category2('highway=>bus_stop'::hstore, 'FR'), 'bus_stop', 'get_category2 highway=>bus_stop for FR should be bus_stop');
@@ -693,38 +677,6 @@ SELECT is(get_category2('public_transport=>stop_position, bus=>yes'::hstore, 'FR
 SELECT is(get_category1('public_transport=>platform, bus=>yes'::hstore, 'FR'), 'mobility', 'get_category1 public_transport=>platform, bus=>yes for FR should be mobility');
 
 SELECT is(get_category2('public_transport=>platform, bus=>yes'::hstore, 'FR'), 'bus_stop', 'get_category2 public_transport=>platform, bus=>yes for FR should be bus_stop');
-
-SELECT is(get_category1('amenity=>ferry_terminal'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>ferry_terminal for FR should be mobility');
-
-SELECT is(get_category2('amenity=>ferry_terminal'::hstore, 'FR'), 'ferry', 'get_category2 amenity=>ferry_terminal for FR should be ferry');
-
-SELECT is(get_category1('aeroway=>aerodrome'::hstore, 'FR'), 'mobility', 'get_category1 aeroway=>aerodrome for FR should be mobility');
-
-SELECT is(get_category2('aeroway=>aerodrome'::hstore, 'FR'), 'airport', 'get_category2 aeroway=>aerodrome for FR should be airport');
-
-SELECT is(get_category1('highway=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 highway=>elevator for FR should be mobility');
-
-SELECT is(get_category2('highway=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 highway=>elevator for FR should be elevator');
-
-SELECT is(get_category1('room=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 room=>elevator for FR should be mobility');
-
-SELECT is(get_category2('room=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 room=>elevator for FR should be elevator');
-
-SELECT is(get_category1('building:part=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 building:part=>elevator for FR should be mobility');
-
-SELECT is(get_category2('building:part=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 building:part=>elevator for FR should be elevator');
-
-SELECT is(get_category1('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 buildingpart:verticalpassage=>elevator for FR should be mobility');
-
-SELECT is(get_category2('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 buildingpart:verticalpassage=>elevator for FR should be elevator');
-
-SELECT is(get_category1('building=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 building=>elevator for FR should be mobility');
-
-SELECT is(get_category2('building=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 building=>elevator for FR should be elevator');
-
-SELECT is(get_category1('indoor=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 indoor=>elevator for FR should be mobility');
-
-SELECT is(get_category2('indoor=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 indoor=>elevator for FR should be elevator');
 
 SELECT is(get_category1('obstacle:wheelchair=>yes, amenity=>parking, informal=>yes'::hstore, 'FR'), 'mobility', 'get_category1 obstacle:wheelchair=>yes, amenity=>parking, informal=>yes for FR should be mobility');
 
@@ -822,6 +774,54 @@ SELECT is(get_category1('highway=>*, surface=>ground'::hstore, 'FR'), 'mobility'
 
 SELECT is(get_category2('highway=>*, surface=>ground'::hstore, 'FR'), 'barrier', 'get_category2 highway=>*, surface=>ground for FR should be barrier');
 
+SELECT is(get_category1('highway=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 highway=>elevator for FR should be mobility');
+
+SELECT is(get_category2('highway=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 highway=>elevator for FR should be elevator');
+
+SELECT is(get_category1('room=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 room=>elevator for FR should be mobility');
+
+SELECT is(get_category2('room=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 room=>elevator for FR should be elevator');
+
+SELECT is(get_category1('building:part=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 building:part=>elevator for FR should be mobility');
+
+SELECT is(get_category2('building:part=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 building:part=>elevator for FR should be elevator');
+
+SELECT is(get_category1('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 buildingpart:verticalpassage=>elevator for FR should be mobility');
+
+SELECT is(get_category2('buildingpart:verticalpassage=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 buildingpart:verticalpassage=>elevator for FR should be elevator');
+
+SELECT is(get_category1('building=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 building=>elevator for FR should be mobility');
+
+SELECT is(get_category2('building=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 building=>elevator for FR should be elevator');
+
+SELECT is(get_category1('indoor=>elevator'::hstore, 'FR'), 'mobility', 'get_category1 indoor=>elevator for FR should be mobility');
+
+SELECT is(get_category2('indoor=>elevator'::hstore, 'FR'), 'elevator', 'get_category2 indoor=>elevator for FR should be elevator');
+
+SELECT is(get_category1('amenity=>taxi'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>taxi for FR should be mobility');
+
+SELECT is(get_category2('amenity=>taxi'::hstore, 'FR'), 'taxi', 'get_category2 amenity=>taxi for FR should be taxi');
+
+SELECT is(get_category1('amenity=>fuel'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>fuel for FR should be mobility');
+
+SELECT is(get_category2('amenity=>fuel'::hstore, 'FR'), 'fuel', 'get_category2 amenity=>fuel for FR should be fuel');
+
+SELECT is(get_category1('shop=>gas'::hstore, 'FR'), 'mobility', 'get_category1 shop=>gas for FR should be mobility');
+
+SELECT is(get_category2('shop=>gas'::hstore, 'FR'), 'fuel', 'get_category2 shop=>gas for FR should be fuel');
+
+SELECT is(get_category1('amenity=>car_rental'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>car_rental for FR should be mobility');
+
+SELECT is(get_category2('amenity=>car_rental'::hstore, 'FR'), 'car_rental', 'get_category2 amenity=>car_rental for FR should be car_rental');
+
+SELECT is(get_category1('amenity=>ferry_terminal'::hstore, 'FR'), 'mobility', 'get_category1 amenity=>ferry_terminal for FR should be mobility');
+
+SELECT is(get_category2('amenity=>ferry_terminal'::hstore, 'FR'), 'ferry', 'get_category2 amenity=>ferry_terminal for FR should be ferry');
+
+SELECT is(get_category1('aeroway=>aerodrome'::hstore, 'FR'), 'mobility', 'get_category1 aeroway=>aerodrome for FR should be mobility');
+
+SELECT is(get_category2('aeroway=>aerodrome'::hstore, 'FR'), 'airport', 'get_category2 aeroway=>aerodrome for FR should be airport');
+
 SELECT is(get_category1('tourism=>guest_house'::hstore, 'FR'), 'housing', 'get_category1 tourism=>guest_house for FR should be housing');
 
 SELECT is(get_category2('tourism=>guest_house'::hstore, 'FR'), 'guest_house', 'get_category2 tourism=>guest_house for FR should be guest_house');
@@ -838,45 +838,49 @@ SELECT is(get_category1('tourism=>camp_site'::hstore, 'FR'), 'housing', 'get_cat
 
 SELECT is(get_category2('tourism=>camp_site'::hstore, 'FR'), 'camping', 'get_category2 tourism=>camp_site for FR should be camping');
 
-SELECT is(get_category1('amenity=>marketplace, tourism=>attraction'::hstore, 'FR'), 'tourism', 'get_category1 amenity=>marketplace, tourism=>attraction for FR should be tourism');
-
-SELECT is(get_category2('amenity=>marketplace, tourism=>attraction'::hstore, 'FR'), 'marketplace', 'get_category2 amenity=>marketplace, tourism=>attraction for FR should be marketplace');
-
-SELECT is(get_category1('leisure=>beach_resort'::hstore, 'FR'), 'tourism', 'get_category1 leisure=>beach_resort for FR should be tourism');
-
-SELECT is(get_category2('leisure=>beach_resort'::hstore, 'FR'), 'tourism_outside', 'get_category2 leisure=>beach_resort for FR should be tourism_outside');
-
-SELECT is(get_category1('leisure=>park'::hstore, 'FR'), 'tourism', 'get_category1 leisure=>park for FR should be tourism');
-
-SELECT is(get_category2('leisure=>park'::hstore, 'FR'), 'tourism_outside', 'get_category2 leisure=>park for FR should be tourism_outside');
-
-SELECT is(get_category1('natural=>beach'::hstore, 'FR'), 'tourism', 'get_category1 natural=>beach for FR should be tourism');
-
-SELECT is(get_category2('natural=>beach'::hstore, 'FR'), 'tourism_outside', 'get_category2 natural=>beach for FR should be tourism_outside');
-
-SELECT is(get_category1('tourism=>viewpoint'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>viewpoint for FR should be tourism');
-
-SELECT is(get_category2('tourism=>viewpoint'::hstore, 'FR'), 'tourism_outside', 'get_category2 tourism=>viewpoint for FR should be tourism_outside');
-
-SELECT is(get_category1('tourism=>artwork'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>artwork for FR should be tourism');
-
-SELECT is(get_category2('tourism=>artwork'::hstore, 'FR'), 'tourism_outside', 'get_category2 tourism=>artwork for FR should be tourism_outside');
-
-SELECT is(get_category1('waterway=>waterfall'::hstore, 'FR'), 'tourism', 'get_category1 waterway=>waterfall for FR should be tourism');
-
-SELECT is(get_category2('waterway=>waterfall'::hstore, 'FR'), 'tourism_outside', 'get_category2 waterway=>waterfall for FR should be tourism_outside');
-
-SELECT is(get_category1('tourism=>*, historic=>*'::hstore, 'FR'), 'tourism', 'get_category1 tourism=>*, historic=>* for FR should be tourism');
-
-SELECT is(get_category2('tourism=>*, historic=>*'::hstore, 'FR'), 'tourism_outside', 'get_category2 tourism=>*, historic=>* for FR should be tourism_outside');
-
-SELECT is(get_category1('amenity=>drinking_water'::hstore, 'FR'), 'tourism', 'get_category1 amenity=>drinking_water for FR should be tourism');
+SELECT is(get_category1('amenity=>drinking_water'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>drinking_water for FR should be tourism_outside');
 
 SELECT is(get_category2('amenity=>drinking_water'::hstore, 'FR'), 'drinking_water', 'get_category2 amenity=>drinking_water for FR should be drinking_water');
 
-SELECT is(get_category1('amenity=>toilets'::hstore, 'FR'), 'tourism', 'get_category1 amenity=>toilets for FR should be tourism');
+SELECT is(get_category1('amenity=>toilets'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>toilets for FR should be tourism_outside');
 
 SELECT is(get_category2('amenity=>toilets'::hstore, 'FR'), 'toilets', 'get_category2 amenity=>toilets for FR should be toilets');
+
+SELECT is(get_category1('amenity=>bench'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>bench for FR should be tourism_outside');
+
+SELECT is(get_category2('amenity=>bench'::hstore, 'FR'), 'bench', 'get_category2 amenity=>bench for FR should be bench');
+
+SELECT is(get_category1('amenity=>shower'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>shower for FR should be tourism_outside');
+
+SELECT is(get_category2('amenity=>shower'::hstore, 'FR'), 'shower', 'get_category2 amenity=>shower for FR should be shower');
+
+SELECT is(get_category1('leisure=>beach_resort'::hstore, 'FR'), 'tourism_outside', 'get_category1 leisure=>beach_resort for FR should be tourism_outside');
+
+SELECT is(get_category2('leisure=>beach_resort'::hstore, 'FR'), 'beach_resort', 'get_category2 leisure=>beach_resort for FR should be beach_resort');
+
+SELECT is(get_category1('natural=>beach'::hstore, 'FR'), 'tourism_outside', 'get_category1 natural=>beach for FR should be tourism_outside');
+
+SELECT is(get_category2('natural=>beach'::hstore, 'FR'), 'beach_resort', 'get_category2 natural=>beach for FR should be beach_resort');
+
+SELECT is(get_category1('leisure=>park'::hstore, 'FR'), 'tourism_outside', 'get_category1 leisure=>park for FR should be tourism_outside');
+
+SELECT is(get_category2('leisure=>park'::hstore, 'FR'), 'park', 'get_category2 leisure=>park for FR should be park');
+
+SELECT is(get_category1('tourism=>viewpoint'::hstore, 'FR'), 'tourism_outside', 'get_category1 tourism=>viewpoint for FR should be tourism_outside');
+
+SELECT is(get_category2('tourism=>viewpoint'::hstore, 'FR'), 'viewpoint', 'get_category2 tourism=>viewpoint for FR should be viewpoint');
+
+SELECT is(get_category1('waterway=>waterfall'::hstore, 'FR'), 'tourism_outside', 'get_category1 waterway=>waterfall for FR should be tourism_outside');
+
+SELECT is(get_category2('waterway=>waterfall'::hstore, 'FR'), 'waterfall', 'get_category2 waterway=>waterfall for FR should be waterfall');
+
+SELECT is(get_category1('tourism=>artwork'::hstore, 'FR'), 'tourism_outside', 'get_category1 tourism=>artwork for FR should be tourism_outside');
+
+SELECT is(get_category2('tourism=>artwork'::hstore, 'FR'), 'artwork', 'get_category2 tourism=>artwork for FR should be artwork');
+
+SELECT is(get_category1('historic=>*'::hstore, 'FR'), 'tourism_outside', 'get_category1 historic=>* for FR should be tourism_outside');
+
+SELECT is(get_category2('historic=>*'::hstore, 'FR'), 'historic', 'get_category2 historic=>* for FR should be historic');
 
 SELECT * FROM finish();
 ROLLBACK;

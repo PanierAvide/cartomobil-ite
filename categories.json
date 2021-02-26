@@ -648,20 +648,20 @@
           "forms": [ "erp", "erp_housing" ],
           "areas": "all",
           "osm_tags": [ { "tourism": "hotel" } ],
-          "subfilters": {}          
+          "subfilters": {}
         },
         "hostel":{
           "name": "Hostel",
           "forms": [ "erp", "erp_housing" ],
           "areas": "all",
-          "osm_tags": [ { "tourism": "hostel" } ], 
+          "osm_tags": [ { "tourism": "hostel" } ],
           "subfilters": {}
         },
         "camping":{
           "name": "Camping",
           "forms": [ "erp", "erp_housing" ],
           "areas": "all",
-          "osm_tags": [ { "tourism": "camp_site" } ], 
+          "osm_tags": [ { "tourism": "camp_site" } ],
           "subfilters": {}
         }
       }
@@ -689,8 +689,8 @@
           "osm_tags": [
             { "amenity": "bench" }
           ],
-          "areas": "all",
-        },        
+          "areas": "all"
+        },
         "shower": {
           "name": "Shower",
           "osm_tags": [
@@ -698,7 +698,7 @@
           ],
           "areas": "all",
           "form": "erp"
-        },        
+        },
         "beach_resort": {
           "name": "Beach resort",
           "osm_tags": [
