@@ -1,5 +1,5 @@
 <template>
-  <div class="full-width">
+  <div class="full-width d-flex flex-column flex-grow-1 menu">
     <div class="d-flex align-center pa-2 mb-2 elevation-4">
       <v-btn
         icon
@@ -85,8 +85,14 @@
       </v-btn>
     </div>
 
-    <v-divider />
-    <map-settings :filter="filter" />
+    <v-spacer />
+
+    <v-list class="pb-0">
+      <v-divider />
+      <map-settings :filter="filter" />
+      <v-divider />
+      <missing-shop-dialog />
+    </v-list>
   </div>
 </template>
 
@@ -101,6 +107,7 @@ import PlaceDense from './place/dense';
 import FilterSubcategories from './filter_subcategories';
 import FilterSubfilters from './filter_subfilters';
 import MapSettings from './map_settings';
+import MissingShopDialog from './missing_shop_dialog';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
 const PAGE_SIZE = 10;
@@ -111,6 +118,7 @@ export default {
     FilterSubcategories,
     PlaceDense,
     MapSettings,
+    MissingShopDialog,
   },
 
   mixins: [isMobile],

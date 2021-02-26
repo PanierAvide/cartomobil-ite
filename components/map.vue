@@ -28,7 +28,7 @@
       v-if="highlightPlace"
       :coordinates="highlightPlace.geometry.coordinates"
       :offset="{ x: 0, y: -15 }"
-      color="red"
+      color="#368CD3"
     />
     <MglMarker
       v-if="newPlaceType"
@@ -104,7 +104,8 @@ function getColorStroke(theme, contribs = readContributionFromStorage()) {
     'case',
     ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] && c[1].startsWith("yes")).map(c => c[0])]], rawColorForStatus('yes', theme),
     ["in", ["get", "fid"], ["literal", contribs.filter(c => c[1] === "no").map(c => c[0])]], rawColorForStatus('no', theme),
-    ["in", ["get", "status"], ["literal", ["yes", "limited"]]], rawColorForStatus('yes', theme),
+    ["in", ["get", "status"], ["literal", ["yes"]]], rawColorForStatus('yes', theme),
+    ["in", ["get", "status"], ["literal", ["limited"]]], rawColorForStatus('limited', theme),
     ["in", ["get", "status"], ["literal", ["no"]]], rawColorForStatus('no', theme),
     rawColorForStatus('unknown', theme)
   ];

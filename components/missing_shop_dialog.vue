@@ -7,7 +7,7 @@
     <template v-slot:activator="{ on }">
       <v-list-item v-on="on">
         <v-list-item-icon class="mr-0">
-          <v-icon small>osm-plus</v-icon>
+          <v-icon small color="#368CD3">osm-marker_plus</v-icon>
         </v-list-item-icon>
         <v-list-item-content class="ml-2">
           <v-list-item-title class="body-1">{{ $t('learnmore.contribute') }}</v-list-item-title>

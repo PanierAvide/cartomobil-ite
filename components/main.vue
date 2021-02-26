@@ -242,6 +242,13 @@ export default {
     statusService() {
       this.updateFilterStatus();
     },
+
+    newPlaceType(newv, oldv) {
+      if(newv && newv !== oldv) {
+        const [ category, subcategories, subfilters, status ] = decodeFilter(this.filter);
+        this.filter = encodeFilter(null, null, null, status);
+      }
+    },
   },
 
   methods: {

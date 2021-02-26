@@ -27,12 +27,12 @@ describe('DetailState', () => {
 
   it('returns the state when limited', () => {
     const detail = createWrapper({ status: 'limited', place: {} });
-    expect(detail.vm.type).toEqual('success');
+    expect(detail.vm.type).toEqual('warning');
   });
 
   it('returns the state when unknown', () => {
     const detail = createWrapper({ status: 'unknown', place: {} });
-    expect(detail.vm.type).toEqual('warning');
+    expect(detail.vm.type).toEqual('yellow accent-4');
   });
 
   it('returns the state when no', () => {

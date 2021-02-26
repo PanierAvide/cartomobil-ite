@@ -5,6 +5,7 @@
       :icon="false"
       tile
       class="mb-0"
+      :style="status == 'unknown' ? 'color: rgba(0, 0, 0, 0.87);' : ''"
     >
       <p class="text-pre mb-0">{{ $t(`details.state.${status}`) }}</p>
       <p
