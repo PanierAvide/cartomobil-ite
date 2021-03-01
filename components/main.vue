@@ -77,7 +77,7 @@
               {{ $t('zoomtosee') }}
             </v-chip>
           </v-slide-y-reverse-transition>
-          <!--rgpd-banner @consent="rgpdBannerHidden = true" /-->
+          <rgpd-banner @consent="rgpdBannerHidden = true" />
           <apps-sheet />
         </client-only>
         <bottom-menu

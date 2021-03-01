@@ -53,7 +53,7 @@
     "service_status": "Service access"
   },
   "rgpd": {
-    "consent": "In these times of lockdown, would you take a cookie on your computer for our statistics?",
+    "consent": "Would you take a cookie on your computer for our statistics?",
     "yes": "Yes",
     "no": "No"
   },

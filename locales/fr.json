@@ -53,7 +53,7 @@
     "service_status": "Accès au service"
   },
   "rgpd": {
-    "consent": "En ces temps de crise sanitaire, vous prendriez bien un cookie sur votre ordinateur pour nos statistiques ?",
+    "consent": "Vous prendriez bien un cookie sur votre ordinateur pour nos statistiques ?",
     "yes": "Oui",
     "no": "Non"
   },
