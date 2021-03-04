@@ -17,7 +17,7 @@ BEGIN
 		result := 'post_service';
 	ELSIF tags->'amenity' IN ('restaurant', 'fast_food', 'bar', 'pub', 'cafe', 'ice_cream', 'nightclub') THEN
 		result := 'outside';
-	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'library')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') THEN
+	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'library', 'place_of_worship')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') THEN
 		result := 'leisure';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') THEN
 		result := 'sport';
@@ -86,6 +86,8 @@ BEGIN
 		result := 'library';
 	ELSIF tags->'tourism' = 'theme_park' THEN
 		result := 'theme_park';
+	ELSIF tags->'amenity' = 'place_of_worship' THEN
+		result := 'place_of_worship';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'amenity' = 'swimming_pool') THEN
 		result := 'swimming_pool';
 	ELSIF tags->'club' = 'sport' AND tags->'sport:for' = 'disabled' THEN
