@@ -226,6 +226,11 @@
           "name": "Theme park",
           "osm_tags": [ { "tourism": "theme_park" } ],
           "areas": "all"
+        },
+        "place_of_worship": {
+          "name": "Place of worship",
+          "osm_tags": [ { "amenity": "place_of_worship" } ],
+          "areas": "all"
         }
       }
     },
