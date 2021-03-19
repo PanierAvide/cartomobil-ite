@@ -404,11 +404,6 @@
       "name": "Education",
       "form": "erp",
       "subcategories": {
-        "childcare": {
-          "name": "Childcare",
-          "osm_tags": [ { "amenity": "childcare" } ],
-          "areas": "all"
-        },
         "kindergarten": {
           "name": "Kindergarten",
           "osm_tags": [ { "amenity": "kindergarten" } ],
@@ -620,7 +615,6 @@
           "areas": "all",
           "form": "erp"
         },
-
         "ferry": {
           "name": "Ferry",
           "osm_tags": [
@@ -738,7 +732,7 @@
         },
         "historic": {
           "name": "Historical site",
-          "osm_tags": [  { "historic": "*" } ],
+          "osm_tags": [  { "historic": "*" } , { "amenity": "marae" }],
           "areas": "all",
           "form": "erp"
         }

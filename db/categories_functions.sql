@@ -23,7 +23,7 @@ BEGIN
 		result := 'sport';
 	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'fishing', 'hunting', 'sports', 'outdoor', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tattoo', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'medical_supply', 'optician', 'hearing_aids', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'obile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' != '') THEN
 		result := 'shop';
-	ELSIF (tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire')) OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'collège') OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée') OR (tags->'amenity' IN ('childcare', 'kindergarten', 'university', 'college')) THEN
+	ELSIF (tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire')) OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'collège') OR (tags->'amenity' = 'school' AND tags->'school:FR' = 'lycée') OR (tags->'amenity' IN ('kindergarten', 'university', 'college')) THEN
 		result := 'education';
 	ELSIF (tags->'healthcare' IN ('centre', 'rehabilitation', 'audiologist', 'dentist', 'midwife', 'nurse', 'podiatrist', 'psychotherapist', 'speech_therapist', 'clinic', 'hospital', 'doctor', 'occupational_therapist', 'physiotherapist')) OR (tags->'amenity' IN ('doctors', 'clinic', 'hospital', 'pharmacy')) THEN
 		result := 'health';
@@ -31,7 +31,7 @@ BEGIN
 		result := 'mobility';
 	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site') THEN
 		result := 'housing';
-	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
+	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower', 'marae')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
 		result := 'tourism_outside';
 	ELSE
 		result := NULL;
@@ -118,8 +118,6 @@ BEGIN
 		result := 'hearing_aids';
 	ELSIF (tags->'shop' IN ('variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'obile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'craft' = 'electronics_repair') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') THEN
 		result := 'shop_others';
-	ELSIF tags->'amenity' = 'childcare' THEN
-		result := 'childcare';
 	ELSIF tags->'amenity' = 'kindergarten' THEN
 		result := 'kindergarten';
 	ELSIF tags->'amenity' = 'school' AND tags->'school:FR' IN ('élémentaire', 'maternelle', 'primaire') THEN
@@ -192,7 +190,7 @@ BEGIN
 		result := 'waterfall';
 	ELSIF tags->'tourism' = 'artwork' THEN
 		result := 'artwork';
-	ELSIF tags->'historic' != '' THEN
+	ELSIF (tags->'historic' != '') OR (tags->'amenity' = 'marae') THEN
 		result := 'historic';
 	ELSE
 		result := 'other';
