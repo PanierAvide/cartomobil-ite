@@ -538,10 +538,6 @@ SELECT is(get_category1('amenity=>vending_machine, vending=>condoms'::hstore, 'F
 
 SELECT is(get_category2('amenity=>vending_machine, vending=>condoms'::hstore, 'FR'), 'shop_others', 'get_category2 amenity=>vending_machine, vending=>condoms for FR should be shop_others');
 
-SELECT is(get_category1('amenity=>childcare'::hstore, 'FR'), 'education', 'get_category1 amenity=>childcare for FR should be education');
-
-SELECT is(get_category2('amenity=>childcare'::hstore, 'FR'), 'childcare', 'get_category2 amenity=>childcare for FR should be childcare');
-
 SELECT is(get_category1('amenity=>kindergarten'::hstore, 'FR'), 'education', 'get_category1 amenity=>kindergarten for FR should be education');
 
 SELECT is(get_category2('amenity=>kindergarten'::hstore, 'FR'), 'kindergarten', 'get_category2 amenity=>kindergarten for FR should be kindergarten');
@@ -885,6 +881,10 @@ SELECT is(get_category2('tourism=>artwork'::hstore, 'FR'), 'artwork', 'get_categ
 SELECT is(get_category1('historic=>*'::hstore, 'FR'), 'tourism_outside', 'get_category1 historic=>* for FR should be tourism_outside');
 
 SELECT is(get_category2('historic=>*'::hstore, 'FR'), 'historic', 'get_category2 historic=>* for FR should be historic');
+
+SELECT is(get_category1('amenity=>marae'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>marae for FR should be tourism_outside');
+
+SELECT is(get_category2('amenity=>marae'::hstore, 'FR'), 'historic', 'get_category2 amenity=>marae for FR should be historic');
 
 SELECT * FROM finish();
 ROLLBACK;
