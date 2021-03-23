@@ -6,6 +6,7 @@
     :max-bounds="mapLimits"
     :accessToken="accessToken"
     :maxZoom="20"
+    :attributionControl="false"
     @load="load"
     @rotateend="maprotated"
     @update:center="updateMapCenter"
@@ -98,6 +99,26 @@ const source = "public.poi_osm_light";
 const noteSource = "public.poi_recent_notes_light";
 const contribSource = "poi-contrib-src";
 let delayCounting = null;
+
+class CustomAttribution {
+  getDefaultPosition() {
+    return 'bottom-right';
+  }
+
+  onAdd(map) {
+    this._container = document.createElement('div');
+    this._container.classList.add('mapboxgl-ctrl', 'mapboxgl-ctrl-attrib');
+    this._innerContainer = document.createElement('div');
+    this._innerContainer.classList.add('mapboxgl-ctrl-attrib-inner');
+    this._innerContainer.innerHTML = `<a href="https://www.mapbox.com/about/maps/">Rendu &copy; Mapbox</a> | <a href="http://www.openstreetmap.org/about/" title="OpenStreetMap est le Wikipédia de la carte, une base de données géographiques libre du monde entier. Tu peux améliorer la carte (cf. menu)">Données &copy; OpenStreetMap</a>`;
+    this._container.appendChild(this._innerContainer);
+    return this._container;
+  }
+
+  onRemove() {
+    this._container.parentNode.removeChild(this._container);
+  }
+}
 
 function getColorStroke(theme, contribs = readContributionFromStorage()) {
   return [
@@ -482,6 +503,7 @@ export default {
       this.map.addControl(this.navcontrol, 'top-right');
       this.geoloccontrol = new GeolocateControl({ positionOptions: { enableHighAccuracy: true } });
       this.map.addControl(this.geoloccontrol, 'top-right');
+      this.map.addControl(new CustomAttribution());
 
       // Count places
       this.map.on('moveend', this.countPlaces.bind(this));

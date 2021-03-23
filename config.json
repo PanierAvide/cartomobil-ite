@@ -17,7 +17,7 @@
   "mapboxStyle": "https://api.mapbox.com/styles/v1/violainedoutreleau/ckcnc91fk1ddq1ipfdolix161",
   "brands": {
     "DEFAULT": {
-      "brand_text": "Cartomobil 'ite",
+      "brand_text": "CartoMobil'ite",
       "domain": "carto.mobilite.xyz",
       "defaultLocale": "fr"
     }
@@ -27,11 +27,13 @@
   },
   "locales": {
     "DEFAULT": {
-      "about": "https://mobilite.xyz/?PagePrincipale",
-      "disclaimer": "https://mobilite.xyz/?LegalCGU/",
+      "about": "https://mobilite.xyz/?CartoMobAPropos",
+      "disclaimer": "https://mobilite.xyz/?LegalCGU",
       "email": "mailto:info@mobilite.xyz",
       "issues": "https://github.com/Cartomobil-ite/cartomobil-ite/issues/new",
-      "contribute_cro": "https://mobilite.xyz/?TutOSM"
+      "contribute_cro": "https://mobilite.xyz/?TutOSM",
+      "faq": "https://mobilite.xyz/?FAQ",
+      "support_us": "https://mobilite.xyz/?NousSoutenir"
     }
   }
 }

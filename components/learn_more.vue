@@ -36,13 +36,23 @@
             <h2 class="mb-3">{{ $t('learnmore.about') }}</h2>
             <ul>
               <li>
-                <a :href="links.blog" target="_blank" rel="noopener">
-                  {{ $t('learnmore.blog') }}
+                <a :href="links.about" target="_blank" rel="noopener">
+                  {{ $t('learnmore.about') }}
                 </a>
               </li>
               <li>
-                <a :href="links.about" target="_blank" rel="noopener">
-                  {{ $t('learnmore.about') }}
+                <a :href="links.contribute_cro" target="_blank" rel="noopener">
+                  {{ $t('missing_shop_dialog.cta_improve') }}
+                </a>
+              </li>
+              <li>
+                <a :href="links.faq" target="_blank" rel="noopener">
+                  {{ $t('learnmore.faq') }}
+                </a>
+              </li>
+              <li>
+                <a :href="links.support_us" target="_blank" rel="noopener">
+                  {{ $t('learnmore.support_us') }}
                 </a>
               </li>
               <li>
@@ -76,6 +86,7 @@
             </ul>
           </v-col>
         </v-row>
+        <p class="font-italic text-center">{{ $t('learnmore.sponsors') }}</p>
       </v-card-text>
     </v-card>
   </v-dialog>

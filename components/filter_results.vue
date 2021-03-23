@@ -110,7 +110,7 @@ import MapSettings from './map_settings';
 import MissingShopDialog from './missing_shop_dialog';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 5;
 
 export default {
   components: {

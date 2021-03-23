@@ -45,7 +45,10 @@
     "contact_us": "Contact us",
     "email": "By email",
     "bugs": "Warn us about a bug on map on GitHub",
-    "category": "Ask for new categories on GitHub"
+    "category": "Ask for new categories on GitHub",
+    "faq": "Frequently-asked questions",
+    "support_us": "Support us",
+    "sponsors": "Supported by French Polynesia"
   },
   "map_settings": {
     "title": "Settings",

@@ -38,14 +38,17 @@
     "description": "« {brand} » est l’outil indispensable pour des déplacements durables (« qui ne compromettent pas la capacité des générations futures à répondre à leurs besoins ») et donc inclusifs. Contraints de vous déplacer en fauteuil roulant, cette carte est faite pour vous !\n\nCette carte collaborative vous permet de partager les lieux accessibles pour les personnes en fauteuil roulant, et de remonter des obstacles au déplacement, pour une mobilité facilitée ! Pas besoin d’être en fauteuil pour participer, c’est la manière la plus solidaire de faciliter les déplacements de vos voisins, amis, familles, ou habitants de votre quartier qui se déplacent en fauteuil roulant.",
     "title": "En savoir plus",
     "press": "Presse",
-    "disclaimer": "Mentions légales",
+    "disclaimer": "CGU et confidentialité",
     "blog": "Blog",
     "townhalls": "Solution de communication de crise pour les mairies",
     "osm_contributors": "Documentation pour contributeur OpenStreetMap",
     "contact_us": "Nous contacter",
     "email": "Par courriel",
     "bugs": "Remonter un bug sur la carte via GitHub",
-    "category": "Demander l'ajout d'une catégorie via GitHub"
+    "category": "Demander l'ajout d'une catégorie via GitHub",
+    "faq": "Foire aux questions",
+    "support_us": "Nous soutenir",
+    "sponsors": "Avec le concours de la Polynésie française"
   },
   "map_settings": {
     "title": "Réglages",
