@@ -106,6 +106,7 @@
           "osm_tags": [
             { "amenity": "atm" }
           ],
+          "form": [ "equipment" ],
           "areas": "all"
         },
         "insurance": {
@@ -688,6 +689,7 @@
           "osm_tags": [
             { "amenity": "bench" }
           ],
+          "form": [ "equipment" ],
           "areas": "all"
         },
         "shower": {
@@ -696,7 +698,15 @@
             { "amenity": "shower" }
           ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
+        },
+        "picnic": {
+          "name": "Picnic Table",
+          "osm_tags": [
+            { "leisure": "picnic_table" }
+          ],
+          "areas": "all",
+          "form": "equipment"
         },
         "beach_resort": {
           "name": "Beach resort",
@@ -704,37 +714,37 @@
             { "leisure": "beach_resort" }, { "natural": "beach" }
           ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         },
         "park": {
           "name": "Park",
           "osm_tags": [ { "leisure": "park" } ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         },
         "viewpoint": {
           "name": "View point",
           "osm_tags": [ { "tourism": "viewpoint" } ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         },
         "waterfall": {
           "name": "Waterfall",
           "osm_tags": [ { "waterway": "waterfall" } ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         },
         "artwork": {
           "name": "Artwork",
           "osm_tags": [  { "tourism": "artwork" } ],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         },
         "historic": {
           "name": "Historical site",
           "osm_tags": [  { "historic": "*" } , { "amenity": "marae" }],
           "areas": "all",
-          "form": "erp"
+          "form": "equipment"
         }
       }
     }
@@ -1838,6 +1848,41 @@
               "pattern": "^(|\\d+(\\.\\d+)?)$"
             }
           }
+        }
+      }
+    },
+    "equipment": {
+      "type": "object",
+      "x-props": {
+        "tile": true,
+        "mandatory": true
+      },
+      "x-display": "expansion-panels",
+      "x-class-readOnly": "pa-2 pb-4",
+      "properties": {
+        "wheelchair": {
+          "type": "string",
+          "title": "Accessible en fauteuil roulant ?",
+          "description": "__Oui__ : accessible en autonomie.\n\n__Limitée__ : accessible avec une aide.\n\n__Non__ : inaccessible.",
+          "x-class": "form-hide-desc",
+          "x-hide-readOnly": true,
+          "x-props": {
+            "prependIcon": "osm-wheelchair"
+          },
+          "oneOf": [
+            { "title": "Oui", "const": "yes" },
+            { "title": "Limité", "const": "limited" },
+            { "title": "Non", "const": "no" },
+            { "title": "Ne sais pas", "const": "null" }
+          ]
+        },
+        "wheelchair:description": {
+          "title": "Précisions sur l'accessibilité",
+          "type": "string",
+          "format": "text",
+          "x-display": "textarea",
+          "maxLength": 250,
+          "x-asNoteReason": "Est-ce un descriptif valide ?"
         }
       }
     },

@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(440);
+SELECT plan(442);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -853,6 +853,10 @@ SELECT is(get_category2('amenity=>bench'::hstore, 'FR'), 'bench', 'get_category2
 SELECT is(get_category1('amenity=>shower'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>shower for FR should be tourism_outside');
 
 SELECT is(get_category2('amenity=>shower'::hstore, 'FR'), 'shower', 'get_category2 amenity=>shower for FR should be shower');
+
+SELECT is(get_category1('leisure=>picnic_table'::hstore, 'FR'), 'tourism_outside', 'get_category1 leisure=>picnic_table for FR should be tourism_outside');
+
+SELECT is(get_category2('leisure=>picnic_table'::hstore, 'FR'), 'picnic', 'get_category2 leisure=>picnic_table for FR should be picnic');
 
 SELECT is(get_category1('leisure=>beach_resort'::hstore, 'FR'), 'tourism_outside', 'get_category1 leisure=>beach_resort for FR should be tourism_outside');
 

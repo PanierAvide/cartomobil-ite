@@ -31,7 +31,7 @@ BEGIN
 		result := 'mobility';
 	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site') THEN
 		result := 'housing';
-	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower', 'marae')) OR (tags->'leisure' IN ('beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
+	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower', 'marae')) OR (tags->'leisure' IN ('picnic_table', 'beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
 		result := 'tourism_outside';
 	ELSE
 		result := NULL;
@@ -180,6 +180,8 @@ BEGIN
 		result := 'bench';
 	ELSIF tags->'amenity' = 'shower' THEN
 		result := 'shower';
+	ELSIF tags->'leisure' = 'picnic_table' THEN
+		result := 'picnic';
 	ELSIF (tags->'leisure' = 'beach_resort') OR (tags->'natural' = 'beach') THEN
 		result := 'beach_resort';
 	ELSIF tags->'leisure' = 'park' THEN
