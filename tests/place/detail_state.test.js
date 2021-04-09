@@ -37,6 +37,6 @@ describe('DetailState', () => {
 
   it('returns the state when no', () => {
     const detail = createWrapper({ status: 'no', place: {} });
-    expect(detail.vm.type).toEqual('error');
+    expect(detail.vm.type).toEqual('blue-grey darken-1');
   });
 });

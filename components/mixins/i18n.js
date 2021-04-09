@@ -1,8 +1,6 @@
 import { mapState } from 'vuex';
 import config from '../../config.json';
 import logo from '../../assets/logo.png';
-import brand from '../../assets/logo-FR-laptop.svg';
-import brandMobile from '../../assets/logo-FR-mobile.svg';
 import brandOg from '../../assets/logo-og.jpg';
 
 function bestLocale(obj, locale) {

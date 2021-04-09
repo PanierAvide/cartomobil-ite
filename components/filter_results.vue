@@ -39,7 +39,7 @@
 
     <v-skeleton-loader
       v-if="loading && !results"
-      type="list-item-two-line@10"
+      :type="`list-item-two-line@${this.pageSize}`"
     />
     <v-list
       v-else-if="results"
@@ -110,7 +110,7 @@ import MapSettings from './map_settings';
 import MissingShopDialog from './missing_shop_dialog';
 
 const debounce = process.env.NODE_ENV === 'production' ? _debounce : fn => fn;
-const PAGE_SIZE = 5;
+const PAGE_SIZE = { "mobile": 5, "wide": 8 };
 
 export default {
   components: {
@@ -221,12 +221,16 @@ export default {
     },
 
     canGoNext() {
-      return !this.loading && this.results && this.results.numberReturned === PAGE_SIZE && (this.nbPlacesVisible === 0 || this.offset + this.results.numberReturned < this.nbPlacesVisible);
+      return !this.loading && this.results && this.results.numberReturned === this.pageSize && (this.nbPlacesVisible === 0 || this.offset + this.results.numberReturned < this.nbPlacesVisible);
+    },
+
+    pageSize() {
+      return this.isMobile ? PAGE_SIZE.mobile : PAGE_SIZE.wide;
     },
 
     pageText() {
-      const currentPage = Math.ceil(this.offset / PAGE_SIZE) + 1;
-      const totalPages = Math.ceil(this.nbPlacesVisible / PAGE_SIZE);
+      const currentPage = Math.ceil(this.offset / this.pageSize) + 1;
+      const totalPages = Math.ceil(this.nbPlacesVisible / this.pageSize);
       return this.loading || !this.nbPlacesVisible || currentPage > totalPages ? "" : currentPage + " / " + (this.canGoNext ? totalPages : currentPage);
     },
 
@@ -278,13 +282,13 @@ export default {
 
     goPrev() {
       if (this.canGoPrev) {
-        this.updateOffset(this.offset - PAGE_SIZE);
+        this.updateOffset(this.offset - this.pageSize);
       }
     },
 
     goNext() {
       if (this.canGoNext) {
-        this.updateOffset(this.offset + PAGE_SIZE);
+        this.updateOffset(this.offset + this.pageSize);
       }
     },
 
@@ -302,7 +306,7 @@ export default {
       }
       this.loading = true;
       const params = [
-        ['limit', PAGE_SIZE],
+        ['limit', this.pageSize],
         ['offset', this.offset],
         ['bbox', this.mapBounds],
         ['orderby', 'status_order'],

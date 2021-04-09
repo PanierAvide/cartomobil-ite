@@ -1,9 +1,15 @@
 <template>
   <div class="d-flex align-center justify-center root accent-3">
-    <div>
-      <span class="white--text title">
-        <img src="../assets/logo_splash.gif" :alt="$t('loading')">
-      </span>
+    <div class="primary--text text-center px-5">
+      <v-progress-circular
+        indeterminate
+        color="primary"
+        :size="30"
+        :width="3"
+      ></v-progress-circular>
+      <h1>{{ $t('title') }}</h1>
+      <h2>{{ $t('splash_subtitle1') }}</h2>
+      <p>{{ $t('splash_subtitle2') }}</p>
     </div>
   </div>
 </template>
@@ -17,8 +23,10 @@
   width: 100vw;
   z-index: 30;
   background-color: #1982C2;
-}
-.title img {
-  max-width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-image: url('../assets/splash_background.jpg');
 }
 </style>
