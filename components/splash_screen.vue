@@ -22,7 +22,7 @@
   height: 100vh;
   width: 100vw;
   z-index: 30;
-  background-color: #1982C2;
+  background-color: #D2E9EF;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
