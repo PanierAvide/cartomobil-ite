@@ -3,7 +3,7 @@
   "loading": "Chargement en cours...",
   "covid19-alert": "Respectez les restrictions gouvernementales. Il en va de VOTRE responsabilité.",
   "title": "CartoMobil'ite",
-  "subtitle": "La carte des mobilités actives",
+  "subtitle": "La carte des mobilités actives et inclusives",
   "splash_subtitle1": "LA carte collaborative pour une mobilité active et inclusive, à Tahiti et Moorea",
   "splash_subtitle2": "Pour partager et t'informer sur l'accessibilité en fauteuil roulant des lieux et cheminements.",
   "search": "Rechercher",
@@ -12,18 +12,18 @@
   "missing_shop": "Commerce manquant ?",
   "backtolist": "Retour à la liste",
   "missing_shop_dialog": {
-    "contribute": "Un lieu est manquant ou incomplet? Aides-nous à compléter la carte ! Pour apporter de nouveaux éléments, c'est ici :",
+    "contribute": "Un lieu est manquant ou incomplet? Aides-nous à compléter la carte ! Pour signaler de nouveaux éléments, c'est ici :",
     "cta_add_barrier": "Obstacle",
     "cta_add_pmr_parking": "Place PMR",
     "cta_add_toilets": "WC extérieurs",
     "cta_note": "Autre",
-    "read_docs": "Pour t'accompagner dans les autres modes de contribution, notre documentation est là :",
-    "cta_improve": "Améliorer la carte",
-    "cta_contact": "Nous contacter"
+    "read_docs": "On t'accompagne dans les autres modes de contribution :",
+    "cta_improve": "Nos tutos pour améliorer la carte",
+    "cta_contact": "Contactes-nous !"
   },
   "change_lang": "Changer la langue",
-  "zoomtosee": "Zoomez pour voir les informations",
-  "filter_noresults": "Aucun résultat. Essayez de dézoomer.",
+  "zoomtosee": "Zoome pour voir les informations",
+  "filter_noresults": "Aucun résultat. Essaie de dézoomer.",
   "toggle_color": {
     "blind": "Activer le mode daltonien",
     "normal": "Désactiver le mode daltonien"
@@ -36,8 +36,10 @@
   "learnmore": {
     "about": "À propos",
     "contribute": "Contribuer",
-    "missing_shop": "Un lieu est manquant ? Rajoutez le !",
-    "description": "« {brand} » est l’outil indispensable pour des déplacements durables (« qui ne compromettent pas la capacité des générations futures à répondre à leurs besoins ») et donc inclusifs. Contraints de vous déplacer en fauteuil roulant, cette carte est faite pour vous !\n\nCette carte collaborative vous permet de partager les lieux accessibles pour les personnes en fauteuil roulant, et de remonter des obstacles au déplacement, pour une mobilité facilitée ! Pas besoin d’être en fauteuil pour participer, c’est la manière la plus solidaire de faciliter les déplacements de vos voisins, amis, familles, ou habitants de votre quartier qui se déplacent en fauteuil roulant.",
+    "missing_shop": "Un lieu est manquant ? Rajoutes-le !",
+    "description": "« {brand} » est l’outil indispensable pour des déplacements actifs et inclusifs à Tahiti et Moorea. Contraints de te déplacer en fauteuil roulant, cette carte est faite pour toi!\n\nCette carte collaborative t'informe sur les lieux et cheminements accessibles mais aussi te permet de partager l'accessibilité de ces derniers, et de remonter des obstacles au déplacement, les toilettes et places PMR! D'aileurs ite en tahiti signifie le savoir, la connaissance. En plus, pas besoin d’être en fauteuil pour participer, c’est la manière la plus solidaire de faciliter les déplacements de tes voisins, amis, familles, ou habitants de ton quartier qui se déplacent en fauteuil roulant.",
+
+
     "title": "En savoir plus",
     "press": "Presse",
     "disclaimer": "CGU et confidentialité",
@@ -109,7 +111,7 @@
       "details": "Optionnel : ajouter d'autres détails liés a la crise sanitaire",
       "details_error": "Doit être vide ou compris entre 10 et 200 caractères",
       "definite_closing": "Fermeture définitive",
-      "details_definite_closing": "Ce lieu a définitivement fermé ses portes. Qu'y a-t-il à ce jour à la place ? Donnez autant de détails que possible, par exemple : bâtiment vide ou en travaux, nouveau commerce..."
+      "details_definite_closing": "Ce lieu a définitivement fermé ses portes. Qu'y a-t-il à ce jour à la place ? Donne autant de détails que possible, par exemple : bâtiment vide ou en travaux, nouveau commerce..."
     },
     "submit": "Publier",
     "cancel": "Annuler"
@@ -121,11 +123,11 @@
       "toilets": "Ajouter des WC extérieurs",
       "note": "Signaler une amélioration"
     },
-    "move_marker": "Déplacez le marqueur de la carte sur la position exacte du lieu concerné"
+    "move_marker": "Déplace le marqueur de la carte sur la position exacte du lieu concerné"
   },
   "details": {
-    "signal_warning": "Vous étiez en train de modifier ce lieu, si vous partez il ne sera pas sauvegardé. Voulez-vous vraiment quitter la page ?",
-    "signal": "Modifier ce lieu",
+    "signal_warning": "Tu étais en train de modifier ce lieu, si tu pars il ne sera pas sauvegardé. Veux-tu vraiment quitter la page ?",
+    "signal": "Compléter ce lieu",
     "signal_done": "Votre modification a été enregistrée, merci ! Elle apparaitra dans un moment sur la carte.",
     "signal_note": "Ces informations sont issues d'une contribution anonyme et n'ont pas encore été validées.",
     "normal_opening_hours": "Horaires d'ouverture",
@@ -230,7 +232,7 @@
     "day_shortcuts": {
       "weekdays": "Du lundi au samedi"
     },
-    "select_days": "Sélectionnez les jours qui ont les même horaires d'ouverture",
+    "select_days": "Sélectionne les jours qui ont les même horaires d'ouverture",
     "next": "Suivant",
     "cancel": "Annuler",
     "select_time": {
