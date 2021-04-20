@@ -232,6 +232,11 @@
           "name": "Place of worship",
           "osm_tags": [ { "amenity": "place_of_worship" } ],
           "areas": "all"
+        },
+        "community_centre": {
+          "name": "Community centre",
+          "osm_tags": [ { "amenity": "community_centre" } ],
+          "areas": "all"
         }
       }
     },
