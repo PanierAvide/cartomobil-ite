@@ -74,12 +74,12 @@
                 </a>
               </li>
               <li>
-                <a :href="links.issues" target="_blank" rel="noopener">
+                <a :href="links.issues_bugs" target="_blank" rel="noopener">
                   {{ $t('learnmore.bugs') }}
                 </a>
               </li>
               <li>
-                <a :href="links.issues" target="_blank" rel="noopener">
+                <a :href="links.issues_category" target="_blank" rel="noopener">
                   {{ $t('learnmore.category') }}
                 </a>
               </li>

@@ -30,7 +30,8 @@
       "about": "https://mobilite.xyz/?CartoMobAPropos",
       "disclaimer": "https://mobilite.xyz/?LegalCGU",
       "email": "mailto:info@mobilite.xyz",
-      "issues": "https://github.com/Cartomobil-ite/cartomobil-ite/issues/new",
+      "issues_bugs": "https://github.com/Cartomobil-ite/cartomobil-ite/issues/new",
+      "issues_category": "https://github.com/Cartomobil-ite/cartomobil-ite/issues/new?assignees=&labels=categories&template=missing-categories.md&title=Missing+category%3A+%28name+of+category%29",
       "contribute_cro": "https://mobilite.xyz/?TutOSM",
       "faq": "https://mobilite.xyz/?FAQ",
       "support_us": "https://mobilite.xyz/?NousSoutenir"
