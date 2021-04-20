@@ -1,6 +1,6 @@
 # CartoMobil'ite
 ![CartoMobil'ite](static/favicon.png)
-[CartoMobil'ite](https://carto.mobilite.xyz/) est LA carte collaborative pour une mobilité durable, active et inclusive, à Tahiti et Moorea.
+[CartoMobil'ite](https://carto.mobilite.xyz/) est LA carte collaborative pour une mobilité active et inclusive, à Tahiti et Moorea.
 
 🎯 **Notre premier objectif :** ♿ la mobil'ite pour les fauteuils roulants.
 
