@@ -1,14 +1,13 @@
 <template>
   <div class="d-flex align-center justify-center root accent-3">
-    <div class="primary--text text-center px-5">
+    <div class="black--text text-center px-5">
       <v-progress-circular
         indeterminate
         color="primary"
         :size="30"
         :width="3"
       ></v-progress-circular>
-      <h1>{{ $t('title') }}</h1>
-      <h2>{{ $t('splash_subtitle1') }}</h2>
+      <h1 class="mb-10">{{ $t('title') }} : {{ $t('splash_subtitle1') }}</h1>
       <p>{{ $t('splash_subtitle2') }}</p>
     </div>
   </div>
