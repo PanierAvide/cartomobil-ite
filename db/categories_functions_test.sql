@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(444);
+SELECT plan(450);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -98,6 +98,14 @@ SELECT is(get_category1('club=>*'::hstore, 'FR'), 'leisure', 'get_category1 club
 
 SELECT is(get_category2('club=>*'::hstore, 'FR'), 'leisure_club', 'get_category2 club=>* for FR should be leisure_club');
 
+SELECT is(get_category1('amenity=>dive_centre'::hstore, 'FR'), 'leisure', 'get_category1 amenity=>dive_centre for FR should be leisure');
+
+SELECT is(get_category2('amenity=>dive_centre'::hstore, 'FR'), 'dive_centre', 'get_category2 amenity=>dive_centre for FR should be dive_centre');
+
+SELECT is(get_category1('sport=>laser_tag'::hstore, 'FR'), 'leisure', 'get_category1 sport=>laser_tag for FR should be leisure');
+
+SELECT is(get_category2('sport=>laser_tag'::hstore, 'FR'), 'laser_tag', 'get_category2 sport=>laser_tag for FR should be laser_tag');
+
 SELECT is(get_category1('amenity=>library'::hstore, 'FR'), 'leisure', 'get_category1 amenity=>library for FR should be leisure');
 
 SELECT is(get_category2('amenity=>library'::hstore, 'FR'), 'library', 'get_category2 amenity=>library for FR should be library');
@@ -133,6 +141,10 @@ SELECT is(get_category2('amenity=>swimming_pool'::hstore, 'FR'), 'swimming_pool'
 SELECT is(get_category1('club=>sport, sport:for=>disabled'::hstore, 'FR'), 'sport', 'get_category1 club=>sport, sport:for=>disabled for FR should be sport');
 
 SELECT is(get_category2('club=>sport, sport:for=>disabled'::hstore, 'FR'), 'club', 'get_category2 club=>sport, sport:for=>disabled for FR should be club');
+
+SELECT is(get_category1('leisure=>sports_centre'::hstore, 'FR'), 'sport', 'get_category1 leisure=>sports_centre for FR should be sport');
+
+SELECT is(get_category2('leisure=>sports_centre'::hstore, 'FR'), 'sports_centre', 'get_category2 leisure=>sports_centre for FR should be sports_centre');
 
 SELECT is(get_category1('shop=>frozen_food'::hstore, 'FR'), 'shop', 'get_category1 shop=>frozen_food for FR should be shop');
 

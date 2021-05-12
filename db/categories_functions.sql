@@ -17,9 +17,9 @@ BEGIN
 		result := 'post_service';
 	ELSIF tags->'amenity' IN ('restaurant', 'fast_food', 'bar', 'pub', 'cafe', 'ice_cream', 'nightclub') THEN
 		result := 'outside';
-	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'library', 'place_of_worship', 'community_centre')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') THEN
+	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'dive_centre', 'library', 'place_of_worship', 'community_centre')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') OR (tags->'sport' = 'laser_tag') THEN
 		result := 'leisure';
-	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') THEN
+	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') OR (tags->'leisure' = 'sports_centre') THEN
 		result := 'sport';
 	ELSIF (tags->'office' = 'company' AND tags->'name' IN ('Electricité de Tahiti', 'EDT', 'Électricité de Tahiti')) OR (tags->'office' = 'company' AND tags->'short_name' = 'EDT') OR (tags->'amenity' = 'vending_machine' AND tags->'vending' = 'condoms') OR (tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery', 'boutique', 'clothes', 'fashion', 'shoes', 'bag', 'jewelry', 'tailor', 'watches', 'fishing', 'hunting', 'sports', 'outdoor', 'beauty', 'cosmetics', 'hairdresser', 'massage', 'perfumery', 'chemist', 'tattoo', 'fabric', 'sewing', 'haberdashery', 'wool', 'art', 'music', 'musical_instrument', 'photo', 'craft', 'camera', 'video', 'video_games', 'stationery', 'printer_ink', 'books', 'kiosk', 'newsagent', 'medical_supply', 'optician', 'hearing_aids', 'variety_store', 'department_store', 'wholesale', 'second_hand', 'charity', 'bathroom_furnishing', 'carpet', 'curtain', 'furniture', 'kitchen', 'houseware', 'interior_decoration', 'pottery', 'lighting', 'bed', 'doityourself', 'electrical', 'fireplace', 'glaziery', 'hardware', 'paint', 'tiles', 'obile_phone', 'computer', 'electronics', 'appliance', 'hifi')) OR (tags->'amenity' = 'marketplace') OR (tags->'craft' != '') THEN
 		result := 'shop';
@@ -82,6 +82,10 @@ BEGIN
 		result := 'association';
 	ELSIF tags->'club' != '' THEN
 		result := 'leisure_club';
+	ELSIF tags->'amenity' = 'dive_centre' THEN
+		result := 'dive_centre';
+	ELSIF tags->'sport' = 'laser_tag' THEN
+		result := 'laser_tag';
 	ELSIF tags->'amenity' = 'library' THEN
 		result := 'library';
 	ELSIF tags->'tourism' = 'theme_park' THEN
@@ -94,6 +98,8 @@ BEGIN
 		result := 'swimming_pool';
 	ELSIF tags->'club' = 'sport' AND tags->'sport:for' = 'disabled' THEN
 		result := 'club';
+	ELSIF tags->'leisure' = 'sports_centre' THEN
+		result := 'sports_centre';
 	ELSIF tags->'shop' IN ('frozen_food', 'supermarket', 'butcher', 'cheese', 'convenience', 'general', 'seafood', 'greengrocer', 'deli', 'spices', 'honey', 'pasta', 'cannery', 'tea', 'coffee', 'health_food', 'dairy', 'confectionery', 'chocolate', 'farm', 'bakery', 'pastry', 'alcohol', 'beverages', 'wine', 'winery') THEN
 		result := 'food';
 	ELSIF tags->'amenity' = 'marketplace' THEN

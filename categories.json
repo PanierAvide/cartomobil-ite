@@ -218,6 +218,20 @@
           ],
           "areas": "all"
         },
+        "dive_centre": {
+          "name": "Dive Centre",
+          "osm_tags": [
+            { "amenity": "dive_centre" }
+          ],
+          "areas": "all"
+        },
+        "laser_tag": {
+          "name": "Laser Game",
+          "osm_tags": [
+            { "sport": "laser_tag" }
+          ],
+          "areas": "all"
+        },
         "library": {
           "name": "Library",
           "osm_tags": [ { "amenity": "library" } ],
@@ -257,6 +271,13 @@
           "name": "Club",
           "osm_tags": [
             { "club": "sport", "sport:for": "disabled" }
+          ],
+          "areas": "all"
+        },
+        "sports_centre": {
+          "name": "Sports Centre",
+          "osm_tags": [
+            { "leisure": "sports_centre" }
           ],
           "areas": "all"
         }
