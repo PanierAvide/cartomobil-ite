@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert
-      :type="type"
+      :color="type"
       :icon="false"
       tile
       class="mb-0"
