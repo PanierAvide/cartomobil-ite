@@ -168,9 +168,9 @@ WHERE
 )
 INSERT INTO poi_osm_next(fid, geom, name, cat1, cat2, cat3, brand, brand_wikidata, brand_infos, status, status_order, status_service, delivery, takeaway, drive_through, tags)
 SELECT *
-FROM selection
+FROM selection;
 -- Remove edge cases needing advanced filtering like vending machines
-WHERE cat1 IS NOT NULL AND NOT (tags ? 'access' AND tags->>'access' NOT IN ('yes', 'public', 'permissive'));
+--WHERE cat1 IS NOT NULL AND NOT (tags ? 'access' AND tags->>'access' NOT IN ('yes', 'public', 'permissive'));
 
 
 -- Join custom tags from poi_cro
