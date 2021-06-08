@@ -865,7 +865,7 @@
                   ]
                 },
                 "sgnwch": {
-                  "title": "Signalétique fauteuil roulant ?",
+                  "title": "Signalétique PMR ?",
                   "x-class": "form-hide-desc",
                   "description": "Pictogramme, plan d'information, signalétique horizontale...",
                   "type": "object",
@@ -873,11 +873,11 @@
                     {
                       "title": "Présente",
                       "properties": {
-                        "sign:wheelchair": {
+                        "custom:sign:disabled": {
                           "type": "string",
                           "const": "yes"
                         },
-                        "information:wheelchair": {
+                        "information:disabled": {
                           "type": "array",
                           "title": "Type de signalétique",
                           "items": {
@@ -891,7 +891,7 @@
                             ]
                           }
                         },
-                        "custom:sign:wheelchair:quality": {
+                        "custom:sign:disabled:quality": {
                           "type": "string",
                           "title": "Accessibilité des informations",
                           "description": "__Bonne__ : bien positionnée, visible, déchiffrable.\n\n__Mauvaise__ : existante mais pas adaptée (peu lisible, trop petite, peu de contraste...).",
@@ -906,7 +906,7 @@
                     {
                       "title": "Absente",
                       "properties": {
-                        "sign:wheelchair": {
+                        "custom:sign:disabled": {
                           "type": "string",
                           "const": "no"
                         }
@@ -915,7 +915,7 @@
                     {
                       "title": "Ne sais pas",
                       "properties": {
-                        "sign:wheelchair": {
+                        "custom:sign:disabled": {
                           "type": "string",
                           "const": "null"
                         }
@@ -949,7 +949,7 @@
               "title": "Plus de détails (optionnel)",
               "title-readOnly": "Détails",
               "properties": {
-                "access:wheelchair": {
+                "custom:reception:trained:wheelchair": {
                   "title": "Personnel formé à l'accueil PMR ?",
                   "type": "string",
                   "oneOf": [
@@ -1136,8 +1136,8 @@
                           "maxLength": 250,
                           "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
-                        "toilets:sign:wheelchair": {
-                          "title": "Signalétique fauteuil roulant ?",
+                        "custom:toilets:sign:disabled": {
+                          "title": "Signalétique PMR ?",
                           "type": "string",
                           "description": "Panneau ou pictogramme",
                           "oneOf": [
@@ -1146,7 +1146,7 @@
                             { "title": "Ne sais pas", "const": "null" }
                           ]
                         },
-                        "toilets:sit_height": {
+                        "custom:toilets:sit_height": {
                           "x-slots": {
                             "before": "#### Plus de détails (optionnel)"
                           },
@@ -1255,8 +1255,8 @@
                           "maxLength": 250,
                           "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
-                        "elevator:sign:wheelchair": {
-                          "title": "Signalétique fauteuil roulant ?",
+                        "custom:elevator:sign:disabled": {
+                          "title": "Signalétique PMR ?",
                           "type": "string",
                           "oneOf": [
                             { "title": "Présente", "const": "yes" },
@@ -1419,7 +1419,7 @@
                     "prependIcon": "osm-hotel"
                   }
                 },
-                "rooms:disabled": {
+                "rooms:wheelchair": {
                   "title": "Nombre de chambres accessibles",
                   "description": "Chambre accessible si répond aux critères suivants :\n* Cheminement libre de tout obstacle de 90 cm de large autour du mobilier\n* Aire de 1,7 m de retournement\n* Si salle de bain hors de la chambre, doit être au même étage et respecter les mêmes conditions\n* Toilettes accessibles (à l’étage ou dans la chambre) : __porte(s)__ facilement ouvrable(s) et suffisamment large(s) (> 90 cm), __pas de marche__ ou ressaut < 3 cm, __espace de retournement__ (170 * 170 cm), __hauteur du siège__ de toilette adapté (45 - 55 cm), __main courante__ à bonne hauteur (70 - 80 cm du sol), __lavabo__ accessible (< 80 cm du sol), __espace de transfert__ adapté (80 * 130 cm)",
                   "type": "string",
@@ -1519,7 +1519,7 @@
               "format": "text",
               "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
-            "sign:wheelchair": {
+            "custom:sign:disabled": {
               "title": "Signalétique PMR",
               "type": "string",
               "oneOf": [
@@ -1558,12 +1558,13 @@
                     { "title": "Ne sais pas", "const": "null" }
                   ]
                 },
-                "passenger_information_display": {
-                  "title": "Panneau d'affichage électronique temps réel ?",
+                "departure_board": {
+                  "title": "Horaires des départs ?",
                   "type": "string",
                   "oneOf": [
                     { "title": "Présent", "const": "yes" },
-                    { "title": "Absent", "const": "no" },
+                    { "title": "Tableau d'horaire imprimé", "const": "timetable" },
+                    { "title": "Panneau d'information en temps réel", "const": "realtime" },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
                 },
@@ -1603,7 +1604,7 @@
                   "format": "text",
                   "pattern": "^(|\\d+)$"
                 },
-                "crossfall": {
+                "incline:across": {
                   "title": "Dévers (en %)",
                   "type": "string",
                   "format": "text",
@@ -1654,7 +1655,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "sign:disabled": {
+            "custom:sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou pictogramme",
               "type": "string",
@@ -1683,7 +1684,7 @@
           "title": "Plus de détails (optionnel)",
           "title-readOnly": "Détails",
           "properties": {
-            "sit_height": {
+            "custom:sit_height": {
               "title": "Hauteur d'assise (en mètres)",
               "type": "string",
               "format": "text",
@@ -1780,7 +1781,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "sign:disabled": {
+            "custom:sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou pictogramme",
               "type": "string",
@@ -1951,7 +1952,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "sign:disabled": {
+            "custom:sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou peinture au sol",
               "type": "string",
@@ -1974,7 +1975,7 @@
               "format": "text",
               "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
-            "crossfall": {
+            "incline:across": {
               "title": "Dévers (en %)",
               "type": "string",
               "format": "text",
@@ -2027,7 +2028,7 @@
           "maxLength": 250,
           "x-asNoteReason": "Est-ce un descriptif valide ?"
         },
-        "sign:disabled": {
+        "custom:sign:disabled": {
           "title": "Signalétique PMR",
           "description": "Panneau ou peinture au sol",
           "type": "string",
@@ -2055,7 +2056,6 @@
             {
               "title": "Marche",
               "properties": {
-                "obstacle": { "type": "string", "const": "kerb" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "barrier": {
                   "type": "string",
@@ -2071,29 +2071,34 @@
                     { "title": "À niveau", "const": "flush" },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
-                }
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"}
               }
             },
             {
               "title": "Travaux",
               "properties": {
-                "obstacle": { "type": "string", "const": "roadworks" },
-                "obstacle:wheelchair": { "type": "string", "const": "yes" }
+                "obstacle:wheelchair": { "type": "string", "const": "yes" },
+                "landuse":{"type": "string", "const": "construction"},
+                "fixme":{"type": "string", "const": "dessiner l'emprise des travaux"},
+                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
               }
             },
             {
               "title": "Parking sauvage",
               "properties": {
-                "obstacle": { "type": "string", "const": "informal_parking" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "amenity": { "type": "string", "const": "parking" },
-                "informal": { "type": "string", "const": "yes" }
+                "informal": { "type": "string", "const": "yes" },
+                "fixme":{"type": "string", "const": "dessiner l'emprise du parking"},
+                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
               }
             },
             {
               "title": "Poteau",
               "properties": {
-                "obstacle": { "type": "string", "const": "pole" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "pole": {
                   "type": "string",
@@ -2110,45 +2115,53 @@
                     { "title": "Barrière à vélos", "const": { "barrier": "cycle_barrier" } },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
-                }
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"},
+                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
               }
             },
             {
               "title": "Arbre",
               "properties": {
-                "obstacle": { "type": "string", "const": "tree" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
-                "natural": { "type": "string", "const": "tree" }
+                "natural": { "type": "string", "const": "tree" },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"},
+                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
               }
             }
             ,
             {
               "title": "Bloc de béton",
               "properties": {
-                "obstacle": { "type": "string", "const": "block" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
-                "barrier": { "type": "string", "const": "block" }
+                "barrier": { "type": "string", "const": "block" },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"},
+                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
               }
             },
             {
               "title": "Pente",
               "properties": {
-                "obstacle": { "type": "string", "const": "incline" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "incline": {
                   "title": "Inclinaison (en %)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|100|\\d{1,2})$"
-                }
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                
               }
+
             },
             {
               "title": "Dévers",
               "properties": {
-                "obstacle": { "type": "string", "const": "crossfall" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
-                "crossfall": {
+                "incline:across": {
                   "title": "Dévers (en %)",
                   "type": "string",
                   "format": "text",
@@ -2159,22 +2172,21 @@
             {
               "title": "Rétrécissement de trottoir",
               "properties": {
-                "obstacle": { "type": "string", "const": "narrow_sidewalk" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "sidewalk:width": {
                   "title": "Largeur du trottoir à cet endroit (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
-                }
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"}
               }
             },
             {
               "title": "Revêtement",
               "properties": {
-                "obstacle": { "type": "string", "const": "surface" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
-                "material": {
+                "surface": {
                   "type": "string",
                   "title": "Type de surface ?",
                   "oneOf": [
@@ -2197,7 +2209,8 @@
                     { "title": "Horrible", "const": "horrible" },
                     { "title": "Correct", "const": "null" }
                   ]
-                }
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"}
               }
             }
           ]
