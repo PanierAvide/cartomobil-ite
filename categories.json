@@ -1288,13 +1288,46 @@
                             { "title": "Ne sais pas", "const": "null" }
                           ]
                         },
-                        "elevator:mirror": {
-                          "title": "Miroir sur le côté opposé à l'entrée ?",
-                          "type": "string",
+                        "mrr": {
+                          "title": "Miroir dans l'ascenseur ?",
+                          "type": "object",
                           "oneOf": [
-                            { "title": "Présent", "const": "yes" },
-                            { "title": "Absent", "const": "no" },
-                            { "title": "Ne sais pas", "const": "null" }
+                            {
+                              "title": "Oui",
+                              "properties": {
+                                "elevator:mirror": {
+                                  "type": "string",
+                                  "const": "yes"
+                                },
+                                "elevator:mirror:wheelchair": {
+                                  "title": "Position du miroir ?",
+                                  "type": "string",
+                                  "oneOf": [
+                                    { "title": "Face à la porte", "const": "yes" },
+                                    { "title": "Sur un côté", "const": "limited" },
+                                    { "title": "Ne sais pas", "const": "null" }
+                                  ]
+                                }
+                              }
+                            },
+                            {
+                              "title": "Non",
+                              "properties": {
+                                "elevator:mirror": {
+                                  "type": "string",
+                                  "const": "no"
+                                }
+                              }
+                            },
+                            {
+                              "title": "Ne sais pas",
+                              "properties": {
+                                "elevator:mirror": {
+                                  "type": "string",
+                                  "const": "null"
+                                }
+                              }
+                            }
                           ]
                         },
                         "custom:elevator:buttons:height": {
@@ -1849,13 +1882,46 @@
               "pattern": "^(|\\d+(\\.\\d+)?)$",
               "title": "Profondeur de la cabine (en mètres)"
             },
-            "mirror": {
-              "title": "Miroir face à l'entrée dans ascenseur ?",
-              "type": "string",
+            "mrr": {
+              "title": "Miroir dans l'ascenseur ?",
+              "type": "object",
               "oneOf": [
-                { "title": "Présent", "const": "yes" },
-                { "title": "Absent", "const": "no" },
-                { "title": "Ne sais pas", "const": "null" }
+                {
+                  "title": "Oui",
+                  "properties": {
+                    "mirror": {
+                      "type": "string",
+                      "const": "yes"
+                    },
+                    "mirror:wheelchair": {
+                      "title": "Position du miroir ?",
+                      "type": "string",
+                      "oneOf": [
+                        { "title": "Face à la porte", "const": "yes" },
+                        { "title": "Sur un côté", "const": "limited" },
+                        { "title": "Ne sais pas", "const": "null" }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "title": "Non",
+                  "properties": {
+                    "mirror": {
+                      "type": "string",
+                      "const": "no"
+                    }
+                  }
+                },
+                {
+                  "title": "Ne sais pas",
+                  "properties": {
+                    "mirror": {
+                      "type": "string",
+                      "const": "null"
+                    }
+                  }
+                }
               ]
             },
             "button_operated:wheelchair": {
@@ -2153,7 +2219,7 @@
                   "pattern": "^(|100|\\d{1,2})$"
                 },
                 "fixme":{"type": "string", "const": "intégrer au cheminement"}
-                
+
               }
 
             },
