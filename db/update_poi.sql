@@ -217,6 +217,9 @@ WHERE pc.osm_id IS NULL;
 -- Update with custom tags
 UPDATE poi_osm_next SET tags = complete_tags(tags);
 
+-- Delete POI without any categories
+DELETE FROM poi_osm_next WHERE cat1 IS NULL;
+
 
 -- Index creation and table switch
 REINDEX TABLE poi_osm_next;
