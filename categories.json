@@ -2150,9 +2150,9 @@
                     { "title": "Abaissé", "const": "lowered" },
                     { "title": "À niveau", "const": "flush" },
                     { "title": "Ne sais pas", "const": "null" }
-                  ]
-                },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                  ],
+                  "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                }                
               }
             },
             {
@@ -2161,8 +2161,12 @@
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "landuse":{"type": "string", "const": "construction"},
                 "fixme":{"type": "string", "const": "dessiner l'emprise des travaux"},
-                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
-                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
+                "maxwidth:physical":{
+                  "type":"string",
+                  "description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué",
+                  "format": "text",
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
               }
             },
             {
