@@ -703,7 +703,7 @@
           "areas": "all",
           "osm_tags": [ { "social_facility": "nursing_home|assisted_living" } ],
           "subfilters": {}
-        }        
+        }
       }
     },
     "tourism_outside": {
@@ -2136,6 +2136,7 @@
             {
               "title": "Marche",
               "properties": {
+                "fixme": { "type": "string", "const": "Intégrer cette marche au cheminement" },
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "barrier": {
                   "type": "string",
@@ -2151,17 +2152,17 @@
                     { "title": "À niveau", "const": "flush" },
                     { "title": "Ne sais pas", "const": "null" }
                   ]
-                },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"}                
+                }
               }
             },
             {
               "title": "Travaux",
               "properties": {
+                "fixme":{ "type": "string", "const": "Dessiner l'emprise des travaux"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "landuse":{"type": "string", "const": "construction"},
-                "fixme":{"type": "string", "const": "dessiner l'emprise des travaux"},
                 "maxwidth:physical":{
+                  "title": "Largeur réelle du passage",
                   "type":"string",
                   "description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué",
                   "format": "text",
@@ -2172,11 +2173,11 @@
             {
               "title": "Parking sauvage",
               "properties": {
+                "fixme":{"type": "string", "const": "Dessiner l'emprise du parking"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "amenity": { "type": "string", "const": "parking" },
                 "informal": { "type": "string", "const": "yes" },
-                "fixme":{"type": "string", "const": "dessiner l'emprise du parking"},
-                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                "maxwidth:physical":{"type":"string", "title": "Largeur réelle du passage", "description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 }
               }
@@ -2184,6 +2185,7 @@
             {
               "title": "Poteau",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer le poteau au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "pole": {
                   "type": "string",
@@ -2201,8 +2203,7 @@
                     { "title": "Ne sais pas", "const": "null" }
                   ]
                 },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"},
-                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                "maxwidth:physical":{"type":"string","title": "Largeur réelle du passage","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 }
               }
@@ -2210,10 +2211,14 @@
             {
               "title": "Arbre",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer l'arbre au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "natural": { "type": "string", "const": "tree" },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"},
-                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                "maxwidth:physical":{
+                  "type":"string",
+                  "title": "Largeur réelle du passage",
+                  "description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué",
+                  "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 }
               }
@@ -2221,10 +2226,14 @@
             {
               "title": "Bloc de béton",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer le bloc de béton au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "barrier": { "type": "string", "const": "block" },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"},
-                "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
+                "maxwidth:physical":{
+                  "type":"string",
+                  "title": "Largeur réelle du passage",
+                  "description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué",
+                  "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 }
               }
@@ -2232,19 +2241,20 @@
             {
               "title": "Pente",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer la pente au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "incline": {
                   "title": "Inclinaison (en %)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|100|\\d{1,2})$"
-                },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                }
               }
             },
             {
               "title": "Dévers",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer le dévers au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "incline:across": {
                   "title": "Dévers (en %)",
@@ -2257,19 +2267,20 @@
             {
               "title": "Rétrécissement de trottoir",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer le rétrécissement au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "sidewalk:width": {
                   "title": "Largeur du trottoir à cet endroit (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
-                },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                }
               }
             },
             {
               "title": "Revêtement",
               "properties": {
+                "fixme":{"type": "string", "const": "Intégrer les infos de revêtement au cheminement"},
                 "obstacle:wheelchair": { "type": "string", "const": "yes" },
                 "surface": {
                   "type": "string",
@@ -2294,8 +2305,7 @@
                     { "title": "Horrible", "const": "horrible" },
                     { "title": "Correct", "const": "null" }
                   ]
-                },
-                "fixme":{"type": "string", "const": "intégrer au cheminement"}
+                }
               }
             }
           ]
