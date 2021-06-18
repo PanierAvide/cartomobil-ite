@@ -2150,9 +2150,9 @@
                     { "title": "Abaissé", "const": "lowered" },
                     { "title": "À niveau", "const": "flush" },
                     { "title": "Ne sais pas", "const": "null" }
-                  ],
-                  "fixme":{"type": "string", "const": "intégrer au cheminement"}
-                }                
+                  ]
+                },
+                "fixme":{"type": "string", "const": "intégrer au cheminement"}                
               }
             },
             {
@@ -2177,7 +2177,8 @@
                 "informal": { "type": "string", "const": "yes" },
                 "fixme":{"type": "string", "const": "dessiner l'emprise du parking"},
                 "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
-                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
               }
             },
             {
@@ -2202,7 +2203,8 @@
                 },
                 "fixme":{"type": "string", "const": "intégrer au cheminement"},
                 "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
-                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
               }
             },
             {
@@ -2212,10 +2214,10 @@
                 "natural": { "type": "string", "const": "tree" },
                 "fixme":{"type": "string", "const": "intégrer au cheminement"},
                 "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
-                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
               }
-            }
-            ,
+            },
             {
               "title": "Bloc de béton",
               "properties": {
@@ -2223,7 +2225,8 @@
                 "barrier": { "type": "string", "const": "block" },
                 "fixme":{"type": "string", "const": "intégrer au cheminement"},
                 "maxwidth:physical":{"type":"string","description":"en mètres; la largeur réelle du nouveau cheminement, 0 si le cheminement est totalement obstrué","format": "text",
-                  "pattern": "^(|\\d+(\\.\\d+)?)$"}
+                  "pattern": "^(|\\d+(\\.\\d+)?)$"
+                }
               }
             },
             {
@@ -2237,9 +2240,7 @@
                   "pattern": "^(|100|\\d{1,2})$"
                 },
                 "fixme":{"type": "string", "const": "intégrer au cheminement"}
-
               }
-
             },
             {
               "title": "Dévers",
