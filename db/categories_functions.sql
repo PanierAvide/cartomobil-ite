@@ -17,7 +17,7 @@ BEGIN
 		result := 'post_service';
 	ELSIF tags->'amenity' IN ('restaurant', 'fast_food', 'bar', 'pub', 'cafe', 'ice_cream', 'nightclub') THEN
 		result := 'outside';
-	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'dive_centre', 'library', 'place_of_worship', 'community_centre')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') OR (tags->'sport' = 'laser_tag') THEN
+	ELSIF (tags->'amenity' IN ('cinema', 'theatre', 'social_facility', 'dive_centre', 'library', 'place_of_worship', 'community_centre')) OR (tags->'tourism' IN ('museum', 'theme_park')) OR (tags->'office' = 'association') OR (tags->'club' != '') OR (tags->'sport' = 'laser_tag') THEN
 		result := 'leisure';
 	ELSIF (tags->'leisure' = 'sports_centre' AND tags->'sport' = 'swimming') OR (tags->'leisure' = 'swimming_pool' AND tags->'access' IN ('yes', 'public')) OR (tags->'club' = 'sport' AND tags->'sport:for' = 'disabled') OR (tags->'amenity' = 'swimming_pool') OR (tags->'leisure' = 'sports_centre') THEN
 		result := 'sport';
@@ -29,7 +29,7 @@ BEGIN
 		result := 'health';
 	ELSIF (tags->'amenity' = 'parking_space' AND tags->'parking_space' = 'disabled') OR (tags->'amenity' = 'parking_space' AND tags->'wheelchair' IN ('yes', 'designated')) OR (tags->'amenity' = 'parking_space' AND tags->'capacity:disabled' != '') OR (tags->'public_transport' IN ('stop_position', 'platform') AND tags->'bus' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'amenity' = 'parking' AND tags->'informal' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'construction' = 'yes') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'power' = 'pole') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'highway' IN ('street_lamp', 'traffic_signals')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'barrier' IN ('bollard', 'cycle_barrier', 'block')) OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'traffic_sign' != '') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'tourism' = 'information') OR (tags->'obstacle:wheelchair' = 'yes' AND tags->'natural' = 'tree') OR (tags->'barrier' = 'kerb' AND tags->'kerb' = 'raised') OR (tags->'highway' != '' AND tags->'smoothness' IN ('bad', 'very_bad', 'horrible', 'very_horrible', 'impassable')) OR (tags->'highway' != '' AND tags->'surface' IN ('metal', 'wood', 'compacted', 'fine_gravel', 'unhewn_cobblestone', 'sand', 'ground')) OR (tags->'amenity' IN ('parking', 'bus_station', 'taxi', 'fuel', 'car_rental', 'ferry_terminal')) OR (tags->'highway' IN ('bus_stop', 'elevator')) OR (tags->'room' = 'elevator') OR (tags->'building:part' = 'elevator') OR (tags->'buildingpart:verticalpassage' = 'elevator') OR (tags->'building' = 'elevator') OR (tags->'indoor' = 'elevator') OR (tags->'shop' = 'gas') OR (tags->'aeroway' = 'aerodrome') THEN
 		result := 'mobility';
-	ELSIF tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site') THEN
+	ELSIF (tags->'tourism' IN ('guest_house', 'hotel', 'hostel', 'camp_site')) OR (tags->'social_facility' IN ('nursing_home', 'assisted_living')) THEN
 		result := 'housing';
 	ELSIF (tags->'amenity' IN ('drinking_water', 'toilets', 'bench', 'shower', 'marae')) OR (tags->'leisure' IN ('picnic_table', 'beach_resort', 'park')) OR (tags->'natural' = 'beach') OR (tags->'tourism' IN ('viewpoint', 'artwork')) OR (tags->'waterway' = 'waterfall') OR (tags->'historic' != '') THEN
 		result := 'tourism_outside';
@@ -80,6 +80,8 @@ BEGIN
 		result := 'museum';
 	ELSIF tags->'office' = 'association' THEN
 		result := 'association';
+	ELSIF tags->'amenity' = 'social_facility' THEN
+		result := 'social_facility';
 	ELSIF tags->'club' != '' THEN
 		result := 'leisure_club';
 	ELSIF tags->'amenity' = 'dive_centre' THEN
@@ -180,6 +182,8 @@ BEGIN
 		result := 'hostel';
 	ELSIF tags->'tourism' = 'camp_site' THEN
 		result := 'camping';
+	ELSIF tags->'social_facility' IN ('nursing_home', 'assisted_living') THEN
+		result := 'assisted_living';
 	ELSIF tags->'amenity' = 'drinking_water' THEN
 		result := 'drinking_water';
 	ELSIF tags->'amenity' = 'toilets' THEN

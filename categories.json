@@ -211,6 +211,13 @@
           ],
           "areas": "all"
         },
+        "social_facility": {
+          "name": "Social facility",
+          "osm_tags": [
+            { "amenity": "social_facility" }
+          ],
+          "areas": "all"
+        },
         "leisure_club": {
           "name": "Club",
           "osm_tags": [
@@ -689,7 +696,14 @@
           "areas": "all",
           "osm_tags": [ { "tourism": "camp_site" } ],
           "subfilters": {}
-        }
+        },
+        "assisted_living":{
+          "name": "Assisted living",
+          "forms": [ "erp", "erp_housing" ],
+          "areas": "all",
+          "osm_tags": [ { "social_facility": "nursing_home|assisted_living" } ],
+          "subfilters": {}
+        }        
       }
     },
     "tourism_outside": {
@@ -873,7 +887,7 @@
                     {
                       "title": "Présente",
                       "properties": {
-                        "custom:sign:disabled": {
+                        "sign:disabled": {
                           "type": "string",
                           "const": "yes"
                         },
@@ -906,7 +920,7 @@
                     {
                       "title": "Absente",
                       "properties": {
-                        "custom:sign:disabled": {
+                        "sign:disabled": {
                           "type": "string",
                           "const": "no"
                         }
@@ -915,7 +929,7 @@
                     {
                       "title": "Ne sais pas",
                       "properties": {
-                        "custom:sign:disabled": {
+                        "sign:disabled": {
                           "type": "string",
                           "const": "null"
                         }
@@ -964,8 +978,8 @@
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
                 },
-                "custom:cordon:width": {
-                  "title": "Taille du cordon CB (en mètres)",
+                "custom:cordon:length": {
+                  "title": "Longueur du cordon CB (en mètres)",
                   "type": "string",
                   "format": "text",
                   "pattern": "^(|\\d+(\\.\\d+)?)$"
@@ -1136,7 +1150,7 @@
                           "maxLength": 250,
                           "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
-                        "custom:toilets:sign:disabled": {
+                        "toilets:sign:disabled": {
                           "title": "Signalétique PMR ?",
                           "type": "string",
                           "description": "Panneau ou pictogramme",
@@ -1255,7 +1269,7 @@
                           "maxLength": 250,
                           "x-asNoteReason": "Est-ce un descriptif valide ?"
                         },
-                        "custom:elevator:sign:disabled": {
+                        "elevator:sign:disabled": {
                           "title": "Signalétique PMR ?",
                           "type": "string",
                           "oneOf": [
@@ -1552,7 +1566,7 @@
               "format": "text",
               "pattern": "^(|\\d+(\\.\\d+)?)$"
             },
-            "custom:sign:disabled": {
+            "sign:disabled": {
               "title": "Signalétique PMR",
               "type": "string",
               "oneOf": [
@@ -1688,7 +1702,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "custom:sign:disabled": {
+            "sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou pictogramme",
               "type": "string",
@@ -1814,7 +1828,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "custom:sign:disabled": {
+            "sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou pictogramme",
               "type": "string",
@@ -2018,7 +2032,7 @@
               "maxLength": 250,
               "x-asNoteReason": "Est-ce un descriptif valide ?"
             },
-            "custom:sign:disabled": {
+            "sign:disabled": {
               "title": "Signalétique PMR",
               "description": "Panneau ou peinture au sol",
               "type": "string",
@@ -2094,7 +2108,7 @@
           "maxLength": 250,
           "x-asNoteReason": "Est-ce un descriptif valide ?"
         },
-        "custom:sign:disabled": {
+        "sign:disabled": {
           "title": "Signalétique PMR",
           "description": "Panneau ou peinture au sol",
           "type": "string",

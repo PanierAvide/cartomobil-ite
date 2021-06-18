@@ -4,7 +4,7 @@
 -- THEN RUN "yarn run categories" TO UPDATE
 
 BEGIN;
-SELECT plan(450);
+SELECT plan(456);
 
 SELECT is(get_category1('amenity=>townhall'::hstore, 'FR'), 'administration', 'get_category1 amenity=>townhall for FR should be administration');
 
@@ -93,6 +93,10 @@ SELECT is(get_category2('tourism=>museum'::hstore, 'FR'), 'museum', 'get_categor
 SELECT is(get_category1('office=>association'::hstore, 'FR'), 'leisure', 'get_category1 office=>association for FR should be leisure');
 
 SELECT is(get_category2('office=>association'::hstore, 'FR'), 'association', 'get_category2 office=>association for FR should be association');
+
+SELECT is(get_category1('amenity=>social_facility'::hstore, 'FR'), 'leisure', 'get_category1 amenity=>social_facility for FR should be leisure');
+
+SELECT is(get_category2('amenity=>social_facility'::hstore, 'FR'), 'social_facility', 'get_category2 amenity=>social_facility for FR should be social_facility');
 
 SELECT is(get_category1('club=>*'::hstore, 'FR'), 'leisure', 'get_category1 club=>* for FR should be leisure');
 
@@ -853,6 +857,14 @@ SELECT is(get_category2('tourism=>hostel'::hstore, 'FR'), 'hostel', 'get_categor
 SELECT is(get_category1('tourism=>camp_site'::hstore, 'FR'), 'housing', 'get_category1 tourism=>camp_site for FR should be housing');
 
 SELECT is(get_category2('tourism=>camp_site'::hstore, 'FR'), 'camping', 'get_category2 tourism=>camp_site for FR should be camping');
+
+SELECT is(get_category1('social_facility=>nursing_home'::hstore, 'FR'), 'housing', 'get_category1 social_facility=>nursing_home for FR should be housing');
+
+SELECT is(get_category2('social_facility=>nursing_home'::hstore, 'FR'), 'assisted_living', 'get_category2 social_facility=>nursing_home for FR should be assisted_living');
+
+SELECT is(get_category1('social_facility=>assisted_living'::hstore, 'FR'), 'housing', 'get_category1 social_facility=>assisted_living for FR should be housing');
+
+SELECT is(get_category2('social_facility=>assisted_living'::hstore, 'FR'), 'assisted_living', 'get_category2 social_facility=>assisted_living for FR should be assisted_living');
 
 SELECT is(get_category1('amenity=>drinking_water'::hstore, 'FR'), 'tourism_outside', 'get_category1 amenity=>drinking_water for FR should be tourism_outside');
 
