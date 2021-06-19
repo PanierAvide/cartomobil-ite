@@ -569,31 +569,32 @@
           "name": "Obstacle",
           "osm_tags": [
             { "obstacle:wheelchair": "yes", "amenity": "parking", "informal": "yes" },
-            { "obstacle:wheelchair": "yes", "construction": "yes" },
+            { "obstacle:wheelchair": "yes", "landuse": "construction" },
             { "obstacle:wheelchair": "yes", "power": "pole" },
             { "obstacle:wheelchair": "yes", "highway": "street_lamp|traffic_signals" },
-            { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier|block" },
+            { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier|block|kerb" },
             { "obstacle:wheelchair": "yes", "traffic_sign": "*" },
             { "obstacle:wheelchair": "yes", "tourism": "information" },
             { "obstacle:wheelchair": "yes", "natural": "tree" },
             { "barrier": "kerb", "kerb": "raised" },
             { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" },
-            { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" }
+            { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" },
+            { "obstacle:wheelchair": "yes", "fixme": "*" }
           ],
           "areas": "all",
           "form": "barrier",
           "subfilters": {
             "informal_parking": {
               "name": "Informal parking",
-              "osm_tags": [ { "obstacle:wheelchair": "yes", "amenity": "parking", "informal": "yes" } ]
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "amenity": "parking", "informal": "yes" }, { "obstacle:wheelchair": "yes", "fixme": "Dessiner l'emprise du parking" } ]
             },
             "roadworks": {
               "name": "Roadworks",
-              "osm_tags": [ { "obstacle:wheelchair": "yes", "construction": "yes" } ]
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "landuse": "construction" }, { "obstacle:wheelchair": "yes", "fixme": "Dessiner l'emprise des travaux" } ]
             },
             "pole": {
               "name": "Pole",
-              "osm_tags": [ { "obstacle:wheelchair": "yes", "power": "pole" }, { "obstacle:wheelchair": "yes", "highway": "street_lamp|traffic_signals" }, { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier" }, { "obstacle:wheelchair": "yes", "traffic_sign": "*" }, { "obstacle:wheelchair": "yes", "tourism": "information" } ]
+              "osm_tags": [ { "obstacle:wheelchair": "yes", "power": "pole" }, { "obstacle:wheelchair": "yes", "highway": "street_lamp|traffic_signals" }, { "obstacle:wheelchair": "yes", "barrier": "bollard|cycle_barrier" }, { "obstacle:wheelchair": "yes", "traffic_sign": "*" }, { "obstacle:wheelchair": "yes", "tourism": "information" }, { "obstacle:wheelchair": "yes", "fixme": "Intégrer le poteau au cheminement" } ]
             },
             "block": {
               "name": "Block",
@@ -605,11 +606,11 @@
             },
             "kerb": {
               "name": "Kerb",
-              "osm_tags": [ { "barrier": "kerb", "kerb": "raised" } ]
+              "osm_tags": [ { "barrier": "kerb", "kerb": "raised" }, { "obstacle:wheelchair": "yes", "barrier": "kerb" } ]
             },
             "surface": {
               "name": "Surface",
-              "osm_tags": [ { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" }, { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" } ]
+              "osm_tags": [ { "highway": "*", "smoothness": "bad|very_bad|horrible|very_horrible|impassable" }, { "highway": "*", "surface": "metal|wood|compacted|fine_gravel|unhewn_cobblestone|sand|ground" }, { "obstacle:wheelchair": "yes", "fixme": "Intégrer les infos de revêtement au cheminement" } ]
             }
           }
         },
@@ -2004,6 +2005,7 @@
       "x-objectName": "Stationnement PMR",
       "properties": {
         "amenity": { "type": "string", "const": "parking_space" },
+        "parking_space": { "type": "string", "const": "disabled" },
         "secgen": {
           "type": "object",
           "title": "Général",
