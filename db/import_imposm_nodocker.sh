@@ -2,13 +2,14 @@
 
 set -e
 
-DATASET_URL="http://download.openstreetmap.fr/extracts/south-america/polynesie-latest.osm.pbf"
-REPLICATION_URL="http://download.openstreetmap.fr/replication/south-america/polynesie/minute/"
+DATASET_URL="http://download.openstreetmap.fr/extracts/oceania/polynesie-latest.osm.pbf"
+REPLICATION_URL="http://download.openstreetmap.fr/replication/oceania/polynesie/minute/"
 CONNEXION=${1}
 DATASET=`basename ${DATASET_URL}`
 IMPORT_FILE=`pwd`/import.yml
 echo "Using config file ${IMPORT_FILE}"
 
+rm -rf /home/prod/data
 mkdir -p /home/prod/data
 cd /home/prod/data
 wget -NS ${DATASET_URL}
